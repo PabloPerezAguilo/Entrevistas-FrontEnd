@@ -5,7 +5,7 @@
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta name="description" content="">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
-
+        
 		<title>Base Front</title>
 
 		<!-- build:CSSCDNs -->
@@ -14,28 +14,45 @@
 		<!--link rel="stylesheet" href="css/style.css" /-->
 
 		<!-- endbuild -->
-
+        <link rel="stylesheet" href="https://cdn.gitcdn.xyz/cdn/angular/bower-material/v1.0.0-rc2/angular-material.css"/>
 		<!-- AQUI IRAN LOS CSS NUESTROS QUE NO TENGAN CDN-->
-		<!--link rel="stylesheet" href="css/style.css" /-->
+		<link rel="stylesheet" href="css/style.css" />
+        <link rel="stylesheet" href="https://cdn.gitcdn.xyz/cdn/angular/bower-material/v1.0.0-rc2/angular-material.css"/>
 	</head>
 	<body>
-		<header>
-            <h1>Magni</h1>
+		<header id="loginCab">
+            <div >Magni</div>
 		</header>
 		<div>zona comun a todas las secciones</div>
 		
+        
+        <md-button class="md-raised">Button</md-button>
+        <md-button class="md-warn">ggg</md-button>
+        
 		<div ng-view>
 		</div>
         
-		<footer>
-			<img src="logoBlanco.png">
-            <p>
+		<footer id="pie">
+			<img id="logo" src="logoBlanco.png">
+            <p id="dat">
                 2015 MagniPowerfull | v4.2
             </p>
 		</footer>
 
 		<!-- build:JSCDNs -->
-		<script src="js/angular.js"></script>        
+         
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.6/angular.js"></script>        
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.6/angular-animate.min.js"></script>        
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.6/angular-route.min.js"></script>        
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.6/angular-aria.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.6/angular-messages.min.js"></script>
+        <script src="https://cdn.gitcdn.xyz/cdn/angular/bower-material/v1.0.0-rc2/angular-material.js"></script>
+        <script src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/t-114/assets-cache.js"></script>
+        
+        
+        
+        
+		<!--script src="js/angular.js"></script>        
 		<script src="js/angular-route.js"></script>
 		<script src="js/angular-aria.js"></script>
 		<!-- endbuild -->
