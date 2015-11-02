@@ -68,7 +68,7 @@ function ServicioREST($http, $q, $rootScope, config) {
 
 
 
-	/* ---------- POST USER ------------- */
+	/* ---------- POST AUTHENTICATE ------------- */
 
 	function postAuthenticate(user) {
 
@@ -90,32 +90,11 @@ function ServicioREST($http, $q, $rootScope, config) {
 
 	}
 
-	/* ---------- GET USER by token ------- */
-
-	function getUserByToken(token) {
-
-		var defered = $q.defer();
-		var promise = defered.promise;
-		$http({
-			method: 'GET',
-			url: url + '/users?token=' + token
-		})
-		.success(function(data, status, headers, config) {
-			defered.resolve(data);
-		})
-		.error(function(data, status, headers, config) {
-			tratarError(data, status,defered);
-		});
-
-		return promise;
-
-	}
 		
 	return {
 		getEntidades: getEntidades,
 		getEntidad: getEntidad,
 		postEntidad: postEntidad,
-		postAuthenticate: postAuthenticate,
-		getUserByToken: getUserByToken
+		postAuthenticate: postAuthenticate
 	}
 }
