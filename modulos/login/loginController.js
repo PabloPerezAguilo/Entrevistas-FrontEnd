@@ -1,4 +1,4 @@
-app.controller('loginController', function(servicioRest, config, $scope, $location) {
+app.controller('logInController', function(servicioRest, config, $scope, $location) {
 
 	$scope.login = function () {
 		var user = {};
@@ -9,6 +9,7 @@ app.controller('loginController', function(servicioRest, config, $scope, $locati
 				if(data.success) {
 					servicioRest.getUserByToken(data.token)
 						.then(function(data) {
+							console.log(data);
 							if(data.admin) {
 								//mandarlo al menu del admin
 								//$location.path("#/modulos/menuAdmin");
