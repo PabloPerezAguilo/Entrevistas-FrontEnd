@@ -1,6 +1,5 @@
 'use strict';
 
-var app = angular.module('lisa', ['ngRoute']);
 var app = angular.module('magni', ['ngRoute','ngMaterial']);
 app.run(function(servicioRest, $rootScope, $http, $location) {
 

@@ -5,35 +5,35 @@
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta name="description" content="">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
-
+        
 		<title>Base Front</title>
 
 		<!-- build:CSSCDNs -->
 		
 		<!-- AQUI IRAN LOS CSS QUE TENGAN CDN-->
-		<link rel="stylesheet" href="css/style.css">
 		<link rel="stylesheet" href="https://cdn.gitcdn.xyz/cdn/angular/bower-material/v1.0.0-rc2/angular-material.css">
 		<!-- endbuild -->
-
+       
 		<!-- AQUI IRAN LOS CSS NUESTROS QUE NO TENGAN CDN-->
-		<!--link rel="stylesheet" href="css/style.css" /-->
+		<link rel="stylesheet" href="css/style.css" />
 	</head>
 	<body>
-		<header>
-			cabecera
+
+		<header id="loginCab">
+            <div >Magni</div>
 		</header>
 
 		<div ng-view>
 		</div>
-        
-		<footer>
-			footer
+             
+		<footer id="pie">
+			<img id="logo" src="logoBlanco.png">
+            <p id="dat">
+                2015 MagniPowerfull | v4.2
+            </p>
 		</footer>
 
 		<!-- build:JSCDNs -->
-		<!--<script src="js/angular.js"></script>        
-		<script src="js/angular-route.js"></script>
-		<script src="js/angular-aria.js"></script>-->
 		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.6/angular.js"></script>
 		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.6/angular-animate.min.js"></script>
 		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.6/angular-route.min.js"></script>

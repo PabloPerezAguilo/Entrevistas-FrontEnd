@@ -47,24 +47,24 @@ table {
   font-family: 'principalCursiva';
   src: url("fonts/HelveticaNeueLTStd-LtCnO.otf"); }
 
-
-
-
-  .buttondemoBasicUsage section {
-  background: #f7f7f7;
-  border-radius: 3px;
-  text-align: center;
-  margin: 1em;
-  position: relative !important;
-  padding-bottom: 10px; }
-.buttondemoBasicUsage md-content {
-  margin-right: 7px; }
-.buttondemoBasicUsage section .md-button {
-  margin-top: 16px;
-  margin-bottom: 16px; }
-.buttondemoBasicUsage .label {
-  position: absolute;
-  bottom: 5px;
-  left: 7px;
-  font-size: 14px;
-  opacity: 0.54; }
+#loginCab{
+    background-color: black;
+    color: white;
+    height: 90px;
+    /*height: 141px;*/
+}
+#pie{
+    background-color: black;
+    color: white;
+    height: 70px;
+}
+#logo{
+	width: 7%;
+    padding-left: 5%;
+    padding-top: 0.5%;
+    display: inline;
+}
+#dat{
+    display: inline;
+    float: right;
+}
