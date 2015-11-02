@@ -53,11 +53,18 @@ table {
     height: 90px;
     /*height: 141px;*/
 }
-#pie{
+footer {
+  position: fixed;
+  bottom: 0;
+  background: black;
+  width: 100%;
+  height: 70px;
+  }
+/*#pie{
     background-color: black;
     color: white;
     height: 70px;
-}
+}*/
 #logo{
 	width: 7%;
     padding-left: 5%;
