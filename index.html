@@ -11,8 +11,8 @@
 		<!-- build:CSSCDNs -->
 		
 		<!-- AQUI IRAN LOS CSS QUE TENGAN CDN-->
-		<!--link rel="stylesheet" href="css/style.css" /-->
-
+		<link rel="stylesheet" href="css/style.css">
+		<link rel="stylesheet" href="https://cdn.gitcdn.xyz/cdn/angular/bower-material/v1.0.0-rc2/angular-material.css">
 		<!-- endbuild -->
 
 		<!-- AQUI IRAN LOS CSS NUESTROS QUE NO TENGAN CDN-->
@@ -22,28 +22,31 @@
 		<header>
 			cabecera
 		</header>
-		<div>zona comun a todas las secciones</div>
-		
+
 		<div ng-view>
 		</div>
         
 		<footer>
-			<img src="logoBlanco.png">
-            <p>
-                2015 MagniPowerfull | v4.2
-            </p>
+			footer
 		</footer>
 
 		<!-- build:JSCDNs -->
-		<script src="js/angular.js"></script>        
+		<!--<script src="js/angular.js"></script>        
 		<script src="js/angular-route.js"></script>
-		<script src="js/angular-aria.js"></script>
+		<script src="js/angular-aria.js"></script>-->
+		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.6/angular.js"></script>
+		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.6/angular-animate.min.js"></script>
+		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.6/angular-route.min.js"></script>
+		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.6/angular-aria.min.js"></script>
+		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.6/angular-messages.min.js"></script>
+		<script src="https://cdn.gitcdn.xyz/cdn/angular/bower-material/v1.0.0-rc2/angular-material.js"></script>
+		<script src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/t-114/assets-cache.js"></script>
 		<!-- endbuild -->
 		<!-- build:JS -->
 		<script src="services.js"></script>
 		<script src="app.js"></script>
 		<script src="config.js"></script>
-		<script src="modulos/modulo1/controladorModulo1.js"></script>
+		<script src="modulos/logIn/controladorLogIn.js"></script>
 		<!-- endbuild -->
 		<script src="js/AES.min.js"></script>
 
