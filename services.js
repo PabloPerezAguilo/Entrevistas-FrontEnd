@@ -65,10 +65,57 @@ function ServicioREST($http, $q, $rootScope, config) {
 
 		return promise;
 	}
+
+
+
+	/* ---------- POST USER ------------- */
+
+	function postAuthenticate(user) {
+
+		var defered = $q.defer();
+		var promise = defered.promise;
+		$http({
+			method: 'POST',
+			url: url + '/authenticate',
+			data: user
+		})
+		.success(function(data, status, headers, config) {
+			defered.resolve(data);
+		})
+		.error(function(data, status, headers, config) {
+			tratarError(data, status, defered);
+		});
+
+		return promise;
+
+	}
+
+	/* ---------- GET USER by token ------- */
+
+	function getUserByToken(token) {
+
+		var defered = $q.defer();
+		var promise = defered.promise;
+		$http({
+			method: 'GET',
+			url: url + '/users?token=' + token
+		})
+		.success(function(data, status, headers, config) {
+			defered.resolve(data);
+		})
+		.error(function(data, status, headers, config) {
+			tratarError(data, status,defered);
+		});
+
+		return promise;
+
+	}
 		
 	return {
 		getEntidades: getEntidades,
 		getEntidad: getEntidad,
-		postEntidad: postEntidad
+		postEntidad: postEntidad,
+		postAuthenticate: postAuthenticate,
+		getUserByToken: getUserByToken
 	}
 }
