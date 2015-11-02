@@ -105,7 +105,7 @@ gulp.task('cdnReplace', function() {
 		'https://cdnjs.cloudflare.com/ajax/libs/c3/0.4.10/c3.min.js'],
 
 		'CSSCDNs': [
-		'https://ajax.googleapis.com/ajax/libs/angular_material/0.8.3/angular-material.min.css',
+		'https://ajax.googleapis.com/ajax/libs/angular_material/0.11.2/angular-material.min.css',
 		'https://mbenford.github.io/ngTagsInput/css/ng-tags-input.min.css',
 		'https://cdnjs.cloudflare.com/ajax/libs/c3/0.4.10/c3.min.css']
 
