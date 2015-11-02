@@ -68,3 +68,10 @@ table {
     display: inline;
     float: right;
 }
+
+
+/* ------------------------- LOG IN --------------------------------------- */
+
+md-input-container.md-default-theme.md-input-invalid .md-input {
+    border-color: rgb(212, 0, 240);
+}

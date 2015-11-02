@@ -13,8 +13,13 @@
 -->
 
 <div>
-	<md-button class="md-raised">Button</md-button>
-    <md-button class="md-raised md-primary">Primary</md-button>
-    <md-button ng-disabled="true" class="md-raised md-primary">Disabled</md-button>
-    <md-button class="md-raised md-warn">Warn</md-button>
+	<md-input-container flex>
+        <label>Usuario</label>
+        <input ng-model="user">
+    </md-input-container>
+
+    <md-input-container flex>
+        <label>Contraseña</label>
+        <input type="password" ng-model="pass">
+    </md-input-container>
 </div>
