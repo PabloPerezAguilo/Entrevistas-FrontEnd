@@ -93,29 +93,7 @@ footer {
     margin-top: 2%;
     margin-right: 2%;
 }
-<<<<<<< HEAD
 
-
-/* ------------------------- LOG IN --------------------------------------- */
-.logIn {
-    font-family: 'Roboto', sans-serif;
-    border: 1px solid #6E6E6E;
-
-}
-
-input, textarea, keygen, select, button {
-    font: 13.3333px Arial;
-}
-
-md-input-container:not(.md-input-invalid).md-input-focused .md-input{
-    border-color: #EF6C00;
-}
-
-md-input-container:not(.md-input-invalid).md-input-focused label {
-    color: #EF6C00;
-}
-
-=======
 #barraProgreso{
     position: relative;
     /*margin-top: 5.5%;*/
@@ -128,4 +106,21 @@ md-progress-linear .md-bar{
 md-progress-linear .md-container {
     background-color: rgb(233,222,197);
 }
->>>>>>> 31b5b56dea73b3468c55327c54cabb895dc92682
+
+/* ------------------------- LOG IN --------------------------------------- */
+.logIn {
+    font-family: 'Roboto', sans-serif;
+    border: 1px solid #6E6E6E;
+}
+
+input, textarea, keygen, select, button {
+    font: 13.3333px Roboto, sans-serif;
+}
+
+md-input-container:not(.md-input-invalid).md-input-focused .md-input{
+    border-color: #EF6C00;
+}
+
+md-input-container:not(.md-input-invalid).md-input-focused label {
+    color: #EF6C00;
+}
