@@ -48,8 +48,8 @@ table {
   font-family: 'principalCursiva';
   src: url("fonts/HelveticaNeueLTStd-LtCnO.otf"); }
 
-#loginCab{
-    background-color: black;
+header{
+    background-color: rgb(30,30,30);
     color: white;
     height: 90px;
     /*height: 141px;*/
@@ -57,7 +57,7 @@ table {
 footer {
   position: fixed;
   bottom: 0;
-  background: black;
+  background: rgb(30,30,30);
   width: 100%;
   height: 70px;
   }
@@ -67,15 +67,33 @@ footer {
     height: 70px;
 }*/
 #logo{
-	width: 7%;
+	/*width: 7%;*/
+    /*width: 90px;*/
+    padding-top: 0.5%;
+    max-width:85%;
+    max-height:85%;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 0.5%;
+}
+#logoGFI{
+	/*width: 7%;*/
+    /*width: 90px;*/
     padding-left: 5%;
     padding-top: 0.5%;
     display: inline;
+    max-width:85%;
+    max-height:85%;
 }
 #dat{
     display: inline;
     float: right;
+    color: white;
+    margin-top: 2%;
+    margin-right: 2%;
 }
+<<<<<<< HEAD
 
 
 /* ------------------------- LOG IN --------------------------------------- */
@@ -97,3 +115,17 @@ md-input-container:not(.md-input-invalid).md-input-focused label {
     color: #EF6C00;
 }
 
+=======
+#barraProgreso{
+    position: relative;
+    /*margin-top: 5.5%;*/
+    /*top:100%;*/
+    background-color: orange;
+}
+md-progress-linear .md-bar{
+    background-color: orange;
+}
+md-progress-linear .md-container {
+    background-color: rgb(233,222,197);
+}
+>>>>>>> 31b5b56dea73b3468c55327c54cabb895dc92682
