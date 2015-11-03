@@ -52,6 +52,7 @@ header{
     background-color: rgb(30,30,30);
     color: white;
     height: 90px;
+    box-shadow: 2px 2px 30px grey;
     /*height: 141px;*/
 }
 footer {
@@ -107,20 +108,45 @@ md-progress-linear .md-container {
     background-color: rgb(233,222,197);
 }
 
+.divComun {
+    background-color: #EFEFEF;
+}
+
 /* ------------------------- LOG IN --------------------------------------- */
 .logIn {
     font-family: 'Roboto', sans-serif;
+    background-color: #F5F5F5;
     border: 1px solid #6E6E6E;
+    box-shadow: 2px 2px 30px grey;
+
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+
+    width: 650px;
+    height: 260px;
 }
 
 input, textarea, keygen, select, button {
     font: 13.3333px Roboto, sans-serif;
 }
 
+/*Color de los txt*/
 md-input-container:not(.md-input-invalid).md-input-focused .md-input{
     border-color: #EF6C00;
 }
 
 md-input-container:not(.md-input-invalid).md-input-focused label {
     color: #EF6C00;
+}
+
+/*Color del boton*/
+.md-button.md-raised {
+    color: #EFEFEF;
+    background-color: #EF6C00;
+}
+
+.md-button.md-raised:not([disabled]):hover {
+    background-color: #ed9a56;
 }
