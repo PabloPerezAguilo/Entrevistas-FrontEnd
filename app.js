@@ -10,7 +10,7 @@ app.run(function(servicioRest, $rootScope, $http, $location) {
 });
 
 app.config(function($routeProvider) {
-
+    
 	$routeProvider
 	.when('/', {
 		templateUrl: 'modulos/logIn/logIn.html',
