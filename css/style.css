@@ -17,7 +17,8 @@ time, mark, audio, video {
   border: 0;
   font-size: 100%;
   font: inherit;
-  vertical-align: baseline; }
+  vertical-align: baseline;
+}
 
 /* HTML5 display-role reset for older browsers */
 article, aside, details, figcaption, figure,
@@ -78,7 +79,21 @@ footer {
 
 
 /* ------------------------- LOG IN --------------------------------------- */
+.logIn {
+    font-family: 'Roboto', sans-serif;
+    border: 1px solid #6E6E6E;
 
-md-input-container.md-default-theme.md-input-invalid .md-input {
-    border-color: rgb(212, 0, 240);
 }
+
+input, textarea, keygen, select, button {
+    font: 13.3333px Arial;
+}
+
+md-input-container:not(.md-input-invalid).md-input-focused .md-input{
+    border-color: #EF6C00;
+}
+
+md-input-container:not(.md-input-invalid).md-input-focused label {
+    color: #EF6C00;
+}
+
