@@ -8,11 +8,9 @@ app.controller('controladorLogIn', function(servicioRest, config, $scope, $locat
 			.then(function(data) {
 				console.log(data.role);
 				if(data.role === "ROLE_ADMIN") {
-					//$location.path("#/modulos/menuAdmin");
-					alert("Es administrador");
+					$location.path("/admin");
 				} else {
-					//$location.path("#/modulos/menuTech");
-					alert("Es técnico");
+					$location.path("/tech");
 				}
 			})
 			.catch(function(err) {
