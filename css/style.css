@@ -50,7 +50,7 @@ table {
     font-family: 13.3333px Roboto, sans-serif;
 }
   
-
+/* ------------------------- HEADER & FOOTER --------------------------------------- */
 header {
     background-color: rgb(30,30,30);
     color: white;
@@ -65,14 +65,7 @@ footer {
   width: 100%;
   height: 70px;
   }
-/*#pie{
-    background-color: black;
-    color: white;
-    height: 70px;
-}*/
 #logo {
-	/*width: 7%;*/
-    /*width: 90px;*/
     padding-top: 0.5%;
     max-width:85%;
     max-height:85%;
@@ -80,25 +73,27 @@ footer {
     margin: auto;
 }
 #logoGFI {
-	/*width: 7%;*/
-    /*width: 90px;*/
     padding-left: 5%;
     padding-top: 0.5%;
     display: inline;
     max-width:85%;
     max-height:85%;
 }
-#dat {
+#magniVersion {
     display: inline;
     float: right;
     color: white;
     margin-top: 2%;
     margin-right: 2%;
 }
-
-#barraProgreso{
-    /*position: relative;*/
-    /*margin-top: 1%;*/
+#doneLoading{
+    height: 5px;
+    position: relative;
+    background-color: #EF6C00;
+    top: 8%;
+    box-shadow: 2px 2px 30px grey;
+}
+#progressBar{
     top: 8%; 
     box-shadow: 2px 2px 30px grey;
 }
@@ -107,15 +102,6 @@ md-progress-linear .md-bar {
 }
 md-progress-linear .md-container {
     background-color: rgba(239,108,0,0.17);
-}
-
-
-#barraCompleta{
-    height: 5px;
-    position: relative;
-    background-color: #EF6C00;
-    top: 8%;
-    box-shadow: 2px 2px 30px grey;
 }
 
 /* ------------------------- LOG IN --------------------------------------- */
