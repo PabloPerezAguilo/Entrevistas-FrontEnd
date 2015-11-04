@@ -19,17 +19,17 @@
 	</head>
 	<body>
 
-		<header id="loginCab" ng-init="cargando=false">
+		<header ng-init="cargando=false">
             <img id="logo" src="logo.png">
-            <div id="barraCompleta" ng-hide="cargando"></div>
-            <md-progress-linear id="barraProgreso" md-mode="indeterminate"  ng-show="cargando"></md-progress-linear>
+            <div id="doneLoading" ng-hide="cargando"></div>
+            <md-progress-linear id="progressBar" md-mode="indeterminate"  ng-show="cargando"></md-progress-linear>
 		</header>
 		<div ng-view>
 		</div>
              
-		<footer id="pie">
+		<footer>
 			<img id="logoGFI" src="logoBlanco.png">
-            <p id="dat">
+            <p id="magniVersion">
                 2015 MagniPowerfull | v4.2
             </p>
 		</footer>
