@@ -1,8 +1,9 @@
-app.controller('controladorLogIn', function(servicioRest, config, $scope, $location, $rootScope) {
+app.controller('controladorLogIn', function(servicioRest, config, $scope, $location, $rootScope, $mdToast) {
 
 	$scope.login = function () {
         $rootScope.cargando=true;
 		var user = {};
+
 		user.username = $scope.user;
 		user.password = $scope.pass;
 		servicioRest.postAuthenticate(user)
@@ -18,6 +19,4 @@ app.controller('controladorLogIn', function(servicioRest, config, $scope, $locat
 				console.log("Error");
 			});
 	}
-
-
 });
