@@ -17,10 +17,12 @@ app.config(function($routeProvider) {
 		controller: 'controladorLogIn'
 	})
 	.when('/admin', {
-		templateUrl: 'modulos/admin/admin.html'
+		templateUrl: 'modulos/admin/admin.html',
+        controller: 'controladorAdmin'
 	})
 	.when('/tech', {
-		templateUrl: 'modulos/tech/tech.html'
+		templateUrl: 'modulos/tech/tech.html',
+        controller: 'controladorTech'
 	})
 	.when('/pageNotFound', {
 		templateUrl: 'modulos/error/templateError.html'
