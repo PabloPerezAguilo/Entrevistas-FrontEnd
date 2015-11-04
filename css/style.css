@@ -43,12 +43,15 @@ table {
   border-collapse: collapse;
   border-spacing: 0; }
 
+
+
 /* ---------------------------------------------------------------------*/
 @font-face {
-  font-family: 'principalCursiva';
-  src: url("fonts/HelveticaNeueLTStd-LtCnO.otf"); }
+    font-family: 13.3333px Roboto, sans-serif;
+}
+  
 
-header{
+header {
     background-color: rgb(30,30,30);
     color: white;
     height: 90px;
@@ -67,7 +70,7 @@ footer {
     color: white;
     height: 70px;
 }*/
-#logo{
+#logo {
 	/*width: 7%;*/
     /*width: 90px;*/
     padding-top: 0.5%;
@@ -78,7 +81,7 @@ footer {
     margin-right: auto;
     margin-bottom: 0.5%;
 }
-#logoGFI{
+#logoGFI {
 	/*width: 7%;*/
     /*width: 90px;*/
     padding-left: 5%;
@@ -87,7 +90,7 @@ footer {
     max-width:85%;
     max-height:85%;
 }
-#dat{
+#dat {
     display: inline;
     float: right;
     color: white;
@@ -95,28 +98,24 @@ footer {
     margin-right: 2%;
 }
 
-#barraProgreso{
+#barraProgreso {
     position: relative;
     /*margin-top: 5.5%;*/
     /*top:100%;*/
     background-color: orange;
 }
-md-progress-linear .md-bar{
+md-progress-linear .md-bar {
     background-color: orange;
 }
 md-progress-linear .md-container {
     background-color: rgb(233,222,197);
 }
 
-.divComun {
-    background-color: #EFEFEF;
-}
-
 /* ------------------------- LOG IN --------------------------------------- */
 .logIn {
     font-family: 'Roboto', sans-serif;
     background-color: #F5F5F5;
-    border: 1px solid #6E6E6E;
+    /*border: 1px solid #6E6E6E;*/
     box-shadow: 2px 2px 30px grey;
 
     position: absolute;
@@ -124,12 +123,14 @@ md-progress-linear .md-container {
     top: 50%;
     transform: translate(-50%, -50%);
 
-    width: 650px;
-    height: 260px;
+    width: 350px;
+    height: 200px;
 }
 
-input, textarea, keygen, select, button {
-    font: 13.3333px Roboto, sans-serif;
+.enBloque {
+   margin: auto;
+   width: 100%;
+   height: 70px;
 }
 
 /*Color de los txt*/
