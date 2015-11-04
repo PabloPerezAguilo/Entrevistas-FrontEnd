@@ -15,6 +15,7 @@ app.controller('controladorLogIn', function(servicioRest, config, $scope, $locat
 				}
 			})
 			.catch(function(err) {
+                $rootScope.cargando=false;
 				console.log("Error");
 			});
 	}

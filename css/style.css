@@ -99,23 +99,23 @@ footer {
 #barraProgreso{
     /*position: relative;*/
     /*margin-top: 1%;*/
-    top: 8%;
-    background-color: orange;   
+    top: 8%; 
     box-shadow: 2px 2px 30px grey;
 }
 md-progress-linear .md-bar {
-    background-color: orange;
+    background-color: #EF6C00;
 }
 md-progress-linear .md-container {
-    background-color: rgb(233,222,197);
+    background-color: rgba(239,108,0,0.17);
 }
 
 
 #barraCompleta{
     height: 5px;
     position: relative;
-    background-color: orange;
+    background-color: #EF6C00;
     top: 8%;
+    box-shadow: 2px 2px 30px grey;
 }
 
 /* ------------------------- LOG IN --------------------------------------- */
