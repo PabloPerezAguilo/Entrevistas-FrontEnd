@@ -1,13 +1,20 @@
 <div class="logIn">
-	<md-input-container flex>
-        <label>Usuario</label>
-        <input ng-model="user">
-    </md-input-container>
+	<div class="enBloque">
+		<md-input-container flex>
+        	<label>Usuario</label>
+        	<input ng-model="user">
+    	</md-input-container>
+	</div>
+	
+	<div class="enBloque">
+    	<md-input-container flex>
+        	<label>Contraseña</label>
+        	<input type="password" ng-model="pass">
+    	</md-input-container>
+    </div>
 
-    <md-input-container flex>
-        <label>Contraseña</label>
-        <input type="password" ng-model="pass">
-    </md-input-container>
-
-    <md-button class="md-raised" ng-click="login()">Iniciar sesión</md-button>
+    <div class="enBloque">
+    	<md-button class="md-raised" ng-click="login()">Iniciar sesión</md-button>
+    </div>
+    
 </div>
