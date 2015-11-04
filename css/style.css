@@ -108,9 +108,10 @@ md-progress-linear .md-container {
 }
 
 #barraCompleta{
-    /*height: 5px;
+    height: 5px;
+    position: relative;
     background-color: orange;
-    top: 8%;*/
+    top: 8%;
 }
 
 /* ------------------------- LOG IN --------------------------------------- */
