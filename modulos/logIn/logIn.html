@@ -1,15 +1,15 @@
 <div class="logIn">
 	<div class="enBloque">
-		<md-input-container flex>
-        	<label>Usuario</label>
-        	<input ng-model="user">
+		<md-input-container class="md-block">
+    		<label>Usuario</label>
+    		<input required name="user" ng-model="user">
     	</md-input-container>
 	</div>
 	
 	<div class="enBloque">
-    	<md-input-container flex>
+    	<md-input-container class="md-block">
         	<label>Contraseña</label>
-        	<input type="password" ng-model="pass">
+        	<input type="password" required name="pass" ng-model="pass">
     	</md-input-container>
     </div>
 
@@ -18,3 +18,5 @@
     </div>
     
 </div>
+
+

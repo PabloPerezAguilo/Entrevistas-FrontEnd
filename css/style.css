@@ -129,14 +129,15 @@ md-progress-linear .md-container {
     top: 50%;
     transform: translate(-50%, -50%);
 
-    width: 350px;
-    height: 200px;
+    width: 450px;
+    height: 250px;
 }
 
 .enBloque {
-   margin: auto;
-   width: 100%;
-   height: 70px;
+    margin: auto;
+    padding-top: 10px;
+    width: 325px;
+    height: 70px;
 }
 
 /*Color de los txt*/
@@ -152,6 +153,10 @@ md-input-container:not(.md-input-invalid).md-input-focused label {
 .md-button.md-raised {
     color: #EFEFEF;
     background-color: #EF6C00;
+    width: 200px;
+}
+md-input-container .md-input {
+    width: 300px;
 }
 
 .md-button.md-raised:not([disabled]):hover {
