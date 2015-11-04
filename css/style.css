@@ -52,6 +52,7 @@ header{
     background-color: rgb(30,30,30);
     color: white;
     height: 90px;
+    /*border-bottom: 4px solid orange;*/
     /*height: 141px;*/
 }
 footer {
@@ -75,7 +76,8 @@ footer {
     display: block;
     margin-left: auto;
     margin-right: auto;
-    margin-bottom: 0.5%;
+    margin-top: auto;
+    margin-bottom: auto;
 }
 #logoGFI{
 	/*width: 7%;*/
@@ -95,10 +97,11 @@ footer {
 }
 
 #barraProgreso{
-    position: relative;
-    /*margin-top: 5.5%;*/
-    /*top:100%;*/
-    background-color: orange;
+    /*position: relative;*/
+    /*margin-top: 1%;*/
+    top: 8%;
+    background-color: orange;   
+    box-shadow: 2px 2px 30px grey;
 }
 md-progress-linear .md-bar{
     background-color: orange;
@@ -106,7 +109,11 @@ md-progress-linear .md-bar{
 md-progress-linear .md-container {
     background-color: rgb(233,222,197);
 }
-
+#barraCompleta{
+    /*height: 5px;
+    background-color: orange;
+    top: 8%;*/
+}
 /* ------------------------- LOG IN --------------------------------------- */
 .logIn {
     font-family: 'Roboto', sans-serif;
