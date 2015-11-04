@@ -19,10 +19,10 @@
 	</head>
 	<body>
 
-		<header id="loginCab">
+		<header id="loginCab" ng-init="cargando=false">
             <img id="logo" src="logo.png">
-            <div id="barraCompleta"></div>
-            <md-progress-linear id="barraProgreso" md-mode="indeterminate" ng-show="cargando"></md-progress-linear>
+            <div id="barraCompleta" ng-hide="cargando"></div>
+            <md-progress-linear id="barraProgreso" md-mode="indeterminate"  ng-show="cargando"></md-progress-linear>
 		</header>
 		<div ng-view>
 		</div>
@@ -48,6 +48,8 @@
 		<script src="app.js"></script>
 		<script src="config.js"></script>
 		<script src="modulos/logIn/controladorLogIn.js"></script>
+        <script src="modulos/admin/controladorAdmin.js"></script>
+        <script src="modulos/tech/controladorTech.js"></script>
 		<!-- endbuild -->
 		<script src="js/AES.min.js"></script>
 
