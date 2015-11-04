@@ -112,10 +112,9 @@ md-progress-linear .md-container {
 
 
 #barraCompleta{
-    height: 5px;
-    position: relative;
+    /*height: 5px;
     background-color: orange;
-    top: 8%;
+    top: 8%;*/
 }
 
 /* ------------------------- LOG IN --------------------------------------- */
@@ -135,6 +134,7 @@ md-progress-linear .md-container {
 }
 
 .enBloque {
+
     margin: auto;
     padding-top: 10px;
     width: 325px;
@@ -154,10 +154,14 @@ md-input-container:not(.md-input-invalid).md-input-focused label {
 .md-button.md-raised {
     color: #EFEFEF;
     background-color: #EF6C00;
-    width: 200px;
+    width: 70%;
+    margin-left: 15%;
+    margin-right: 15%;
 }
-md-input-container .md-input {
+
+.md-input-container .md-input {
     width: 300px;
+
 }
 
 .md-button.md-raised:not([disabled]):hover {
