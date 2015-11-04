@@ -1,5 +1,6 @@
 app.controller('controladorLogIn', function(servicioRest, config, $scope, $location, $rootScope) {
 
+
 	$scope.login = function () {
         $rootScope.cargando=true;
 		var user = {};
