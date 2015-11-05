@@ -70,7 +70,7 @@ $naranjaClaro: rgba(239,108,0,0.17);
 
 /* ------------------------- HEADER & FOOTER --------------------------------------- */
 header {
-    background-color: $negro;
+    background-color: $naranja;
     color: white;
     height: 90px;
     box-shadow: 2px 2px 30px grey;
@@ -290,5 +290,7 @@ md-checkbox.md-default-theme.md-checked.md-focused .md-container:before, md-chec
 md-toast.md-default-theme, md-toast {
     background-color: $naranja;
     color: $grisLetra;
-    text-align: center;
+}
+.md-button.md-raised:not([disabled]).md-focused {
+    background-color: $naranja;
 }

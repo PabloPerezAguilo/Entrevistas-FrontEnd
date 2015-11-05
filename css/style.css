@@ -49,7 +49,7 @@ table {
 
 /* ------------------------- HEADER & FOOTER --------------------------------------- */
 header {
-  background-color: #1E1E1E;
+  background-color: #EF6C00;
   color: white;
   height: 90px;
   box-shadow: 2px 2px 30px grey;
@@ -241,6 +241,9 @@ md-checkbox.md-default-theme.md-checked.md-focused .md-container:before, md-chec
 
 md-toast.md-default-theme, md-toast {
   background-color: #EF6C00;
-  text-align: center;}
+  color: #EFEFEF; }
+
+.md-button.md-raised:not([disabled]).md-focused {
+  background-color: #EF6C00; }
 
 /*# sourceMappingURL=style.css.map */
