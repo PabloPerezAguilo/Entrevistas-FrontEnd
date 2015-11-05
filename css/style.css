@@ -141,12 +141,7 @@ md-input-container:not(.md-input-invalid).md-input-focused .md-input{
 md-input-container:not(.md-input-invalid).md-input-focused label {
     color: #EF6C00;
 }
-/*Checkbox*/
-md-checkbox.md-checked .md-ink-ripple {
-    color: #EF6C00;
-}
 
-/*Color y tamaño del boton*/
 .md-button.md-raised {
     color: #EFEFEF;
     background-color: #EF6C00;
@@ -161,5 +156,11 @@ md-checkbox.md-checked .md-ink-ripple {
 }
 
 .md-button.md-raised:not([disabled]):hover {
-    background-color: #ed9a56;
+    background-color: #ED9A56;
+}
+
+md-toast.md-default-theme, md-toast {
+    background-color: #EF6C00;
+    color: rgb(250,250,250);
+    font-family: font-family: 'Roboto', sans-serif;
 }

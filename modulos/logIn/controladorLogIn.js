@@ -24,7 +24,7 @@ app.controller('controladorLogIn', function(servicioRest, config, $scope, $locat
 					      $mdToast.simple()
 					        .content('Debe introducir su usuario y contraseña.')
 					        .position('top right')
-					        .hideDelay(1500)
+					        .hideDelay(15000000)
 					    );
 					} else {
 						$mdToast.show(
