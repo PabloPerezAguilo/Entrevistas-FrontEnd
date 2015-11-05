@@ -16,7 +16,7 @@ time, mark, audio, video {
   padding: 0;
   border: 0;
   font-size: 100%;
-  font: inherit;
+  font: sans-serif;
   vertical-align: baseline; }
 
 /* HTML5 display-role reset for older browsers */
@@ -44,8 +44,90 @@ table {
 
 /* ---------------------------------------------------------------------*/
 @font-face {
-  font-family: 'principalCursiva';
-  src: url("fonts/HelveticaNeueLTStd-LtCnO.otf"); }
+  font-family: 'principal';
+  src: url("fonts/Roboto-Thin.ttf"); }
+
+/* ------------------------- HEADER & FOOTER --------------------------------------- */
+header {
+  background-color: #1E1E1E;
+  color: white;
+  height: 90px;
+  box-shadow: 2px 2px 30px grey;
+  /*height: 141px;*/ }
+
+footer {
+  position: fixed;
+  bottom: 0;
+  background: #1E1E1E;
+  width: 100%;
+  height: 70px; }
+
+#logo {
+  padding-top: 0.5%;
+  max-width: 85%;
+  max-height: 85%;
+  display: block;
+  margin: auto; }
+
+#logoGFI {
+  padding-left: 5%;
+  padding-top: 0.5%;
+  display: inline;
+  max-width: 85%;
+  max-height: 85%; }
+
+#magniVersion {
+  display: inline;
+  float: right;
+  color: white;
+  margin-top: 2%;
+  margin-right: 2%; }
+
+#doneLoading {
+  height: 5px;
+  position: relative;
+  background-color: #EF6C00;
+  top: 8%;
+  box-shadow: 2px 2px 30px grey; }
+
+#progressBar {
+  top: 8%;
+  box-shadow: 2px 2px 30px grey; }
+
+md-progress-linear .md-bar {
+  background-color: #EF6C00; }
+
+md-progress-linear .md-container {
+  background-color: rgba(239, 108, 0, 0.17); }
+
+/* ------------------------- LOG IN --------------------------------------- */
+.logIn {
+  font-family: 'Roboto', sans-serif;
+  background-color: #F5F5F5;
+  box-shadow: 2px 2px 30px grey;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 450px;
+  height: 280px; }
+
+.enBloque {
+  margin: auto;
+  padding-top: 10px;
+  width: 325px;
+  height: 60px; }
+
+.izq {
+  text-align: right;
+  padding-right: 13%; }
+
+/*Color de los txt*/
+md-input-container:not(.md-input-invalid).md-input-focused .md-input {
+  border-color: #EF6C00; }
+
+md-input-container:not(.md-input-invalid).md-input-focused label {
+  color: #EF6C00; }
 
 /* ------------------------- HEADER & FOOTER --------------------------------------- */
 header {
@@ -156,5 +238,9 @@ md-checkbox.md-checked .md-ink-ripple {
 
 md-checkbox.md-default-theme.md-checked.md-focused .md-container:before, md-checkbox.md-checked.md-focused .md-container:before {
   background-color: rgba(239, 108, 0, 0.17); }
+
+md-toast.md-default-theme, md-toast {
+  background-color: #EF6C00;
+  color: #EFEFEF; }
 
 /*# sourceMappingURL=style.css.map */
