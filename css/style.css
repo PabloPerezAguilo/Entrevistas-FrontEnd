@@ -143,6 +143,8 @@ md-input-container:not(.md-input-invalid).md-input-focused label {
 
 md-toast.md-default-theme, md-toast {
   background-color: #EF6C00;
-  color: #EFEFEF; }
+  color: #EFEFEF; 
+  text-align: center;
+}
 
 /*# sourceMappingURL=style.css.map */
