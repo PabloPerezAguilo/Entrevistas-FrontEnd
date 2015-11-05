@@ -241,6 +241,8 @@ md-checkbox.md-default-theme.md-checked.md-focused .md-container:before, md-chec
 
 md-toast.md-default-theme, md-toast {
   background-color: #EF6C00;
-  color: #EFEFEF; }
+  color: #EFEFEF;
+  text-align: center;
+}
 
 /*# sourceMappingURL=style.css.map */
