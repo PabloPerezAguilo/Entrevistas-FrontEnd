@@ -291,3 +291,6 @@ md-toast.md-default-theme, md-toast {
     background-color: $naranja;
     color: $grisLetra;
 }
+.md-button.md-raised:not([disabled]).md-focused {
+    background-color: $naranja;
+}
