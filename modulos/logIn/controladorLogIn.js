@@ -34,7 +34,7 @@ app.controller('controladorLogIn', function(servicioRest, config, $scope, $locat
 				} else if($scope.user == null && $scope.pass == null) {
 					toast("Debe introducir su usuario y contraseña");
 				} else if($scope.user == null) {
-					$toast("Debe introducir su usuario");
+					toast("Debe introducir su usuario");
 				} else if($scope.pass == null) {
 					toast("Debe introducir su contraseña");
 				} else {
