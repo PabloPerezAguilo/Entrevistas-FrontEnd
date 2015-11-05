@@ -18,29 +18,28 @@ app.controller('controladorLogIn', function(servicioRest, config, $scope, $locat
 			.catch(function(err) {
                 $rootScope.cargando = false;
 				console.log("Error");
-				if($scope.user == null) {
-					if($scope.pass == null) {
-						$mdToast.show(
+
+				if($scope.user == null && $scope.pass == null) {
+					$mdToast.show(
 					      $mdToast.simple()
 					        .content('Debe introducir su usuario y contraseña.')
 					        .position('top right')
 					        .hideDelay(1500)
 					    );
-					} else {
-						$mdToast.show(
+				} else if($scope.user == null) {
+					$mdToast.show(
 					      $mdToast.simple()
 					        .content('Debe introducir su usuario.')
 					        .position('top right')
 					        .hideDelay(1500)
 					    );
-					}
 				} else if($scope.pass == null) {
 					$mdToast.show(
-				      $mdToast.simple()
-				        .content('Debe introducir su contraseña.')
-				        .position('top right')
-				        .hideDelay(1500)
-				    );
+					      $mdToast.simple()
+					        .content('Debe introducir su contraseña.')
+					        .position('top right')
+					        .hideDelay(1500)
+					    );
 				} else {
 					$mdToast.show(
 				      $mdToast.simple()
