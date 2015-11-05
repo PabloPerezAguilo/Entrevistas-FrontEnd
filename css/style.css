@@ -245,4 +245,7 @@ md-toast.md-default-theme, md-toast {
   text-align: center;
 }
 
+.md-button.md-raised:not([disabled]).md-focused {
+  background-color: #EF6C00; }
+
 /*# sourceMappingURL=style.css.map */
