@@ -171,3 +171,7 @@ md-checkbox.md-checked .md-icon {
 md-checkbox.md-checked .md-ink-ripple {
     color: #EF6C00;
 }
+
+md-checkbox.md-default-theme.md-checked.md-focused .md-container:before, md-checkbox.md-checked.md-focused .md-container:before {
+    background-color: rgba(239,108,0,0.17);
+}
