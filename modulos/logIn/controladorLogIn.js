@@ -13,7 +13,6 @@ app.controller('controladorLogIn', function(servicioRest, config, $scope, $locat
 	$scope.login = function () {
         $rootScope.cargando = true;
 		var user = {};
-
 		user.username = $scope.user;
 		user.password = $scope.pass;
 		servicioRest.postAuthenticate(user)
