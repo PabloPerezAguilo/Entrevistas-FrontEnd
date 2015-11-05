@@ -4,10 +4,11 @@ function ServicioREST($http, $q, $rootScope, config) {
 	
 	/* ---------- GESTION DE ERRORES DE SERVICIOS ---------- */
 	function tratarError(data, status, defered) {
-		if (status === 404 || status === 0) {
+		if (data === null || status === 404 || status === 0) {
 			defered.reject("Servicio no disponible");
 		} else if (data === undefined || data.message === undefined) {
-			defered.reject("Error: " + status);
+			//defered.reject("Error: " + status);
+			defered.reject(status);
 		} else {
 			defered.reject(data.message);
 		}

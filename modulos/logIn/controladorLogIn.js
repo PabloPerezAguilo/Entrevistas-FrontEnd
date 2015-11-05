@@ -1,5 +1,15 @@
 app.controller('controladorLogIn', function(servicioRest, config, $scope, $location, $rootScope, $mdToast) {
 
+	function toast(texto) {
+		$mdToast.show(
+	      $mdToast.simple()
+	        .content(texto)
+	        .position('top right')
+	        .hideDelay(1500)
+		);
+
+	}
+
 	$scope.login = function () {
         $rootScope.cargando = true;
 		var user = {};
@@ -18,36 +28,17 @@ app.controller('controladorLogIn', function(servicioRest, config, $scope, $locat
 			.catch(function(err) {
                 $rootScope.cargando = false;
 				console.log("Error");
-				if($scope.user == null) {
-					if($scope.pass == null) {
-						$mdToast.show(
-					      $mdToast.simple()
-					        .content('Debe introducir su usuario y contraseña.')
-					        .position('top right')
-					        .hideDelay(15000000)
-					    );
-					} else {
-						$mdToast.show(
-					      $mdToast.simple()
-					        .content('Debe introducir su usuario.')
-					        .position('top right')
-					        .hideDelay(1500)
-					    );
-					}
+				console.log(err);
+				if (err === "Servicio no disponible") {
+					toast("Error de conexión");
+				} else if($scope.user == null && $scope.pass == null) {
+					toast("Debe introducir su usuario y contraseña");
+				} else if($scope.user == null) {
+					toast("Debe introducir su usuario");
 				} else if($scope.pass == null) {
-					$mdToast.show(
-				      $mdToast.simple()
-				        .content('Debe introducir su contraseña.')
-				        .position('top right')
-				        .hideDelay(1500)
-				    );
+					toast("Debe introducir su contraseña");
 				} else {
-					$mdToast.show(
-				      $mdToast.simple()
-				        .content('El usuario o la contraseña es incorrecta.')
-				        .position('top right')
-				        .hideDelay(1500)
-				    );
+					toast("El usuario o la contraseña es incorrecta");
 				}
 			});
 	}
