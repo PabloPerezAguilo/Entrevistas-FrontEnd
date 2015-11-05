@@ -1,5 +1,5 @@
 {
-    "sass.enabled": false,
+    "sass.enabled": true,
     "path": {
         "css/style.scss": {
             "sass.enabled": true,
