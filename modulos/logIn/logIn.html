@@ -1,0 +1,26 @@
+<div class="logIn">
+	<div class="enBloque">
+		<md-input-container class="md-block">
+    		<label>Usuario</label>
+    		<input required name="user" ng-model="user">
+    	</md-input-container>
+	</div>
+	
+	<div class="enBloque">
+    	<md-input-container class="md-block">
+        	<label>Contraseña</label>
+        	<input type="password" required name="pass" ng-model="pass">
+    	</md-input-container>
+    </div>
+
+    <div class="izq">
+        <md-checkbox ng-model="checkRecordar">
+            No cerrar sesión
+        </md-checkbox>     
+    </div>
+
+    <div class="botonIniciar">
+    	<md-button class="md-raised" ng-click="login()">Iniciar sesión</md-button>
+    </div>
+    
+</div>

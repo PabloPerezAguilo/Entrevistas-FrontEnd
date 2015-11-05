@@ -1,49 +1,55 @@
 <!DOCTYPE html>
-<html lang="es" ng-app="lisa" class="no-js" > 
+<html lang="es" ng-app="magni" class="no-js" > 
 	<head>
 		<meta charset="utf-8">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta name="description" content="">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
-
+        
 		<title>Base Front</title>
 
 		<!-- build:CSSCDNs -->
 		
 		<!-- AQUI IRAN LOS CSS QUE TENGAN CDN-->
-		<!--link rel="stylesheet" href="css/style.css" /-->
-
+		<link rel="stylesheet" href="https://cdn.gitcdn.xyz/cdn/angular/bower-material/v1.0.0-rc2/angular-material.css">
 		<!-- endbuild -->
-
+       
 		<!-- AQUI IRAN LOS CSS NUESTROS QUE NO TENGAN CDN-->
-		<!--link rel="stylesheet" href="css/style.css" /-->
+		<link rel="stylesheet" href="css/style.css" />
 	</head>
 	<body>
-		<header>
-			cabecera
+
+		<header ng-init="cargando=false">
+            <img id="logo" src="logo.png">
+            <div id="doneLoading" ng-hide="cargando"></div>
+            <md-progress-linear id="progressBar" md-mode="indeterminate"  ng-show="cargando"></md-progress-linear>
 		</header>
-		<div>zona comun a todas las secciones</div>
-		
 		<div ng-view>
 		</div>
-
+             
 		<footer>
-			<img src="algo.jpg">
-            <p>
+			<img id="logoGFI" src="logoBlanco.png">
+            <p id="magniVersion">
                 2015 MagniPowerfull | v4.2
             </p>
 		</footer>
 
 		<!-- build:JSCDNs -->
-		<script src="js/angular.js"></script>        
-		<script src="js/angular-route.js"></script>
-		<script src="js/angular-aria.js"></script>
+		<script src="js/angular.min.js"></script>        
+		<script src="js/angular-animate.js"></script>
+		<script src="js/angular-route.min.js"></script>
+		<script src="js/angular-messages.min.js"></script>
+		<script src="js/angular-aria.min.js"></script>
+		<script src="js/angular-material.js"></script>
+		<script src="js/assets-cache.js"></script>
 		<!-- endbuild -->
 		<!-- build:JS -->
 		<script src="services.js"></script>
 		<script src="app.js"></script>
 		<script src="config.js"></script>
-		<script src="modulos/modulo1/controladorModulo1.js"></script>
+		<script src="modulos/logIn/controladorLogIn.js"></script>
+        <script src="modulos/admin/controladorAdmin.js"></script>
+        <script src="modulos/tech/controladorTech.js"></script>
 		<!-- endbuild -->
 		<script src="js/AES.min.js"></script>
 

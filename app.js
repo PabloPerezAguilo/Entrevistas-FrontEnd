@@ -1,6 +1,6 @@
 'use strict';
 
-var app = angular.module('lisa', ['ngRoute']);
+var app = angular.module('magni', ['ngRoute','ngMaterial']);
 app.run(function(servicioRest, $rootScope, $http, $location) {
 
 	// Establecemos las cabeceras por defecto. Las cabecera Authorization se modificara cuando el usuario se loge
@@ -13,8 +13,16 @@ app.config(function($routeProvider) {
 
 	$routeProvider
 	.when('/', {
-		templateUrl: 'modulos/modulo1/modulo1.html',
-		controller: 'controladorModulo1'
+		templateUrl: 'modulos/logIn/logIn.html',
+		controller: 'controladorLogIn'
+	})
+	.when('/admin', {
+		templateUrl: 'modulos/admin/admin.html',
+        controller: 'controladorAdmin'
+	})
+	.when('/tech', {
+		templateUrl: 'modulos/tech/tech.html',
+        controller: 'controladorTech'
 	})
 	.when('/pageNotFound', {
 		templateUrl: 'modulos/error/templateError.html'

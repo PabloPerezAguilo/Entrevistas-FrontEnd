@@ -4,10 +4,11 @@ function ServicioREST($http, $q, $rootScope, config) {
 	
 	/* ---------- GESTION DE ERRORES DE SERVICIOS ---------- */
 	function tratarError(data, status, defered) {
-		if (status === 404 || status === 0) {
+		if (data === null || status === 404 || status === 0) {
 			defered.reject("Servicio no disponible");
 		} else if (data === undefined || data.message === undefined) {
-			defered.reject("Error: " + status);
+			//defered.reject("Error: " + status);
+			defered.reject(status);
 		} else {
 			defered.reject(data.message);
 		}
@@ -65,10 +66,36 @@ function ServicioREST($http, $q, $rootScope, config) {
 
 		return promise;
 	}
+
+
+
+	/* ---------- POST AUTHENTICATE ------------- */
+
+	function postAuthenticate(user) {
+
+		var defered = $q.defer();
+		var promise = defered.promise;
+		$http({
+			method: 'POST',
+			url: url + '/authenticate',
+			data: user
+		})
+		.success(function(data, status, headers, config) {
+			defered.resolve(data);
+		})
+		.error(function(data, status, headers, config) {
+			tratarError(data, status, defered);
+		});
+
+		return promise;
+
+	}
+
 		
 	return {
 		getEntidades: getEntidades,
 		getEntidad: getEntidad,
-		postEntidad: postEntidad
+		postEntidad: postEntidad,
+		postAuthenticate: postAuthenticate
 	}
 }
