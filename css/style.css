@@ -163,3 +163,11 @@ md-checkbox.md-checked .md-ink-ripple {
 .md-button.md-raised:not([disabled]):hover {
     background-color: #ed9a56;
 }
+
+md-checkbox.md-checked .md-icon {
+    background-color: #EF6C00;
+}
+
+md-checkbox.md-checked .md-ink-ripple {
+    color: #EF6C00;
+}
