@@ -44,7 +44,6 @@ table {
 
 /* ---------------------------------------------------------------------*/
 
-
 $negro: #1E1E1E;
 $naranja: #EF6C00;
 $grisLetra: #EFEFEF;
@@ -67,22 +66,22 @@ $naranjaClaro: rgba(239,108,0,0.17);
 	src: url('fonts/Roboto-Thin.ttf');
 }
 
-
 /* ------------------------- HEADER & FOOTER --------------------------------------- */
 header {
-    background-color: $naranja;
-    color: white;
+    background-color: $negro;
+    color: $grisLetra;
     height: 90px;
     box-shadow: 2px 2px 30px grey;
-    /*height: 141px;*/
 }
+
 footer {
   position: fixed;
   bottom: 0;
   background: $negro;
   width: 100%;
   height: 70px;
-  }
+}
+
 #logo {
     padding-top: 0.5%;
     max-width:85%;
@@ -90,6 +89,7 @@ footer {
     display: block;
     margin: auto;
 }
+
 #logoGFI {
     padding-left: 5%;
     padding-top: 0.5%;
@@ -97,118 +97,32 @@ footer {
     max-width:85%;
     max-height:85%;
 }
+
 #magniVersion {
     display: inline;
     float: right;
-    color: white;
+    color: $grisLetra;
     margin-top: 2%;
     margin-right: 2%;
 }
-#doneLoading{
+
+#doneLoading {
     height: 5px;
     position: relative;
     background-color: $naranja;
     top: 8%;
     box-shadow: 2px 2px 30px grey;
 }
-#progressBar{
+
+#progressBar {
     top: 8%; 
     box-shadow: 2px 2px 30px grey;
 }
+
 md-progress-linear .md-bar {
     background-color: $naranja;
 }
-md-progress-linear .md-container {
-    background-color: $naranjaClaro;
-}
 
-/* ------------------------- LOG IN --------------------------------------- */
-.logIn {
-    font-family: 'Roboto', sans-serif;
-    background-color: #F5F5F5;
-    box-shadow: 2px 2px 30px grey;
-
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%, -50%);
-
-    width: 450px;
-    height: 280px;
-}
-
-.enBloque {
-
-    margin: auto;
-    padding-top: 10px;
-    width: 325px;
-    height: 60px;
-}
-
-.izq {
-    text-align: right;
-    padding-right: 13%;
-}
-
-/*Color de los txt*/
-md-input-container:not(.md-input-invalid).md-input-focused .md-input{
-    border-color: $naranja;
-}
-
-md-input-container:not(.md-input-invalid).md-input-focused label {
-    color: $naranja;
-}
-
-/* ------------------------- HEADER & FOOTER --------------------------------------- */
-header {
-    background-color: rgb(30,30,30);
-    color: white;
-    height: 90px;
-    box-shadow: 2px 2px 30px grey;
-    /*height: 141px;*/
-}
-footer {
-  position: fixed;
-  bottom: 0;
-  background: rgb(30,30,30);
-  width: 100%;
-  height: 70px;
-  }
-#logo {
-    padding-top: 0.5%;
-    max-width:85%;
-    max-height:85%;
-    display: block;
-    margin: auto;
-}
-#logoGFI {
-    padding-left: 5%;
-    padding-top: 0.5%;
-    display: inline;
-    max-width:85%;
-    max-height:85%;
-}
-#magniVersion {
-    display: inline;
-    float: right;
-    color: white;
-    margin-top: 2%;
-    margin-right: 2%;
-}
-#doneLoading{
-    height: 5px;
-    position: relative;
-    background-color: #EF6C00;
-    top: 8%;
-    box-shadow: 2px 2px 30px grey;
-}
-#progressBar{
-    top: 8%; 
-    box-shadow: 2px 2px 30px grey;
-}
-md-progress-linear .md-bar {
-    background-color: #EF6C00;
-}
 md-progress-linear .md-container {
     background-color: rgba(239,108,0,0.17);
 }
@@ -217,7 +131,6 @@ md-progress-linear .md-container {
 .logIn {
     font-family: 'Roboto', sans-serif;
     background-color: #F5F5F5;
-    /*border: 1px solid #6E6E6E;*/
     box-shadow: 2px 2px 30px grey;
 
     position: absolute;
@@ -237,26 +150,34 @@ md-progress-linear .md-container {
     height: 60px;
 }
 
-.izq {
+.derecha {
     text-align: right;
     padding-right: 13%;
 }
 
-/*Color de los txt*/
+/*Textbox*/
 md-input-container:not(.md-input-invalid).md-input-focused .md-input{
-    border-color: #EF6C00;
+    border-color: $naranja;
 }
 
 md-input-container:not(.md-input-invalid).md-input-focused label {
-    color: #EF6C00;
+    color: $naranja;
 }
+
 /*Checkbox*/
 md-checkbox.md-checked .md-ink-ripple {
-    color: #EF6C00;
+    color: $naranja;
 }
 
-/*Color y tamaño del boton*/
+md-checkbox.md-checked .md-icon {
+    background-color: $naranja;
+}
 
+md-checkbox.md-default-theme.md-checked.md-focused .md-container:before, md-checkbox.md-checked.md-focused .md-container:before {
+    background-color: rgba(239,108,0,0.17);
+}
+
+/*Button*/
 .md-button.md-raised {
     color: $grisLetra;
     background-color: $naranja;
@@ -267,26 +188,13 @@ md-checkbox.md-checked .md-ink-ripple {
 
 .md-input-container .md-input {
     width: 300px;
-
 }
 
 .md-button.md-raised:not([disabled]):hover {
-    background-color: #ed9a56;
+    background-color: #F19E5A;
 }
 
-md-checkbox.md-checked .md-icon {
-    background-color: #EF6C00;
-}
-
-md-checkbox.md-checked .md-ink-ripple {
-    color: #EF6C00;
-}
-
-md-checkbox.md-default-theme.md-checked.md-focused .md-container:before, md-checkbox.md-checked.md-focused .md-container:before {
-    background-color: rgba(239,108,0,0.17);
-
-}
-
+/*Toast*/
 md-toast.md-default-theme, md-toast {
     background-color: $naranja;
     color: $grisLetra;
