@@ -41,7 +41,6 @@ app.controller('controladorLogIn', function(servicioRest, config, $scope, $locat
 				}
 			});
 	}
-    
     $scope.hacerEntrevista = function () {
         $rootScope.cargando = true;
         var entrevistado = {};

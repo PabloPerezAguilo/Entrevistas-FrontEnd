@@ -1,26 +1,50 @@
+
 <div class="logIn">
-	<div class="enBloque">
-		<md-input-container class="md-block">
-    		<label>Usuario</label>
-    		<input required name="user" ng-model="user">
-    	</md-input-container>
-	</div>
+    <md-content class="md-padding">
+        <md-tabs class="md-accent" md-selected="data.selectedIndex" md-align-tabs="{{data.bottom ? 'bottom' : 'top'}}">
+            <md-tab id="tab1">
+                <md-tab-label>Iniciar sesión</md-tab-label>
+                <md-tab-body>
+                   <div class="enBloque">
+                       <md-input-container class="md-block">
+                           <label>Usuario</label>
+                           <input required name="user" ng-model="user">
+    	               </md-input-container>
+	               </div>
 	
-	<div class="enBloque">
-    	<md-input-container class="md-block">
-        	<label>Contraseña</label>
-        	<input type="password" required name="pass" ng-model="pass">
-    	</md-input-container>
-    </div>
+	               <div class="enBloque">
+                    	<md-input-container class="md-block">
+        	               <label>Contraseña</label>
+        	               <input type="password" required name="pass" ng-model="pass">
+    	               </md-input-container>
+                    </div>
 
-    <div class="izq">
-        <md-checkbox ng-model="checkRecordar">
-            No cerrar sesión
-        </md-checkbox>     
-    </div>
+                    <div class="derecha">
+                        <md-checkbox ng-model="checkRecordar">
+                            No cerrar sesión
+                        </md-checkbox>     
+                    </div>
 
-    <div class="botonIniciar">
-    	<md-button class="md-raised" ng-click="login()">Iniciar sesión</md-button>
-    </div>
-    
+                    <div>
+    	               <md-button class="md-raised" ng-click="login()">Iniciar sesión</md-button>
+                    </div>
+                </md-tab-body>
+            </md-tab>
+            <md-tab id="tab2">
+                <md-tab-label>DNI</md-tab-label>
+                <md-tab-body>
+                    <div class="enBloqueCentrado">
+                    	<md-input-container class="md-block">
+        	               <label>DNI</label>
+        	               <input required name="dni" ng-model="pass">
+    	               </md-input-container>
+                    </div>
+
+                    <div>
+    	               <md-button class="md-raised" ng-click="login()">Iniciar entrevista</md-button>
+                    </div>
+                </md-tab-body>
+            </md-tab>
+        </md-tabs>
+    </md-content>
 </div>
