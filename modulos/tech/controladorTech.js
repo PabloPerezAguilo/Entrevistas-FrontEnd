@@ -1,4 +1,4 @@
-app.controller('controladorTech', function(servicioRest, config, $scope, $location, $rootScope) {
+app.controller('controladorTech', function(servicioRest, config, $scope, $location, $rootScope, $mdDialog) {
     
     /*---------------------------Inicializar vista------------------------------*/
     
@@ -80,5 +80,14 @@ app.controller('controladorTech', function(servicioRest, config, $scope, $locati
         
         */
 	}
-    
+  
+  $scope.showTabDialog = function(ev) {
+    $mdDialog.show({
+      controller: 'controladorCrear',
+      templateUrl: 'modulos/tech/crear.tmpl.html',
+      parent: angular.element(document.body),
+      targetEvent: ev,
+      clickOutsideToClose:true
+    })
+  };
 });
