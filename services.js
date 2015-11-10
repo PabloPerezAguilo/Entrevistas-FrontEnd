@@ -33,12 +33,12 @@ function ServicioREST($http, $q, $rootScope, config) {
 		return promise;
 	}
 
-	function getEntidades() {
+	function getPreguntas() {
 		var defered = $q.defer();
 		var promise = defered.promise;
 		$http({
 			method: 'GET',
-			url: url + '/resource/'
+			url: url + '/Question/'
 		})
 		.success(function(data, status, headers, config) {
 			defered.resolve(data);
@@ -93,7 +93,7 @@ function ServicioREST($http, $q, $rootScope, config) {
 
 		
 	return {
-		getEntidades: getEntidades,
+		getPreguntas: getPreguntas,
 		getEntidad: getEntidad,
 		postPregunta: postPregunta,
 		postAuthenticate: postAuthenticate

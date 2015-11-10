@@ -1,8 +1,29 @@
 app.controller('controladorTech', function(servicioRest, config, $scope, $location, $rootScope) {
     
     /*---------------------------Inicializar vista------------------------------*/
-    
-	$rootScope.cargando=false;
+    var Options={
+        title: String,
+        Valid: Boolean
+    }
+    var pregunta={
+        title:{
+            type:String,
+            required:true 
+        },
+        type:{
+            type:String,
+            required:true
+        },
+        tags:[String],
+        level:{
+            type: Number,
+        min:1,
+        max:10,
+        required:true
+        },
+        answers:[Options]
+    }
+	$rootScope.cargando = false;
     
     $scope.preguntas = [
       {
@@ -21,13 +42,33 @@ app.controller('controladorTech', function(servicioRest, config, $scope, $locati
     
     /*--------------------------Funciones--------------------------*/
     
+    $scope.ver= function () {
+        
+        servicioRest.getPreguntas()
+			.then(function(data) {
+                console.log(data);
+				console.log(pregunta);
+            //while
+				$scope.preguntas.push({
+                    titulo: $scope.titulo,
+                    tema: $scope.tema,
+                    nivel: $scope.nivel,
+                    tipo: $scope.tipo
+                })
+			})
+			.catch(function(err) {
+				console.log("Error");
+                console.log(err);
+			});
+    }
+    
     $scope.crear= function () {
         
-        $scope.p=true;
+        $scope.p = true;
     }
     
     $scope.terminarCrear= function () {
-        $scope.p=false;
+        $scope.p = false;
         /*
         $scope.preguntas.push({
             titulo: 'pregunta1',
@@ -36,12 +77,31 @@ app.controller('controladorTech', function(servicioRest, config, $scope, $locati
             tipo: "test"
         })
         */
-        $scope.preguntas.push({
-            titulo: $scope.titulo,
-            tema: $scope.tema,
-            nivel: $scope.nivel,
-            tipo: $scope.tipo
-        })
+        pregunta.title=$scope.titulo
+        pregunta.tags=$scope.tema
+        pregunta.level=$scope.nivel
+        pregunta.type=$scope.tipo
+        if($scope.tipo==="abierto")
+        {
+            //pregunta.answers=$scope.respuestas;
+        }
+        servicioRest.postPregunta(pregunta)
+			.then(function(data) {
+                console.log(data);
+				console.log(pregunta);
+				$scope.preguntas.push({
+                    titulo: $scope.titulo,
+                    tema: $scope.tema,
+                    nivel: $scope.nivel,
+                    tipo: $scope.tipo
+                })
+			})
+			.catch(function(err) {
+				console.log("Error");
+            console.log(err);
+			});
+        
+        
     }
     
     $scope.modificar = function (indice) {
@@ -80,7 +140,7 @@ app.controller('controladorTech', function(servicioRest, config, $scope, $locati
 	}
     
     $scope.eliminar = function (indice) {
-        $scope.preguntas.splice(indice,1);
+        $scope.preguntas.splice(indice, 1);
         
         /* SOLUCION
         
