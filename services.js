@@ -95,7 +95,7 @@ function ServicioREST($http, $q, $rootScope, config) {
 	return {
 		getEntidades: getEntidades,
 		getEntidad: getEntidad,
-		postEntidad: postEntidad,
+		postPregunta: postPregunta,
 		postAuthenticate: postAuthenticate
 	}
 }
