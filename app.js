@@ -28,6 +28,10 @@ app.config(function($routeProvider) {
 		templateUrl: 'modulos/entrevista/entrevista.html',
         controller: 'controladorTech'
 	})
+    .when('/entrevista', {
+		templateUrl: 'modulos/entrevista/entrevista.html',
+        controller: 'controladorEntrevista'
+	})
 	.when('/pageNotFound', {
 		templateUrl: 'modulos/error/templateError.html'
 	})

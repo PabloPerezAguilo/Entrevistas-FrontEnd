@@ -91,7 +91,7 @@ function ServicioREST($http, $q, $rootScope, config) {
 
 	}
     
-    /* ---------- GET INTERVIEW ---------------- */
+    /* ------------- GET INTERVIEW -------------- */
     
     function getInterview(dni) {
         var defered = $q.defer();
