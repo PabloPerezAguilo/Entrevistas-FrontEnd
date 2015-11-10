@@ -4,38 +4,36 @@ app.controller('controladorTech', function(servicioRest, config, $scope, $locati
     
 	$rootScope.cargando=false;
     
-    var imagePath = "logo.png";
-
-    $scope.todos = [
+    $scope.preguntas = [
       {
-        face : imagePath,
-        what: 'hola this weekend?',
-        who: 'Min Li Chan',
-        when: '3:08PM',
-        notes: " I'll be in your neighborhood doing errands"
+        titulo: 'hola this weekend?',
+        tema: 'Min Li Chan',
+        nivel: '3:08PM',
+        tipo: " I'll be in your neighborhood doing errands"
       },
       {
-        face : imagePath,
-        what: 'Brunch this weekend?',
-        who: 'Min Li Chan',
-        when: '3:08PM',
-        notes: " I'll be in your neighborhood doing errands"
+        titulo: 'hola this weekend?',
+        tema: 'Min Li Chan',
+        nivel: '3:08PM',
+        tipo: " I'll be in your neighborhood doing errands"
       },
     ];
     
     /*--------------------------Funciones--------------------------*/
     
     $scope.crear= function () {
-        $scope.todos.push({
-            face : imagePath,
-            what: 'hola?',
-            who: 'Min Li Chan',
-            when: '3:08PM',
-            notes: " I'll be in your neighborhood doing errands"})
+        $scope.preguntas.push({
+            titulo: 'pregunta1',
+            tema: 'java',
+            nivel: '6',
+            tipo: "test"
+        })
     }
     
     $scope.modificar = function () {
-        
+        /*function(item) {
+        angular.element(document.getElementById("modal")).scope().item = item;
+    };*/
         /*$rootScope.cargando = true;
 		var user = {};
 		user.username = $scope.user;
@@ -68,7 +66,7 @@ app.controller('controladorTech', function(servicioRest, config, $scope, $locati
 	}
     
     $scope.eliminar = function (indice) {
-        $scope.todos.splice(indice,1);
+        $scope.preguntas.splice(indice,1);
         
         /* SOLUCION
         
