@@ -102,17 +102,26 @@ md-progress-linear .md-container {
 .logIn {
   font-family: 'Roboto', sans-serif;
   background-color: #F5F5F5;
-  box-shadow: 2px 2px 30px grey;
+  -webkit-box-shadow: 1px 2px 40px 1px grey;
+  -moz-box-shadow: 1px 2px 40px 1px grey;
+  box-shadow: 1px 2px 40px 1px grey;
   position: absolute;
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
-  width: 450px;
-  height: 280px; }
+  width: 480px;
+  height: 300px; }
 
 .enBloque {
   margin: auto;
   padding-top: 10px;
+  width: 325px;
+  height: 60px; }
+
+.enBloqueCentrado {
+  margin: auto;
+  padding-top: 45px;
+  padding-bottom: 8px;
   width: 325px;
   height: 60px; }
 
@@ -158,5 +167,29 @@ md-toast.md-default-theme, md-toast {
 
 .md-button.md-raised:not([disabled]).md-focused {
   background-color: #EF6C00; }
+
+/*TAB*/
+md-tabs.md-accent > md-tabs-wrapper {
+  background-color: white; }
+
+md-content md-tabs {
+  background: #F6F6F6;
+  vertical-align: middle; }
+
+md-tabs.md-accent > md-tabs-wrapper > md-tabs-canvas > md-pagination-wrapper > md-tab-item:not([disabled]) {
+  color: #B5B4B4; }
+
+md-tabs.md-accent > md-tabs-wrapper > md-tabs-canvas > md-pagination-wrapper > md-tab-item:not([disabled]).md-active {
+  color: #1E1E1E; }
+
+md-tabs.md-accent > md-tabs-wrapper > md-tabs-canvas > md-pagination-wrapper > md-ink-bar {
+  color: #EF6C00;
+  background: #EF6C00; }
+
+md-tabs:not(.md-no-tab-content):not(.md-dynamic-height) {
+  min-height: 300px; }
+
+.md-padding {
+  padding: 0px; }
 
 /*# sourceMappingURL=style.css.map */
