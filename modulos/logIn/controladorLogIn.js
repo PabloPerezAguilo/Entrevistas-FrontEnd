@@ -41,11 +41,9 @@ app.controller('controladorLogIn', function(servicioRest, config, $scope, $locat
 				}
 			});
 	}
+    
     $scope.hacerEntrevista = function () {
         $rootScope.cargando = true;
-        var entrevistado = {};
-        entrevistado.dni = $scope.dni;
-        console.log(entrevistado);
         servicioRest.getInterview($scope.dni)
             .then(function(data) {
                 console.log(data);
