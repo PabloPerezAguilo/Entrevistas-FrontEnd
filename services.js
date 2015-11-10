@@ -15,12 +15,12 @@ function ServicioREST($http, $q, $rootScope, config) {
 	}
 
 	/* ---------- SERVICIOS ENTIDAD ---------- */
-	function postEntidad(objetoAEnviar) {
+	function postPregunta(objetoAEnviar) {
 		var defered = $q.defer();
 		var promise = defered.promise;
 		$http({
 			method: 'POST',
-			url: url + '/entidad',
+			url: url + '/Question',
 			data: objetoAEnviar
 		})
 		.success(function(data, status, headers, config) {

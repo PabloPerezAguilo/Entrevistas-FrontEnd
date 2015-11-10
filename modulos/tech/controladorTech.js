@@ -22,15 +22,29 @@ app.controller('controladorTech', function(servicioRest, config, $scope, $locati
     /*--------------------------Funciones--------------------------*/
     
     $scope.crear= function () {
+        
+        $scope.p=true;
+    }
+    
+    $scope.terminarCrear= function () {
+        $scope.p=false;
+        /*
         $scope.preguntas.push({
             titulo: 'pregunta1',
             tema: 'java',
             nivel: '6',
             tipo: "test"
         })
+        */
+        $scope.preguntas.push({
+            titulo: $scope.titulo,
+            tema: $scope.tema,
+            nivel: $scope.nivel,
+            tipo: $scope.tipo
+        })
     }
     
-    $scope.modificar = function () {
+    $scope.modificar = function (indice) {
         /*function(item) {
         angular.element(document.getElementById("modal")).scope().item = item;
     };*/
