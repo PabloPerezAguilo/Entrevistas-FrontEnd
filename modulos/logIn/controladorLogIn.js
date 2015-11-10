@@ -42,19 +42,21 @@ app.controller('controladorLogIn', function(servicioRest, config, $scope, $locat
 			});
 	}
     
-    
-    function AppCtrl () {
-        $scope.data = {
-            selectedIndex: 0,
-            bottom: false
-        };
-        $scope.next = function() {
-            $scope.data.selectedIndex = Math.min($scope.data.selectedIndex + 1, 2);
-        };
-        $scope.previous = function() {
-            $scope.data.selectedIndex = Math.max($scope.data.selectedIndex - 1, 0);
-        };
-    }    
-    
-    
+    $scope.hacerEntrevista = function () {
+        $rootScope.cargando = true;
+        servicioRest.getInterview($scope.dni)
+            .then(function(data) {
+                console.log(data);
+                $location.path("/entrevista");
+            })
+            .catch(function(err) {
+                $rootScope.cargando = false;
+                console.log("Error: " + err);
+                if (err === "Servicio no disponible") {
+					toast("Error de conexión");
+				} else {
+                    toast("DNI inválido");
+                }
+            });
+    }
 });
