@@ -1,24 +1,28 @@
-<!--<input type=button value="+" ng-click="crear()"></input>
-<md-list>
-      <md-subheader class="md-no-sticky">Preguntas</md-subheader>
-        <md-divider></md-divider>
-      <md-list-item class="md-3-line" ng-repeat="item in preguntas">
-          
-        <div class="md-list-item-text" layout="column">
-          <h3>{{ item.titulo }}</h3>
-          <h4>{{ item.tema }} / {{ item.nivel }}</h4>
-          <p>{{ item.tipo }}</p>
-        </div>
-          <input type=button value="ver" ng-click="ver()"></input>
-            <input type=button value="Modificar" ng-click="modificar($index)"></input>
-            <input type=button value="Eliminar" ng-click="eliminar($index)"></input>
-            <md-divider></md-divider>
-      </md-list-item>
-
-    </md-list>-->
-
 <div>
     <md-button class="md-primary md-raised" ng-click="showTabDialog($event)" flex-sm="100" flex-md="100" flex-gt-md="auto">
         Tab Dialog
     </md-button>
+    
+    <input type=button value="+" ng-click="crear()"/>
+    <md-list>
+        <md-subheader class="md-no-sticky">Preguntas</md-subheader>
+        <md-divider></md-divider>
+        <md-list-item class="md-3-line" ng-repeat="item in preguntas">
+            <div class="md-list-item-text" layout="column">
+                <h3>
+                    {{ item.titulo }}
+                </h3>
+                <h4>
+                    {{ item.tema }} / {{ item.nivel }}
+                </h4>
+                <p>
+                    {{ item.tipo }}
+                </p>
+            </div>
+            <input type=button value="ver" ng-click="ver()"/>
+            <input type=button value="Modificar" ng-click="modificar($index)"/>
+            <input type=button value="Eliminar" ng-click="eliminar($index)"/>
+            <md-divider></md-divider>
+        </md-list-item>
+    </md-list>
 </div>
