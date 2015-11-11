@@ -94,7 +94,6 @@ function ServicioREST($http, $q, $rootScope, config) {
     /* ------------- GET INTERVIEW -------------- */
     
     function getInterview(dni) {
-        
         var defered = $q.defer();
 		var promise = defered.promise;
 		$http({
@@ -109,9 +108,7 @@ function ServicioREST($http, $q, $rootScope, config) {
 		});
 
 		return promise;
-        
     }
-
 		
 	return {
 		getEntidades: getEntidades,
