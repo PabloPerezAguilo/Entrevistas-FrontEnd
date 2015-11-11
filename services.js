@@ -49,6 +49,23 @@ function ServicioREST($http, $q, $rootScope, config) {
 
 		return promise;
 	}
+    
+    function deletePregunta(idPregunta) {
+		var defered = $q.defer();
+		var promise = defered.promise;
+		$http({
+			method: 'DELETE',
+			url: url + '/question/'+idPregunta
+		})
+		.success(function(data, status, headers, config) {
+			defered.resolve(data);
+		})
+		.error(function(data, status, headers, config) {
+			tratarError(data, status,defered);
+		});
+
+		return promise;
+	}
 
 	function getEntidad(parametroA, parametroB, parametroC) {
 		var defered = $q.defer();
@@ -96,6 +113,7 @@ function ServicioREST($http, $q, $rootScope, config) {
 		getPreguntas: getPreguntas,
 		getEntidad: getEntidad,
 		postPregunta: postPregunta,
+        deletePregunta: deletePregunta,
 		postAuthenticate: postAuthenticate
 	}
 }
