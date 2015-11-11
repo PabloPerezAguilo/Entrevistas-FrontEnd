@@ -77,14 +77,16 @@ app.controller('controladorTech', function(servicioRest, config, $scope, $locati
             tipo: "test"
         })
         */
-        pregunta.title=$scope.titulo
-        pregunta.tags=$scope.tema
-        pregunta.level=$scope.nivel
-        pregunta.type=$scope.tipo
+        pregunta.title=$scope.titulo;
+        pregunta.tags[0]=$scope.tema;
+        pregunta.level=$scope.nivel;
+        pregunta.type=$scope.tipo;
+        pregunta.answers=undefined;
         if($scope.tipo==="abierto")
         {
             //pregunta.answers=$scope.respuestas;
         }
+        console.log(pregunta);
         servicioRest.postPregunta(pregunta)
 			.then(function(data) {
                 console.log(data);

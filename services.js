@@ -20,7 +20,7 @@ function ServicioREST($http, $q, $rootScope, config) {
 		var promise = defered.promise;
 		$http({
 			method: 'POST',
-			url: url + '/Question',
+			url: url + '/question',
 			data: objetoAEnviar
 		})
 		.success(function(data, status, headers, config) {
@@ -38,7 +38,7 @@ function ServicioREST($http, $q, $rootScope, config) {
 		var promise = defered.promise;
 		$http({
 			method: 'GET',
-			url: url + '/Question/'
+			url: url + '/question/'
 		})
 		.success(function(data, status, headers, config) {
 			defered.resolve(data);
