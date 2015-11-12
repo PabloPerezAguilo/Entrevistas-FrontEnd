@@ -28,7 +28,6 @@ app.controller('controladorTech', function(servicioRest, config, $scope, $locati
         },
         answers:[Options]
     }
-    
 	$rootScope.cargando = false;
     
     /*---------------------------Inicializar lista------------------------------*/
@@ -61,25 +60,22 @@ app.controller('controladorTech', function(servicioRest, config, $scope, $locati
         pregunta.tags[0]=$scope.tema;
         pregunta.level=$scope.nivel;
         pregunta.type=$scope.tipo;
-        
-        if($scope.tipo==="abierto")
+        if($scope.tipo==="FREE")
         {
-            //pregunta.answers=$scope.respuestas;
+            
             pregunta.answers=null;
         }
         else
         {
+            //pregunta.answers=$scope.respuestas;
            pregunta.answers=null; 
         }
         console.log(pregunta);
         servicioRest.postPregunta(pregunta)
 			.then(function(data) {
-                console.log(data.data.level);
-				
-            pregunta._id=data._id;
-            console.log(pregunta);
+            pregunta._id=data.data._id;
 				$scope.preguntas.push({
-                    id: data._id,
+                    _id: pregunta._id,
                     title: pregunta.title,
                     tags: pregunta.tags[0],
                     level: pregunta.level,
@@ -90,8 +86,6 @@ app.controller('controladorTech', function(servicioRest, config, $scope, $locati
 				console.log("Error");
             console.log(err);
 			});
-        
-        
     }
     
     $scope.modificar = function (indice) {
