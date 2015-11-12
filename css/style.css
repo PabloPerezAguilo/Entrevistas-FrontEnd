@@ -195,11 +195,13 @@ md-tabs:not(.md-no-tab-content):not(.md-dynamic-height) {
 /*------------------------------TECNICO*------------------------------*/
 /*Crear pregunta*/
 .md-button.md-fab {
-  color: #EFEFEF;
   background-color: #EF6C00; }
 
 .md-button.md-fab:not([disabled]):hover {
   background-color: #F19E5A; }
+
+.md-button.md-fab:not([disabled]).md-focused {
+  background-color: #BC5500; }
 
 md-toolbar:not(.md-menu-toolbar) {
   background-color: #EF6C00;
@@ -218,12 +220,46 @@ md-tabs .md-tab.md-active {
 md-tabs md-ink-bar {
   background: #EF6C00; }
 
-md-content {
-  min-height: 300px; }
+.contenidoTablaCrear {
+  padding: 22px; }
 
-.dialogdemoBasicUsage .debt-be-gone {
-  font-weight: bold;
-  color: blue;
-  text-decoration: underline; }
+md-slider .md-thumb:after {
+  border-color: #EF6C00;
+  background-color: #EF6C00; }
+
+md-slider .md-sign {
+  background-color: #EF6C00; }
+
+md-slider .md-sign:after {
+  border-top-color: #EF6C00; }
+
+md-slider .md-track.md-track-fill {
+  background-color: #EF6C00; }
+
+.sliderdemoBasicUsage input[type="number"] {
+  text-align: center;
+  padding-left: 10px; }
+
+/*input tema*/
+.chipsdemoCustomInputs md-content.autocomplete {
+  min-height: 200px; }
+
+.chipsdemoCustomInputs input[type=number] {
+  width: 110px; }
+
+.chipsdemoCustomInputs .veggie-option {
+  float: left;
+  width: 20%;
+  box-sizing: border-box;
+  padding: 0 8px; }
+
+.chipsdemoCustomInputs .veggie-option .md-item-text {
+  padding: 8px;
+  background: #f0f0f0;
+  border-radius: 3px; }
+
+.chipsdemoCustomInputs .veggie-option .md-item-text h3, .chipsdemoCustomInputs .veggie-option .md-item-text p {
+  padding: 0;
+  margin: 0; }
 
 /*# sourceMappingURL=style.css.map */

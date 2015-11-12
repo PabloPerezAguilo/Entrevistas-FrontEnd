@@ -21,8 +21,8 @@ app.config(function($routeProvider) {
         controller: 'controladorAdmin'
 	})
 	.when('/', {
-		templateUrl: 'modulos/tech/tech.html',
-        controller: 'controladorTech'
+		templateUrl: 'modulos/tec/tec.html',
+        controller: 'controladorTec'
 	})
     
 	.when('/entrevista', {
