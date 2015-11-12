@@ -1,7 +1,6 @@
-app.controller('controladorTech', function(servicioRest, config, $scope, $location, $rootScope, $mdDialog) {
+app.controller('controladorTec', function(servicioRest, config,$scope, $location, $rootScope, $mdDialog) {
     
     /*---------------------------Inicializar vista------------------------------*/
-    
     var Options={
         title: String,
         Valid: Boolean
@@ -52,7 +51,6 @@ app.controller('controladorTech', function(servicioRest, config, $scope, $locati
     }
     
     $scope.crear= function () {
-        
         $scope.p = true;
     }
     
@@ -107,14 +105,14 @@ app.controller('controladorTech', function(servicioRest, config, $scope, $locati
             console.log(err);
 			});
 	}
-  
-  $scope.showTabDialog = function(ev) {
-    $mdDialog.show({
-      controller: 'controladorCrear',
-      templateUrl: 'modulos/tech/crear.tmpl.html',
-      parent: angular.element(document.body),
-      targetEvent: ev,
-      clickOutsideToClose:true
-    })
-  };
+    
+    $scope.showTabDialog = function(ev) {
+        $mdDialog.show({
+            controller: 'controladorTecCrear',
+            templateUrl: 'modulos/tec/crear.tmpl.html',
+            parent: angular.element(document.body),
+            targetEvent: ev,
+            clickOutsideToClose:true
+        })
+    };
 });

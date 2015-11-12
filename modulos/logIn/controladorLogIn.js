@@ -21,7 +21,7 @@ app.controller('controladorLogIn', function(servicioRest, config, $scope, $locat
 				if(data.role === "ROLE_ADMIN") {
 					$location.path("/admin");
 				} else {
-					$location.path("/tech");
+					$location.path("/tec");
 				}
 			})
 			.catch(function(err) {
