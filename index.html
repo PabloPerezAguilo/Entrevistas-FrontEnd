@@ -22,8 +22,9 @@
 		<header ng-init="cargando=false">
             <img id="logo" src="logo.png">
             <div id="doneLoading" ng-hide="cargando"></div>
-            <md-progress-linear id="progressBar" md-mode="indeterminate"  ng-show="cargando"></md-progress-linear>
+            <md-progress-linear id="progressBar" md-mode="indeterminate" ng-show="cargando"></md-progress-linear>
 		</header>
+        
 		<div ng-view>
 		</div>
              
@@ -50,6 +51,8 @@
 		<script src="modulos/logIn/controladorLogIn.js"></script>
         <script src="modulos/admin/controladorAdmin.js"></script>
         <script src="modulos/tech/controladorTech.js"></script>
+        <script src="modulos/tech/controladorCrear.js"></script>
+        <script src="modulos/entrevista/controladorEntrevista.js"></script>
 		<!-- endbuild -->
 		<script src="js/AES.min.js"></script>
 
