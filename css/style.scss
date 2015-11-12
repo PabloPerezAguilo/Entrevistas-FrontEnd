@@ -211,7 +211,7 @@ md-toast.md-default-theme, md-toast {
     background-color: $naranja;
 }
 
-/*TAB*/
+/*Tab*/
 md-tabs.md-accent > md-tabs-wrapper {
     background-color: white;
 }
@@ -241,3 +241,46 @@ md-tabs:not(.md-no-tab-content):not(.md-dynamic-height) {
 .md-padding {
     padding: 0px;
 }
+
+/*------------------------------TECNICO*------------------------------*/
+/*Crear pregunta*/
+
+.md-button.md-fab {
+    color: $grisLetra;
+    background-color: $naranja;
+}
+
+.md-button.md-fab:not([disabled]):hover {
+    background-color: #F19E5A;
+}
+
+md-toolbar:not(.md-menu-toolbar) {
+    background-color: $naranja;
+    color: $grisLetra;
+}
+
+.dialogdemoBasicUsage #popupContainer {
+  position: relative;
+}
+
+md-dialog.md-transition-in {
+    min-width: 500px;
+    min-height: 300px;
+}
+
+md-tabs .md-tab.md-active {
+    color: $negro;
+}
+
+md-tabs md-ink-bar {
+    background: $naranja;
+}
+
+md-content {
+    min-height: 300px;   
+}
+
+.dialogdemoBasicUsage .debt-be-gone {
+  font-weight: bold;
+  color: blue;
+  text-decoration: underline; }

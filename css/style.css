@@ -168,7 +168,7 @@ md-toast.md-default-theme, md-toast {
 .md-button.md-raised:not([disabled]).md-focused {
   background-color: #EF6C00; }
 
-/*TAB*/
+/*Tab*/
 md-tabs.md-accent > md-tabs-wrapper {
   background-color: white; }
 
@@ -191,5 +191,39 @@ md-tabs:not(.md-no-tab-content):not(.md-dynamic-height) {
 
 .md-padding {
   padding: 0px; }
+
+/*------------------------------TECNICO*------------------------------*/
+/*Crear pregunta*/
+.md-button.md-fab {
+  color: #EFEFEF;
+  background-color: #EF6C00; }
+
+.md-button.md-fab:not([disabled]):hover {
+  background-color: #F19E5A; }
+
+md-toolbar:not(.md-menu-toolbar) {
+  background-color: #EF6C00;
+  color: #EFEFEF; }
+
+.dialogdemoBasicUsage #popupContainer {
+  position: relative; }
+
+md-dialog.md-transition-in {
+  min-width: 500px;
+  min-height: 300px; }
+
+md-tabs .md-tab.md-active {
+  color: #1E1E1E; }
+
+md-tabs md-ink-bar {
+  background: #EF6C00; }
+
+md-content {
+  min-height: 300px; }
+
+.dialogdemoBasicUsage .debt-be-gone {
+  font-weight: bold;
+  color: blue;
+  text-decoration: underline; }
 
 /*# sourceMappingURL=style.css.map */

@@ -1,7 +1,9 @@
 <div>
-    <md-button class="md-primary md-raised" ng-click="showTabDialog($event)" flex-sm="100" flex-md="100" flex-gt-md="auto">
-        Tab Dialog
+    <md-button class="md-fab md-mini" ng-click="showTabDialog($event)" aria-label="crearPregunta">
+        <md-icon md-svg-src="img/crear.svg"></md-icon>
     </md-button>
+    
+    <p></p>
     
     <input type=button value="+" ng-click="crear()"/>
     <md-list>
@@ -20,7 +22,6 @@
                 </p>
             </div>
             <input type=button value="ver" ng-click="ver()"/>
-            <input type=button value="Modificar" ng-click="modificar($index)"/>
             <input type=button value="Eliminar" ng-click="eliminar($index)"/>
             <md-divider></md-divider>
         </md-list-item>
