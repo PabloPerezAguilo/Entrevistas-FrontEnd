@@ -6,19 +6,20 @@
     <p></p>
     
     <input type=button value="+" ng-click="crear()"/>
+    
     <md-list>
         <md-subheader class="md-no-sticky">Preguntas</md-subheader>
         <md-divider></md-divider>
-        <md-list-item class="md-3-line" ng-repeat="item in preguntas">
+      <md-list-item class="md-3-line" ng-repeat="item in preguntas">
             <div class="md-list-item-text" layout="column">
                 <h3>
-                    {{ item.titulo }}
+                    {{ item.title }}
                 </h3>
                 <h4>
-                    {{ item.tema }} / {{ item.nivel }}
+                    {{ item.tags }} <!--<span ng-repeat="tag in item.tags">{{ tag }} </span>-->/ {{ item.level }}
                 </h4>
                 <p>
-                    {{ item.tipo }}
+                    {{ item.type }}
                 </p>
             </div>
             <input type=button value="ver" ng-click="ver()"/>
@@ -26,4 +27,11 @@
             <md-divider></md-divider>
         </md-list-item>
     </md-list>
+
+<div ng-init="p=false" ng-show=p>
+<input ng-model="titulo">titulo</input>
+<input ng-model="tema">tema</input>
+<input ng-model="nivel">nivel</input>
+<input ng-model="tipo">tipo</input>
+<input type=button value="Aceptar" ng-click="terminarCrear()"></input>
 </div>
