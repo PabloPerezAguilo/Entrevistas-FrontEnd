@@ -10,5 +10,5 @@ app.controller('controladorTecCrear', function(servicioRest, config, $scope, $lo
         $mdDialog.hide(answer);
     };
     
-    $scope.barra = 5;
+    $scope.nivel = 5;
 });
