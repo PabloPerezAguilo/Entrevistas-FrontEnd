@@ -19,8 +19,12 @@
 	</head>
 	<body>
 
-		<header ng-init="cargando=false">
-            <img id="logo" src="logo.png">
+		<header ng-init="cargando=false;logueado=false">
+            <img id="logo" src="logo.png" ng-hide="logueado">
+            <img id="logoLogeado" src="logo.png" ng-show="logueado" ng-cloak>
+            <p id="nombreUsuario" nh-model="rolUsuario" ng-show="logueado" ng-cloak>
+                {{rolUsuario}}
+            </p>
             <div id="doneLoading" ng-hide="cargando"></div>
             <md-progress-linear id="progressBar" md-mode="indeterminate" ng-show="cargando"></md-progress-linear>
 		</header>

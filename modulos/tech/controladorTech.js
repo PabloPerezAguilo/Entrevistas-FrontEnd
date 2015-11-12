@@ -29,6 +29,8 @@ app.controller('controladorTech', function(servicioRest, config, $scope, $locati
         answers:[Options]
     }
 	$rootScope.cargando = false;
+    $rootScope.logueado=true;
+    $rootScope.rolUsuario="Técnico";
     
     /*---------------------------Inicializar lista------------------------------*/
     
