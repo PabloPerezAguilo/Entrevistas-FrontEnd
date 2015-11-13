@@ -10,6 +10,7 @@
                     <md-button class="md-icon-button" aria-label="cerrarCrearPregunta" ng-click="cancel()">
                         <md-icon md-svg-src="img/cerrar.svg"></md-icon>
                     </md-button>
+
                 </div>
             </md-toolbar>
             
@@ -18,7 +19,8 @@
                     <md-tab label="pregunta abierta">
                         <md-content class="md-padding">
                             <div class="contenidoTablaCrear">
-                                <md-slider flex="" md-discrete="" ng-model="nivelAbierta" step="1" min="1" max="10">
+                                <md-slider flex="" md-discrete="" ng-model="nivelAbierta" aria-label="nivel abierta" 
+										   step="1" min="1" max="10">
                                 </md-slider>
                                 
                                 <md-input-container flex>
@@ -29,6 +31,11 @@
                                 <md-input-container class="md-block">
                                     <label>Enunciado de la pregunta</label>
                                     <textarea ng-model="tituloAbierta"></textarea>
+                                </md-input-container>
+								
+								<md-input-container class="md-block">
+                                    <label>Directivas de la pregunta</label>
+                                    <textarea ng-model="directivasAbierta"></textarea>
                                 </md-input-container>
                                 
                                 <md-input-container class="md-block">
@@ -45,7 +52,8 @@
                     <md-tab label="pregunta tipo test">
                         <md-content class="md-padding">
                             <div class="contenidoTablaCrear">
-                                <md-slider flex="" md-discrete="" ng-model="nivelTest" step="1" min="1" max="10">
+                                <md-slider flex="" md-discrete="" ng-model="nivelTest" aria-label="nivel test" 
+										   step="1" min="1" max="10">
                                 </md-slider>
                                 
                                 <md-input-container flex>
@@ -57,16 +65,16 @@
                                     <label>Enunciado de la pregunta</label>
                                     <textarea ng-model="tituloTest"></textarea>
                                 </md-input-container>
-                                
-                                <md-input-container class="md-block">
-                                    <label>Respuesta 1</label>
-                                    <textarea ng-model="respuestaTest1"></textarea>
-                                </md-input-container>
-                                <md-input-container class="md-block">
-                                    <label>Respuesta 2</label>
-                                    <textarea ng-model="respuestaTest2"></textarea>
-                                </md-input-container>
-                                
+								<div ng-repeat="respuestas in test">
+									<md-input-container class="md-block">
+                                    	<label>Respuesta {{respuestas}}</label>
+                                    	<textarea ng-model="respuestasTest[$index]"></textarea>
+                                	</md-input-container>
+								</div>
+							
+								<md-button class="md-fab md-mini" ng-click="masRespuestaTest()" aria-label="crearPregunta">
+        							<md-icon md-svg-src="img/crear.svg"></md-icon>
+    							</md-button>
                             </div>      
                         </md-content>
                     </md-tab>
@@ -84,3 +92,9 @@
         </form>
     </md-dialog>
 </div>
+
+
+
+
+
+    

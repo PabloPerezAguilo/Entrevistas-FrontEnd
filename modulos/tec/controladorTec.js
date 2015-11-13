@@ -111,7 +111,7 @@ app.controller('controladorTec', function(servicioRest, config,$scope, $location
     
     $scope.showTabDialog = function(ev) {
         $mdDialog.show({
-            controller: 'controladorTecCrear',
+            controller: 'controladorCrear',
             templateUrl: 'modulos/tec/crear.tmpl.html',
             parent: angular.element(document.body),
             targetEvent: ev,

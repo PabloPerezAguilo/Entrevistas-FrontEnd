@@ -1,4 +1,4 @@
-app.controller('controladorTecCrear', function(servicioRest, config, $scope, $location, $rootScope, $mdDialog) {
+app.controller('controladorCrear', function(servicioRest, config, $scope, $location, $rootScope, $mdDialog) {
     
     var Options={
         title: String,
@@ -53,12 +53,22 @@ app.controller('controladorTecCrear', function(servicioRest, config, $scope, $lo
         $mdDialog.hide(respuesta);
         console.log("aqui");
     };
-    $scope.cancel = function () {
-        $mdDialog.cancel();
-    };
     $scope.answer = function (answer) {
         $mdDialog.hide(answer);
     };
     
+    $scope.cancel = function () {
+        $mdDialog.cancel();
+    };
+    
     $scope.nivel = 5;
+	$scope.respuestasTest = [];
+	$scope.test = ['1', '2'];
+	$scope.contTest = 2;
+	
+	
+	$scope.masRespuestaTest = function () {
+		$scope.contTest++;
+		$scope.test.push($scope.contTest);
+	}
 });
