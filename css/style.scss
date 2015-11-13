@@ -75,6 +75,25 @@ header {
     box-shadow: 2px 2px 30px grey;
 }
 
+#logoLogeado {
+    margin-top:0.3%;
+    //padding-top: 0.5%;
+    max-width:85%;
+    max-height:85%;
+    display: inline-block;
+    margin-left: 5%;
+    
+}
+
+#nombreUsuario {
+    position: relative;
+    display: inline-block;
+    float: right;
+    color: $grisLetra;
+    margin-right: 7%;
+    margin-top: 5%;
+}
+
 footer {
   position: fixed;
   bottom: 0;
