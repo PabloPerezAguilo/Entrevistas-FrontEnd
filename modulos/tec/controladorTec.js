@@ -1,4 +1,4 @@
-app.controller('controladorTec', function(servicioRest, config,$scope, $location, $rootScope, $mdDialog) {
+app.controller('controladorTec', function(servicioRest, config,$scope, $location, $rootScope, $mdDialog, $timeout, $q, $log) {
     
     /*---------------------------Inicializar vista------------------------------*/
     var Options={
@@ -113,4 +113,103 @@ app.controller('controladorTec', function(servicioRest, config,$scope, $location
             clickOutsideToClose:true
         })
     };
+});
+
+app.controller('controladorTecAutocomplete', function(servicioRest, config,$scope, $location, $rootScope, $mdDialog, $timeout, $q, $log) {  
+    /* ----- AUTOCOMPLETE ------- */
+	
+	// CARGAR TEMAS
+	var temas = [];
+	servicioRest.getPreguntas()
+		.then(function(data) {
+			temas = data;
+		})
+		.catch(function(err) {
+			console.log(err);
+		});
+    
+    var self = this;
+
+    self.simulateQuery = false;
+    self.isDisabled    = false;
+
+    // list of `state` value/display objects
+    self.temas        = loadAll();
+    self.querySearch   = querySearch;
+    self.selectedItemChange = selectedItemChange;
+    self.searchTextChange   = searchTextChange;
+
+    self.newTema = newTema;
+
+    function newTema(tema) {
+      alert("Sorry! You'll need to create a Constituion for " + tema + " first!");
+    }
+
+    // ******************************
+    // Internal methods
+    // ******************************
+
+    /**
+     * Search for states... use $timeout to simulate
+     * remote dataservice call.
+     */
+    function querySearch (query) {
+      var results = query ? self.temas.filter( createFilterFor(query) ) : self.temas,
+          deferred;
+      if (self.simulateQuery) {
+        deferred = $q.defer();
+        $timeout(function () { deferred.resolve( results ); }, Math.random() * 1000, false);
+        return deferred.promise;
+      } else {
+        return results;
+      }
+    }
+
+    function searchTextChange(text) {
+      $log.info('Text changed to ' + text);
+    }
+
+    function selectedItemChange(item) {
+      //$log.info('Item changed to ' + JSON.stringify(item));
+      //item.display coge el texto del item seleccionado
+      if(item != null) {
+        //alert("seleccionado " + item.display);
+      }
+    }
+
+    /**
+     * Build `states` list of key/value pairs
+     */
+    function loadAll() {
+      var temas = [];
+		servicioRest.getPreguntas()
+			.then(function(data) {
+				temas = data[0].tags;				
+				console.log(temas);
+			})
+			.catch(function(err) {
+				console.log
+			});
+
+      return temas.map( function (tema) {
+        return {
+          value: tema.toLowerCase(),
+          display: tema
+        };
+      });
+    }
+
+    /**
+     * Create filter function for a query string
+     */
+    function createFilterFor(query) {
+      var lowercaseQuery = angular.lowercase(query);
+
+      return function filterFn(tema) {
+        return (tema.value.indexOf(lowercaseQuery) === 0);
+      };
+
+    }
+    
+    
 });
