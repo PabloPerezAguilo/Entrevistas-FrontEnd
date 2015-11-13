@@ -25,6 +25,9 @@ app.controller('controladorTec', function(servicioRest, config,$scope, $location
         max:10,
         required:true
         },
+        directive:{
+            type:String
+        },
         answers:[Options]
     }
 	$rootScope.cargando = false;
@@ -114,5 +117,40 @@ app.controller('controladorTec', function(servicioRest, config,$scope, $location
             targetEvent: ev,
             clickOutsideToClose:true
         })
+        .then(function(datosPregunta) {
+                console.log(datosPregunta);
+				pregunta.title=datosPregunta.title;
+                pregunta.tags=datosPregunta.tags;
+                pregunta.level=datosPregunta.level;
+                pregunta.type=datosPregunta.type;
+            
+                if(datosPregunta.type==="FREE")
+                {
+                    pregunta.directive=datosPregunta.directive;
+                    pregunta.answers=null;
+                }
+                else
+                {
+                    //pregunta.answers=$scope.respuestas;
+                   pregunta.answers=null; 
+                }
+                console.log(pregunta);
+                servicioRest.postPregunta(pregunta)
+                    .then(function(data) {
+                    pregunta._id=data.data._id;
+                        $scope.preguntas.push({
+                            _id: pregunta._id,
+                            title: pregunta.title,
+                            tags: pregunta.tags[0],
+                            level: pregunta.level,
+                            type: pregunta.type
+                        })
+                        console.log(data);
+                    })
+                    .catch(function(err) {
+                        console.log("Error");
+                    console.log(err);
+                    });
+			})
     };
 });

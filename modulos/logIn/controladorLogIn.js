@@ -49,6 +49,7 @@ app.controller('controladorLogIn', function(servicioRest, config, $scope, $locat
                 $location.path("/entrevista");
             })
             .catch(function(err) {
+                $rootScope.cargando = false;
                 if (err === "Servicio no disponible") {
 					toast("Error de conexión");
 				} else {
