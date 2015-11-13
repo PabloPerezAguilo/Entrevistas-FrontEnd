@@ -28,6 +28,8 @@ app.controller('controladorTec', function(servicioRest, config,$scope, $location
         answers:[Options]
     }
 	$rootScope.cargando = false;
+    $rootScope.logueado=true;
+    $rootScope.rolUsuario="Técnico";
     
     /*---------------------------Inicializar lista------------------------------*/
     
@@ -106,7 +108,7 @@ app.controller('controladorTec', function(servicioRest, config,$scope, $location
     
     $scope.showTabDialog = function(ev) {
         $mdDialog.show({
-            controller: 'controladorTecCrear',
+            controller: 'controladorCrear',
             templateUrl: 'modulos/tec/crear.tmpl.html',
             parent: angular.element(document.body),
             targetEvent: ev,
