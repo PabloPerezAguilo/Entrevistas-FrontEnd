@@ -286,8 +286,9 @@ md-toolbar:not(.md-menu-toolbar) {
 }
 
 md-dialog.md-transition-in {
-    min-width: 500px;
+    min-width: 700px;
     min-height: 300px;
+	max-height: 700px;
 }
 
 md-tabs .md-tab.md-active {

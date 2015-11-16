@@ -226,8 +226,9 @@ md-toolbar:not(.md-menu-toolbar) {
   position: relative; }
 
 md-dialog.md-transition-in {
-  min-width: 500px;
-  min-height: 300px; }
+  min-width: 700px;
+  min-height: 300px;
+  max-height: 700px; }
 
 md-tabs .md-tab.md-active {
   color: #1E1E1E; }
