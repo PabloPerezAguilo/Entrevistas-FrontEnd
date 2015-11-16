@@ -35,7 +35,6 @@ app.controller('controladorTec', function(servicioRest, config,$scope, $location
     
     servicioRest.getPreguntas()
         .then(function(data) {
-        console.log(data);
         $scope.preguntas=data;
     })
         .catch(function(err) {
@@ -70,7 +69,6 @@ app.controller('controladorTec', function(servicioRest, config,$scope, $location
             //pregunta.answers=$scope.respuestas;
            pregunta.answers=null; 
         }
-        console.log(pregunta);
         servicioRest.postPregunta(pregunta)
 			.then(function(data) {
             pregunta._id=data.data._id;

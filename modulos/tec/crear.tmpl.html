@@ -17,7 +17,7 @@
             <md-dialog-content>
                 <md-tabs md-dynamic-height md-border-bottom>
                     <md-tab label="pregunta abierta">
-                        <md-content class="md-padding">
+                        <md-content>
                             <div class="contenidoTablaCrear">
                                 <md-slider flex="" md-discrete="" ng-model="nivelAbierta" aria-label="nivel abierta" 
 										   step="1" min="1" max="10">
@@ -25,7 +25,7 @@
                                 
                                 <md-input-container flex>
                                     <label>Temas de las preguntas</label>
-                                    <input ng-model="temas">
+                                    <input ng-model="temasAbierta">
                                 </md-input-container>
                                 
                                 <md-input-container class="md-block">
@@ -37,49 +37,81 @@
                                     <label>Directivas de la pregunta</label>
                                     <textarea ng-model="directivasAbierta"></textarea>
                                 </md-input-container>
-                                
+                               
                                 <md-button class="md-raised">Guardar</md-button>
-                            </div>                    
+                            </div>
                         </md-content>
                     </md-tab>
-                    
+   
                     
                     <md-tab label="pregunta tipo test">
-                        <md-content class="md-padding">
+                        <md-content>
                             <div class="contenidoTablaCrear">
                                 <md-slider flex="" md-discrete="" ng-model="nivelTest" aria-label="nivel test" 
 										   step="1" min="1" max="10">
                                 </md-slider>
-                                
+								
                                 <md-input-container flex>
                                     <label>Temas de las preguntas</label>
-                                    <input ng-model="temas">
+                                    <input ng-model="temasTest">
                                 </md-input-container>
                                 
                                 <md-input-container class="md-block">
                                     <label>Enunciado de la pregunta</label>
                                     <textarea ng-model="tituloTest"></textarea>
                                 </md-input-container>
-								<div ng-repeat="respuestas in test">
-									<md-input-container class="md-block">
-                                    	<label>Respuesta {{respuestas}}</label>
-                                    	<textarea ng-model="respuestasTest[$index]"></textarea>
-                                	</md-input-container>
-								</div>
+								<md-radio-group ng-model="radioTest">
+									<div ng-repeat="respuestas in test">
+										<md-radio-button value="{{respuestas}}"></md-radio-button>
+										
+										<md-input-container class="md-block">
+                                    		<label>Respuesta {{respuestas}}</label>
+                                    		<textarea ng-model="respuestasTest[$index]"></textarea>
+										</md-input-container>
+									</div>
+								</md-radio-group>
 							
-								<md-button class="md-fab md-mini" ng-click="masRespuestaTest()" aria-label="crearPregunta">
+								<md-button class="md-fab md-mini" ng-click="aniadirRespuestaTest()" aria-label="crearPregunta">
         							<md-icon md-svg-src="img/crear.svg"></md-icon>
     							</md-button>
+								<md-button class="md-raised">Guardar</md-button>
                             </div>      
                         </md-content>
                     </md-tab>
                     
                 
                     <md-tab label="pregunta tipo test abierto">
-                        <md-content class="md-padding">
-                            <p>
-                                ------------------CONTENIDO TABLA TEST ABIERTO------------------
-                            </p>
+                        <md-content>
+							<div class="contenidoTablaCrear">
+								<md-slider flex="" md-discrete="" ng-model="nivelTestAbierto" aria-label="nivel test abierto" 
+									   step="1" min="1" max="10">
+								</md-slider>
+								
+                            	<md-input-container flex>
+									<label>Temas de las preguntas</label>
+								<input ng-model="temasTestAbierto">
+									
+								<md-input-container class="md-block">
+                                    <label>Enunciado de la pregunta</label>
+                                    <textarea ng-model="tituloTest"></textarea>
+                                </md-input-container>
+									
+								<div ng-repeat="respuestasAbierto in testAbierto">
+									<md-checkbox ng-model="checkTestAbierto[$index]" aria-label="respuestas test abierto">
+									</md-checkbox>
+									<md-input-container class="md-block">
+                                    	<label>Respuesta {{respuestasAbierto}}</label>
+                                    	<textarea ng-model="respuestasTestAbierto[$index]"></textarea>
+                                	</md-input-container>
+								</div>
+							
+								<md-button class="md-fab md-mini" ng-click="aniadirRespuestaTestAbierto()" 
+										   aria-label="crearPregunta abierta">
+        							<md-icon md-svg-src="img/crear.svg"></md-icon>
+    							</md-button>
+								<md-button class="md-raised">Guardar</md-button>
+							</md-input-container>
+							</div>
                         </md-content>
                     </md-tab>
                 </md-tabs>
