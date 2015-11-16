@@ -38,4 +38,3 @@ app.config(function($routeProvider) {
 });
 
 app.service('servicioRest', ServicioREST);
-

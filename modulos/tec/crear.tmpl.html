@@ -14,7 +14,7 @@
                 </div>
             </md-toolbar>
             
-            <md-dialog-content>
+            <md-dialog-content ng-model="conte">
                 <md-tabs md-dynamic-height md-border-bottom>
                     <md-tab label="pregunta abierta">
                         <md-content>
@@ -32,14 +32,15 @@
                                     <label>Enunciado de la pregunta</label>
                                     <textarea ng-model="tituloAbierta"></textarea>
                                 </md-input-container>
-								
-								<md-input-container class="md-block">
-                                    <label>Directivas de la pregunta</label>
+                                
+                                <md-input-container class="md-block">
+                                    <label>Directicas de la pregunta</label>
                                     <textarea ng-model="directivasAbierta"></textarea>
                                 </md-input-container>
-                               
-                                <md-button class="md-raised">Guardar</md-button>
-                            </div>
+                                
+                                <md-button class="md-raised" ng-click="crearPAbierta()">Guardar</md-button>
+                            </div>                    
+							
                         </md-content>
                     </md-tab>
    
