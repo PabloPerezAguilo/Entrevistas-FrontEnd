@@ -153,28 +153,15 @@ app.controller('controladorTec', function(servicioRest, config,$scope, $location
                     });
 			})
     };
-});
-
-app.controller('controladorTecAutocomplete', function(servicioRest, config,$scope, $location, $rootScope, $mdDialog, $timeout, $q, $log) {  
-    /* ----- AUTOCOMPLETE ------- */
 	
-	// CARGAR TEMAS
-	var temas = [];
-	servicioRest.getPreguntas()
-		.then(function(data) {
-			temas = data;
-		})
-		.catch(function(err) {
-			console.log(err);
-		});
-    
+	/* ----------------- AUTOCOMPLETE ---------------- */
     var self = this;
 
     self.simulateQuery = false;
     self.isDisabled    = false;
 
     // list of `state` value/display objects
-    self.temas        = loadAll();
+    self.temas        = cargarTemas();
     self.querySearch   = querySearch;
     self.selectedItemChange = selectedItemChange;
     self.searchTextChange   = searchTextChange;
@@ -210,28 +197,30 @@ app.controller('controladorTecAutocomplete', function(servicioRest, config,$scop
     }
 
     function selectedItemChange(item) {
-      //$log.info('Item changed to ' + JSON.stringify(item));
-      //item.display coge el texto del item seleccionado
-      if(item != null) {
-        //alert("seleccionado " + item.display);
-      }
+		var tema = JSON.stringify(item)
+		$log.info('Item changed to ' + tema);
+		if(item != null) {
+			//se mostrarán las preguntas de ese tema
+			/*servicioRest.getPreguntasByTag(item)
+				.then(function(data) {
+					$scope.preguntas = data;
+					console.log(data);
+				})
+				.catch(function(err) {
+					console.log("Error: " + err);
+				});*/
+			console.log("seleccionado: " + tema);
+		}
+		
     }
 
     /**
      * Build `states` list of key/value pairs
      */
-    function loadAll() {
-      var temas = [];
-		servicioRest.getPreguntas()
-			.then(function(data) {
-				temas = data[0].tags;				
-				console.log(temas);
-			})
-			.catch(function(err) {
-				console.log
-			});
+    function cargarTemas() {
+      var datos = ['Alabama', 'Alaska', 'Arizona', 'Arkansas', 'California', 'Colorado', 'Connecticut', 'Delaware'];
 
-      return temas.map( function (tema) {
+      return datos.map( function (tema) {
         return {
           value: tema.toLowerCase(),
           display: tema
@@ -250,6 +239,5 @@ app.controller('controladorTecAutocomplete', function(servicioRest, config,$scop
       };
 
     }
-    
-    
+
 });
