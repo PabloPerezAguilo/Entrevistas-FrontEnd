@@ -4,7 +4,7 @@ app.controller('controladorCrear', function(servicioRest, config, $scope, $locat
         title: {
             type: String
         },
-        Valid: {
+        valid: {
             type: Boolean
         }
     }
@@ -34,8 +34,6 @@ app.controller('controladorCrear', function(servicioRest, config, $scope, $locat
         answers: [Options]
     }
     $scope.crearPAbierta=function(){
-        console.log($scope.tituloAbierta);
-        //pregunta._id=null;
         pregunta.title=$scope.tituloAbierta;
         pregunta.type="FREE";
         pregunta.tags[0]=$scope.temasAbierta;
@@ -50,23 +48,28 @@ app.controller('controladorCrear', function(servicioRest, config, $scope, $locat
         pregunta.tags[0]=$scope.temasTest;
         pregunta.level=$scope.nivelTest;
         pregunta.answers=[];
-        
-        console.log(pregunta);
+
        for(var i=0 ; i<$scope.contTest ; i++)
         {            
-            pregunta.answers.push({title: $scope.respuestasTest[i],Valid:false});
+            pregunta.answers.push({title: $scope.respuestasTest[i],valid:false});
         }
         
-        pregunta.answers[0].Valid=true;
+        pregunta.answers[$scope.radioTest-1].valid=true;
         $scope.hide(pregunta);
     };
     
     $scope.crearPTestAbierta=function(){
-        console.log();
-        /*pregunta.title=$scope.tituloTest;
+        pregunta.title=$scope.tituloTestAbierto;
         pregunta.type="MULTI_CHOICE";
-        pregunta.tags[0]=$scope.temasTest;
-        pregunta.level=$scope.nivelTest;*/
+        pregunta.tags[0]=$scope.temasTestAbierto;
+        pregunta.level=$scope.nivelTestAbierto;
+        pregunta.answers=[];
+
+       for(var i=0 ; i<$scope.contTestAbierto ; i++)
+        {            
+            pregunta.answers.push({title: $scope.respuestasTestAbierto[i],valid:$scope.checkTestAbierto[i]});
+        }
+        
         $scope.hide(pregunta);
     };
     
@@ -82,15 +85,28 @@ app.controller('controladorCrear', function(servicioRest, config, $scope, $locat
         $mdDialog.cancel();
     };
     
-    $scope.nivelAbierta = 5;
-    $scope.nivelTest = 5;
+    $scope.nivelAbierta = 1;
+    $scope.nivelTest = 1;
+    $scope.nivelTestAbierto = 1;
 	$scope.respuestasTest = [];
 	$scope.test = ['1', '2'];
 	$scope.contTest = 2;
+	$scope.radioTest = 1;
 	
+	$scope.respuestasTestAbierto = [];
+	$scope.testAbierto = ['1', '2'];
+	$scope.contTestAbierto = 2;
+	$scope.checkTestAbierto = [false, false];
 	
-	$scope.masRespuestaTest = function () {
-		$scope.contTest++;
+	$scope.aniadirRespuestaTest = function () {
+		$scope.contTest += 1;
 		$scope.test.push($scope.contTest);
-	}
+	};
+	
+	$scope.aniadirRespuestaTestAbierto = function () {
+		$scope.contTestAbierto += 1;
+		$scope.testAbierto.push($scope.contTestAbierto);
+		$scope.checkTestAbierto.push(false);
+	};
+
 });
