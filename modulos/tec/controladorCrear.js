@@ -1,13 +1,13 @@
 app.controller('controladorCrear', function (servicioRest, config, $scope, $location, $rootScope, $mdDialog) {
     
     var Options = {
-        title: String,
-        Valid: Boolean
+        title: { type: String },
+        valid: { type: Boolean }
     };
     
     var pregunta = {
         _id: { type: String },
-        title: { type: String, required: true },
+		title: { type: String, required: true },
         type: { type: String, required: true },
         tags: [String],
         level: { type: Number, min: 1, max: 10, required: true },
@@ -18,17 +18,41 @@ app.controller('controladorCrear', function (servicioRest, config, $scope, $loca
     $scope.crearPAbierta = function () {
         pregunta.title = $scope.tituloAbierta;
         pregunta.type = "FREE";
-        pregunta.tags[0] = "algo";
+        pregunta.tags[0] = $scope.temasAbierta;
         pregunta.level = $scope.nivelAbierta;
+        pregunta.directive = $scope.directivasAbierta;
         $scope.hide(pregunta);
     };
     
     $scope.crearPTest = function () {
-        $scope.hide();
+		var i;
+        pregunta.title = $scope.tituloTest;
+        pregunta.type = "SINGLE_CHOICE";
+        pregunta.tags[0] = $scope.temasTest;
+        pregunta.level = $scope.nivelTest;
+        pregunta.answers = [];
+
+       	for (i = 0;i < $scope.contTest;i++) {            
+            pregunta.answers.push({title: $scope.respuestasTest[i], valid: false});
+        }
+        
+        pregunta.answers[$scope.radioTest - 1].valid = true;
+        $scope.hide(pregunta);
     };
     
     $scope.crearPTestAbierta = function () {
-        $scope.hide();
+		var i;
+        pregunta.title = $scope.tituloTestAbierto;
+        pregunta.type = "MULTI_CHOICE";
+        pregunta.tags[0] = $scope.temasTestAbierto;
+        pregunta.level = $scope.nivelTestAbierto;
+        pregunta.answers = [];
+		
+		for (i = 0; i < $scope.contTestAbierto; i++) {            
+            pregunta.answers.push({title: $scope.respuestasTestAbierto[i], valid: $scope.checkTestAbierto[i]});
+        }
+        
+        $scope.hide(pregunta);
     };
     
     $scope.hide = function (respuesta) {
@@ -42,7 +66,10 @@ app.controller('controladorCrear', function (servicioRest, config, $scope, $loca
         $mdDialog.cancel();
     };
     
-    $scope.nivelAbierta = $scope.nivelTest = $scope.nivelTestAbierto = 5;
+    $scope.nivelAbierta = 1;
+    $scope.nivelTest = 1;
+    $scope.nivelTestAbierto = 1;
+		
 	$scope.respuestasTest = [];
 	$scope.test = ['1', '2'];
 	$scope.contTest = 2;

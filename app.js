@@ -1,6 +1,6 @@
 'use strict';
 
-var app = angular.module('magni', ['ngRoute','ngMaterial']);
+var app = angular.module('magni', ['ngRoute','ngMaterial', 'ngMdIcons']);
 app.run(function(servicioRest, $rootScope, $http, $location) {
 
 	// Establecemos las cabeceras por defecto. Las cabecera Authorization se modificara cuando el usuario se loge
@@ -22,7 +22,7 @@ app.config(function($routeProvider) {
 	})
 	.when('/', {
 		templateUrl: 'modulos/tec/tec.html',
-        controller: 'controladorTec'
+        controller: 'controladorTec as ctrl'
 	})
     
 	.when('/entrevista', {

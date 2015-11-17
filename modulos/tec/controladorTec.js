@@ -1,9 +1,9 @@
-app.controller('controladorTec', function(servicioRest, config,$scope, $location, $rootScope, $mdDialog) {
+app.controller('controladorTec', function(servicioRest, config,$scope, $location, $rootScope, $mdDialog, $timeout, $q, $log) {
     
     /*---------------------------Inicializar vista------------------------------*/
     var Options={
         title: String,
-        Valid: Boolean
+        valid: Boolean
     }
     
     var pregunta={
@@ -129,8 +129,8 @@ app.controller('controladorTec', function(servicioRest, config,$scope, $location
                 }
                 else
                 {
-                    //pregunta.answers=$scope.respuestas;
-                   pregunta.answers=null; 
+                    pregunta.directive=null;
+                    pregunta.answers=datosPregunta.answers; 
                 }
                 console.log(pregunta);
                 servicioRest.postPregunta(pregunta)
@@ -141,6 +141,8 @@ app.controller('controladorTec', function(servicioRest, config,$scope, $location
                             title: pregunta.title,
                             tags: pregunta.tags[0],
                             level: pregunta.level,
+                            directive: pregunta.directive,
+                            answers: pregunta.answers,
                             type: pregunta.type
                         })
                         console.log(data);
@@ -151,4 +153,102 @@ app.controller('controladorTec', function(servicioRest, config,$scope, $location
                     });
 			})
     };
+	
+	/* ----------------- AUTOCOMPLETE ---------------- */
+    var self = this;
+
+    self.simulateQuery = false;
+    self.isDisabled    = false;
+
+    // list of `state` value/display objects
+    self.temas        = cargarTemas();
+    self.querySearch   = querySearch;
+    self.selectedItemChange = selectedItemChange;
+    self.searchTextChange   = searchTextChange;
+
+    self.newTema = newTema;
+
+    function newTema(tema) {
+      alert("Sorry! You'll need to create a Constituion for " + tema + " first!");
+    }
+
+    // ******************************
+    // Internal methods
+    // ******************************
+
+    /**
+     * Search for states... use $timeout to simulate
+     * remote dataservice call.
+     */
+    function querySearch (query) {
+      var results = query ? self.temas.filter( createFilterFor(query) ) : self.temas,
+          deferred;
+      if (self.simulateQuery) {
+        deferred = $q.defer();
+        $timeout(function () { deferred.resolve( results ); }, Math.random() * 1000, false);
+        return deferred.promise;
+      } else {
+        return results;
+      }
+    }
+
+    function searchTextChange(text) {
+      $log.info('Text changed to ' + text);
+    }
+
+    function selectedItemChange(item) {
+		var tema = JSON.stringify(item)
+		$log.info('Item changed to ' + tema);
+		if(item != null) {
+			//se mostrarán las preguntas de ese tema
+			/*servicioRest.getPreguntasByTag(item)
+				.then(function(data) {
+					$scope.preguntas = data;
+					console.log(data);
+				})
+				.catch(function(err) {
+					console.log("Error: " + err);
+				});*/
+			console.log("seleccionado: " + tema);
+		}
+		
+    }
+
+    /**
+     * Build `states` list of key/value pairs
+     */
+    function cargarTemas() {
+      var datos = [];
+		servicioRest.getTemas()
+			.then(function(data) {
+				for(var i = 0; i < data.length; i++) {
+					console.log(data[i].tag);
+					datos[i] = data[i].tag;
+				}
+				console.log(datos);
+			})
+			.catch(function(err) {
+				console.log(err);
+			});
+
+      return datos.map( function (tema) {
+        return {
+          value: tema.toLowerCase(),
+          display: tema
+        };
+      });
+    }
+
+    /**
+     * Create filter function for a query string
+     */
+    function createFilterFor(query) {
+      var lowercaseQuery = angular.lowercase(query);
+
+      return function filterFn(tema) {
+        return (tema.value.indexOf(lowercaseQuery) === 0);
+      };
+
+    }
+
 });

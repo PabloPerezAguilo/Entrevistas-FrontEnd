@@ -1,13 +1,29 @@
 <div>
-    <md-button class="md-fab md-mini" ng-click="showTabDialog($event)" aria-label="crearPregunta">
+    <md-button mfb-button class="md-fab md-mini" ng-click="showTabDialog($event)" aria-label="crearPregunta">
         <md-icon md-svg-src="img/crear.svg"></md-icon>
     </md-button>
-    
     <p></p>
     
     <input type=button value="+" ng-click="crear()"/>
-    
-    <md-list>
+	<div>
+		<md-autocomplete ng-disabled="ctrl.isDisabled" 
+					 md-no-cache="ctrl.noCache" 
+					 md-selected-item="ctrl.selectedItem" 
+					 md-search-text-change="ctrl.searchTextChange(ctrl.searchText)" 
+					 md-search-text="ctrl.searchText" 
+					 md-selected-item-change="ctrl.selectedItemChange(item)" 
+					 md-items="item in ctrl.querySearch(ctrl.searchText)" 
+					 md-item-text="item.display" 
+					 md-min-length="0" 
+					 placeholder="Buscar por tema">
+        <md-item-template>
+          <span md-highlight-text="ctrl.searchText" md-highlight-flags="^i">{{item.display}}</span>
+        </md-item-template>
+        <md-not-found>
+          No se ha encontrado el tema.
+        </md-not-found>
+      </md-autocomplete>
+	</div>
         <md-subheader class="md-no-sticky">Preguntas</md-subheader>
         <md-divider></md-divider>
       <md-list-item class="md-3-line" ng-repeat="item in preguntas">
@@ -22,8 +38,25 @@
                     {{ item.type }}
                 </p>
             </div>
-            <input type=button value="ver" ng-click="ver()"/>
-            <input type=button value="Eliminar" ng-click="eliminar($index)"/>
+		  	<md-button aria-label="ver" ng-click="ver()">
+				<ng-md-icon icon="search" size="20"></ng-md-icon>
+				<md-tooltip md-direction="bottom">
+				  Ver
+				</md-tooltip>
+			 </md-button>
+		  <!--boton modificar-->
+		  	<!--<md-button aria-label="modificar" ng-click="eliminar($index)">
+				<ng-md-icon icon="mode_edit" size="20"></ng-md-icon>
+				<md-tooltip md-direction="bottom">
+				  Modificar
+				</md-tooltip>
+			 </md-button>-->
+		  	<md-button aria-label="eliminar" ng-click="eliminar($index)">
+				<ng-md-icon icon="delete" size="20"></ng-md-icon>
+				<md-tooltip md-direction="bottom">
+				  Eliminar
+				</md-tooltip>
+			 </md-button>
             <md-divider></md-divider>
         </md-list-item>
     </md-list>
