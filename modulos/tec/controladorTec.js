@@ -216,7 +216,18 @@ app.controller('controladorTec', function(servicioRest, config,$scope, $location
      * Build `states` list of key/value pairs
      */
     function cargarTemas() {
-      var datos = ['Alabama', 'Alaska', 'Arizona', 'Arkansas', 'California', 'Colorado', 'Connecticut', 'Delaware'];
+      var datos = [];
+		servicioRest.getTemas()
+			.then(function(data) {
+				for(var i = 0; i < data.length; i++) {
+					console.log(data[i].tag);
+					datos[i] = data[i].tag;
+				}
+				console.log(datos);
+			})
+			.catch(function(err) {
+				console.log(err);
+			});
 
       return datos.map( function (tema) {
         return {
