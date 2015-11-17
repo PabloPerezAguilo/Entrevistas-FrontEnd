@@ -1,4 +1,4 @@
-app.controller('controladorCrear', function (servicioRest, config, $scope, $location, $rootScope, $mdDialog, $mdToast) {
+app.controller('controladorCrear', function ($scope, $mdDialog, $mdToast) {
     
     var Options = {
         title: { type: String },
