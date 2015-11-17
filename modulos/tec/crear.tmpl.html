@@ -27,7 +27,7 @@
                                     <label>Temas de las preguntas</label>
                                     <input ng-model="temasAbierta">
                                 </md-input-container>
-                                
+								
                                 <md-input-container class="md-block">
                                     <label>Enunciado de la pregunta</label>
                                     <textarea ng-model="tituloAbierta"></textarea>
@@ -40,7 +40,6 @@
                                 
                                 <md-button class="md-raised" ng-click="crearPAbierta()">Guardar</md-button>
                             </div>                    
-							
                         </md-content>
                     </md-tab>
    
@@ -63,7 +62,8 @@
                                 </md-input-container>
 								<md-radio-group ng-model="radioTest">
 									<div ng-repeat="respuestas in test">
-										<md-radio-button value="{{respuestas}}"></md-radio-button>
+										<md-radio-button value="{{respuestas}}" aria-label="respuestas test abierto">
+										</md-radio-button>
 										
 										<md-input-container class="md-block">
                                     		<label>Respuesta {{respuestas}}</label>
@@ -90,11 +90,12 @@
 								
                             	<md-input-container flex>
 									<label>Temas de las preguntas</label>
-								<input ng-model="temasTestAbierto">
-									
+									<input ng-model="temasTestAbierto">
+								</md-input-container>
+								
 								<md-input-container class="md-block">
                                     <label>Enunciado de la pregunta</label>
-                                    <textarea ng-model="tituloTest"></textarea>
+                                    <textarea ng-model="tituloTestAbierto"></textarea>
                                 </md-input-container>
 									
 								<div ng-repeat="respuestasAbierto in testAbierto">
@@ -111,7 +112,6 @@
         							<md-icon md-svg-src="img/crear.svg"></md-icon>
     							</md-button>
 								<md-button class="md-raised">Guardar</md-button>
-							</md-input-container>
 							</div>
                         </md-content>
                     </md-tab>
