@@ -32,12 +32,12 @@
                                     <label>Enunciado de la pregunta</label>
                                     <textarea ng-model="tituloAbierta"></textarea>
                                 </md-input-container>
-                                
-                                <md-input-container class="md-block">
-                                    <label>Directicas de la pregunta</label>
+								
+								<md-input-container class="md-block">
+                                    <label>Directivas de la pregunta</label>
                                     <textarea ng-model="directivasAbierta"></textarea>
                                 </md-input-container>
-                                
+
                                 <md-button class="md-raised" ng-click="crearPAbierta()">Guardar</md-button>
                             </div>                    
 							
@@ -75,7 +75,9 @@
 								<md-button class="md-fab md-mini" ng-click="aniadirRespuestaTest()" aria-label="crearPregunta">
         							<md-icon md-svg-src="img/crear.svg"></md-icon>
     							</md-button>
-								<md-button class="md-raised">Guardar</md-button>
+
+                                <md-button class="md-raised" ng-click="crearPTest()">Guardar</md-button>
+                            
                             </div>      
                         </md-content>
                     </md-tab>
@@ -90,11 +92,11 @@
 								
                             	<md-input-container flex>
 									<label>Temas de las preguntas</label>
-								<input ng-model="temasTestAbierto">
-									
+								    <input ng-model="temasTestAbierto">
+								</md-input-container>
 								<md-input-container class="md-block">
                                     <label>Enunciado de la pregunta</label>
-                                    <textarea ng-model="tituloTest"></textarea>
+                                    <textarea ng-model="tituloTestAbierto"></textarea>
                                 </md-input-container>
 									
 								<div ng-repeat="respuestasAbierto in testAbierto">
@@ -110,8 +112,8 @@
 										   aria-label="crearPregunta abierta">
         							<md-icon md-svg-src="img/crear.svg"></md-icon>
     							</md-button>
-								<md-button class="md-raised">Guardar</md-button>
-							</md-input-container>
+								<md-button class="md-raised" ng-click="crearPTestAbierta()">Guardar</md-button>
+							
 							</div>
                         </md-content>
                     </md-tab>

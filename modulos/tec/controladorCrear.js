@@ -1,8 +1,12 @@
 app.controller('controladorCrear', function(servicioRest, config, $scope, $location, $rootScope, $mdDialog) {
     
     var Options={
-        title: String,
-        Valid: Boolean
+        title: {
+            type: String
+        },
+        valid: {
+            type: Boolean
+        }
     }
     
     var pregunta={
@@ -27,26 +31,46 @@ app.controller('controladorCrear', function(servicioRest, config, $scope, $locat
         directive:{
             type:String
         },
-        answers:[Options]
+        answers: [Options]
     }
     $scope.crearPAbierta=function(){
-        console.log($scope.tituloAbierta);
-        //pregunta._id=null;
         pregunta.title=$scope.tituloAbierta;
         pregunta.type="FREE";
-        pregunta.tags[0]="algo";
+        pregunta.tags[0]=$scope.temasAbierta;
         pregunta.level=$scope.nivelAbierta;
+        pregunta.directive=$scope.directivasAbierta;
         $scope.hide(pregunta);
     };
     
     $scope.crearPTest=function(){
-        console.log();
-        $scope.hide();
+        pregunta.title=$scope.tituloTest;
+        pregunta.type="SINGLE_CHOICE";
+        pregunta.tags[0]=$scope.temasTest;
+        pregunta.level=$scope.nivelTest;
+        pregunta.answers=[];
+
+       for(var i=0 ; i<$scope.contTest ; i++)
+        {            
+            pregunta.answers.push({title: $scope.respuestasTest[i],valid:false});
+        }
+        
+        pregunta.answers[$scope.radioTest-1].valid=true;
+        $scope.hide(pregunta);
     };
     
     $scope.crearPTestAbierta=function(){
-        console.log();
-        $scope.hide();
+        pregunta.title=$scope.tituloTestAbierto;
+        pregunta.type="MULTI_CHOICE";
+        pregunta.tags[0]=$scope.temasTestAbierto;
+        pregunta.level=$scope.nivelTestAbierto;
+        pregunta.answers=[];
+
+       for(var i=0 ; i<$scope.contTestAbierto ; i++)
+        {            
+            pregunta.answers.push({title: $scope.respuestasTestAbierto[i],valid:$scope.checkTestAbierto[i]});
+        }
+        
+        $scope.hide(pregunta);
     };
     
     $scope.hide = function (respuesta) {
@@ -61,7 +85,9 @@ app.controller('controladorCrear', function(servicioRest, config, $scope, $locat
         $mdDialog.cancel();
     };
     
-    $scope.nivel = 5;
+    $scope.nivelAbierta = 1;
+    $scope.nivelTest = 1;
+    $scope.nivelTestAbierto = 1;
 	$scope.respuestasTest = [];
 	$scope.test = ['1', '2'];
 	$scope.contTest = 2;
@@ -75,7 +101,6 @@ app.controller('controladorCrear', function(servicioRest, config, $scope, $locat
 	$scope.aniadirRespuestaTest = function () {
 		$scope.contTest += 1;
 		$scope.test.push($scope.contTest);
-		$scope.radioTest($scope.contTest);
 	};
 	
 	$scope.aniadirRespuestaTestAbierto = function () {

@@ -3,7 +3,7 @@ app.controller('controladorTec', function(servicioRest, config,$scope, $location
     /*---------------------------Inicializar vista------------------------------*/
     var Options={
         title: String,
-        Valid: Boolean
+        valid: Boolean
     }
     
     var pregunta={
@@ -129,8 +129,8 @@ app.controller('controladorTec', function(servicioRest, config,$scope, $location
                 }
                 else
                 {
-                    //pregunta.answers=$scope.respuestas;
-                   pregunta.answers=null; 
+                    pregunta.directive=null;
+                    pregunta.answers=datosPregunta.answers; 
                 }
                 console.log(pregunta);
                 servicioRest.postPregunta(pregunta)
@@ -141,6 +141,8 @@ app.controller('controladorTec', function(servicioRest, config,$scope, $location
                             title: pregunta.title,
                             tags: pregunta.tags[0],
                             level: pregunta.level,
+                            directive: pregunta.directive,
+                            answers: pregunta.answers,
                             type: pregunta.type
                         })
                         console.log(data);
