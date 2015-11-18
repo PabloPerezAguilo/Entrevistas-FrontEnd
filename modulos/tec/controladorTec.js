@@ -66,7 +66,6 @@ app.controller('controladorTec', function(servicioRest, $scope, $rootScope, $mdD
         var idPregunta = $scope.preguntas[indice]._id;
         servicioRest.deletePregunta(idPregunta)
 			.then(function(data) {
-                console.log(data);
 				$scope.preguntas.splice(indice, 1);
 			})
 			.catch(function(err) {
@@ -84,7 +83,6 @@ app.controller('controladorTec', function(servicioRest, $scope, $rootScope, $mdD
             clickOutsideToClose: false
         })
         .then(function (datosPregunta) {
-                console.log(datosPregunta);
 				pregunta.title = datosPregunta.title;
                 pregunta.tags = datosPregunta.tags;
                 pregunta.level = datosPregunta.level;
@@ -98,7 +96,6 @@ app.controller('controladorTec', function(servicioRest, $scope, $rootScope, $mdD
                     pregunta.directive = null;
                     pregunta.answers = datosPregunta.answers; 
                 }
-                console.log(pregunta);
                 servicioRest.postPregunta(pregunta)
                     .then(function(data) {
                     pregunta._id = data.data._id;
@@ -160,6 +157,7 @@ app.controller('controladorTec', function(servicioRest, $scope, $rootScope, $mdD
     }
 
     function selectedItemChange(item) {
+
       $log.info('Item recogido ' + JSON.stringify(item));
 		console.log(item.tag);
 		var question = {
