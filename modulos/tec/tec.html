@@ -1,5 +1,5 @@
 <div>
-    <md-button mfb-button class="md-fab md-mini" ng-click="showTabDialog($event)" aria-label="crearPregunta">
+    <md-button mfb-button class="md-fab md-mini" ng-click="crear($event)" aria-label="crearPregunta">
         <md-icon md-svg-src="img/crear.svg"></md-icon>
     </md-button>
 	<div>
@@ -38,18 +38,13 @@
             </div>
 		
 		  	<md-button aria-label="ver" ng-click="ver()">
+		  	<md-button ng-click="ver($event)" aria-label="ver pegrunta">
 				<ng-md-icon icon="search" size="20"></ng-md-icon>
 				<md-tooltip md-direction="bottom">
 				  Ver
 				</md-tooltip>
 			 </md-button>
-		  <!--boton modificar-->
-		  	<!--<md-button aria-label="modificar" ng-click="eliminar($index)">
-				<ng-md-icon icon="mode_edit" size="20"></ng-md-icon>
-				<md-tooltip md-direction="bottom">
-				  Modificar
-				</md-tooltip>
-			 </md-button>-->
+	
 		  	<md-button aria-label="eliminar" ng-click="eliminar($index)">
 				<ng-md-icon icon="delete" size="20"></ng-md-icon>
 				<md-tooltip md-direction="bottom">

@@ -1,104 +1,107 @@
-app.controller('controladorTec', function(servicioRest, config,$scope, $location, $rootScope, $mdDialog, $timeout, $q, $log) {
+app.controller('controladorTec', function(servicioRest, $scope, $rootScope, $mdDialog, $timeout, $q, $log) {
     
     /*---------------------------Inicializar vista------------------------------*/
-    var Options={
+    var Options = {
         title: String,
         valid: Boolean
-    }
+    };
     
-    var pregunta={
-        _id:{
-            type: String
-        },
-        title:{
-            type:String,
-            required:true 
-        },
-        type:{
-            type:String,
-            required:true
-        },
-        tags:[String],
-        level:{
-            type: Number,
-        min:1,
-        max:10,
-        required:true
-        },
-        directive:{
-            type:String
-        },
-        answers:[Options]
-    }
+    var pregunta = {
+        _id: { type: String },
+        title: { type: String, required: true },
+        type: { type: String, required: true },
+        tags: [String],
+        level: { type: Number, min: 1, max: 10, required: true },
+        directive: { type: String },
+        answers: [Options]
+	};
+	
 	$rootScope.cargando = false;
-    $rootScope.logueado=true;
-    $rootScope.rolUsuario="Técnico";
+    $rootScope.logueado = true;
+    $rootScope.rolUsuario = "Técnico";
     
     /*---------------------------Inicializar lista------------------------------*/
     
     servicioRest.getPreguntas()
-        .then(function(data) {
-        $scope.preguntas=data;
-    })
-        .catch(function(err) {
-        console.log("Error");
-        console.log(err);
-    });
+		.then(function (data) {
+			$scope.preguntas = data;
+		})
+		.catch(function (err) {
+			console.log("Error");
+        	console.log(err);
+    	});
     
-    /*--------------------------Funciones--------------------------*/
-    
-    $scope.ver= function () {
-        
-        
-    }
-    
-    $scope.modificar = function (indice) {
-        
-	}
+    /*--------------------------Funciones--------------------------*/        
+    $scope.terminarCrear = function () {
+        $scope.p = false;
+        pregunta.title = $scope.titulo;
+        pregunta.tags[0] = $scope.tema;
+        pregunta.level = $scope.nivel;
+        pregunta.type = $scope.tipo;
+        if($scope.tipo === "FREE") {
+            pregunta.answers = null;
+        }
+        else {
+            //pregunta.answers=$scope.respuestas;
+           pregunta.answers = null; 
+        }
+        servicioRest.postPregunta(pregunta)
+			.then(function(data) {
+            pregunta._id = data.data._id;
+				$scope.preguntas.push({
+                    _id: pregunta._id,
+                    title: pregunta.title,
+                    tags: pregunta.tags[0],
+                    level: pregunta.level,
+                    type: pregunta.type
+                })
+			})
+			.catch(function(err) {
+				console.log("Error");
+            	console.log(err);
+			});
+    };
     
     $scope.eliminar = function (indice) {
         var idPregunta = $scope.preguntas[indice]._id;
         servicioRest.deletePregunta(idPregunta)
 			.then(function(data) {
                 console.log(data);
-				
 				$scope.preguntas.splice(indice, 1);
 			})
 			.catch(function(err) {
 				console.log("Error");
-            console.log(err);
+            	console.log(err);
 			});
-	}
+	};
     
-    $scope.showTabDialog = function(ev) {
+    $scope.crear = function(ev) {
         $mdDialog.show({
             controller: 'controladorCrear',
             templateUrl: 'modulos/tec/crear.tmpl.html',
             parent: angular.element(document.body),
             targetEvent: ev,
-            clickOutsideToClose:true
+            clickOutsideToClose: false
         })
-        .then(function(datosPregunta) {
+        .then(function (datosPregunta) {
                 console.log(datosPregunta);
-				pregunta.title=datosPregunta.title;
-                pregunta.tags=datosPregunta.tags;
-                pregunta.level=datosPregunta.level;
-                pregunta.type=datosPregunta.type;
+				pregunta.title = datosPregunta.title;
+                pregunta.tags = datosPregunta.tags;
+                pregunta.level = datosPregunta.level;
+                pregunta.type = datosPregunta.type;
             
-                if(datosPregunta.type==="FREE")
-                {
-                    pregunta.directive=datosPregunta.directive;
-                    pregunta.answers=null;
+                if(datosPregunta.type === "FREE") {
+                    pregunta.directive = datosPregunta.directive;
+                    pregunta.answers = null;
                 }
-                else
-                {
-                    pregunta.directive=null;
-                    pregunta.answers=datosPregunta.answers; 
+                else {
+                    pregunta.directive = null;
+                    pregunta.answers = datosPregunta.answers; 
                 }
                 console.log(pregunta);
                 servicioRest.postPregunta(pregunta)
                     .then(function(data) {
-                    pregunta._id=data.data._id;
+                    pregunta._id = data.data._id;
                         $scope.preguntas.push({
                             _id: pregunta._id,
                             title: pregunta.title,
@@ -112,10 +115,20 @@ app.controller('controladorTec', function(servicioRest, config,$scope, $location
                     })
                     .catch(function(err) {
                         console.log("Error");
-                    console.log(err);
+                    	console.log(err);
                     });
 			})
     };
+	
+	$scope.ver = function(ev) {
+    	$mdDialog.show({
+      		controller: 'controladorVer',
+      		templateUrl: 'modulos/tec/ver.tmpl.html',
+      		parent: angular.element(document.body),
+      		targetEvent: ev,
+      		clickOutsideToClose: true
+    	});
+	};
 	
 	/* ----------------- AUTOCOMPLETE ---------------- */
     var self = this;
@@ -127,7 +140,7 @@ app.controller('controladorTec', function(servicioRest, config,$scope, $location
     //self.states        = loadAll();
     self.querySearch   = querySearch;
     self.selectedItemChange = selectedItemChange;
-    self.searchTextChange   = searchTextChange;   
+    self.searchTextChange   = searchTextChange;
 
    
     function querySearch (query) {
@@ -140,7 +153,7 @@ app.controller('controladorTec', function(servicioRest, config,$scope, $location
       } else {
         return results;
       }
-    }
+    };
 
     function searchTextChange(text) {
       $log.info('texto seleccionado ' + text);
@@ -179,7 +192,7 @@ app.controller('controladorTec', function(servicioRest, config,$scope, $location
 			state.value = state.tag.toLowerCase();
 			return state;          
       });
-    }
+    };
 
     /**
      * Create filter function for a query string
@@ -190,7 +203,6 @@ app.controller('controladorTec', function(servicioRest, config,$scope, $location
       return function filterFn(item) {
         return (item.value.indexOf(lowercaseQuery) === 0);
       };
-
     }
 
 });
