@@ -90,7 +90,7 @@ app.controller('controladorCrear', function ($scope, $mdDialog, $mdToast) {
        var resp=false;
         if(tipoP==="abierta")
         {
-            if($scope.tituloAbierto===undefined||$scope.temasAbierto===undefined||$scope.respuestasAbierto[0]===undefined||$scope.respuestasAbierto[1]===undefined||$scope.tituloAbierto===""||$scope.temasAbierto===""||$scope.respuestasAbierto[0]===""||$scope.respuestasAbierto[1]==="")
+            if($scope.tituloAbierta===undefined||$scope.temasAbierta===undefined||$scope.tituloAbierta===""||$scope.temasAbierta==="")
             {
                 resp=true;
             }

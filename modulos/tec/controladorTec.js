@@ -5,7 +5,6 @@ app.controller('controladorTec', function(servicioRest, $scope, $rootScope, $mdD
         title: String,
         valid: Boolean
     };
-    
     var pregunta = {
         _id: { type: String },
         title: { type: String, required: true },
@@ -32,36 +31,6 @@ app.controller('controladorTec', function(servicioRest, $scope, $rootScope, $mdD
     	});
     
     /*--------------------------Funciones--------------------------*/        
-    $scope.terminarCrear = function () {
-        $scope.p = false;
-        pregunta.title = $scope.titulo;
-        pregunta.tags[0] = $scope.tema;
-        pregunta.level = $scope.nivel;
-        pregunta.type = $scope.tipo;
-        if($scope.tipo === "FREE") {
-            pregunta.answers = null;
-        }
-        else {
-            //pregunta.answers=$scope.respuestas;
-           pregunta.answers = null; 
-        }
-        servicioRest.postPregunta(pregunta)
-			.then(function(data) {
-            pregunta._id = data.data._id;
-				$scope.preguntas.push({
-                    _id: pregunta._id,
-                    title: pregunta.title,
-                    tags: pregunta.tags[0],
-                    level: pregunta.level,
-                    type: pregunta.type
-                })
-			})
-			.catch(function(err) {
-				console.log("Error");
-            	console.log(err);
-			});
-    };
-    
     
     $scope.eliminar = function (indice) {
         var idPregunta = $scope.preguntas[indice]._id;
@@ -106,7 +75,7 @@ app.controller('controladorTec', function(servicioRest, $scope, $rootScope, $mdD
                         $scope.preguntas.push({
                             _id: pregunta._id,
                             title: pregunta.title,
-                            tags: pregunta.tags[0],
+                            tags: pregunta.tags,
                             level: pregunta.level,
                             directive: pregunta.directive,
                             answers: pregunta.answers,
@@ -118,17 +87,21 @@ app.controller('controladorTec', function(servicioRest, $scope, $rootScope, $mdD
                         console.log("Error");
                     	console.log(err);
                     });
-			})
+			});
     };
 	
-	$scope.ver = function(ev) {
+	$scope.ver = function(ev,ind) {
     	$mdDialog.show({
+            locals: {
+                indice: ind
+            },
+            scope: $scope.$new(),
       		controller: 'controladorVer',
       		templateUrl: 'modulos/tec/ver.tmpl.html',
       		parent: angular.element(document.body),
       		targetEvent: ev,
       		clickOutsideToClose: true
-    	});
+    	})
 	};
 	
 	/* ----------------- AUTOCOMPLETE ---------------- */
