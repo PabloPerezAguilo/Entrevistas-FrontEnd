@@ -23,10 +23,54 @@
 										   step="1" min="1" max="10">
                                 </md-slider>
                                 
-                                <md-input-container flex>
-                                    <label>Temas de las preguntas</label>
-                                    <input ng-model="temasAbierta">
-                                </md-input-container>
+								
+								
+								
+								
+								
+								
+								
+								
+								
+								
+								
+								
+								<md-chips ng-model="temasAbierta" md-autocomplete-snap="" 
+										  md-transform-chip="transformChip($chip)"
+										  md-require-match="false">
+									<md-autocomplete md-selected-item="selectedItem" md-search-text="searchText"
+													 md-items="item in querySearch(searchText)"
+													 md-item-text="item.name"
+													 placeholder="Temas de la pregunta">
+										<span md-highlight-text="searchText">
+											{{item.name}} :: {{item.type}}
+										</span>
+									</md-autocomplete>
+									<md-chip-template>
+										<span>
+											<strong>{{$chip.name}}</strong>
+											<em>({{$chip.type}})</em>
+										</span>
+									</md-chip-template>
+								</md-chips>
+									
+								
+								
+								
+								
+								
+								
+								
+								
+								
+								
+								
+								
+								
+								
+								
+								
+								
 								
                                 <md-input-container class="md-block">
                                     <label>Enunciado de la pregunta</label>

@@ -1,4 +1,5 @@
-app.controller('controladorCrear', function ($scope, $mdDialog, $mdToast) {
+app.controller('controladorCrear', function (servicioRest, $scope, $mdDialog, $mdToast) {
+
     
     var Options = {
         title: { type: String },
@@ -24,6 +25,48 @@ app.controller('controladorCrear', function ($scope, $mdDialog, $mdToast) {
 		);
 	}
     
+	/* ----------- Respuestas tests ----------- */
+	$scope.nivelAbierta = 1;
+    $scope.nivelTest = 1;
+    $scope.nivelTestAbierto = 1;
+		
+	$scope.respuestasTest = [];
+	$scope.test = ['1', '2'];
+	$scope.contTest = 2;
+	$scope.radioTest = 1;
+	
+	$scope.respuestasTestAbierto = [];
+	$scope.testAbierto = ['1', '2'];
+	$scope.contTestAbierto = 2;
+	$scope.checkTestAbierto = [false, false];
+	
+	/* ----------- Input temas ----------- */
+	$scope.temas = [];
+	$scope.temasAbierta = [];
+	$scope.temasTest = [];
+	$scope.temasTestAbierto = [];
+	
+	$scope.readonly = false;
+    $scope.selectedItem = null;
+    $scope.searchText = null;
+    $scope.querySearch = querySearch;
+    $scope.numberChips = [];
+    $scope.numberChips2 = [];
+    $scope.numberBuffer = '';
+    $scope.transformChip = transformChip;
+	
+	
+	servicioRest.getTemas()
+		.then(function (data) {
+			for(var i = 0; i < data.length; i++) {
+					$scope.temas[i] = data[i].tag;
+			}
+			console.log($scope.temas);
+		})
+		.catch(function (err) {
+			console.log("Error al cargar los temas");
+    	});
+	
     $scope.crearPAbierta = function () {
         if(preguntaVacia("abierta"))
         {
@@ -122,20 +165,6 @@ app.controller('controladorCrear', function ($scope, $mdDialog, $mdToast) {
     $scope.cancel = function () {
         $mdDialog.cancel();
     };
-    
-    $scope.nivelAbierta = 1;
-    $scope.nivelTest = 1;
-    $scope.nivelTestAbierto = 1;
-		
-	$scope.respuestasTest = [];
-	$scope.test = ['1', '2'];
-	$scope.contTest = 2;
-	$scope.radioTest = 1;
-	
-	$scope.respuestasTestAbierto = [];
-	$scope.testAbierto = ['1', '2'];
-	$scope.contTestAbierto = 2;
-	$scope.checkTestAbierto = [false, false];
 	
 	$scope.aniadirRespuestaTest = function () {
 		$scope.contTest += 1;
@@ -147,4 +176,66 @@ app.controller('controladorCrear', function ($scope, $mdDialog, $mdToast) {
 		$scope.testAbierto.push($scope.contTestAbierto);
 		$scope.checkTestAbierto.push(false);
 	};
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+  
+
+    /**
+     * Return the proper object when the append is called.
+     */
+    function transformChip(chip) {
+      // If it is an object, it's already a known chip
+      if (angular.isObject(chip)) {
+        return chip;
+      }
+		console.log('hola');
+		console.log(chip);
+      // Otherwise, create a new one
+		servicioRest.postTema(chip)
+			.then(function(data) {
+				chip = data.tag;
+            })
+			.catch(function(err) {
+				console.log("Error");
+            	console.log(err);
+			});
+      return { name: chip, type: 'new' }
+    }
+
+    /**
+     * Search for vegetables.
+     */
+    function querySearch (query) {
+		for
+      var results = query ? $scope.temas.filter(createFilterFor(query)) : [];
+      return results;
+    }
+
+    /**
+     * Create filter function for a query string
+     */
+    function createFilterFor(query) {
+      var lowercaseQuery = angular.lowercase(query);
+
+      return function filterFn(tema) {
+        return (tema.indexOf(lowercaseQuery) === 0);
+      };
+
+    }
 });

@@ -2,6 +2,7 @@
     <md-button mfb-button class="md-fab md-mini" ng-click="crear($event)" aria-label="crearPregunta">
         <md-icon md-svg-src="img/crear.svg"></md-icon>
     </md-button>
+
     <p></p>
 
 	<div>
@@ -23,10 +24,11 @@
         </md-not-found>
       </md-autocomplete>
 	</div>
+
     <md-list>
         <md-subheader class="md-no-sticky">Preguntas</md-subheader>
         <md-divider></md-divider>
-      <md-list-item class="md-3-line" ng-repeat="item in preguntas">
+      	<md-list-item class="md-3-line" ng-repeat="item in preguntas">
             <div class="md-list-item-text" layout="column">
                 <h3>
                     {{ item.title }}
@@ -53,4 +55,7 @@
 			 </md-button>
             <md-divider></md-divider>
         </md-list-item>
+
     </md-list>
+
+</div>

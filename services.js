@@ -146,9 +146,44 @@ function ServicioREST($http, $q, $rootScope, config) {
 		return promise;
 	}
 	
-    
+	/* ------------- GET PREGUNTAS BY TAG ------------- */
+	
+	function postPreguntasByTag(tag) {
+		var defered = $q.defer();
+		var promise = defered.promise;
+		$http({
+			method: 'POST',
+			url: url + '/questionByTag/',
+			data: tag
+		})
+		.success(function(data, status, headers, config) {
+			defered.resolve(data);
+		})
+		.error(function(data, status, headers, config) {
+			tratarError(data, status, defered);
+		});
 
-		
+		return promise;
+	}
+	
+	function postTemas(tema) {
+		var defered = $q.defer();
+		var promise = defered.promise;
+		$http({
+			method: 'POST',
+			url: url + '/tag/',
+			data: tema
+		})
+		.success(function(data, status, headers, config) {
+			defered.resolve(data);
+		})
+		.error(function(data, status, headers, config) {
+			tratarError(data, status, defered);
+		});
+
+		return promise;
+	}
+	
 	return {
 		getPreguntas: getPreguntas,
 		getEntidad: getEntidad,
@@ -156,6 +191,8 @@ function ServicioREST($http, $q, $rootScope, config) {
         deletePregunta: deletePregunta,
 		postAuthenticate: postAuthenticate,
         getInterview: getInterview,
-		getTemas: getTemas
+		getTemas: getTemas,
+		postTemas: postTemas,
+		postPreguntasByTag: postPreguntasByTag
 	}
 }
