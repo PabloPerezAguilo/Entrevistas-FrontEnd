@@ -133,15 +133,23 @@ app.controller('controladorTec', function(servicioRest, $scope, $rootScope, $mdD
     self.simulateQuery = false;
     self.isDisabled    = false;
 
-    // list of `state` value/display objects
-    //self.states        = loadAll();
     self.querySearch   = querySearch;
     self.selectedItemChange = selectedItemChange;
     self.searchTextChange   = searchTextChange;
+	
+	//almaceno los temas en un array
+	self.listaTemas = [];
+	servicioRest.getTemas()
+		.then(function(data) {
+			self.listaTemas = data;
+			self.allTags = loadAll();
+		})
+		.catch(function (err) {
+		});
 
    
     function querySearch (query) {
-      var results = query ? self.allStates.filter( createFilterFor(query) ) : self.allStates,
+      var results = query ? self.allTags.filter( createFilterFor(query) ) : self.allTags,
           deferred;
       if (self.simulateQuery) {
         deferred = $q.defer();
@@ -174,19 +182,9 @@ app.controller('controladorTec', function(servicioRest, $scope, $rootScope, $mdD
 			});
     }
 
-	self.t = [];
-	servicioRest.getTemas()
-		.then(function(data) {
-			$scope.tag = data;				
-			self.t = data;
-			self.allStates = loadAll();
-		})
-		.catch(function (err) {
-		});
-	
     function loadAll() {
-		var allStates = self.t;
-		return allStates.map( function (state) {
+		var allTags = self.listaTemas;
+		return allTags.map( function (state) {
 			state.value = state.tag.toLowerCase();
 			return state;          
       });
