@@ -62,7 +62,6 @@ app.controller('controladorTec', function(servicioRest, $scope, $rootScope, $mdD
 			});
     };
     
-    
     $scope.eliminar = function (indice) {
         var idPregunta = $scope.preguntas[indice]._id;
         servicioRest.deletePregunta(idPregunta)
@@ -135,27 +134,14 @@ app.controller('controladorTec', function(servicioRest, $scope, $rootScope, $mdD
     self.isDisabled    = false;
 
     // list of `state` value/display objects
-    self.temas = cargarTemas();
-    self.querySearch  = querySearch;
+    //self.states        = loadAll();
+    self.querySearch   = querySearch;
     self.selectedItemChange = selectedItemChange;
-    self.searchTextChange = searchTextChange;
+    self.searchTextChange   = searchTextChange;
 
-    self.newTema = newTema;
-
-    function newTema(tema) {
-      alert("Sorry! You'll need to create a Constituion for " + tema + " first!");
-    }
-
-    // ******************************
-    // Internal methods
-    // ******************************
-
-    /**
-     * Search for states... use $timeout to simulate
-     * remote dataservice call.
-     */
+   
     function querySearch (query) {
-      var results = query ? self.temas.filter( createFilterFor(query) ) : self.temas,
+      var results = query ? self.allStates.filter( createFilterFor(query) ) : self.allStates,
           deferred;
       if (self.simulateQuery) {
         deferred = $q.defer();
@@ -167,48 +153,42 @@ app.controller('controladorTec', function(servicioRest, $scope, $rootScope, $mdD
     };
 
     function searchTextChange(text) {
-      $log.info('Text changed to ' + text);
-    };
+      $log.info('texto seleccionado ' + text);
+    }
 
     function selectedItemChange(item) {
-		var tema = JSON.stringify(item)
-		$log.info('Item changed to ' + tema);
-		if(item != null) {
-			//se mostrarán las preguntas de ese tema
-			/*servicioRest.getPreguntasByTag(item)
-				.then(function(data) {
-					$scope.preguntas = data;
-					console.log(data);
-				})
-				.catch(function(err) {
-					console.log("Error: " + err);
-				});*/
-		}
-		
-    };
 
-    /**
-     * Build `states` list of key/value pairs
-     */
-    function cargarTemas() {
-      var datos = [];
-		servicioRest.getTemas()
+      $log.info('Item recogido ' + JSON.stringify(item));
+		console.log(item.tag);
+		var question = {
+			tag : String
+		}
+		question.tag = item.tag;
+		console.log(question);
+		servicioRest.postPreguntasByTag(question)
 			.then(function(data) {
-				for(var i = 0; i < data.length; i++) {
-					//console.log(data[i].tag);
-					datos[i] = data[i].tag;
-				}
-				//console.log(datos);
+				$scope.preguntas=data;
 			})
-			.catch(function(err) {
+			.catch(function (err) {
 				console.log(err);
 			});
+    }
 
-      return datos.map( function (tema) {
-        return {
-          value: tema.toLowerCase(),
-          display: tema
-        };
+	self.t = [];
+	servicioRest.getTemas()
+		.then(function(data) {
+			$scope.tag = data;				
+			self.t = data;
+			self.allStates = loadAll();
+		})
+		.catch(function (err) {
+		});
+	
+    function loadAll() {
+		var allStates = self.t;
+		return allStates.map( function (state) {
+			state.value = state.tag.toLowerCase();
+			return state;          
       });
     };
 
@@ -218,9 +198,9 @@ app.controller('controladorTec', function(servicioRest, $scope, $rootScope, $mdD
     function createFilterFor(query) {
       var lowercaseQuery = angular.lowercase(query);
 
-      return function filterFn(tema) {
-        return (tema.value.indexOf(lowercaseQuery) === 0);
+      return function filterFn(item) {
+        return (item.value.indexOf(lowercaseQuery) === 0);
       };
+    }
 
-    };
 });
