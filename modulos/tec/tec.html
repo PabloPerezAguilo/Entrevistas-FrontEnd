@@ -4,7 +4,7 @@
     </md-button>
 
     <p></p>
-    
+
 	<div>
 		<md-autocomplete ng-disabled="false" 
 					 md-no-cache="false" 
@@ -24,7 +24,8 @@
         </md-not-found>
       </md-autocomplete>
 	</div>
-	<md-list>
+
+    <md-list>
         <md-subheader class="md-no-sticky">Preguntas</md-subheader>
         <md-divider></md-divider>
       	<md-list-item class="md-3-line" ng-repeat="item in preguntas">
@@ -39,7 +40,7 @@
                     {{ item.type }}
                 </p>
             </div>
-		  	<md-button ng-click="ver($event)" aria-label="ver pegrunta">
+		  	<md-button ng-click="ver($event,$index)" aria-label="ver pegrunta">
 				<ng-md-icon icon="search" size="20"></ng-md-icon>
 				<md-tooltip md-direction="bottom">
 				  Ver
@@ -54,6 +55,7 @@
 			 </md-button>
             <md-divider></md-divider>
         </md-list-item>
+
     </md-list>
 
 </div>
