@@ -2,7 +2,7 @@
 	<form>
     	<md-toolbar>
       		<div class="md-toolbar-tools">
-        		<h2>Ver pregunta</h2>
+        		<h2 ng-model="cabeceraVer">Ver pregunta {{cabeceraVer}}</h2>
                 <span flex></span>
 				<md-button class="md-icon-button" ng-click="cancel()">
 					<md-icon md-svg-src="img/cerrar.svg" aria-label="Close dialog"></md-icon>
@@ -13,11 +13,12 @@
       
 		<div class="md-dialog-content">
             
-            <p ng-bind="temas_nivel"></p>  
-            <p ng-bind="titulo"></p>       
-            <p ng-bind="directiva"></p>
+            <p id="textoTemaNivel" ng-bind="temas_nivel"></p>  
+            <p id="textoTitulo" ng-bind="titulo"></p>       
+            <p id="textoDirectiva" ng-bind="directiva"></p>
             <div ng-repeat="item in items">
-                <md-checkbox ng-disabled="true" ng-model="item.esCorrecta">{{item.respuesta}}</md-checkbox>
+                <md-checkbox id="checkboxVer" ng-disabled="true" ng-model="item.esCorrecta"></md-checkbox>
+                <p id="textoResp" ng-bind="item.respuesta"></p>
             </div>
       </div>
 		

@@ -57,9 +57,13 @@ app.controller('controladorCrear', function (servicioRest, $scope, $mdDialog, $m
         }
         else
         {
+            console.log($scope.temasAbierta[0].tag);
             pregunta.title = $scope.tituloAbierta;
             pregunta.type = "FREE";
-            pregunta.tags[0] = $scope.temasAbierta;
+            for(var i=0;i<$scope.temasAbierta.length;i++)
+            {
+                pregunta.tags[i] = $scope.temasAbierta[i].tag;
+            }
             pregunta.level = $scope.nivelAbierta;
             pregunta.directive = $scope.directivasAbierta;
             $scope.hide(pregunta);
@@ -76,7 +80,10 @@ app.controller('controladorCrear', function (servicioRest, $scope, $mdDialog, $m
         {
             pregunta.title = $scope.tituloTest;
             pregunta.type = "SINGLE_CHOICE";
-            pregunta.tags[0] = $scope.temasTest;
+            for(i=0;i<$scope.temasTest.length;i++)
+            {
+                pregunta.tags[i] = $scope.temasTest[i].tag;
+            }
             pregunta.level = $scope.nivelTest;
             pregunta.answers = [];
 
@@ -100,7 +107,10 @@ app.controller('controladorCrear', function (servicioRest, $scope, $mdDialog, $m
         {
             pregunta.title = $scope.tituloTestAbierto;
             pregunta.type = "MULTI_CHOICE";
-            pregunta.tags[0] = $scope.temasTestAbierto;
+            for(i=0;i<$scope.temasTestAbierto.length;i++)
+            {
+                pregunta.tags[i] = $scope.temasTestAbierto[i].tag;
+            }
             pregunta.level = $scope.nivelTestAbierto;
             pregunta.answers = [];
 
