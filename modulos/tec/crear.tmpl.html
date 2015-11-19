@@ -23,54 +23,21 @@
 										   step="1" min="1" max="10">
                                 </md-slider>
                                 
-								
-								
-								
-								
-								
-								
-								
-								
-								
-								
-								
-								
 								<md-chips ng-model="temasAbierta" md-autocomplete-snap="" 
-										  md-transform-chip="transformChip($chip)"
-										  md-require-match="false">
+										  md-transform-chip="transformChip($chip)" md-require-match="false">
 									<md-autocomplete md-selected-item="selectedItem" md-search-text="searchText"
-													 md-items="item in querySearch(searchText)"
-													 md-item-text="item.name"
+													 md-items="item in queryBuscarTema(searchText)"
+													 md-item-text="item.valor"
 													 placeholder="Temas de la pregunta">
+										
 										<span md-highlight-text="searchText">
-											{{item.name}} :: {{item.type}}
+											{{item.valor}}
 										</span>
 									</md-autocomplete>
 									<md-chip-template>
-										<span>
-											<strong>{{$chip.name}}</strong>
-											<em>({{$chip.type}})</em>
-										</span>
+										<span> {{$chip.valor}} </span>
 									</md-chip-template>
 								</md-chips>
-									
-								
-								
-								
-								
-								
-								
-								
-								
-								
-								
-								
-								
-								
-								
-								
-								
-								
 								
                                 <md-input-container class="md-block">
                                     <label>Enunciado de la pregunta</label>
@@ -95,10 +62,21 @@
 										   step="1" min="1" max="10">
                                 </md-slider>
 								
-                                <md-input-container flex>
-                                    <label>Temas de las preguntas</label>
-                                    <input ng-model="temasTest">
-                                </md-input-container>
+                                <md-chips ng-model="temasTest" md-autocomplete-snap="" 
+										  md-transform-chip="transformChip($chip)" md-require-match="false">
+									<md-autocomplete md-selected-item="selectedItem" md-search-text="searchText"
+													 md-items="item in queryBuscarTema(searchText)"
+													 md-item-text="item.valor"
+													 placeholder="Temas de la pregunta">
+										
+										<span md-highlight-text="searchText">
+											{{item.valor}}
+										</span>
+									</md-autocomplete>
+									<md-chip-template>
+										<span> {{$chip.valor}} </span>
+									</md-chip-template>
+								</md-chips>
                                 
                                 <md-input-container class="md-block">
                                     <label>Enunciado de la pregunta</label>
@@ -134,10 +112,22 @@
 									   step="1" min="1" max="10">
 								</md-slider>
 								
-                            	<md-input-container flex>
-									<label>Temas de las preguntas</label>
-								    <input ng-model="temasTestAbierto">
-								</md-input-container>
+                            	<md-chips ng-model="temasTestAbierto" md-autocomplete-snap="" 
+										  md-transform-chip="transformChip($chip)" md-require-match="false">
+									<md-autocomplete md-selected-item="selectedItem" md-search-text="searchText"
+													 md-items="item in queryBuscarTema(searchText)"
+													 md-item-text="item.valor"
+													 placeholder="Temas de la pregunta">
+										
+										<span md-highlight-text="searchText">
+											{{item.valor}}
+										</span>
+									</md-autocomplete>
+									<md-chip-template>
+										<span> {{$chip.valor}} </span>
+									</md-chip-template>
+								</md-chips>
+                                
 
 								<md-input-container class="md-block">
                                     <label>Enunciado de la pregunta</label>

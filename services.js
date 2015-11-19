@@ -166,13 +166,13 @@ function ServicioREST($http, $q, $rootScope, config) {
 		return promise;
 	}
 	
-	function postTemas(tema) {
+	function postTema(tema) {
 		var defered = $q.defer();
 		var promise = defered.promise;
 		$http({
 			method: 'POST',
 			url: url + '/tag/',
-			data: tema
+			data: { tag: tema }
 		})
 		.success(function(data, status, headers, config) {
 			defered.resolve(data);
@@ -192,7 +192,7 @@ function ServicioREST($http, $q, $rootScope, config) {
 		postAuthenticate: postAuthenticate,
         getInterview: getInterview,
 		getTemas: getTemas,
-		postTemas: postTemas,
+		postTema: postTema,
 		postPreguntasByTag: postPreguntasByTag
 	}
 }
