@@ -326,23 +326,10 @@ md-slider .md-track.md-track-fill {
 }
 
 /*input tema*/
-.chipsdemoCustomInputs md-content.autocomplete {
-  min-height: 200px; }
-.chipsdemoCustomInputs input[type=number] {
-  width: 110px; }
-.chipsdemoCustomInputs .veggie-option {
-  float: left;
-  width: 20%;
-  box-sizing: border-box;
-  padding: 0 8px; }
-.chipsdemoCustomInputs .veggie-option .md-item-text {
-  padding: 8px;
-  background: #f0f0f0;
-  border-radius: 3px; }
-.chipsdemoCustomInputs .veggie-option .md-item-text h3, .chipsdemoCustomInputs .veggie-option .md-item-text p {
-  padding: 0;
-  margin: 0; }
+md-chips .md-chips.md-focused {
+    box-shadow: 0 2px $naranja;
 
+}
 /*Ver pregunta*/
 
 md-checkbox[disabled].md-checked .md-icon {
@@ -367,4 +354,7 @@ md-checkbox[disabled] .md-label {
 #textoDirectiva{
     margin-bottom: 7%;
     margin-left: 6%;
+}
+#textoResp{
+    display: inline;
 }

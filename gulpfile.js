@@ -89,15 +89,15 @@ gulp.task('cdnReplace', function() {
 	console.log("Reemplazamos las librerias por los CDNs de index");
 	return gulp.src('target/files/index.html')
 	.pipe(htmlreplace({
-
+		
 		'JSCDNs': [
-		'https://ajax.googleapis.com/ajax/libs/angularjs/1.4.7/angular.min.js',
+		'https://ajax.googleapis.com/ajax/libs/angularjs/1.4.7/angular.js',
 		'https://ajax.googleapis.com/ajax/libs/angularjs/1.4.7/angular-route.min.js',
 		'https://ajax.googleapis.com/ajax/libs/angularjs/1.4.7/angular-mocks.js',
 		'https://ajax.googleapis.com/ajax/libs/angularjs/1.4.7/angular-messages.min.js',
 		'https://ajax.googleapis.com/ajax/libs/angularjs/1.4.7/angular-animate.min.js',
 		'https://ajax.googleapis.com/ajax/libs/angularjs/1.4.7/angular-aria.min.js',
-		'js/angular-material.min.js',
+		'https://cdn.gitcdn.xyz/cdn/angular/bower-material/v1.0.0-rc4/angular-material.js',
 		'https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js',
 		'https://cdnjs.cloudflare.com/ajax/libs/ng-tags-input/2.3.0/ng-tags-input.min.js',
 		'https://s3-us-west-2.amazonaws.com/s.cdpn.io/t-114/assets-cache.js',
@@ -105,7 +105,7 @@ gulp.task('cdnReplace', function() {
 		'https://cdnjs.cloudflare.com/ajax/libs/c3/0.4.10/c3.min.js'],
 
 		'CSSCDNs': [
-		'https://cdn.gitcdn.xyz/cdn/angular/bower-material/v1.0.0-rc2/angular-material.min.css',
+		'https://cdn.gitcdn.xyz/cdn/angular/bower-material/v1.0.0-rc4/angular-material.css',
 		'https://mbenford.github.io/ngTagsInput/css/ng-tags-input.min.css',
 		'https://cdnjs.cloudflare.com/ajax/libs/c3/0.4.10/c3.min.css']
 
