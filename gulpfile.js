@@ -89,9 +89,9 @@ gulp.task('cdnReplace', function() {
 	console.log("Reemplazamos las librerias por los CDNs de index");
 	return gulp.src('target/files/index.html')
 	.pipe(htmlreplace({
-
+		
 		'JSCDNs': [
-		'https://ajax.googleapis.com/ajax/libs/angularjs/1.4.7/angular.min.js',
+		'https://ajax.googleapis.com/ajax/libs/angularjs/1.4.7/angular.js',
 		'https://ajax.googleapis.com/ajax/libs/angularjs/1.4.7/angular-route.min.js',
 		'https://ajax.googleapis.com/ajax/libs/angularjs/1.4.7/angular-mocks.js',
 		'https://ajax.googleapis.com/ajax/libs/angularjs/1.4.7/angular-messages.min.js',
