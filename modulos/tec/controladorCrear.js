@@ -201,16 +201,15 @@ app.controller('controladorCrear', function (servicioRest, $scope, $mdDialog, $m
      */
     $scope.transformChip = function transformChip(chip) {
 		// If it is an object, it's already a known chip
-		console.log('antes if');
 		if (angular.isObject(chip)) {
 			return chip;
 		}
-		console.log('despues if');
 		console.log(chip);
 		// Otherwise, create a new one
 		servicioRest.postTema(chip)
 			.then(function(data) {
-				chip = data.tag;
+				
+				//chip = data.tag;
             })
 			.catch(function(err) {
 			console.log("Error");
