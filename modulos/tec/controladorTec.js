@@ -108,72 +108,78 @@ app.controller('controladorTec', function(servicioRest, $scope, $rootScope, $mdD
     self.simulateQuery = false;
     self.isDisabled    = false;
 
-    self.querySearch   = querySearch;
-    self.selectedItemChange = selectedItemChange;
-    self.searchTextChange   = searchTextChange;
+    $scope.querySearch   = querySearch;
+    $scope.selectedItemChange = selectedItemChange;
+    $scope.searchTextChange   = searchTextChange;
 	
-	//almaceno los temas en un array
-	self.listaTemas = [];
 	servicioRest.getTemas()
 		.then(function(data) {
-			self.listaTemas = data;
-			self.allTags = loadAll();
+			self.listaTemas = data;			
+			$scope.temas = data;
+			cadenaTemas();
+			$scope.listaTemas = loadAll();
 		})
 		.catch(function (err) {
 		});
 
    
     function querySearch (query) {
-      var results = query ? self.allTags.filter( createFilterFor(query) ) : self.allTags,
-          deferred;
-      if (self.simulateQuery) {
-        deferred = $q.defer();
-        $timeout(function () { deferred.resolve( results ); }, Math.random() * 1000, false);
-        return deferred.promise;
-      } else {
-        return results;
-      }
+		var results = query ? self.listaTemas.filter( filtrar(query) ) : self.listaTemas,
+			deferred;
+		if (self.simulateQuery) {
+			deferred = $q.defer();
+			$timeout(function () {
+				deferred.resolve( results );
+			}, Math.random() * 1000, false);
+			return deferred.promise;
+		} else {
+			return results;
+		}
     };
 
     function searchTextChange(text) {
-      $log.info('texto seleccionado ' + text);
+		$log.info('texto seleccionado ' + text);
     }
 
     function selectedItemChange(item) {
 
       $log.info('Item recogido ' + JSON.stringify(item));
-		console.log(item.tag);
-		var question = {
-			tag : String
-		}
-		question.tag = item.tag;
-		console.log(question);
-		servicioRest.postPreguntasByTag(question)
-			.then(function(data) {
-				$scope.preguntas=data;
-			})
-			.catch(function (err) {
-				console.log(err);
-			});
+		if(item != null) {
+			var tema = {
+				tag: String
+			}
+			tema.tag = item.tag;
+			servicioRest.postPreguntasByTag(tema)
+				.then(function(data) {
+					$scope.preguntas = data;
+				})
+				.catch(function (err) {
+					console.log(err);
+				});
+			}
     }
+	
+	function cadenaTemas() {
+		for(var i = 0; i < $scope.temas.length; i++) {
+			$scope.cadena += $scope.temas[i].tag + '*' + i + ', ';
+		}
+	}
 
     function loadAll() {
-		var allTags = self.listaTemas;
-		return allTags.map( function (state) {
-			state.value = state.tag.toLowerCase();
-			return state;          
-      });
+		
+		var allTags = $scope.cadena;
+		return allTags.split(/, +/g).map(function(tema) {
+			return {
+				value: tema.toLowerCase()
+			};
+		});
     };
-
-    /**
-     * Create filter function for a query string
-     */
-    function createFilterFor(query) {
-      var lowercaseQuery = angular.lowercase(query);
-
-      return function filterFn(item) {
-        return (item.value.indexOf(lowercaseQuery) === 0);
-      };
-    }
-
+	
+	function filtrar(texto) {
+		var lowercaseQuery = angular.lowercase(texto);
+		return function (tema) {
+			$scope.texto = tema.tag;
+			return ($scope.texto.indexOf(lowercaseQuery) === 0 || $scope.texto.search(lowercaseQuery) > 0);
+		};
+	}
 });

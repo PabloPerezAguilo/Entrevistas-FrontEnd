@@ -22,7 +22,7 @@ app.config(function($routeProvider) {
 	})
 	.when('/', {
 		templateUrl: 'modulos/tec/tec.html',
-        controller: 'controladorTec as ctrl'
+        controller: 'controladorTec'
 	})
     
 	.when('/entrevista', {
