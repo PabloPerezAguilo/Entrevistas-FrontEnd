@@ -264,6 +264,10 @@ md-tabs:not(.md-no-tab-content):not(.md-dynamic-height) {
 /*------------------------------TECNICO*------------------------------*/
 /*Crear pregunta*/
 
+.enLinea {
+	display: inline-block;
+}
+
 .md-button.md-fab {
     background-color: $naranja;
 }
@@ -293,6 +297,14 @@ md-dialog.md-transition-in {
 
 md-tabs .md-tab.md-active {
     color: $negro;
+}
+
+md-tabs .md-tab .md-ripple-container {
+    color: rgba(255, 141, 0, 0.26);
+}
+
+.md-ripple-container {:not([disabled]).md-focused {
+    background-color: $naranja;
 }
 
 md-tabs md-ink-bar {
@@ -325,8 +337,22 @@ md-slider .md-track.md-track-fill {
   padding-left: 10px;
 }
 
-/*input tema*/
-
 md-chips .md-chips.md-focused {
     box-shadow: 0 2px $naranja;
+}
+
+md-radio-button.md-checked .md-off {
+    border-color: $naranja;
+}
+
+md-radio-button .md-on {
+    background-color: $naranja;
+}
+
+md-radio-group .md-checked .md-ink-ripple {
+    color: rgba(255, 161, 0, 0.26);
+}
+
+.md-checked .md-container:before {
+    background-color: rgba(255, 141, 0, 0.26);
 }

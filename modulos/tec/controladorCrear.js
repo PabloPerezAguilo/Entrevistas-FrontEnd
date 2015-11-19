@@ -175,8 +175,6 @@ app.controller('controladorCrear', function (servicioRest, $scope, $mdDialog, $m
 	$scope.readonly = false;
     $scope.selectedItem = null;
     $scope.searchText = null;
-    $scope.numberChips = [];
-    $scope.numberChips2 = [];
     $scope.numberBuffer = '';	
 	
 	
@@ -209,7 +207,6 @@ app.controller('controladorCrear', function (servicioRest, $scope, $mdDialog, $m
 		servicioRest.postTema(chip)
 			.then(function(data) {
 				
-				//chip = data.tag;
             })
 			.catch(function(err) {
 			console.log("Error");

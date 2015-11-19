@@ -84,13 +84,15 @@
                                 </md-input-container>
 								<md-radio-group ng-model="radioTest">
 									<div ng-repeat="respuestas in test">
-										<md-radio-button value="{{respuestas}}" aria-label="respuestas test abierto">
+										<span>
+											<md-radio-button value="{{respuestas}}" aria-label="respuestas test abierto" >
 										</md-radio-button>
 										
 										<md-input-container class="md-block">
                                     		<label>Respuesta {{respuestas}}</label>
                                     		<textarea ng-model="respuestasTest[$index]"></textarea>
 										</md-input-container>
+										</span>
 									</div>
 								</md-radio-group>
 							
@@ -102,8 +104,7 @@
                             
                             </div>      
                         </md-content>
-                    </md-tab>
-                    
+                    </md-tab>                    
                 
                     <md-tab label="pregunta tipo test abierto">
                         <md-content>
