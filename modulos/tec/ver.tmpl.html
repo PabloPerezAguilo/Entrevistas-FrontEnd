@@ -13,11 +13,11 @@
       
 		<div class="md-dialog-content">
             
-            <p ng-bind="temas_nivel"></p>  
-            <p ng-bind="titulo"></p>       
-            <p ng-bind="directiva"></p>
+            <p id="textoTemaNivel" ng-bind="temas_nivel"></p>  
+            <p id="textoTitulo" ng-bind="titulo"></p>       
+            <p id="textoDirectiva" ng-bind="directiva"></p>
             <div ng-repeat="item in items">
-                <md-checkbox ng-disabled="true" ng-model="item.esCorrecta">{{item.respuesta}}</md-checkbox>
+                <md-checkbox id="checkboxVer" ng-disabled="true" ng-model="item.esCorrecta">{{item.respuesta}}</md-checkbox>
             </div>
       </div>
 		

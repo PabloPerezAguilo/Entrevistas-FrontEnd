@@ -343,3 +343,28 @@ md-slider .md-track.md-track-fill {
   padding: 0;
   margin: 0; }
 
+/*Ver pregunta*/
+
+md-checkbox[disabled].md-checked .md-icon {
+    background-color: $naranja;
+}
+
+md-checkbox[disabled] .md-label {
+    color: $negro;
+}
+#checkboxVer{
+    display: inline;
+}
+#textoTemaNivel{
+    margin-bottom: 3%;
+    font-weight: bold;
+}
+#textoTitulo{
+    margin-bottom: 3%;
+    text-align: center;
+    font-size: 150%;
+}
+#textoDirectiva{
+    margin-bottom: 7%;
+    margin-left: 6%;
+}
