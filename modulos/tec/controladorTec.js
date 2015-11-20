@@ -108,11 +108,12 @@ app.controller('controladorTec', function(servicioRest, $scope, $rootScope, $mdD
 	$scope.temasCargados;
     $scope.selectedItemChange = selectedItemChange;
     $scope.searchText = null;	
+	$scope.listaTemas = [];
 	self.simulateQuery = false;
 	
 	servicioRest.getTemas()
 		.then(function(data) {
-			$scope.temas = data;			
+			$scope.temas = data;
 			$scope.temasCargados = cargarTemas();
 		})
 		.catch(function (err) {
@@ -132,7 +133,7 @@ app.controller('controladorTec', function(servicioRest, $scope, $rootScope, $mdD
 		console.log(item);
 		if(item != null) {
 			var tema = {
-				tags: String
+				tags: [String]
 			}
 			tema.tags = item.tag;
 			servicioRest.postPreguntasByTag(tema)
