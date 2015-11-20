@@ -153,7 +153,7 @@ function ServicioREST($http, $q, $rootScope, config) {
 		var promise = defered.promise;
 		$http({
 			method: 'POST',
-			url: url + '/questionByTag/',
+			url: url + '/questionByTags/',
 			data: tag
 		})
 		.success(function(data, status, headers, config) {

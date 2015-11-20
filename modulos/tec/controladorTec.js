@@ -103,52 +103,38 @@ app.controller('controladorTec', function(servicioRest, $scope, $rootScope, $mdD
 	};
 	
 	/* ----------------- AUTOCOMPLETE ---------------- */
-    var self = this;
-
-    self.simulateQuery = false;
-    self.isDisabled    = false;
-
-    $scope.querySearch   = querySearch;
+	var self = this;
+	$scope.temas;
+	$scope.temasCargados;
     $scope.selectedItemChange = selectedItemChange;
-    $scope.searchTextChange   = searchTextChange;
+    $scope.searchText = null;	
+	self.simulateQuery = false;
 	
 	servicioRest.getTemas()
 		.then(function(data) {
-			self.listaTemas = data;			
-			$scope.temas = data;
-			cadenaTemas();
-			$scope.listaTemas = loadAll();
+			$scope.temas = data;			
+			$scope.temasCargados = cargarTemas();
 		})
 		.catch(function (err) {
 		});
-
-   
-    function querySearch (query) {
-		var results = query ? self.listaTemas.filter( filtrar(query) ) : self.listaTemas,
-			deferred;
-		if (self.simulateQuery) {
-			deferred = $q.defer();
-			$timeout(function () {
-				deferred.resolve( results );
-			}, Math.random() * 1000, false);
-			return deferred.promise;
-		} else {
-			return results;
-		}
-    };
-
-    function searchTextChange(text) {
-		$log.info('texto seleccionado ' + text);
-    }
-
-    function selectedItemChange(item) {
+	
+    function cargarTemas() {
+		var temasCargados = $scope.temas;
+		return temasCargados.map( function (tema) {
+			tema.valor = tema.tag.toLowerCase();
+			return tema;          
+      });
+	}
+	
+	function selectedItemChange(item) {
 
       $log.info('Item recogido ' + JSON.stringify(item));
+		console.log(item);
 		if(item != null) {
 			var tema = {
-				tag: String
+				tags: String
 			}
-			tema.tag = item.tag;
+			tema.tags = item.tag;
 			servicioRest.postPreguntasByTag(tema)
 				.then(function(data) {
 					$scope.preguntas = data;
@@ -159,21 +145,43 @@ app.controller('controladorTec', function(servicioRest, $scope, $rootScope, $mdD
 			}
     }
 	
-	function cadenaTemas() {
-		for(var i = 0; i < $scope.temas.length; i++) {
-			$scope.cadena += $scope.temas[i].tag + '*' + i + ', ';
+	function searchTextChange(text) {
+		$log.info('texto seleccionado ' + text);
+    }
+	
+    /**
+     * Return the proper object when the append is called.
+     */
+    $scope.transformChip = function transformChip(chip) {
+		// If it is an object, it's already a known chip
+		if (angular.isObject(chip)) {
+			return chip;
+		}
+		return { valor: chip};
+	}
+	
+    function createFilterFor(query) {
+		var lowercaseQuery = angular.lowercase(query);
+		
+		return function filterFn(tema) {
+			return (tema.valor.indexOf(lowercaseQuery) === 0);
+		};
+	}
+		
+    $scope.queryBuscarTema = function (query) {
+		
+		var results = query ? $scope.temasCargados.filter( filtrar(query) ) : $scope.temasCargados,
+			deferred;
+		if (self.simulateQuery) {
+			deferred = $q.defer();
+			$timeout(function () {
+				deferred.resolve( results );
+			}, Math.random() * 1000, false);
+			return deferred.promise;
+		} else {
+			return results;
 		}
 	}
-
-    function loadAll() {
-		
-		var allTags = $scope.cadena;
-		return allTags.split(/, +/g).map(function(tema) {
-			return {
-				value: tema.toLowerCase()
-			};
-		});
-    };
 	
 	function filtrar(texto) {
 		var lowercaseQuery = angular.lowercase(texto);
