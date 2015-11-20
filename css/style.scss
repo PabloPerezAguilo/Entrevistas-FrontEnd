@@ -264,6 +264,10 @@ md-tabs:not(.md-no-tab-content):not(.md-dynamic-height) {
 /*------------------------------TECNICO*------------------------------*/
 /*Crear pregunta*/
 
+.enLinea {
+	display: inline-block;
+}
+
 .md-button.md-fab {
     background-color: $naranja;
 }
@@ -295,8 +299,12 @@ md-tabs .md-tab.md-active {
     color: $negro;
 }
 
+md-tabs .md-tab .md-ripple-container {
+    color: rgba(255, 141, 0, 0.26);
+}
+
 md-tabs md-ink-bar {
-    background: $naranja;
+   background: $naranja;
 }
 
 .contenidoTablaCrear {
@@ -325,8 +333,51 @@ md-slider .md-track.md-track-fill {
   padding-left: 10px;
 }
 
-/*input tema*/
-
 md-chips .md-chips.md-focused {
     box-shadow: 0 2px $naranja;
+}
+
+md-radio-button.md-checked .md-off {
+    border-color: $naranja;
+}
+
+md-radio-button .md-on {
+    background-color: $naranja;
+}
+
+md-radio-group .md-checked .md-ink-ripple {
+    color: rgba(255, 161, 0, 0.26);
+}
+
+.md-checked .md-container:before {
+    background-color: rgba(255, 141, 0, 0.26);
+}
+
+/*Ver pregunta*/
+
+md-checkbox[disabled].md-checked .md-icon {
+    background-color: $naranja;
+}
+
+md-checkbox[disabled] .md-label {
+    color: $negro;
+}
+#checkboxVer {
+    display: inline;
+}
+#textoTemaNivel {
+    margin-bottom: 3%;
+    font-weight: bold;
+}
+#textoTitulo {
+    margin-bottom: 3%;
+    text-align: center;
+    font-size: 150%;
+}
+#textoDirectiva {
+    margin-bottom: 7%;
+    margin-left: 6%;
+}
+#textoResp {
+    display: inline;
 }

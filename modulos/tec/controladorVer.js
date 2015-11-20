@@ -2,6 +2,7 @@ app.controller('controladorVer', function ($scope, $mdDialog,indice) {
     
     if($scope.preguntas[indice].type==="FREE")
     {
+        $scope.cabeceraVer="- Abierta";
         $scope.temas_nivel=$scope.preguntas[indice].tags[0];
         for(var i=1;i<$scope.preguntas[indice].tags.length;i++)
         {
@@ -14,6 +15,15 @@ app.controller('controladorVer', function ($scope, $mdDialog,indice) {
     }
     else
     {
+        if($scope.preguntas[indice].type==="SINGLE_CHOICE")
+        {
+            $scope.cabeceraVer="- Test";
+        }
+        else
+        {
+            $scope.cabeceraVer="- Test abierta";
+        }
+        
         $scope.temas_nivel=$scope.preguntas[indice].tags[0];
         for(var i=1;i<$scope.preguntas[indice].tags.length;i++)
         {
