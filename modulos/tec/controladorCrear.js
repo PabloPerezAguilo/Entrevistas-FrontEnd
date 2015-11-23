@@ -232,9 +232,17 @@ app.controller('controladorCrear', function (servicioRest, $scope, $mdDialog, $m
 			return (tema.valor.indexOf(lowercaseQuery) === 0);
 		};
 	}
+	
+	function filtrar(texto) {
+		var lowercaseQuery = angular.lowercase(texto);
+		return function (tema) {
+			$scope.texto = tema.tag;
+			return ($scope.texto.indexOf(lowercaseQuery) === 0 || $scope.texto.search(lowercaseQuery) > 0);
+		};
+	}
 		
     $scope.queryBuscarTema = function (query) {
-		var results = query ? $scope.temasCargados.filter(createFilterFor(query)) : [];
+		var results = query ? $scope.temasCargados.filter(filtrar(query)) : [];
 		return results;
 	}
 });
