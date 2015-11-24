@@ -1,6 +1,6 @@
 'use strict';
 
-var app = angular.module('magni', ['ngRoute','ngMaterial', 'ngMdIcons']);
+var app = angular.module('magni', ['ngRoute','ngMaterial', 'ngMdIcons', 'rzModule']);
 app.run(function(servicioRest, $rootScope, $http, $location) {
 
 	// Establecemos las cabeceras por defecto. Las cabecera Authorization se modificara cuando el usuario se loge
@@ -16,11 +16,11 @@ app.config(function($routeProvider) {
 		templateUrl: 'modulos/logIn/logIn.html',
 		controller: 'controladorLogIn'
 	})*/
-	.when('/admin', {
+	.when('/', {
 		templateUrl: 'modulos/admin/admin.html',
         controller: 'controladorAdmin'
 	})
-	.when('/', {
+	.when('/tec', {
 		templateUrl: 'modulos/tec/tec.html',
         controller: 'controladorTec'
 	})
