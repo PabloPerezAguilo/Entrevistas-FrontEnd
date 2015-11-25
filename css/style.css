@@ -209,6 +209,9 @@ md-tabs:not(.md-no-tab-content):not(.md-dynamic-height) {
 
 /*------------------------------TECNICO*------------------------------*/
 /*Crear pregunta*/
+.enLinea {
+  display: inline-block; }
+
 .md-button.md-fab {
   background-color: #EF6C00; }
 
@@ -233,6 +236,9 @@ md-dialog.md-transition-in {
 md-tabs .md-tab.md-active {
   color: #1E1E1E; }
 
+md-tabs .md-tab .md-ripple-container {
+  color: rgba(255, 141, 0, 0.26); }
+
 md-tabs md-ink-bar {
   background: #EF6C00; }
 
@@ -256,26 +262,45 @@ md-slider .md-track.md-track-fill {
   text-align: center;
   padding-left: 10px; }
 
-/*input tema*/
-.chipsdemoCustomInputs md-content.autocomplete {
-  min-height: 200px; }
+md-chips .md-chips.md-focused {
+  box-shadow: 0 2px #EF6C00; }
 
-.chipsdemoCustomInputs input[type=number] {
-  width: 110px; }
+md-radio-button.md-checked .md-off {
+  border-color: #EF6C00; }
 
-.chipsdemoCustomInputs .veggie-option {
-  float: left;
-  width: 20%;
-  box-sizing: border-box;
-  padding: 0 8px; }
+md-radio-button .md-on {
+  background-color: #EF6C00; }
 
-.chipsdemoCustomInputs .veggie-option .md-item-text {
-  padding: 8px;
-  background: #f0f0f0;
-  border-radius: 3px; }
+md-radio-group .md-checked .md-ink-ripple {
+  color: rgba(255, 161, 0, 0.26); }
 
-.chipsdemoCustomInputs .veggie-option .md-item-text h3, .chipsdemoCustomInputs .veggie-option .md-item-text p {
-  padding: 0;
-  margin: 0; }
+.md-checked .md-container:before {
+  background-color: rgba(255, 141, 0, 0.26); }
+
+/*Ver pregunta*/
+md-checkbox[disabled].md-checked .md-icon {
+  background-color: #EF6C00; }
+
+md-checkbox[disabled] .md-label {
+  color: #1E1E1E; }
+
+#checkboxVer {
+  display: inline; }
+
+#textoTemaNivel {
+  margin-bottom: 3%;
+  font-weight: bold; }
+
+#textoTitulo {
+  margin-bottom: 3%;
+  text-align: center;
+  font-size: 150%; }
+
+#textoDirectiva {
+  margin-bottom: 7%;
+  margin-left: 6%; }
+
+#textoResp {
+  display: inline; }
 
 /*# sourceMappingURL=style.css.map */

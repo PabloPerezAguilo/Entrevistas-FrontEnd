@@ -1,0 +1,108 @@
+<div>
+    <md-dialog>
+        <form>
+            <md-toolbar>
+                <div class="md-toolbar-tools">
+                    <h2>
+                        Crear pregunta
+                    </h2>
+                    <span flex></span>
+                    <md-button class="md-icon-button" aria-label="cerrarCrearPregunta" ng-click="cancel()">
+                        <md-icon md-svg-src="img/cerrar.svg"></md-icon>
+                    </md-button>
+
+                </div>
+            </md-toolbar>
+            
+            <md-dialog-content ng-model="conte">
+                <md-content>
+                    <div class="contenidoTablaCrear">
+
+
+                        <md-input-container class="md-block">
+                            <label>Nombre</label>
+                            <textarea ng-model="nombreEntrevista"></textarea>
+                        </md-input-container>
+                        <md-input-container class="md-block">
+                            <label>Apellidos</label>
+                            <textarea ng-model="apellidosEntrevista"></textarea>
+                        </md-input-container>
+                        <md-input-container class="md-block">
+                            <label>DNI</label>
+                            <textarea ng-model="dniEntrevista"></textarea>
+                        </md-input-container>
+                        <md-datepicker ng-model="fecha" md-placeholder="Introducir fecha"></md-datepicker>
+                        
+                        <div ng-init="pondIndividual=false" ng-hide="pondGeneral">
+                                <div ng-repeat="respuestas in test">
+                                    <span>										                                            
+                                        <md-autocomplete ng-model="respuestasTestAutoC[$index]" md-selected-item="selectedItem" 
+                                                 md-search-text="searchText"
+                                                 md-items="item in queryBuscarTema(searchText)"
+                                                 md-item-text="item.valor"
+                                                 placeholder="Temas de la pregunta">
+
+                                            <span md-highlight-text="searchText">
+                                                {{item.valor}}
+                                            </span>
+                                        </md-autocomplete>
+                                        <!--https://github.com/rzajac/angularjs-slider-->
+                                        <!--http://rzajac.github.io/angularjs-slider/index.html-->
+                                        <!--PARA INSTALAR: "npm i angularjs-slider"-->
+                                    <md-slider ng-model="respuestasTest[$index]" flex="" md-discrete=""
+                                               aria-label="nivel test" 
+                                               step="1" min="1" max="10">
+                                    </md-slider>
+                                    <rzslider ng-model="respuestasTest[$index]" rz-slider-model="1" 
+                                              rz-slider-high="10" rz-slider-options="minSliderValue"></rzslider>
+                                    </span>
+                                </div>
+
+
+
+
+
+
+
+                                <md-button class="md-fab md-mini" ng-click="aniadirRespuestaTest()" aria-label="crearPregunta">
+                                    <md-icon md-svg-src="img/crear.svg"></md-icon>
+                                </md-button>
+                        </div>
+
+                        <div ng-show="pondGeneral">
+                            <md-chips ng-model="temasTest" md-autocomplete-snap="" 
+                                      md-transform-chip="transformChip($chip)" md-require-match="false">
+                                <md-autocomplete md-selected-item="selectedItem" md-search-text="searchText"
+                                                 md-items="item in queryBuscarTema(searchText)"
+                                                 md-item-text="item.valor"
+                                                 placeholder="Temas de la pregunta">
+
+                                    <span md-highlight-text="searchText">
+                                        {{item.valor}}
+                                    </span>
+                                </md-autocomplete>
+                                <md-chip-template>
+                                    <span> {{$chip.valor}} </span>
+                                </md-chip-template>
+                            </md-chips>
+                            
+                            <rzslider ng-model="nivelGeneral" rz-slider-model="1" rz-slider-high="10" rz-slider-options="minSliderValue"></rzslider>
+                        </div>
+                        
+                        <md-checkbox ng-model="pondGeneral" aria-label="respuestas test abierto">Ponderar de forma general el nivel de las preguntas
+									</md-checkbox>
+                        
+                        <md-button class="md-raised" ng-click="crearPTest()">Guardar</md-button>
+                    </div>      
+                </md-content>
+
+            </md-dialog-content>
+        </form>
+    </md-dialog>
+</div>
+
+
+
+
+
+    

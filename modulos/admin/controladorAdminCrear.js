@@ -1,4 +1,7 @@
-app.controller('controladorCrear', function (servicioRest, $scope, $mdDialog, $mdToast) {
+app.controller('controladorAdminCrear', function (servicioRest, $scope, $mdDialog, $mdToast) {
+    
+    
+    $scope.minSliderValue={floor: 1};
     
     var Options = {
         title: { type: String },
@@ -43,32 +46,6 @@ app.controller('controladorCrear', function (servicioRest, $scope, $mdDialog, $m
 
 	
 	
-	
-	
-	
-	
-	
-	
-	
-    $scope.crearPAbierta = function () {
-        if(preguntaVacia("abierta"))
-        {
-            toast("Rellena todos los campos obligatorios");
-        }
-        else
-        {
-            pregunta.title = $scope.tituloAbierta;
-            pregunta.type = "FREE";
-
-            for(var i=0;i<$scope.temasAbierta.length;i++)
-            {
-                pregunta.tags[i] = $scope.temasAbierta[i].valor;
-            }
-            pregunta.level = $scope.nivelAbierta;
-            pregunta.directive = $scope.directivasAbierta;
-            $scope.hide(pregunta);
-        }
-    };
     
     $scope.crearPTest = function () {
 		var i;
@@ -80,16 +57,9 @@ app.controller('controladorCrear', function (servicioRest, $scope, $mdDialog, $m
         {
             pregunta.title = $scope.tituloTest;
             pregunta.type = "SINGLE_CHOICE";
-            servicioRest.getTemas()
-		.then(function(data) {
-			$scope.temas = data;			
-			$scope.temasCargados = cargarTemas();
-		})
-		.catch(function (err) {
-		});
             for(i=0;i<$scope.temasTest.length;i++)
             {
-                pregunta.tags[i] = $scope.temasTest[i].valor;
+                pregunta.tags[i] = $scope.temasTest[i].tag;
             }
             pregunta.level = $scope.nivelTest;
             pregunta.answers = [];
@@ -97,40 +67,9 @@ app.controller('controladorCrear', function (servicioRest, $scope, $mdDialog, $m
             for (i = 0;i < $scope.contTest;i++) {            
                 pregunta.answers.push({title: $scope.respuestasTest[i], valid: false});
             }
+            console.log(pregunta.title);
 
             pregunta.answers[$scope.radioTest - 1].valid = true;
-            $scope.hide(pregunta);
-        }
-    };
-    
-    $scope.crearPTestAbierta = function () {
-		var i;
-        if(preguntaVacia("testAbierta"))
-        {
-            toast("Rellena todos los campos obligatorios");
-        }
-        else
-        {
-            pregunta.title = $scope.tituloTestAbierto;
-            pregunta.type = "MULTI_CHOICE";
-            servicioRest.getTemas()
-		.then(function(data) {
-			$scope.temas = data;			
-			$scope.temasCargados = cargarTemas();
-		})
-		.catch(function (err) {
-		});
-            for(i=0;i<$scope.temasTestAbierto.length;i++)
-            {
-                pregunta.tags[i] = $scope.temasTestAbierto[i].valor;
-            }
-            pregunta.level = $scope.nivelTestAbierto;
-            pregunta.answers = [];
-
-            for (i = 0; i < $scope.contTestAbierto; i++) {            
-                pregunta.answers.push({title: $scope.respuestasTestAbierto[i], valid: $scope.checkTestAbierto[i]});
-            }
-
             $scope.hide(pregunta);
         }
     };
@@ -177,11 +116,7 @@ app.controller('controladorCrear', function (servicioRest, $scope, $mdDialog, $m
 		$scope.test.push($scope.contTest);
 	};
 	
-	$scope.aniadirRespuestaTestAbierto = function () {
-		$scope.contTestAbierto += 1;
-		$scope.testAbierto.push($scope.contTestAbierto);
-		$scope.checkTestAbierto.push(false);
-	};
+
 	
 	
 	
@@ -225,9 +160,11 @@ app.controller('controladorCrear', function (servicioRest, $scope, $mdDialog, $m
 		if (angular.isObject(chip)) {
 			return chip;
 		}
+		console.log(chip);
 		// Otherwise, create a new one
 		servicioRest.postTema(chip)
 			.then(function(data) {
+				
             })
 			.catch(function(err) {
 			console.log("Error");
@@ -243,17 +180,9 @@ app.controller('controladorCrear', function (servicioRest, $scope, $mdDialog, $m
 			return (tema.valor.indexOf(lowercaseQuery) === 0);
 		};
 	}
-	
-	function filtrar(texto) {
-		var lowercaseQuery = angular.lowercase(texto);
-		return function (tema) {
-			$scope.texto = tema.tag;
-			return ($scope.texto.indexOf(lowercaseQuery) === 0 || $scope.texto.search(lowercaseQuery) > 0);
-		};
-	}
 		
     $scope.queryBuscarTema = function (query) {
-		var results = query ? $scope.temasCargados.filter(filtrar(query)) : [];
+		var results = query ? $scope.temasCargados.filter(createFilterFor(query)) : [];
 		return results;
 	}
 });
