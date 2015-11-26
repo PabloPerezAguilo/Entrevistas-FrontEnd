@@ -381,3 +381,40 @@ md-checkbox[disabled] .md-label {
 #textoResp {
     display: inline;
 }
+
+/*Range Slider*/
+rzslider .rz-bubble.rz-limit {
+    opacity: 0!important;
+}
+rzslider .rz-pointer:after {
+    //background: $naranja;
+    display: none;
+    background: none;
+}
+rzslider .rz-pointer:hover:after {
+    //background-color: $naranja;
+    display: none;
+    background-color: none;
+}/*
+rzslider .rz-pointer:before {
+    background: $naranja;
+}
+rzslider .rz-pointer:after {
+    background: $naranja;
+}*/
+rzslider .rz-pointer {
+    background-color: $naranja;
+    top: -7px;
+    width: 16px;
+    height: 16px;
+}
+rzslider .rz-bar.rz-selection {
+    background: $naranja;
+}
+rzslider .rz-pointer.rz-active:after {
+    //background-color: $naranja;
+    display: none;
+}
+rzslider .rz-bar {
+    height: 2px;
+}

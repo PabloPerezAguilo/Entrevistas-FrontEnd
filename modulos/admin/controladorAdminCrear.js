@@ -1,23 +1,8 @@
-app.controller('controladorAdminCrear', function (servicioRest, $scope, $mdDialog, $mdToast) {
+app.controller('controladorAdminCrear', function (servicioRest, $scope, $mdDialog, $mdToast, $rootScope) {
+    var hola="MDDIALOG"
+    $scope.minSliderValue={floor: 1,ceil:10};
     
-    
-    $scope.minSliderValue={floor: 1};
-    
-    var Options = {
-        title: { type: String },
-        valid: { type: Boolean }
-    };
-    
-    var pregunta = {
-        _id: { type: String },
-		title: { type: String, required: true },
-        type: { type: String, required: true },
-        tags: [String],
-        level: { type: Number, min: 1, max: 10, required: true },
-        directive: { type: String },
-        answers: [Options]
-    };
-	
+
     function toast(texto) {
 		$mdToast.show(
 	      $mdToast.simple()
@@ -27,27 +12,20 @@ app.controller('controladorAdminCrear', function (servicioRest, $scope, $mdDialo
 		);
 	}
     
-	/* ----------- Respuestas tests ----------- */
-	$scope.nivelAbierta = 1;
-    $scope.nivelTest = 1;
-    $scope.nivelTestAbierto = 1;
-		
+	/* ----------- Respuestas tests ----------- */		
 	$scope.respuestasTest = [];
-	$scope.test = ['1', '2'];
-	$scope.contTest = 2;
+	$scope.test = [];
+	$scope.contTest = 0;
 	$scope.radioTest = 1;
 	
-	$scope.respuestasTestAbierto = [];
-	$scope.testAbierto = ['1', '2'];
-	$scope.contTestAbierto = 2;
-	$scope.checkTestAbierto = [false, false];
+
 	
 	/* ----------- Input temas ----------- */
 
 	
 	
     
-    $scope.crearPTest = function () {
+    /*$scope.crearPTest = function () {
 		var i;
         if(preguntaVacia("test"))
         {
@@ -98,7 +76,7 @@ app.controller('controladorAdminCrear', function (servicioRest, $scope, $mdDialo
             }
         }
         return resp;
-    }
+    }*/
     
     $scope.hide = function (respuesta) {
         $mdDialog.hide(respuesta);
@@ -111,7 +89,7 @@ app.controller('controladorAdminCrear', function (servicioRest, $scope, $mdDialo
         $mdDialog.cancel();
     };
 	
-	$scope.aniadirRespuestaTest = function () {
+	$rootScope.aniadirRespuestaTest = function () {
 		$scope.contTest += 1;
 		$scope.test.push($scope.contTest);
 	};
