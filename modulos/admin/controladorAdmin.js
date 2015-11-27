@@ -12,9 +12,6 @@ app.controller('controladorAdmin', function(servicioRest, config, $scope, $locat
             onComplete: function(){
                 $rootScope.aniadirRespuestaTest();
                 $rootScope.aniadirRespuestaTest();
-                /*console.log($rootScope.contTest);
-                //$rootScope.contTest=2;
-                console.log($rootScope.contTest);*/
             },
             clickOutsideToClose: false
         })
