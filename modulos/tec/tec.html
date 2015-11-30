@@ -9,14 +9,15 @@
 		<md-chips ng-model="listaTemas" 
 				  md-autocomplete-snap=""
 				  md-transform-chip="transformChip($chip)" 
-				  md-require-match="true">
+				  md-require-match="true"
+				  md-on-remove="deleteChip($index)">
 			<md-autocomplete md-selected-item="selectedItem" 
 							 md-search-text-change="searchTextChange(searchText)" 
 							 md-search-text="searchText" 
 							 md-selected-item-change="selectedItemChange(item)" 
 							 md-items="item in queryBuscarTema(searchText)" 
 							 md-item-text="item.valor" 
-							 md-min-length="0" 
+							 md-min-length="0"
 							 placeholder="Buscar por temas">
 				<span md-highlight-text="searchText">
 					{{item.valor}}
@@ -38,7 +39,8 @@
 						{{ item.title }}
 					</h3>
 					<h4>
-						<!--{{ item.tags }}--> <span ng-repeat="tag in item.tags">{{ tag }} </span>/ {{ item.level }}
+						<span ng-repeat="tag in item.tags" ng-if="$first">{{ tag }} </span>
+						<span ng-repeat="tag in item.tags" ng-if="!$first">, {{ tag }} </span>/ {{ item.level }}
 					</h4>
 					<p>
 						{{ item.type }}

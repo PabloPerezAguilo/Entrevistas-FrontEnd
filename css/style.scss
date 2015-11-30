@@ -74,7 +74,7 @@ $naranjaClaro: rgba(239,108,0,0.17);
 header {
     background-color: $negro;
     color: $grisLetra;
-    height: 15%;
+    height: 90px;
     box-shadow: 2px 2px 30px grey;
 }
 
@@ -102,7 +102,7 @@ footer {
   bottom: 0;
   background: $negro;
   width: 100%;
-  height: 12%;
+  height: 70px;
 }
 
 #logo {
@@ -387,12 +387,13 @@ md-checkbox[disabled] .md-label {
 
 /*div del md-chips para buscar por temas*/
 .buscarTemas {
-	padding-left: 6%;
+	padding-left: 2%;
     margin-top: 1%;
 }
 
 .md-button.md-fab.md-mini {
-    float: left;
+    float: right;
+	margin-top: 1%;
 }
 
 .md-button .md-ripple-container {
@@ -418,7 +419,7 @@ md-icon {
 /*lista de preguntas*/
 .listaPreguntas {
     padding: 8px 0px 8px 0px;
-    height: 200px;
+    height: 600px;
     margin-bottom: 70px;
     overflow: auto;
 }
@@ -427,4 +428,22 @@ md-icon {
 md-list-item.md-3-line, md-list-item.md-3-line > .md-no-style {
     padding-left: 2%;
 	padding-right: 1%;
+}
+
+md-list md-list-item.md-3-line .md-list-item-text h3 {
+	font-weight: bolder;
+}
+
+/* media queries */
+
+@media screen and (min-height: 1024px) {
+    .listaPreguntas {
+		height: 975px;
+	}
+}
+
+@media screen and (max-height: 768px) {
+    .listaPreguntas {
+		height: 448px;
+	}
 }
