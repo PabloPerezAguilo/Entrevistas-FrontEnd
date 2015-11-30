@@ -385,6 +385,7 @@ md-checkbox[disabled] .md-label {
     display: inline;
 }
 
+
 /*div del md-chips para buscar por temas*/
 .buscarTemas {
 	padding-left: 2%;
@@ -447,3 +448,41 @@ md-list md-list-item.md-3-line .md-list-item-text h3 {
 		height: 448px;
 	}
 }
+
+/*Range Slider*/
+rzslider .rz-bubble.rz-limit {
+    opacity: 0!important;
+}
+rzslider .rz-pointer:after {
+    //background: $naranja;
+    display: none;
+    background: none;
+}
+rzslider .rz-pointer:hover:after {
+    //background-color: $naranja;
+    display: none;
+    background-color: none;
+}/*
+rzslider .rz-pointer:before {
+    background: $naranja;
+}
+rzslider .rz-pointer:after {
+    background: $naranja;
+}*/
+rzslider .rz-pointer {
+    background-color: $naranja;
+    top: -7px;
+    width: 16px;
+    height: 16px;
+}
+rzslider .rz-bar.rz-selection {
+    background: $naranja;
+}
+rzslider .rz-pointer.rz-active:after {
+    //background-color: $naranja;
+    display: none;
+}
+rzslider .rz-bar {
+    height: 2px;
+}
+

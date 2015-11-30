@@ -2,13 +2,17 @@ app.controller('controladorAdmin', function(servicioRest, config, $scope, $locat
 	$rootScope.cargando=false;
     $rootScope.logueado=true;
     $rootScope.rolUsuario="Administrador";
-    
+    var hola="A";
     $scope.crear = function(ev) {
         $mdDialog.show({
             controller: 'controladorAdminCrear',
             templateUrl: 'modulos/admin/adminCrear.tmpl.html',
             parent: angular.element(document.body),
             targetEvent: ev,
+            onComplete: function(){
+                $rootScope.aniadirRespuestaTest();
+                $rootScope.aniadirRespuestaTest();
+            },
             clickOutsideToClose: false
         })
         .then(function (datosPregunta) {
