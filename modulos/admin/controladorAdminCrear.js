@@ -1,7 +1,18 @@
 app.controller('controladorAdminCrear', function (servicioRest, $scope, $mdDialog, $mdToast, $rootScope) {
-    var hola="MDDIALOG"
     $scope.minSliderValue={floor: 1,ceil:10};
     
+    var Options = {
+        tag: String,
+        max: Number,
+        min: Number
+    };
+    var entrevista = {
+        nombre: { type: String, required: true },
+        apellidos: { type: String, required: true },
+        dni: { type: String, required: true },
+        fecha_hora: { type: String, required: true },
+        leveledTags: [Options]
+	};
 
     function toast(texto) {
 		$mdToast.show(
@@ -25,58 +36,45 @@ app.controller('controladorAdminCrear', function (servicioRest, $scope, $mdDialo
 	
 	
     
-    /*$scope.crearPTest = function () {
+    $scope.crearEntrevista = function () {
 		var i;
-        if(preguntaVacia("test"))
+        var fecha_hora        
+        
+        if(false)//preguntaVacia())
         {
             toast("Rellena todos los campos obligatorios");
         }
         else
         {
-            pregunta.title = $scope.tituloTest;
-            pregunta.type = "SINGLE_CHOICE";
-            for(i=0;i<$scope.temasTest.length;i++)
+            entrevista.nombre = $scope.nombreEntrevista;
+            entrevista.apellidos = $scope.apellidosEntrevista;
+            entrevista.dni = $scope.dniEntrevista
+            fecha_hora = $scope.fecha.getDate() + "/" + ($scope.fecha.getMonth()+1) + "/" + $scope.fecha.getFullYear();
+            fecha_hora +=  " " + $scope.horas + ":" + $scope.minutos;
+            console.log("sf" + $scope.listaTemas);
+            if($scope.pondGeneral)
             {
-                pregunta.tags[i] = $scope.temasTest[i].tag;
+                
             }
-            pregunta.level = $scope.nivelTest;
-            pregunta.answers = [];
-
-            for (i = 0;i < $scope.contTest;i++) {            
-                pregunta.answers.push({title: $scope.respuestasTest[i], valid: false});
+            else
+            {
+                for (i = 0;i < $scope.contTest;i++) {            
+                    entrevista.leveledTags.push({tag: $scope.respuestasTest[i], max: false, min: false});
+                }
             }
-            console.log(pregunta.title);
-
-            pregunta.answers[$scope.radioTest - 1].valid = true;
-            $scope.hide(pregunta);
+            $scope.hide(entrevista);
         }
     };
     
-    function preguntaVacia(tipoP){
+    function preguntaVacia(){
        var resp=false;
-        if(tipoP==="abierta")
-        {
-            if($scope.tituloAbierta===undefined||$scope.temasAbierta===undefined||$scope.tituloAbierta===""||$scope.temasAbierta==="")
+            if($scope.nombreEntrevista===undefined||$scope.apellidosEntrevista===undefined||$scope.dniEntrevista===undefined||$scope.preguntasEntrevistas[0]===undefined||$scope.preguntasEntrevistas[1]===undefined||$scope.nombreEntrevista===""||$scope.apellidosEntrevista===""||$scope.dniEntrevista===""||$scope.preguntasEntrevistas[0]===""||$scope.preguntasEntrevistas[1]==="")
             {
                 resp=true;
             }
-        }
-        else if(tipoP==="test")
-        {
-            if($scope.tituloTest===undefined||$scope.temasTest===undefined||$scope.respuestasTest[0]===undefined||$scope.respuestasTest[1]===undefined||$scope.tituloTest===""||$scope.temasTest===""||$scope.respuestasTest[0]===""||$scope.respuestasTest[1]==="")
-            {
-                resp=true;
-            }
-        }
-        else if(tipoP==="testAbierta")
-        {
-            if($scope.tituloTestAbierto===undefined||$scope.temasTestAbierto===undefined||$scope.respuestasTestAbierto[0]===undefined||$scope.respuestasTestAbierto[1]===undefined||$scope.tituloTestAbierto===""||$scope.temasTestAbierto===""||$scope.respuestasTestAbierto[0]===""||$scope.respuestasTestAbierto[1]==="")
-            {
-                resp=true;
-            }
-        }
+
         return resp;
-    }*/
+    }
     
     $scope.hide = function (respuesta) {
         $mdDialog.hide(respuesta);
@@ -138,11 +136,9 @@ app.controller('controladorAdminCrear', function (servicioRest, $scope, $mdDialo
 		if (angular.isObject(chip)) {
 			return chip;
 		}
-		console.log(chip);
 		// Otherwise, create a new one
 		servicioRest.postTema(chip)
 			.then(function(data) {
-				
             })
 			.catch(function(err) {
 			console.log("Error");
@@ -158,9 +154,17 @@ app.controller('controladorAdminCrear', function (servicioRest, $scope, $mdDialo
 			return (tema.valor.indexOf(lowercaseQuery) === 0);
 		};
 	}
+	
+	function filtrar(texto) {
+		var lowercaseQuery = angular.lowercase(texto);
+		return function (tema) {
+			$scope.texto = tema.tag;
+			return ($scope.texto.indexOf(lowercaseQuery) === 0 || $scope.texto.search(lowercaseQuery) > 0);
+		};
+	}
 		
     $scope.queryBuscarTema = function (query) {
-		var results = query ? $scope.temasCargados.filter(createFilterFor(query)) : [];
+		var results = query ? $scope.temasCargados.filter(filtrar(query)) : [];
 		return results;
 	}
 });

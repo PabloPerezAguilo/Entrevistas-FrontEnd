@@ -21,7 +21,7 @@
 
                         <md-input-container class="md-block">
                             <label>Nombre</label>
-                            <textarea ng-model="nombreEntrevista"></textarea>
+                            <textarea required="hola" ng-Required=true ng-model="nombreEntrevista"></textarea>
                         </md-input-container>
                         <md-input-container class="md-block">
                             <label>Apellidos</label>
@@ -32,19 +32,28 @@
                             <textarea ng-model="dniEntrevista"></textarea>
                         </md-input-container>
                         <md-datepicker ng-model="fecha" md-placeholder="Introducir fecha"></md-datepicker>
+                        <md-input-container class="md-inline">
+                            <input type="number" step="any" ng-model="horas" min="00" max="23">
+                        </md-input-container>
+                        <md-input-container class="md-inline">
+                            <input type="number" step="any" ng-model="minutos" min="00" max="59">
+                        </md-input-container>
+                        <!--http://simeonc.github.io/sc-date-time/index.html-->
                         <md-checkbox ng-model="pondGeneral" aria-label="respuestas test abierto">Ponderar de forma general el nivel de las preguntas
 									</md-checkbox>
-                        <div ng-init="pondIndividual=false" ng-hide="pondGeneral">
+                        <div ng-init="pondGeneral=false" ng-hide="pondGeneral">
                                 <div ng-repeat="respuestas in test">
                                     <span>	
-                                        <rzslider ng-model="respuestasTest[$index]" rz-slider-model="1" 
+                                        <rzslider ng-model="pEntrevistasLevel[$index]" rz-slider-model="1" 
                                               rz-slider-high="10" rz-slider-options="minSliderValue"></rzslider>
-                                        <md-autocomplete ng-model="respuestasTestAutoC[$index]" md-selected-item="selectedItem" 
-                                                 md-search-text="searchText"
-                                                 md-items="item in queryBuscarTema(searchText)"
-                                                 md-item-text="item.valor"
-                                                 placeholder="Temas de la pregunta">
-
+                                        <md-autocomplete md-selected-item="selectedItem" 
+                                                         md-search-text-change="searchTextChange(searchText)" 
+                                                         md-search-text="searchText" 
+                                                         md-selected-item-change="selectedItemChange(item)" 
+                                                         md-items="item in queryBuscarTema(searchText)" 
+                                                         md-item-text="item.valor" 
+                                                         md-min-length="0" 
+                                                         placeholder="Buscar por temas">
                                             <span md-highlight-text="searchText">
                                                 {{item.valor}}
                                             </span>
@@ -69,33 +78,33 @@
 
                         <div ng-if="pondGeneral">
                             <span>	
-                                        <rzslider ng-model="a.respuestasTestGeneral" rz-slider-model="1" 
+                                        <rzslider ng-model="respuestaGeneral.nivel" rz-slider-model="1" 
                                               rz-slider-high="10" rz-slider-options="minSliderValue"></rzslider>
                                         
                                     
                                     </span>
-                            <md-chips ng-model="a.temasTest" md-autocomplete-snap="" 
-                                      md-transform-chip="transformChip($chip)" md-require-match="false">
-                                <md-autocomplete md-selected-item="selectedItem" md-search-text="searchText"
-                                                 md-items="item in queryBuscarTema(searchText)"
-                                                 md-item-text="item.valor"
-                                                 placeholder="Temas de la pregunta">
-
-                                    <span md-highlight-text="searchText">
-                                        {{item.valor}}
-                                    </span>
-                                </md-autocomplete>
-                                <md-chip-template>
-                                    <span> {{$chip.valor}} </span>
-                                </md-chip-template>
-                            </md-chips>
+                            <md-chips ng-model="temasTestAbierto" md-autocomplete-snap="" 
+										  md-transform-chip="transformChip($chip)" md-require-match="false">
+									<md-autocomplete md-selected-item="selectedItem" md-search-text="searchText"
+													 md-items="item in queryBuscarTema(searchText)"
+													 md-item-text="item.valor"
+													 placeholder="Temas de la pregunta">
+										
+										<span md-highlight-text="searchText">
+											{{item.valor}}
+										</span>
+									</md-autocomplete>
+									<md-chip-template>
+										<span> {{$chip.valor}} </span>
+									</md-chip-template>
+								</md-chips>
                             
                             
                         </div>
                         
                         
                         
-                        <md-button class="md-raised" ng-click="crearPTest()">Guardar</md-button>
+                        <md-button class="md-raised" ng-click="crearEntrevista()">Guardar</md-button>
                     </div>      
                 </md-content>
 

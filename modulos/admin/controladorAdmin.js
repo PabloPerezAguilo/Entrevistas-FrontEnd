@@ -11,7 +11,6 @@ app.controller('controladorAdmin', function(servicioRest, config, $scope, $locat
             targetEvent: ev,
             onComplete: function(){
                 $rootScope.aniadirRespuestaTest();
-                $rootScope.aniadirRespuestaTest();
             },
             clickOutsideToClose: false
         })
