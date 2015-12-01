@@ -356,6 +356,22 @@ md-radio-group .md-checked .md-ink-ripple {
     background-color: rgba(255, 141, 0, 0.26);
 }
 
+md-input-container.md-block.respuesta {
+	display: inline-block;
+    width: 90%;
+}
+
+md-radio-button {
+	display: inline-block;
+    float: left;
+    padding-top: 2%;
+}
+
+md-checkbox {
+	float: left;
+    padding-top: 5%;
+}
+
 /*Ver pregunta*/
 
 md-checkbox[disabled].md-checked .md-icon {

@@ -15,7 +15,7 @@
             </md-toolbar>
             
             <md-dialog-content ng-model="conte">
-                <md-tabs md-dynamic-height md-border-bottom>
+                <md-tabs class="md-accent" md-dynamic-height md-border-bottom>
                     <md-tab label="pregunta abierta">
                         <md-content>
                             <div class="contenidoTablaCrear">
@@ -88,7 +88,7 @@
 											<md-radio-button value="{{respuestas}}" aria-label="respuestas test abierto" >
 										</md-radio-button>
 										
-										<md-input-container class="md-block">
+										<md-input-container class="md-block respuesta">
                                     		<label>Respuesta {{respuestas}}</label>
                                     		<textarea ng-model="respuestasTest[$index]"></textarea>
 										</md-input-container>
@@ -138,7 +138,7 @@
 								<div ng-repeat="respuestasAbierto in testAbierto">
 									<md-checkbox ng-model="checkTestAbierto[$index]" aria-label="respuestas test abierto">
 									</md-checkbox>
-									<md-input-container class="md-block">
+									<md-input-container class="md-block respuesta">
                                     	<label>Respuesta {{respuestasAbierto}}</label>
                                     	<textarea ng-model="respuestasTestAbierto[$index]"></textarea>
                                 	</md-input-container>
