@@ -367,7 +367,7 @@ md-radio-button {
     padding-top: 2%;
 }
 
-md-checkbox {
+md-checkbox.respuesta {
 	float: left;
     padding-top: 5%;
 }
@@ -463,6 +463,14 @@ md-list md-list-item.md-3-line .md-list-item-text h3 {
     .listaPreguntas {
 		height: 448px;
 	}
+}
+
+@media screen and (max-height: 453px) {
+   md-dialog.md-transition-in {
+		min-width: 700px;
+		min-height: 300px;
+		max-height: 700px;
+   }
 }
 
 /*Range Slider*/

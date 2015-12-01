@@ -136,7 +136,8 @@
                                 </md-input-container>
 									
 								<div ng-repeat="respuestasAbierto in testAbierto">
-									<md-checkbox ng-model="checkTestAbierto[$index]" aria-label="respuestas test abierto">
+									<md-checkbox class="respuesta" ng-model="checkTestAbierto[$index]" 
+												 aria-label="respuestas test abierto">
 									</md-checkbox>
 									<md-input-container class="md-block respuesta">
                                     	<label>Respuesta {{respuestasAbierto}}</label>
