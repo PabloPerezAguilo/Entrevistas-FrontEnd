@@ -5,18 +5,19 @@
 
     <p></p>
 
-	<div>
+	<div class="buscarTemas">
 		<md-chips ng-model="listaTemas" 
 				  md-autocomplete-snap=""
 				  md-transform-chip="transformChip($chip)" 
-				  md-require-match="true">
+				  md-require-match="true"
+				  md-on-remove="deleteChip($index)">
 			<md-autocomplete md-selected-item="selectedItem" 
 							 md-search-text-change="searchTextChange(searchText)" 
 							 md-search-text="searchText" 
 							 md-selected-item-change="selectedItemChange(item)" 
 							 md-items="item in queryBuscarTema(searchText)" 
 							 md-item-text="item.valor" 
-							 md-min-length="0" 
+							 md-min-length="0"
 							 placeholder="Buscar por temas">
 				<span md-highlight-text="searchText">
 					{{item.valor}}
@@ -31,34 +32,36 @@
     <md-list>
         <md-subheader class="md-no-sticky">Preguntas</md-subheader>
         <md-divider></md-divider>
-      	<md-list-item class="md-3-line" ng-repeat="item in preguntas">
-            <div class="md-list-item-text" layout="column">
-                <h3>
-                    {{ item.title }}
-                </h3>
-                <h4>
-                    {{ item.tags }} <!--<span ng-repeat="tag in item.tags">{{ tag }} </span>-->/ {{ item.level }}
-                </h4>
-                <p>
-                    {{ item.type }}
-                </p>
-            </div>
-		  	<md-button ng-click="ver($event,$index)" aria-label="ver pegrunta">
-				<ng-md-icon icon="search" size="20"></ng-md-icon>
-				<md-tooltip md-direction="bottom">
-				  Ver
-				</md-tooltip>
-			 </md-button>
-	
-		  	<md-button aria-label="eliminar" ng-click="eliminar($index)">
-				<ng-md-icon icon="delete" size="20"></ng-md-icon>
-				<md-tooltip md-direction="bottom">
-				  Eliminar
-				</md-tooltip>
-			 </md-button>
-            <md-divider></md-divider>
-        </md-list-item>
+      	<div class="listaPreguntas">
+			<md-list-item class="md-3-line" ng-repeat="item in preguntas">
+				<div class="md-list-item-text" layout="column">
+					<h3>
+						{{ item.title }}
+					</h3>
+					<h4>
+						<span ng-repeat="tag in item.tags" ng-if="$first">{{ tag }} </span>
+						<span ng-repeat="tag in item.tags" ng-if="!$first">, {{ tag }} </span>/ {{ item.level }}
+					</h4>
+					<p>
+						{{ item.type }}
+					</p>
+				</div>
+				<md-button ng-click="ver($event,$index)" aria-label="ver pegrunta" class="md-button icon">
+					<md-icon md-svg-src="img/lupa.svg"></md-icon>
+					<md-tooltip md-direction="bottom">
+					  Ver
+					</md-tooltip>
+				 </md-button>
 
+				<md-button aria-label="eliminar" ng-click="eliminar($index)" class="md-button icon">
+					<md-icon md-svg-src="img/delete.svg"></md-icon>
+					<md-tooltip md-direction="bottom">
+					  Eliminar
+					</md-tooltip>
+				 </md-button>
+				<md-divider></md-divider>
+			</md-list-item>
+		</div>
     </md-list>
 
 </div>

@@ -1,4 +1,37 @@
-app.controller('controladorTec', function(servicioRest, $scope, $rootScope, $mdDialog, $timeout, $q, $log) {
+app.controller('controladorTec', function(servicioRest, $scope, $rootScope, $mdDialog, $timeout, $q, $log, $mdToast) {
+	function toast(texto) {
+		$mdToast.show(
+	      $mdToast.simple()
+	        .content(texto)
+	        .position('top right')
+	        .hideDelay(1500)
+		);
+
+	}
+	
+	function escribirTipo(preguntas) {
+		for(var i = 0; i < preguntas.length; i++) {
+			if(preguntas[i].type === "FREE") {
+				preguntas[i].type = "Pregunta Abierta";
+			} else if(preguntas[i].type === "SINGLE_CHOICE") {
+				preguntas[i].type = "Pregunta Tipo Test";
+			} else {
+				preguntas[i].type  = "Pregunta Tipo Test Abierto";
+			}
+		}
+	}
+	
+	function getPreguntas() {
+		servicioRest.getPreguntas()
+			.then(function (data) {
+				$scope.preguntas = data;
+				escribirTipo($scope.preguntas);
+			})
+			.catch(function (err) {
+				console.log("Error");
+				console.log(err);
+			});
+	}
     
     /*---------------------------Inicializar vista------------------------------*/
     var Options = {
@@ -21,14 +54,7 @@ app.controller('controladorTec', function(servicioRest, $scope, $rootScope, $mdD
     
     /*---------------------------Inicializar lista------------------------------*/
     
-    servicioRest.getPreguntas()
-		.then(function (data) {
-			$scope.preguntas = data;
-		})
-		.catch(function (err) {
-			console.log("Error");
-        	console.log(err);
-    	});
+	getPreguntas();    
     
     /*--------------------------Funciones--------------------------*/        
 
@@ -69,7 +95,15 @@ app.controller('controladorTec', function(servicioRest, $scope, $rootScope, $mdD
                 }
                 servicioRest.postPregunta(pregunta)
                     .then(function(data) {
-                    pregunta._id = data.data._id;
+						pregunta._id = data.data._id;
+						var tipo = '';
+						if(pregunta.type === "FREE") {
+							tipo = "Pregunta Abierta";
+						} else if(pregunta.type === "SINGLE_CHOICE") {
+							tipo = "Pregunta Tipo Test";
+						} else {
+							tipo = "Pregunta Tipo Test Abierto";
+						}
                         $scope.preguntas.push({
                             _id: pregunta._id,
                             title: pregunta.title,
@@ -77,9 +111,16 @@ app.controller('controladorTec', function(servicioRest, $scope, $rootScope, $mdD
                             level: pregunta.level,
                             directive: pregunta.directive,
                             answers: pregunta.answers,
-                            type: pregunta.type
+                            type: tipo
                         })
                         console.log(data);
+						servicioRest.getTemas()
+							.then(function(data) {
+								$scope.temas = data;
+								$scope.temasCargados = cargarTemas();
+							})
+							.catch(function (err) {
+							});
                     })
                     .catch(function(err) {
                         console.log("Error");
@@ -106,8 +147,7 @@ app.controller('controladorTec', function(servicioRest, $scope, $rootScope, $mdD
 	var self = this;
 	$scope.temas;
 	$scope.temasCargados;
-    $scope.selectedItemChange = selectedItemChange;
-    $scope.searchText = null;	
+    $scope.selectedItemChange = selectedItemChange;	
 	$scope.listaTemas = [];
 	self.simulateQuery = false;
 	
@@ -130,8 +170,7 @@ app.controller('controladorTec', function(servicioRest, $scope, $rootScope, $mdD
 	function selectedItemChange(item) {
 
       $log.info('Item recogido ' + JSON.stringify(item));
-		console.log(item);
-		if(item != null) {
+		if(item != undefined) {
 			var tema = {
 				tags: [String]
 			}
@@ -139,15 +178,9 @@ app.controller('controladorTec', function(servicioRest, $scope, $rootScope, $mdD
 			servicioRest.postPreguntasByTag(tema)
 				.then(function(data) {
 					$scope.preguntas = data;
+					escribirTipo($scope.preguntas);
 				})
-				.catch(function (err) {
-					console.log(err);
-				});
-			}
-    }
-	
-	function searchTextChange(text) {
-		$log.info('texto seleccionado ' + text);
+		}
     }
 	
     /**
@@ -184,11 +217,30 @@ app.controller('controladorTec', function(servicioRest, $scope, $rootScope, $mdD
 		}
 	}
 	
+	$scope.deleteChip = function(index) {
+		if(index === 0) {
+			getPreguntas();
+		} else {
+			var tema = {
+				tags: [String]
+			}
+			for(var i = 0; i < $scope.listaTemas.length; i++) {
+				tema.tags[i] = $scope.listaTemas[i].tag;
+			}
+			console.log(tema.tags);
+			servicioRest.postPreguntasByTag(tema)
+				.then(function(data) {
+					$scope.preguntas = data;
+					escribirTipo($scope.preguntas);
+				})
+		}
+	}
+	
 	function filtrar(texto) {
 		var lowercaseQuery = angular.lowercase(texto);
 		return function (tema) {
-			$scope.texto = tema.tag;
-			return ($scope.texto.indexOf(lowercaseQuery) === 0 || $scope.texto.search(lowercaseQuery) > 0);
+			$scope.texto = tema.valor;
+			return ($scope.texto.indexOf(lowercaseQuery) === 0 || $scope.texto.search(lowercaseQuery) > 0);				   
 		};
 	}
 });

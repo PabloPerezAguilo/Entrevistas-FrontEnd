@@ -18,6 +18,9 @@ time, mark, audio, video {
 	font: sans-serif;
 	vertical-align: baseline;
 }
+.ng-scope {
+	overflow: hidden;
+}
 /* HTML5 display-role reset for older browsers */
 article, aside, details, figcaption, figure, 
 footer, header, hgroup, menu, nav, section {
@@ -353,6 +356,22 @@ md-radio-group .md-checked .md-ink-ripple {
     background-color: rgba(255, 141, 0, 0.26);
 }
 
+md-input-container.md-block.respuesta {
+	display: inline-block;
+    width: 90%;
+}
+
+md-radio-button {
+	display: inline-block;
+    float: left;
+    padding-top: 2%;
+}
+
+md-checkbox.respuesta {
+	float: left;
+    padding-top: 5%;
+}
+
 /*Ver pregunta*/
 
 md-checkbox[disabled].md-checked .md-icon {
@@ -380,6 +399,78 @@ md-checkbox[disabled] .md-label {
 }
 #textoResp {
     display: inline;
+}
+
+
+/*div del md-chips para buscar por temas*/
+.buscarTemas {
+	padding-left: 2%;
+    margin-top: 1%;
+}
+
+.md-button.md-fab.md-mini {
+    float: right;
+	margin-top: 1%;
+}
+
+.md-button .md-ripple-container {
+	border-radius: 50%;	
+}
+
+.md-button.icon.md-ink-ripple {
+	min-width: 0;
+	line-height: 40px;
+    width: 40px;
+    height: 40px;
+}
+
+.md-button.icon.md-ink-ripple:focus {
+	background: $grisFondo;
+	border-radius: 50%;
+}
+
+md-icon {
+    color: rgb(0, 0, 0);
+}
+
+/*lista de preguntas*/
+.listaPreguntas {
+    padding: 8px 0px 8px 0px;
+    height: 600px;
+    margin-bottom: 70px;
+    overflow: auto;
+}
+
+/*items de la lista de preguntas*/
+md-list-item.md-3-line, md-list-item.md-3-line > .md-no-style {
+    padding-left: 2%;
+	padding-right: 1%;
+}
+
+md-list md-list-item.md-3-line .md-list-item-text h3 {
+	font-weight: bolder;
+}
+
+/* media queries */
+
+@media screen and (min-height: 1024px) {
+    .listaPreguntas {
+		height: 975px;
+	}
+}
+
+@media screen and (max-height: 768px) {
+    .listaPreguntas {
+		height: 448px;
+	}
+}
+
+@media screen and (max-height: 453px) {
+   md-dialog.md-transition-in {
+		min-width: 700px;
+		min-height: 300px;
+		max-height: 700px;
+   }
 }
 
 /*Range Slider*/
@@ -418,3 +509,4 @@ rzslider .rz-pointer.rz-active:after {
 rzslider .rz-bar {
     height: 2px;
 }
+

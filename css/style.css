@@ -303,38 +303,4 @@ md-checkbox[disabled] .md-label {
 #textoResp {
   display: inline; }
 
-/*Range Slider*/
-rzslider .rz-bubble.rz-limit {
-  opacity: 0 !important; }
-
-rzslider .rz-pointer:after {
-  display: none;
-  background: none; }
-
-rzslider .rz-pointer:hover:after {
-  display: none;
-  background-color: none; }
-
-/*
-rzslider .rz-pointer:before {
-    background: $naranja;
-}
-rzslider .rz-pointer:after {
-    background: $naranja;
-}*/
-rzslider .rz-pointer {
-  background-color: #EF6C00;
-  top: -7px;
-  width: 16px;
-  height: 16px; }
-
-rzslider .rz-bar.rz-selection {
-  background: #EF6C00; }
-
-rzslider .rz-pointer.rz-active:after {
-  display: none; }
-
-rzslider .rz-bar {
-  height: 2px; }
-
 /*# sourceMappingURL=style.css.map */
