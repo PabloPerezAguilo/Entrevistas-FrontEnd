@@ -180,6 +180,9 @@ app.controller('controladorTec', function(servicioRest, $scope, $rootScope, $mdD
 					$scope.preguntas = data;
 					escribirTipo($scope.preguntas);
 				})
+				.catch(function (err) {
+					$scope.preguntas = null;
+			});
 		}
     }
 	
