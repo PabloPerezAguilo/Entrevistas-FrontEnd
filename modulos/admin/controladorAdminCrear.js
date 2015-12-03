@@ -1,5 +1,9 @@
 app.controller('controladorAdminCrear', function (servicioRest, $scope, $mdDialog, $mdToast, $rootScope) {
-    $scope.minSliderValue={floor: 1,ceil:10};
+    
+    $scope.minSliderValue = [];
+    $scope.temasTestAbierto = [];
+    
+    
     
     var Options = {
         tag: String,
@@ -7,10 +11,10 @@ app.controller('controladorAdminCrear', function (servicioRest, $scope, $mdDialo
         min: Number
     };
     var entrevista = {
-        nombre: { type: String, required: true },
-        apellidos: { type: String, required: true },
-        dni: { type: String, required: true },
-        fecha_hora: { type: String, required: true },
+        name: { type: String, required: true },
+        surname: { type: String, required: true },
+        DNI: { type: String, required: true },
+        date: { type: String, required: true },
         leveledTags: [Options]
 	};
 
@@ -34,10 +38,10 @@ app.controller('controladorAdminCrear', function (servicioRest, $scope, $mdDialo
 	/* ----------- Input temas ----------- */
 
 	
-	
     
     $scope.crearEntrevista = function () {
 		var i;
+        var j;
         var fecha_hora        
         
         if(false)//preguntaVacia())
@@ -46,22 +50,21 @@ app.controller('controladorAdminCrear', function (servicioRest, $scope, $mdDialo
         }
         else
         {
-            entrevista.nombre = $scope.nombreEntrevista;
-            entrevista.apellidos = $scope.apellidosEntrevista;
-            entrevista.dni = $scope.dniEntrevista
-            fecha_hora = $scope.fecha.getFullYear() + "-" + ($scope.fecha.getMonth()+1) + "-" + $scope.fecha.getDate();
-            fecha_hora +=  "T" + $scope.horas + ":" + $scope.minutos;
-            console.log("sf" + $scope.listaTemas);
-            if($scope.pondGeneral)
-            {
-                
+
+            entrevista.leveledTags=[];
+            entrevista.name = $scope.nombreEntrevista;
+            entrevista.surname = $scope.apellidosEntrevista;
+            entrevista.DNI = $scope.dniEntrevista
+            entrevista.date = $scope.fecha.getFullYear() + "-" + ($scope.fecha.getMonth()+1) + "-" + $scope.fecha.getDate();
+            entrevista.date +=  "T" + $scope.horas + ":" + $scope.minutos;
+            
+            console.log($scope.temasTestAbierto.length);
+            for (i = 0;i < $scope.contTest;i++) {
+                for (j = 0;j < $scope.temasTestAbierto[i].length;j++)
+                entrevista.leveledTags.push({tag: $scope.temasTestAbierto[i][j].valor, max: $scope.minSliderValue[i].maxSliderG, min: $scope.minSliderValue[i].minSliderG});
             }
-            else
-            {
-                for (i = 0;i < $scope.contTest;i++) {            
-                    entrevista.leveledTags.push({tag: $scope.respuestasTest[i], max: 4, min: 2});
-                }
-            }
+            
+            console.log(entrevista);
             $scope.hide(entrevista);
         }
     };
@@ -90,6 +93,16 @@ app.controller('controladorAdminCrear', function (servicioRest, $scope, $mdDialo
 	$rootScope.aniadirRespuestaTest = function () {
 		$scope.contTest += 1;
 		$scope.test.push($scope.contTest);
+        $scope.minSliderValue[$scope.contTest-1] = {
+                    minSliderG: 1,
+                    maxSliderG: 10,
+                    options: {
+                        floor: 1,
+                        ceil: 10,
+                        step: 1
+                    }
+                };
+        $scope.temasTestAbierto[$scope.contTest-1] = [];
 	};
 	
 

@@ -126,6 +126,24 @@ function ServicioREST($http, $q, $rootScope, config) {
 
 		return promise;
 	}  
+    
+    function postInterview(entrevista) {
+		var defered = $q.defer();
+		var promise = defered.promise;
+		$http({
+			method: 'POST',
+			url: url + '/interview/',
+            data: entrevista
+		})
+		.success(function(data, status, headers, config) {
+			defered.resolve(data);
+		})
+		.error(function(data, status, headers, config) {
+			tratarError(data, status,defered);
+		});
+
+		return promise;
+	}
 	
 	/* --------------- GET TEMAS --------------- */
 	
@@ -191,6 +209,7 @@ function ServicioREST($http, $q, $rootScope, config) {
         deletePregunta: deletePregunta,
 		postAuthenticate: postAuthenticate,
         getInterview: getInterview,
+        postInterview: postInterview,
 		getTemas: getTemas,
 		postTema: postTema,
 		postPreguntasByTag: postPreguntasByTag

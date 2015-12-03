@@ -1,4 +1,4 @@
-app.controller('controladorCrear', function (servicioRest, $scope, $mdDialog, $mdToast) {
+app.controller('controladorCrear', function (servicioRest, $scope, $mdDialog, $mdToast, $rootScope) {
     
     var Options = {
         title: { type: String },
@@ -233,6 +233,14 @@ app.controller('controladorCrear', function (servicioRest, $scope, $mdDialog, $m
 			console.log("Error");
 			console.log(err);
 			});
+		servicioRest.getTemas()
+		.then(function(data) {
+			$rootScope.temas = data;
+			$rootScope.temasCargados = $rootScope.cargarTemas();
+		})
+		.catch(function (err) {
+		});
+		console.log($rootScope.temas);
 		return { valor: chip};
 	}
 	
@@ -247,7 +255,7 @@ app.controller('controladorCrear', function (servicioRest, $scope, $mdDialog, $m
 	function filtrar(texto) {
 		var lowercaseQuery = angular.lowercase(texto);
 		return function (tema) {
-			$scope.texto = tema.tag;
+			$scope.texto = tema.valor;
 			return ($scope.texto.indexOf(lowercaseQuery) === 0 || $scope.texto.search(lowercaseQuery) > 0);
 		};
 	}
