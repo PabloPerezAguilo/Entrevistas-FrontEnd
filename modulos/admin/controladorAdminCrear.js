@@ -49,8 +49,8 @@ app.controller('controladorAdminCrear', function (servicioRest, $scope, $mdDialo
             entrevista.nombre = $scope.nombreEntrevista;
             entrevista.apellidos = $scope.apellidosEntrevista;
             entrevista.dni = $scope.dniEntrevista
-            fecha_hora = $scope.fecha.getDate() + "/" + ($scope.fecha.getMonth()+1) + "/" + $scope.fecha.getFullYear();
-            fecha_hora +=  " " + $scope.horas + ":" + $scope.minutos;
+            fecha_hora = $scope.fecha.getFullYear() + "-" + ($scope.fecha.getMonth()+1) + "-" + $scope.fecha.getDate();
+            fecha_hora +=  "T" + $scope.horas + ":" + $scope.minutos;
             console.log("sf" + $scope.listaTemas);
             if($scope.pondGeneral)
             {
@@ -59,7 +59,7 @@ app.controller('controladorAdminCrear', function (servicioRest, $scope, $mdDialo
             else
             {
                 for (i = 0;i < $scope.contTest;i++) {            
-                    entrevista.leveledTags.push({tag: $scope.respuestasTest[i], max: false, min: false});
+                    entrevista.leveledTags.push({tag: $scope.respuestasTest[i], max: 4, min: 2});
                 }
             }
             $scope.hide(entrevista);

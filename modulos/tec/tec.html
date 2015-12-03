@@ -1,14 +1,11 @@
 <div>
     <md-button mfb-button class="md-fab md-mini" ng-click="crear($event)" aria-label="crearPregunta">
-        <md-icon md-svg-src="img/crear.svg"></md-icon>
+        <md-icon md-svg-src="img/crear.svg" class="btnIconoCentrado"></md-icon>
     </md-button>
-
     <p></p>
-
+	
 	<div class="buscarTemas">
 		<md-chips ng-model="listaTemas" 
-				  md-autocomplete-snap=""
-				  md-transform-chip="transformChip($chip)" 
 				  md-require-match="true"
 				  md-on-remove="deleteChip($index)">
 			<md-autocomplete md-selected-item="selectedItem" 
@@ -27,6 +24,7 @@
 				<span> {{$chip.valor}} </span>
 			</md-chip-template>
 		</md-chips>
+		
 	</div>
 
     <md-list>

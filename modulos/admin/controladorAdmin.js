@@ -1,7 +1,7 @@
 app.controller('controladorAdmin', function(servicioRest, config, $scope, $location, $rootScope, $mdDialog, $timeout, $q, $log) {
 	$rootScope.cargando=false;
     $rootScope.logueado=true;
-    $rootScope.rolUsuario="Administrador";
+    $rootScope.rolUsuario="img/administrador.svg";
     var hola="A";
     $scope.crear = function(ev) {
         $mdDialog.show({

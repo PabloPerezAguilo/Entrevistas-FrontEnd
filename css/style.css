@@ -224,6 +224,13 @@ md-tabs:not(.md-no-tab-content):not(.md-dynamic-height) {
 .md-button.md-fab:not([disabled]).md-focused {
   background-color: #BC5500; }
 
+md-icon {
+  color: white; }
+
+.btnIconoCentrado {
+  margin-left: 3px;
+  margin-top: 1px; }
+
 md-toolbar:not(.md-menu-toolbar) {
   background-color: #EF6C00;
   color: #EFEFEF; }

@@ -283,6 +283,15 @@ md-tabs:not(.md-no-tab-content):not(.md-dynamic-height) {
     background-color: #BC5500;
 }
 
+md-icon {
+    color: white;
+}
+
+.btnIconoCentrado {
+	margin-left: 3px;
+    margin-top: 1px;
+}
+
 md-toolbar:not(.md-menu-toolbar) {
     background-color: $naranja;
     color: $grisLetra;
