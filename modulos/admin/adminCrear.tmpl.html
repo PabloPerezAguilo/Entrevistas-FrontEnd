@@ -39,51 +39,17 @@
                             <input type="number" step="any" ng-model="minutos" min="00" max="59">
                         </md-input-container>
                         <!--http://simeonc.github.io/sc-date-time/index.html-->
-                        <md-checkbox ng-model="pondGeneral" aria-label="respuestas test abierto">Ponderar de forma general el nivel de las preguntas
-									</md-checkbox>
-                        <div ng-init="pondGeneral=false" ng-hide="pondGeneral">
+
+                        <div>
                                 <div ng-repeat="respuestas in test">
                                     <span>	
-                                        <rzslider ng-model="pEntrevistasLevel[$index]" rz-slider-model="1" 
-                                              rz-slider-high="10" rz-slider-options="minSliderValue"></rzslider>
-                                        <md-autocomplete md-selected-item="selectedItem" 
-                                                         md-search-text-change="searchTextChange(searchText)" 
-                                                         md-search-text="searchText" 
-                                                         md-selected-item-change="selectedItemChange(item)" 
-                                                         md-items="item in queryBuscarTema(searchText)" 
-                                                         md-item-text="item.valor" 
-                                                         md-min-length="0" 
-                                                         placeholder="Buscar por temas">
-                                            <span md-highlight-text="searchText">
-                                                {{item.valor}}
-                                            </span>
-                                        </md-autocomplete>
-                                        <!--https://github.com/rzajac/angularjs-slider-->
-                                        <!--http://rzajac.github.io/angularjs-slider/index.html-->
-                                        <!--PARA INSTALAR: "npm i angularjs-slider"-->
-                                    
-                                    </span>
-                                </div>
-
-
-
-
-
-
-
-                                <md-button class="md-fab md-mini" ng-click="$root.aniadirRespuestaTest()" aria-label="crearPregunta">
-                                    <md-icon md-svg-src="img/crear.svg"></md-icon>
-                                </md-button>
-                        </div>
-
-                        <div ng-if="pondGeneral">
-                            <span>	
-                                        <rzslider ng-model="respuestaGeneral.nivel" rz-slider-model="1" 
-                                              rz-slider-high="10" rz-slider-options="minSliderValue"></rzslider>
+                                   
+                                        <rzslider rz-slider-model="minSliderValue[$index].minSliderG" 
+                                              rz-slider-high="minSliderValue[$index].maxSliderG" rz-slider-options="minSliderValue[$index].options"></rzslider>
                                         
                                     
-                                    </span>
-                            <md-chips ng-model="temasTestAbierto" md-autocomplete-snap="" 
+                                 
+                            <md-chips ng-model="temasTestAbierto[$index]" md-autocomplete-snap="" 
 										  md-transform-chip="transformChip($chip)" md-require-match="false">
 									<md-autocomplete md-selected-item="selectedItem" md-search-text="searchText"
 													 md-items="item in queryBuscarTema(searchText)"
@@ -98,11 +64,18 @@
 										<span> {{$chip.valor}} </span>
 									</md-chip-template>
 								</md-chips>
-                            
-                            
+                                        <!--https://github.com/rzajac/angularjs-slider-->
+                                        <!--http://rzajac.github.io/angularjs-slider/index.html-->
+                                        <!--PARA INSTALAR: "npm i angularjs-slider"-->
+                                    
+                                    </span>
+                                </div>
+
+                                <md-button class="md-fab md-mini" ng-click="$root.aniadirRespuestaTest()" aria-label="crearPregunta">
+                                    <md-icon md-svg-src="img/crear.svg"></md-icon>
+                                </md-button>
                         </div>
-                        
-                        
+
                         
                         <md-button class="md-raised" ng-click="crearEntrevista()">Guardar</md-button>
                     </div>      
