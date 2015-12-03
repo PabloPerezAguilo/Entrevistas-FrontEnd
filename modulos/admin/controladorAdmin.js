@@ -1,8 +1,23 @@
 app.controller('controladorAdmin', function(servicioRest, config, $scope, $location, $rootScope, $mdDialog, $timeout, $q, $log) {
-	$rootScope.cargando=false;
+	
+    $rootScope.cargando=false;
     $rootScope.logueado=true;
     $rootScope.rolUsuario="Administrador";
-    var hola="A";
+    $scope.entrevistas=[];
+    
+    var Options = {
+        tag: String,
+        max: Number,
+        min: Number
+    };
+    var entrevista = {
+        name: { type: String, required: true },
+        surname: { type: String, required: true },
+        DNI: { type: String, required: true },
+        date: { type: String, required: true },
+        leveledTags: [Options]
+	};
+    
     $scope.crear = function(ev) {
         $mdDialog.show({
             controller: 'controladorAdminCrear',
@@ -11,42 +26,32 @@ app.controller('controladorAdmin', function(servicioRest, config, $scope, $locat
             targetEvent: ev,
             onComplete: function(){
                 $rootScope.aniadirRespuestaTest();
-                $rootScope.aniadirRespuestaTest();
+                
             },
             clickOutsideToClose: false
         })
         .then(function (datosPregunta) {
-				/*pregunta.title = datosPregunta.title;
-                pregunta.tags = datosPregunta.tags;
-                pregunta.level = datosPregunta.level;
-                pregunta.type = datosPregunta.type;
-            
-                if(datosPregunta.type === "FREE") {
-                    pregunta.directive = datosPregunta.directive;
-                    pregunta.answers = null;
-                }
-                else {
-                    pregunta.directive = null;
-                    pregunta.answers = datosPregunta.answers; 
-                }
-                servicioRest.postPregunta(pregunta)
+				entrevista.name = datosPregunta.name;
+                entrevista.surname = datosPregunta.surname;
+                entrevista.DNI = datosPregunta.DNI;
+                entrevista.date = datosPregunta.date;
+                entrevista.leveledTags = datosPregunta.leveledTags;
+                servicioRest.postInterview(entrevista)
                     .then(function(data) {
-                    pregunta._id = data.data._id;
-                        $scope.preguntas.push({
-                            _id: pregunta._id,
-                            title: pregunta.title,
-                            tags: pregunta.tags,
-                            level: pregunta.level,
-                            directive: pregunta.directive,
-                            answers: pregunta.answers,
-                            type: pregunta.type
+                        $scope.entrevistas.push({
+                            _id: data.data._id,
+                            name: data.data.name,
+                            surname: data.data.surname,
+                            DNI: data.data.DNI,
+                            date: data.data.date,
+                            leveledTags: data.data.leveledTags
                         })
                         console.log(data);
                     })
                     .catch(function(err) {
                         console.log("Error");
                     	console.log(err);
-                    });*/
+                    });
 			});
     };
 });

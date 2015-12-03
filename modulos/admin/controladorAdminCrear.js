@@ -1,7 +1,22 @@
 app.controller('controladorAdminCrear', function (servicioRest, $scope, $mdDialog, $mdToast, $rootScope) {
-    var hola="MDDIALOG"
-    $scope.minSliderValue={floor: 1,ceil:10};
     
+    $scope.minSliderValue = [];
+    $scope.temasTestAbierto = [];
+    
+    
+    
+    var Options = {
+        tag: String,
+        max: Number,
+        min: Number
+    };
+    var entrevista = {
+        name: { type: String, required: true },
+        surname: { type: String, required: true },
+        DNI: { type: String, required: true },
+        date: { type: String, required: true },
+        leveledTags: [Options]
+	};
 
     function toast(texto) {
 		$mdToast.show(
@@ -23,60 +38,45 @@ app.controller('controladorAdminCrear', function (servicioRest, $scope, $mdDialo
 	/* ----------- Input temas ----------- */
 
 	
-	
     
-    /*$scope.crearPTest = function () {
+    $scope.crearEntrevista = function () {
 		var i;
-        if(preguntaVacia("test"))
+        var j;
+        var fecha_hora        
+        
+        if(false)//preguntaVacia())
         {
             toast("Rellena todos los campos obligatorios");
         }
         else
         {
-            pregunta.title = $scope.tituloTest;
-            pregunta.type = "SINGLE_CHOICE";
-            for(i=0;i<$scope.temasTest.length;i++)
-            {
-                pregunta.tags[i] = $scope.temasTest[i].tag;
+            entrevista.leveledTags=[];
+            entrevista.name = $scope.nombreEntrevista;
+            entrevista.surname = $scope.apellidosEntrevista;
+            entrevista.DNI = $scope.dniEntrevista
+            entrevista.date = $scope.fecha.getFullYear() + "-" + ($scope.fecha.getMonth()+1) + "-" + $scope.fecha.getDate();
+            entrevista.date +=  "T" + $scope.horas + ":" + $scope.minutos;
+            
+            console.log($scope.temasTestAbierto.length);
+            for (i = 0;i < $scope.contTest;i++) {
+                for (j = 0;j < $scope.temasTestAbierto[i].length;j++)
+                entrevista.leveledTags.push({tag: $scope.temasTestAbierto[i][j].valor, max: $scope.minSliderValue[i].maxSliderG, min: $scope.minSliderValue[i].minSliderG});
             }
-            pregunta.level = $scope.nivelTest;
-            pregunta.answers = [];
-
-            for (i = 0;i < $scope.contTest;i++) {            
-                pregunta.answers.push({title: $scope.respuestasTest[i], valid: false});
-            }
-            console.log(pregunta.title);
-
-            pregunta.answers[$scope.radioTest - 1].valid = true;
-            $scope.hide(pregunta);
+            
+            console.log(entrevista);
+            $scope.hide(entrevista);
         }
     };
     
-    function preguntaVacia(tipoP){
+    function preguntaVacia(){
        var resp=false;
-        if(tipoP==="abierta")
-        {
-            if($scope.tituloAbierta===undefined||$scope.temasAbierta===undefined||$scope.tituloAbierta===""||$scope.temasAbierta==="")
+            if($scope.nombreEntrevista===undefined||$scope.apellidosEntrevista===undefined||$scope.dniEntrevista===undefined||$scope.preguntasEntrevistas[0]===undefined||$scope.preguntasEntrevistas[1]===undefined||$scope.nombreEntrevista===""||$scope.apellidosEntrevista===""||$scope.dniEntrevista===""||$scope.preguntasEntrevistas[0]===""||$scope.preguntasEntrevistas[1]==="")
             {
                 resp=true;
             }
-        }
-        else if(tipoP==="test")
-        {
-            if($scope.tituloTest===undefined||$scope.temasTest===undefined||$scope.respuestasTest[0]===undefined||$scope.respuestasTest[1]===undefined||$scope.tituloTest===""||$scope.temasTest===""||$scope.respuestasTest[0]===""||$scope.respuestasTest[1]==="")
-            {
-                resp=true;
-            }
-        }
-        else if(tipoP==="testAbierta")
-        {
-            if($scope.tituloTestAbierto===undefined||$scope.temasTestAbierto===undefined||$scope.respuestasTestAbierto[0]===undefined||$scope.respuestasTestAbierto[1]===undefined||$scope.tituloTestAbierto===""||$scope.temasTestAbierto===""||$scope.respuestasTestAbierto[0]===""||$scope.respuestasTestAbierto[1]==="")
-            {
-                resp=true;
-            }
-        }
+
         return resp;
-    }*/
+    }
     
     $scope.hide = function (respuesta) {
         $mdDialog.hide(respuesta);
@@ -92,6 +92,16 @@ app.controller('controladorAdminCrear', function (servicioRest, $scope, $mdDialo
 	$rootScope.aniadirRespuestaTest = function () {
 		$scope.contTest += 1;
 		$scope.test.push($scope.contTest);
+        $scope.minSliderValue[$scope.contTest-1] = {
+                    minSliderG: 1,
+                    maxSliderG: 10,
+                    options: {
+                        floor: 1,
+                        ceil: 10,
+                        step: 1
+                    }
+                };
+        $scope.temasTestAbierto[$scope.contTest-1] = [];
 	};
 	
 
@@ -138,11 +148,9 @@ app.controller('controladorAdminCrear', function (servicioRest, $scope, $mdDialo
 		if (angular.isObject(chip)) {
 			return chip;
 		}
-		console.log(chip);
 		// Otherwise, create a new one
 		servicioRest.postTema(chip)
 			.then(function(data) {
-				
             })
 			.catch(function(err) {
 			console.log("Error");
@@ -158,9 +166,17 @@ app.controller('controladorAdminCrear', function (servicioRest, $scope, $mdDialo
 			return (tema.valor.indexOf(lowercaseQuery) === 0);
 		};
 	}
+	
+	function filtrar(texto) {
+		var lowercaseQuery = angular.lowercase(texto);
+		return function (tema) {
+			$scope.texto = tema.tag;
+			return ($scope.texto.indexOf(lowercaseQuery) === 0 || $scope.texto.search(lowercaseQuery) > 0);
+		};
+	}
 		
     $scope.queryBuscarTema = function (query) {
-		var results = query ? $scope.temasCargados.filter(createFilterFor(query)) : [];
+		var results = query ? $scope.temasCargados.filter(filtrar(query)) : [];
 		return results;
 	}
 });

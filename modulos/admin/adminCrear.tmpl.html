@@ -4,7 +4,7 @@
             <md-toolbar>
                 <div class="md-toolbar-tools">
                     <h2>
-                        Crear pregunta
+                        Crear entrevista
                     </h2>
                     <span flex></span>
                     <md-button class="md-icon-button" aria-label="cerrarCrearPregunta" ng-click="cancel()">
@@ -21,7 +21,7 @@
 
                         <md-input-container class="md-block">
                             <label>Nombre</label>
-                            <textarea ng-model="nombreEntrevista"></textarea>
+                            <textarea required="hola" ng-Required=true ng-model="nombreEntrevista"></textarea>
                         </md-input-container>
                         <md-input-container class="md-block">
                             <label>Apellidos</label>
@@ -32,23 +32,38 @@
                             <textarea ng-model="dniEntrevista"></textarea>
                         </md-input-container>
                         <md-datepicker ng-model="fecha" md-placeholder="Introducir fecha"></md-datepicker>
-                        <md-checkbox ng-model="pondGeneral" aria-label="respuestas test abierto">Ponderar de forma general el nivel de las preguntas
-									</md-checkbox>
-                        <div ng-init="pondIndividual=false" ng-hide="pondGeneral">
+                        <md-input-container class="md-inline">
+                            <input type="number" step="any" ng-model="horas" min="00" max="23">
+                        </md-input-container>
+                        <md-input-container class="md-inline">
+                            <input type="number" step="any" ng-model="minutos" min="00" max="59">
+                        </md-input-container>
+                        <!--http://simeonc.github.io/sc-date-time/index.html-->
+
+                        <div>
                                 <div ng-repeat="respuestas in test">
                                     <span>	
-                                        <rzslider ng-model="respuestasTest[$index]" rz-slider-model="1" 
-                                              rz-slider-high="10" rz-slider-options="minSliderValue"></rzslider>
-                                        <md-autocomplete ng-model="respuestasTestAutoC[$index]" md-selected-item="selectedItem" 
-                                                 md-search-text="searchText"
-                                                 md-items="item in queryBuscarTema(searchText)"
-                                                 md-item-text="item.valor"
-                                                 placeholder="Temas de la pregunta">
-
-                                            <span md-highlight-text="searchText">
-                                                {{item.valor}}
-                                            </span>
-                                        </md-autocomplete>
+                                   
+                                        <rzslider rz-slider-model="minSliderValue[$index].minSliderG" 
+                                              rz-slider-high="minSliderValue[$index].maxSliderG" rz-slider-options="minSliderValue[$index].options"></rzslider>
+                                        
+                                    
+                                 
+                            <md-chips ng-model="temasTestAbierto[$index]" md-autocomplete-snap="" 
+										  md-transform-chip="transformChip($chip)" md-require-match="false">
+									<md-autocomplete md-selected-item="selectedItem" md-search-text="searchText"
+													 md-items="item in queryBuscarTema(searchText)"
+													 md-item-text="item.valor"
+													 placeholder="Temas de la pregunta">
+										
+										<span md-highlight-text="searchText">
+											{{item.valor}}
+										</span>
+									</md-autocomplete>
+									<md-chip-template>
+										<span> {{$chip.valor}} </span>
+									</md-chip-template>
+								</md-chips>
                                         <!--https://github.com/rzajac/angularjs-slider-->
                                         <!--http://rzajac.github.io/angularjs-slider/index.html-->
                                         <!--PARA INSTALAR: "npm i angularjs-slider"-->
@@ -56,46 +71,13 @@
                                     </span>
                                 </div>
 
-
-
-
-
-
-
                                 <md-button class="md-fab md-mini" ng-click="$root.aniadirRespuestaTest()" aria-label="crearPregunta">
                                     <md-icon md-svg-src="img/crear.svg"></md-icon>
                                 </md-button>
                         </div>
 
-                        <div ng-if="pondGeneral">
-                            <span>	
-                                        <rzslider ng-model="a.respuestasTestGeneral" rz-slider-model="1" 
-                                              rz-slider-high="10" rz-slider-options="minSliderValue"></rzslider>
-                                        
-                                    
-                                    </span>
-                            <md-chips ng-model="a.temasTest" md-autocomplete-snap="" 
-                                      md-transform-chip="transformChip($chip)" md-require-match="false">
-                                <md-autocomplete md-selected-item="selectedItem" md-search-text="searchText"
-                                                 md-items="item in queryBuscarTema(searchText)"
-                                                 md-item-text="item.valor"
-                                                 placeholder="Temas de la pregunta">
-
-                                    <span md-highlight-text="searchText">
-                                        {{item.valor}}
-                                    </span>
-                                </md-autocomplete>
-                                <md-chip-template>
-                                    <span> {{$chip.valor}} </span>
-                                </md-chip-template>
-                            </md-chips>
-                            
-                            
-                        </div>
                         
-                        
-                        
-                        <md-button class="md-raised" ng-click="crearPTest()">Guardar</md-button>
+                        <md-button class="md-raised" ng-click="crearEntrevista()">Guardar</md-button>
                     </div>      
                 </md-content>
 
