@@ -64,6 +64,13 @@ app.controller('controladorTec', function(servicioRest, $scope, $rootScope, $mdD
         servicioRest.deletePregunta(idPregunta)
 			.then(function(data) {
 				$scope.preguntas.splice(indice, 1);
+				servicioRest.getTemas()
+				.then(function(data) {
+					$scope.temas = data;			
+					$scope.temasCargados = cargarTemas();
+				})
+		.catch(function (err) {
+		});
 			})
 			.catch(function(err) {
 				console.log("Error");
@@ -114,13 +121,7 @@ app.controller('controladorTec', function(servicioRest, $scope, $rootScope, $mdD
                             type: tipo
                         })
                         console.log(data);
-						servicioRest.getTemas()
-							.then(function(data) {
-								$scope.temas = data;
-								$scope.temasCargados = cargarTemas();
-							})
-							.catch(function (err) {
-							});
+						$rootScope.obtenerTemas();
                     })
                     .catch(function(err) {
                         console.log("Error");
@@ -145,22 +146,26 @@ app.controller('controladorTec', function(servicioRest, $scope, $rootScope, $mdD
 	
 	/* ----------------- AUTOCOMPLETE ---------------- */
 	var self = this;
-	$scope.temas;
-	$scope.temasCargados;
+	$rootScope.temas;
+	$rootScope.temasCargados;
     $scope.selectedItemChange = selectedItemChange;	
 	$scope.listaTemas = [];
 	self.simulateQuery = false;
 	
-	servicioRest.getTemas()
+	$rootScope.obtenerTemas = function () {
+		servicioRest.getTemas()
 		.then(function(data) {
-			$scope.temas = data;
-			$scope.temasCargados = cargarTemas();
+			$rootScope.temas = data;
+			$rootScope.temasCargados = $rootScope.cargarTemas();
 		})
 		.catch(function (err) {
 		});
+	}
 	
-    function cargarTemas() {
-		var temasCargados = $scope.temas;
+	$rootScope.obtenerTemas();
+	
+    $rootScope.cargarTemas = function () {
+		var temasCargados = $rootScope.temas;
 		return temasCargados.map( function (tema) {
 			tema.valor = tema.tag.toLowerCase();
 			return tema;          
