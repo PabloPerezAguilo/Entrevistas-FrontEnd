@@ -293,6 +293,7 @@ md-toolbar:not(.md-menu-toolbar) {
 }
 
 md-dialog.md-transition-in {
+    margin: auto;
     min-width: 700px;
     min-height: 300px;
 	max-height: 700px;
@@ -367,9 +368,18 @@ md-radio-button {
     padding-top: 2%;
 }
 
+md-radio-button, .md-switch-thumb {
+    
+}
+
 md-checkbox.respuesta {
 	float: left;
     padding-top: 5%;
+    margin: 0;
+}
+
+md-radio-group.md-default-theme.md-focused:not(:empty) .md-checked .md-container:before, md-radio-group.md-focused:not(:empty) .md-checked .md-container:before {
+    background-color: $naranjaClaro;
 }
 
 /*Ver pregunta*/
@@ -465,13 +475,31 @@ md-list md-list-item.md-3-line .md-list-item-text h3 {
 	}
 }
 
-@media screen and (max-height: 453px) {
+@media screen and (max-height: 620px) {
    md-dialog.md-transition-in {
-		min-width: 700px;
-		min-height: 300px;
-		max-height: 700px;
-   }
+       float: inherit;
+       min-height: 100%;
+       max-height: 100%;
+       min-width: 100%;
+       max-width: 100%;
+       overflow-y: hidden;
+       
+       
+    }
 }
+@media screen and (max-width: 750px) {
+   md-dialog.md-transition-in {
+       float: inherit;
+       min-height: 100%;
+       max-height: 100%;
+       min-width: 100%;
+       max-width: 100%;
+       overflow-y: hidden;
+       
+       
+    }
+}
+
 
 /*Range Slider*/
 rzslider .rz-bubble.rz-limit {
