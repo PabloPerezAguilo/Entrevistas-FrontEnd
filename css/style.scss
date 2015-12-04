@@ -406,11 +406,14 @@ md-checkbox[disabled] .md-label {
 .buscarTemas {
 	padding-left: 2%;
     margin-top: 1%;
+	margin-left: 25%;
+	margin-right: 25%;
 }
 
 .md-button.md-fab.md-mini {
     float: right;
 	margin-top: 1%;
+	margin-right: 28%;
 }
 
 .md-button .md-ripple-container {
@@ -435,10 +438,16 @@ md-icon {
 
 /*lista de preguntas*/
 .listaPreguntas {
-    padding: 8px 0px 8px 0px;
     height: 600px;
     margin-bottom: 70px;
     overflow: auto;
+	margin-left: 25%;
+	margin-right: 25%;
+}
+
+.md-subheader .md-subheader-content {
+	margin-right: 25%;
+	margin-left: 25%
 }
 
 /*items de la lista de preguntas*/
