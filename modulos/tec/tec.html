@@ -5,33 +5,32 @@
 
     <p></p>
 
-	<div class="buscarTemas">
-		<md-chips ng-model="listaTemas" 
-				  md-autocomplete-snap=""
-				  md-transform-chip="transformChip($chip)" 
-				  md-require-match="true"
-				  md-on-remove="deleteChip($index)">
-			<md-autocomplete md-selected-item="selectedItem" 
-							 md-search-text-change="searchTextChange(searchText)" 
-							 md-search-text="searchText" 
-							 md-selected-item-change="selectedItemChange(item)" 
-							 md-items="item in queryBuscarTema(searchText)" 
-							 md-item-text="item.valor" 
-							 md-min-length="0"
-							 placeholder="Buscar por temas">
-				<span md-highlight-text="searchText">
-					{{item.valor}}
-				</span>
-			</md-autocomplete>
-			<md-chip-template>
-				<span> {{$chip.valor}} </span>
-			</md-chip-template>
-		</md-chips>
-	</div>
-
     <md-list>
         <md-subheader class="md-no-sticky">Preguntas</md-subheader>
         <md-divider></md-divider>
+		<div class="buscarTemas">
+			<md-chips ng-model="listaTemas" 
+					  md-autocomplete-snap=""
+					  md-transform-chip="transformChip($chip)" 
+					  md-require-match="true"
+					  md-on-remove="deleteChip($index)">
+				<md-autocomplete md-selected-item="selectedItem" 
+								 md-search-text-change="searchTextChange(searchText)" 
+								 md-search-text="searchText" 
+								 md-selected-item-change="selectedItemChange(item)" 
+								 md-items="item in queryBuscarTema(searchText)" 
+								 md-item-text="item.valor" 
+								 md-min-length="0"
+								 placeholder="Buscar por temas">
+					<span md-highlight-text="searchText">
+						{{item.valor}}
+					</span>
+				</md-autocomplete>
+				<md-chip-template>
+					<span> {{$chip.valor}} </span>
+				</md-chip-template>
+			</md-chips>
+		</div>
       	<div class="listaPreguntas">
 			<md-list-item class="md-3-line" ng-repeat="item in preguntas">
 				<div class="md-list-item-text" layout="column">
