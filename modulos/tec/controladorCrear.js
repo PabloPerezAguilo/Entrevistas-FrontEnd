@@ -1,4 +1,4 @@
-app.controller('controladorCrear', function (servicioRest, $scope, $mdDialog, $mdToast) {
+app.controller('controladorCrear', function (servicioRest, $scope, $mdDialog, $mdToast, $rootScope) {
     
     var Options = {
         title: { type: String },
@@ -39,15 +39,14 @@ app.controller('controladorCrear', function (servicioRest, $scope, $mdDialog, $m
 	$scope.contTestAbierto = 2;
 	$scope.checkTestAbierto = [false, false];
 	
-	/* ----------- Input temas ----------- */
-
-	
-	
-	
-	
-	
-	
-	
+	$scope.temas;
+	$scope.temasCargados;
+	$scope.temasAbierta = [];
+	$scope.temasTest = [];
+	$scope.temasTestAbierto = [];
+	$scope.readonly = false;
+    $scope.selectedItem = null;
+    $scope.searchText = null;
 	
 	
     $scope.crearPAbierta = function () {
@@ -184,22 +183,7 @@ app.controller('controladorCrear', function (servicioRest, $scope, $mdDialog, $m
 	};
 	
 	
-	
-	
-	
-	
-	
-	
-	$scope.temas;
-	$scope.temasCargados;
-	$scope.temasAbierta = [];
-	$scope.temasTest = [];
-	$scope.temasTestAbierto = [];
-	$scope.readonly = false;
-    $scope.selectedItem = null;
-    $scope.searchText = null;
-    $scope.numberBuffer = '';	
-	
+	/* ----------- Input temas ----------- */
 	
 	servicioRest.getTemas()
 		.then(function(data) {
@@ -217,9 +201,6 @@ app.controller('controladorCrear', function (servicioRest, $scope, $mdDialog, $m
       });
 	}
 	
-    /**
-     * Return the proper object when the append is called.
-     */
     $scope.transformChip = function transformChip(chip) {
 		// If it is an object, it's already a known chip
 		if (angular.isObject(chip)) {
@@ -228,11 +209,14 @@ app.controller('controladorCrear', function (servicioRest, $scope, $mdDialog, $m
 		// Otherwise, create a new one
 		servicioRest.postTema(chip)
 			.then(function(data) {
+				$rootScope.obtenerTemas();
             })
 			.catch(function(err) {
 			console.log("Error");
 			console.log(err);
 			});
+		
+		console.log($rootScope.temas);
 		return { valor: chip};
 	}
 	
@@ -247,7 +231,7 @@ app.controller('controladorCrear', function (servicioRest, $scope, $mdDialog, $m
 	function filtrar(texto) {
 		var lowercaseQuery = angular.lowercase(texto);
 		return function (tema) {
-			$scope.texto = tema.tag;
+			$scope.texto = tema.valor;
 			return ($scope.texto.indexOf(lowercaseQuery) === 0 || $scope.texto.search(lowercaseQuery) > 0);
 		};
 	}

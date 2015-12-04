@@ -283,6 +283,15 @@ md-tabs:not(.md-no-tab-content):not(.md-dynamic-height) {
     background-color: #BC5500;
 }
 
+md-icon {
+    color: white;
+}
+
+.btnIconoCentrado {
+	margin-left: 3px;
+    margin-top: 1px;
+}
+
 md-toolbar:not(.md-menu-toolbar) {
     background-color: $naranja;
     color: $grisLetra;
@@ -416,11 +425,14 @@ md-checkbox[disabled] .md-label {
 .buscarTemas {
 	padding-left: 2%;
     margin-top: 1%;
+	margin-left: 25%;
+	margin-right: 25%;
 }
 
 .md-button.md-fab.md-mini {
     float: right;
 	margin-top: 1%;
+	margin-right: 28%;
 }
 
 .md-button .md-ripple-container {
@@ -445,10 +457,22 @@ md-icon {
 
 /*lista de preguntas*/
 .listaPreguntas {
-    padding: 8px 0px 8px 0px;
     height: 600px;
     margin-bottom: 70px;
     overflow: auto;
+	margin-left: 25%;
+	margin-right: 25%;
+}
+
+.md-subheader .md-subheader-content {
+	margin-right: 25%;
+	margin-left: 25%
+}
+
+/*Divider de preguntas */
+md-divider.dividerPrincipal {
+	margin-right: 25%;
+    margin-left: 25%;
 }
 
 /*items de la lista de preguntas*/
@@ -466,14 +490,84 @@ md-list md-list-item.md-3-line .md-list-item-text h3 {
 @media screen and (min-height: 1024px) {
     .listaPreguntas {
 		height: 975px;
+		margin-left: 0%;
+		margin-right: 0%;
+		margin-bottom: 70px;
+	}
+	md-divider.dividerPrincipal {
+		margin-right: 0%;
+		margin-left: 0%;
+	}
+	.md-subheader .md-subheader-content {
+		margin-right: 0%;
+		margin-left: 0%
+	}
+	.buscarTemas {
+		padding-left: 2%;
+		margin-top: 1%;
+		margin-left: 0%;
+		margin-right: 0%;
+	}
+	.md-button.md-fab.md-mini {
+		float: right;
+		margin-top: 1%;
+		margin-right: 1%;
 	}
 }
 
-@media screen and (max-height: 768px) {
+@media screen and (min-height: 551px) and (max-height: 700px) {
+    .listaPreguntas {
+		height: 400px;
+	}
+}
+
+@media screen and (min-height: 701px) and (max-height: 820px) {
+    .listaPreguntas {
+		height: 500px;
+	}
+}
+
+@media screen and (min-height: 440px) and (max-height: 550px) {
+    .listaPreguntas {
+		height: 210px;
+	}
+}
+
+
+
+
+@media screen and (max-width: 784px) {
+    .listaPreguntas {
+		margin-left: 0%;
+		margin-right: 0%;
+		margin-bottom: 70px;
+	}
+	md-divider.dividerPrincipal {
+		margin-right: 0%;
+		margin-left: 0%;
+	}
+	.md-subheader .md-subheader-content {
+		margin-right: 0%;
+		margin-left: 0%
+	}
+	.buscarTemas {
+		padding-left: 2%;
+		margin-top: 1%;
+		margin-left: 0%;
+		margin-right: 0%;
+	}
+	.md-button.md-fab.md-mini {
+		float: right;
+		margin-top: 1%;
+		margin-right: 1%;
+	}
+}
+
+/*@media screen and (max-height: 768px) {
     .listaPreguntas {
 		height: 448px;
 	}
-}
+}*/
 
 @media screen and (max-height: 620px) {
    md-dialog.md-transition-in {

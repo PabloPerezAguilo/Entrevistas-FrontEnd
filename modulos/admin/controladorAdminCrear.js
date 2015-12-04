@@ -50,6 +50,7 @@ app.controller('controladorAdminCrear', function (servicioRest, $scope, $mdDialo
         }
         else
         {
+
             entrevista.leveledTags=[];
             entrevista.name = $scope.nombreEntrevista;
             entrevista.surname = $scope.apellidosEntrevista;
