@@ -2,7 +2,7 @@ app.controller('controladorAdmin', function(servicioRest, config, $scope, $locat
 	
     $rootScope.cargando=false;
     $rootScope.logueado=true;
-    $rootScope.rolUsuario="Administrador";
+    $rootScope.rolUsuario="img/administrador.svg";
     $scope.entrevistas=[];
     
     var Options = {

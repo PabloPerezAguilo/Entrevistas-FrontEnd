@@ -39,15 +39,14 @@ app.controller('controladorCrear', function (servicioRest, $scope, $mdDialog, $m
 	$scope.contTestAbierto = 2;
 	$scope.checkTestAbierto = [false, false];
 	
-	/* ----------- Input temas ----------- */
-
-	
-	
-	
-	
-	
-	
-	
+	$scope.temas;
+	$scope.temasCargados;
+	$scope.temasAbierta = [];
+	$scope.temasTest = [];
+	$scope.temasTestAbierto = [];
+	$scope.readonly = false;
+    $scope.selectedItem = null;
+    $scope.searchText = null;
 	
 	
     $scope.crearPAbierta = function () {
@@ -184,22 +183,7 @@ app.controller('controladorCrear', function (servicioRest, $scope, $mdDialog, $m
 	};
 	
 	
-	
-	
-	
-	
-	
-	
-	$scope.temas;
-	$scope.temasCargados;
-	$scope.temasAbierta = [];
-	$scope.temasTest = [];
-	$scope.temasTestAbierto = [];
-	$scope.readonly = false;
-    $scope.selectedItem = null;
-    $scope.searchText = null;
-    $scope.numberBuffer = '';	
-	
+	/* ----------- Input temas ----------- */
 	
 	servicioRest.getTemas()
 		.then(function(data) {
@@ -217,9 +201,6 @@ app.controller('controladorCrear', function (servicioRest, $scope, $mdDialog, $m
       });
 	}
 	
-    /**
-     * Return the proper object when the append is called.
-     */
     $scope.transformChip = function transformChip(chip) {
 		// If it is an object, it's already a known chip
 		if (angular.isObject(chip)) {

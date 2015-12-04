@@ -1,4 +1,5 @@
 app.controller('controladorTec', function(servicioRest, $scope, $rootScope, $mdDialog, $timeout, $q, $log, $mdToast) {
+	
 	function toast(texto) {
 		$mdToast.show(
 	      $mdToast.simple()
@@ -6,7 +7,6 @@ app.controller('controladorTec', function(servicioRest, $scope, $rootScope, $mdD
 	        .position('top right')
 	        .hideDelay(1500)
 		);
-
 	}
 	
 	function escribirTipo(preguntas) {
@@ -50,7 +50,7 @@ app.controller('controladorTec', function(servicioRest, $scope, $rootScope, $mdD
 	
 	$rootScope.cargando = false;
     $rootScope.logueado = true;
-    $rootScope.rolUsuario = "Técnico";
+    $rootScope.rolUsuario = "img/tecnico.svg";
     
     /*---------------------------Inicializar lista------------------------------*/
     
@@ -185,25 +185,6 @@ app.controller('controladorTec', function(servicioRest, $scope, $rootScope, $mdD
 			});
 		}
     }
-	
-    /**
-     * Return the proper object when the append is called.
-     */
-    $scope.transformChip = function transformChip(chip) {
-		// If it is an object, it's already a known chip
-		if (angular.isObject(chip)) {
-			return chip;
-		}
-		return { valor: chip};
-	}
-	
-    function createFilterFor(query) {
-		var lowercaseQuery = angular.lowercase(query);
-		
-		return function filterFn(tema) {
-			return (tema.valor.indexOf(lowercaseQuery) === 0);
-		};
-	}
 		
     $scope.queryBuscarTema = function (query) {
 		

@@ -16,11 +16,11 @@ app.config(function($routeProvider) {
 		templateUrl: 'modulos/logIn/logIn.html',
 		controller: 'controladorLogIn'
 	})*/
-	.when('/', {
+	.when('/admin', {
 		templateUrl: 'modulos/admin/admin.html',
         controller: 'controladorAdmin'
 	})
-	.when('/tec', {
+	.when('/', {
 		templateUrl: 'modulos/tec/tec.html',
         controller: 'controladorTec'
 	})

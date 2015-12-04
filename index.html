@@ -25,7 +25,7 @@
             <img id="logo" src="logo.png" ng-hide="logueado">
             <img id="logoLogeado" src="logo.png" ng-show="logueado" ng-cloak>
             <p id="nombreUsuario" nh-model="rolUsuario" ng-show="logueado" ng-cloak>
-                {{rolUsuario}}
+                <md-icon md-svg-src="{{rolUsuario}}" class="btnIconoCentrado"></md-icon>
             </p>
             <div id="doneLoading" ng-hide="cargando"></div>
             <md-progress-linear id="progressBar" md-mode="indeterminate" ng-show="cargando"></md-progress-linear>
