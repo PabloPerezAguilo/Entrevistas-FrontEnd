@@ -210,18 +210,13 @@ app.controller('controladorCrear', function (servicioRest, $scope, $mdDialog, $m
 		// Otherwise, create a new one
 		servicioRest.postTema(chip)
 			.then(function(data) {
+				$rootScope.obtenerTemas();
             })
 			.catch(function(err) {
 			console.log("Error");
 			console.log(err);
 			});
-		servicioRest.getTemas()
-		.then(function(data) {
-			$rootScope.temas = data;
-			$rootScope.temasCargados = $rootScope.cargarTemas();
-		})
-		.catch(function (err) {
-		});
+		
 		console.log($rootScope.temas);
 		return { valor: chip};
 	}

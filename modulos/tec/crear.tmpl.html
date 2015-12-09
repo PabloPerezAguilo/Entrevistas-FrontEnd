@@ -1,166 +1,164 @@
-<div>
-    <md-dialog>
-        <form>
-            <md-toolbar>
-                <div class="md-toolbar-tools">
-                    <h2>
-                        Crear pregunta
-                    </h2>
-                    <span flex></span>
-                    <md-button class="md-icon-button" aria-label="cerrarCrearPregunta" ng-click="cancel()">
-                        <md-icon md-svg-src="img/cerrar.svg"></md-icon>
-                    </md-button>
+<md-dialog fullscreen="true">
+    <form>
+        <md-toolbar>
+            <div class="md-toolbar-tools">
+                <h2>
+                    Crear pregunta
+                </h2>
+                <span flex></span>
+                <md-button class="md-icon-button" aria-label="cerrarCrearPregunta" ng-click="cancel()">
+                    <md-icon md-svg-src="img/cerrar.svg"></md-icon>
+                </md-button>
 
-                </div>
-            </md-toolbar>
-            
-            <md-dialog-content ng-model="conte">
-                <md-tabs class="md-accent" md-dynamic-height md-border-bottom>
-                    <md-tab label="pregunta abierta">
-                        <md-content>
-                        <md-content>
-                            <div class="contenidoTablaCrear">
-                                <md-slider flex="" md-discrete="" ng-model="nivelAbierta" aria-label="nivel abierta" 
-										   step="1" min="1" max="10">
-                                </md-slider>
-                                
-								<md-chips ng-model="temasAbierta" md-autocomplete-snap="" 
-										  md-transform-chip="transformChip($chip)" md-require-match="false">
-									<md-autocomplete md-selected-item="selectedItem" md-search-text="searchText"
-													 md-items="item in queryBuscarTema(searchText)"
-													 md-item-text="item.valor"
-													 placeholder="Temas de la pregunta">
-										
-										<span md-highlight-text="searchText">
-											{{item.valor}}
-										</span>
-									</md-autocomplete>
-									<md-chip-template>
-										<span> {{$chip.valor}} </span>
-									</md-chip-template>
-								</md-chips>
-								
-                                <md-input-container class="md-block">
-                                    <label>Enunciado de la pregunta</label>
-                                    <textarea ng-model="tituloAbierta"></textarea>
+            </div>
+        </md-toolbar>
+
+        <md-dialog-content ng-model="conte">
+            <md-tabs class="md-accent" md-dynamic-height md-border-bottom>
+                <md-tab label="pregunta abierta">
+                    <md-content>
+                        <div class="contenidoTablaCrear">
+                            <md-slider flex="" md-discrete="" ng-model="nivelAbierta" aria-label="nivel abierta" 
+                                       step="1" min="1" max="10">
+                            </md-slider>
+
+                            <md-chips ng-model="temasAbierta" md-autocomplete-snap="" 
+                                      md-transform-chip="transformChip($chip)" md-require-match="false">
+                                <md-autocomplete md-selected-item="selectedItem" md-search-text="searchText"
+                                                 md-items="item in queryBuscarTema(searchText)"
+                                                 md-item-text="item.valor"
+                                                 placeholder="Temas de la pregunta">
+
+                                    <span md-highlight-text="searchText">
+                                        {{item.valor}}
+                                    </span>
+                                </md-autocomplete>
+                                <md-chip-template>
+                                    <span> {{$chip.valor}} </span>
+                                </md-chip-template>
+                            </md-chips>
+
+                            <md-input-container class="md-block">
+                                <label>Enunciado de la pregunta</label>
+                                <textarea ng-model="tituloAbierta"></textarea>
+                            </md-input-container>
+
+                            <md-input-container class="md-block">
+                                <label>Directivas de la pregunta</label>
+                                <textarea ng-model="directivasAbierta"></textarea>
+                            </md-input-container>
+
+                            <md-button class="md-raised" ng-click="crearPAbierta()">Guardar</md-button>
+                        </div>                    
+                    </md-content>
+                </md-tab>
+
+
+                <md-tab label="pregunta tipo test">
+                    <md-content>
+                        <div class="contenidoTablaCrear">
+                            <md-slider flex="" md-discrete="" ng-model="nivelTest" aria-label="nivel test" 
+                                       step="1" min="1" max="10">
+                            </md-slider>
+
+                            <md-chips ng-model="temasTest" md-autocomplete-snap="" 
+                                      md-transform-chip="transformChip($chip)" md-require-match="false">
+                                <md-autocomplete md-selected-item="selectedItem" md-search-text="searchText"
+                                                 md-items="item in queryBuscarTema(searchText)"
+                                                 md-item-text="item.valor"
+                                                 placeholder="Temas de la pregunta">
+
+                                    <span md-highlight-text="searchText">
+                                        {{item.valor}}
+                                    </span>
+                                </md-autocomplete>
+                                <md-chip-template>
+                                    <span> {{$chip.valor}} </span>
+                                </md-chip-template>
+                            </md-chips>
+
+                            <md-input-container class="md-block">
+                                <label>Enunciado de la pregunta</label>
+                                <textarea ng-model="tituloTest"></textarea>
+                            </md-input-container>
+                            <md-radio-group ng-model="radioTest">
+                                <div ng-repeat="respuestas in test">
+                                    <span>
+                                        <md-radio-button value="{{respuestas}}" aria-label="respuestas test abierto" >
+                                    </md-radio-button>
+
+                                    <md-input-container class="md-block respuesta">
+                                        <label>Respuesta {{respuestas}}</label>
+                                        <textarea ng-model="respuestasTest[$index]"></textarea>
+                                    </md-input-container>
+                                    </span>
+                                </div>
+                            </md-radio-group>
+
+                            <md-button class="md-fab md-mini" ng-click="aniadirRespuestaTest()" aria-label="crearPregunta">
+                                <md-icon md-svg-src="img/crear.svg"></md-icon>
+                            </md-button>
+
+                            <md-button class="md-raised" ng-click="crearPTest()">Guardar</md-button>
+
+                        </div>      
+                    </md-content>
+                </md-tab>                    
+
+                <md-tab label="pregunta tipo test abierto">
+                    <md-content>
+                        <div class="contenidoTablaCrear">
+                            <md-slider flex="" md-discrete="" ng-model="nivelTestAbierto" aria-label="nivel test abierto" 
+                                   step="1" min="1" max="10">
+                            </md-slider>
+
+                            <md-chips ng-model="temasTestAbierto" md-autocomplete-snap="" 
+                                      md-transform-chip="transformChip($chip)" md-require-match="false">
+                                <md-autocomplete md-selected-item="selectedItem" md-search-text="searchText"
+                                                 md-items="item in queryBuscarTema(searchText)"
+                                                 md-item-text="item.valor"
+                                                 placeholder="Temas de la pregunta">
+
+                                    <span md-highlight-text="searchText">
+                                        {{item.valor}}
+                                    </span>
+                                </md-autocomplete>
+                                <md-chip-template>
+                                    <span> {{$chip.valor}} </span>
+                                </md-chip-template>
+                            </md-chips>
+
+
+                            <md-input-container class="md-block">
+                                <label>Enunciado de la pregunta</label>
+                                <textarea ng-model="tituloTestAbierto"></textarea>
+                            </md-input-container>
+
+                            <div ng-repeat="respuestasAbierto in testAbierto">
+                                <md-checkbox class="respuesta" ng-model="checkTestAbierto[$index]" 
+                                             aria-label="respuestas test abierto">
+                                </md-checkbox>
+                                <md-input-container class="md-block respuesta">
+                                    <label>Respuesta {{respuestasAbierto}}</label>
+                                    <textarea ng-model="respuestasTestAbierto[$index]"></textarea>
                                 </md-input-container>
-								
-								<md-input-container class="md-block">
-                                    <label>Directivas de la pregunta</label>
-                                    <textarea ng-model="directivasAbierta"></textarea>
-                                </md-input-container>
+                            </div>
 
-                                <md-button class="md-raised" ng-click="crearPAbierta()">Guardar</md-button>
-                            </div>                    
-                        </md-content>
-                    </md-tab>
-   
-                    
-                    <md-tab label="pregunta tipo test">
-                        <md-content>
-                            <div class="contenidoTablaCrear">
-                                <md-slider flex="" md-discrete="" ng-model="nivelTest" aria-label="nivel test" 
-										   step="1" min="1" max="10">
-                                </md-slider>
-								
-                                <md-chips ng-model="temasTest" md-autocomplete-snap="" 
-										  md-transform-chip="transformChip($chip)" md-require-match="false">
-									<md-autocomplete md-selected-item="selectedItem" md-search-text="searchText"
-													 md-items="item in queryBuscarTema(searchText)"
-													 md-item-text="item.valor"
-													 placeholder="Temas de la pregunta">
-										
-										<span md-highlight-text="searchText">
-											{{item.valor}}
-										</span>
-									</md-autocomplete>
-									<md-chip-template>
-										<span> {{$chip.valor}} </span>
-									</md-chip-template>
-								</md-chips>
-                                
-                                <md-input-container class="md-block">
-                                    <label>Enunciado de la pregunta</label>
-                                    <textarea ng-model="tituloTest"></textarea>
-                                </md-input-container>
-								<md-radio-group ng-model="radioTest">
-									<div ng-repeat="respuestas in test">
-										<span>
-											<md-radio-button value="{{respuestas}}" aria-label="respuestas test abierto" >
-										</md-radio-button>
-										
-										<md-input-container class="md-block respuesta">
-                                    		<label>Respuesta {{respuestas}}</label>
-                                    		<textarea ng-model="respuestasTest[$index]"></textarea>
-										</md-input-container>
-										</span>
-									</div>
-								</md-radio-group>
-							
-								<md-button class="md-fab md-mini" ng-click="aniadirRespuestaTest()" aria-label="crearPregunta">
-        							<md-icon md-svg-src="img/mas.svg"></md-icon>
-    							</md-button>
+                            <md-button class="md-fab md-mini" ng-click="aniadirRespuestaTestAbierto()" 
+                                       aria-label="crearPregunta abierta">
+                                <md-icon md-svg-src="img/crear.svg"></md-icon>
+                            </md-button>
 
-                                <md-button class="md-raised" ng-click="crearPTest()">Guardar</md-button>
-                            
-                            </div>      
-                        </md-content>
-                    </md-tab>                    
-                
-                    <md-tab label="pregunta tipo test abierto">
-                        <md-content>
-							<div class="contenidoTablaCrear">
-								<md-slider flex="" md-discrete="" ng-model="nivelTestAbierto" aria-label="nivel test abierto" 
-									   step="1" min="1" max="10">
-								</md-slider>
-								
-                            	<md-chips ng-model="temasTestAbierto" md-autocomplete-snap="" 
-										  md-transform-chip="transformChip($chip)" md-require-match="false">
-									<md-autocomplete md-selected-item="selectedItem" md-search-text="searchText"
-													 md-items="item in queryBuscarTema(searchText)"
-													 md-item-text="item.valor"
-													 placeholder="Temas de la pregunta">
-										
-										<span md-highlight-text="searchText">
-											{{item.valor}}
-										</span>
-									</md-autocomplete>
-									<md-chip-template>
-										<span> {{$chip.valor}} </span>
-									</md-chip-template>
-								</md-chips>
-                                
+                            <md-button class="md-raised" ng-click="crearPTestAbierta()">Guardar</md-button>
 
-								<md-input-container class="md-block">
-                                    <label>Enunciado de la pregunta</label>
-                                    <textarea ng-model="tituloTestAbierto"></textarea>
-                                </md-input-container>
-									
-								<div ng-repeat="respuestasAbierto in testAbierto">
-									<md-checkbox class="respuesta" ng-model="checkTestAbierto[$index]" 
-												 aria-label="respuestas test abierto">
-									</md-checkbox>
-									<md-input-container class="md-block respuesta">
-                                    	<label>Respuesta {{respuestasAbierto}}</label>
-                                    	<textarea ng-model="respuestasTestAbierto[$index]"></textarea>
-                                	</md-input-container>
-								</div>
-							
-								<md-button class="md-fab md-mini" ng-click="aniadirRespuestaTestAbierto()" 
-										   aria-label="crearPregunta abierta">
-        							<md-icon md-svg-src="img/mas.svg"></md-icon>
-    							</md-button>
+                        </div>
+                    </md-content>
+                </md-tab>
+            </md-tabs>
+        </md-dialog-content>
+    </form>
+</md-dialog>
 
-								<md-button class="md-raised" ng-click="crearPTestAbierta()">Guardar</md-button>
-
-							</div>
-                        </md-content>
-                    </md-tab>
-                </md-tabs>
-            </md-dialog-content>
-        </form>
-    </md-dialog>
-</div>
 
 
 
