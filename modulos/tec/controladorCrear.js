@@ -205,7 +205,8 @@ app.controller('controladorCrear', function (servicioRest, $scope, $mdDialog, $m
 		// If it is an object, it's already a known chip
 		if (angular.isObject(chip)) {
 			return chip;
-		}
+		}		
+		
 		// Otherwise, create a new one
 		servicioRest.postTema(chip)
 			.then(function(data) {
