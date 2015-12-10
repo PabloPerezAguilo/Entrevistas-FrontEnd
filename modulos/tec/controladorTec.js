@@ -1,4 +1,4 @@
-app.controller('controladorTec', function(servicioRest, $scope, $rootScope, $mdDialog, $timeout, $q, $log, $mdToast) {
+app.controller('controladorTec', function (servicioRest, $scope, $rootScope, $mdDialog, $timeout, $q, $log, $mdToast) {
 	
 	function toast(texto) {
 		$mdToast.show(
@@ -179,7 +179,7 @@ app.controller('controladorTec', function(servicioRest, $scope, $rootScope, $mdD
 			var tema = {
 				tags: [String]
 			}
-			tema.tags = item.tag;
+			tema.tags = item.tag.toLowerCase();
 			servicioRest.postPreguntasByTag(tema)
 				.then(function(data) {
 					$scope.preguntas = data;
@@ -206,8 +206,8 @@ app.controller('controladorTec', function(servicioRest, $scope, $rootScope, $mdD
 		}
 	}
 	
-	$scope.deleteChip = function(index) {
-		if(index === 0) {
+	$scope.deleteChip = function() {
+		if($scope.listaTemas.length === 0) {
 			getPreguntas();
 		} else {
 			var tema = {
