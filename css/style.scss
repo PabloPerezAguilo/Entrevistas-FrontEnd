@@ -434,10 +434,15 @@ md-checkbox[disabled] .md-label {
 	line-height: 40px;
     width: 40px;
     height: 40px;
+	border-radius: 50%
 }
 
 .md-button.icon.md-ink-ripple:focus {
 	background: $grisFondo;
+	border-radius: 50%;
+}
+
+.md-button.icon.md-ink-ripple:hover {
 	border-radius: 50%;
 }
 
@@ -494,6 +499,15 @@ md-list md-list-item.md-3-line .md-list-item-text h3 {
 	font-weight: bolder;
 }
 
+/*confirmacion*/
+.md-button.md-raised.confirm {
+	width: 5%;
+	margin-right: 0%;
+	margin-left: 0%;
+	margin-top: 0%;
+	margin-bottom: 0%;
+}
+
 /* media queries */
 
 @media screen and (min-height: 1024px) {
@@ -541,9 +555,6 @@ md-list md-list-item.md-3-line .md-list-item-text h3 {
 		height: 210px;
 	}
 }
-
-
-
 
 @media screen and (max-width: 784px) {
     .listaPreguntas {
