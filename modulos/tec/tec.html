@@ -2,11 +2,13 @@
     <md-button mfb-button class="md-fab md-mini" ng-click="crear($event)" aria-label="crearPregunta">
         <md-icon md-svg-src="img/crear.svg" class="btnIconoCentrado"></md-icon>
     </md-button>
+    
     <p></p>
 
     <md-list>
         <md-subheader class="md-no-sticky">Preguntas</md-subheader>
         <md-divider class="dividerPrincipal"></md-divider>
+        <md-icon md-svg-src="img/lupa.svg" class="iconoBuscar"></md-icon>
 		<div class="buscarTemas">
 			<md-chips ng-model="listaTemas" 
 					  md-autocomplete-snap=""
@@ -45,7 +47,7 @@
 					</p>
 				</div>
 				<md-button ng-click="ver($event,$index)" aria-label="ver pegrunta" class="md-button icon">
-					<md-icon md-svg-src="img/lupa.svg"></md-icon>
+					<md-icon md-svg-src="img/ojo.svg"></md-icon>
 					<md-tooltip md-direction="bottom">
 					  Ver
 					</md-tooltip>
