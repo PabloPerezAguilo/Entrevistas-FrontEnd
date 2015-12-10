@@ -47,10 +47,10 @@ table {
 /* ---------------------------------------------------------------------*/
 
 $negro: #1E1E1E;
-$naranja: #EF6C00;
-$grisLetra: #EFEFEF;
-$grisFondo: #F6F6F6;
-$naranjaClaro: rgba(239,108,0,0.17);
+$colorPrincipal: #EF6C00;
+$letra: #EFEFEF;
+$fondo: #F6F6F6;
+$colorPrincipalClaro: rgba(239,108,0,0.17);
 
 @mixin sombra($h,$v,$blur,$spread, $color) {
 	-webkit-box-shadow: $h $v $blur $spread $color;
@@ -72,7 +72,7 @@ $naranjaClaro: rgba(239,108,0,0.17);
 /* ------------------------- HEADER & FOOTER --------------------------------------- */
 header {
     background-color: $negro;
-    color: $grisLetra;
+    color: $letra;
     height: 90px;
     box-shadow: 2px 2px 30px grey;
 }
@@ -120,7 +120,7 @@ footer {
 #magniVersion {
     display: inline;
     float: right;
-    color: $grisLetra;
+    color: $letra;
     margin-top: 2%;
     margin-right: 2%;
 }
@@ -128,7 +128,7 @@ footer {
 #doneLoading {
     height: 5px;
     position: relative;
-    background-color: $naranja;
+    background-color: $colorPrincipal;
     top: 8%;
     box-shadow: 2px 2px 30px grey;
 }
@@ -139,7 +139,7 @@ footer {
 }
 
 md-progress-linear .md-bar {
-    background-color: $naranja;
+    background-color: $colorPrincipal;
 }
 
 md-progress-linear .md-container {
@@ -183,20 +183,20 @@ md-progress-linear .md-container {
 
 /*Textbox*/
 md-input-container:not(.md-input-invalid).md-input-focused .md-input{
-    border-color: $naranja;
+    border-color: $colorPrincipal;
 }
 
 md-input-container:not(.md-input-invalid).md-input-focused label {
-    color: $naranja;
+    color: $colorPrincipal;
 }
 
 /*Checkbox*/
 md-checkbox.md-checked .md-ink-ripple {
-    color: $naranja;
+    color: $colorPrincipal;
 }
 
 md-checkbox.md-checked .md-icon {
-    background-color: $naranja;
+    background-color: $colorPrincipal;
 }
 
 md-checkbox.md-default-theme.md-checked.md-focused .md-container:before, md-checkbox.md-checked.md-focused .md-container:before {
@@ -205,8 +205,8 @@ md-checkbox.md-default-theme.md-checked.md-focused .md-container:before, md-chec
 
 /*Button*/
 .md-button.md-raised {
-    color: $grisLetra;
-    background-color: $naranja;
+    color: $letra;
+    background-color: $colorPrincipal;
     width: 70%;
     margin-left: 15%;
     margin-right: 15%;
@@ -222,11 +222,11 @@ md-checkbox.md-default-theme.md-checked.md-focused .md-container:before, md-chec
 
 /*Toast*/
 md-toast.md-default-theme, md-toast {
-    background-color: $naranja;
-    color: $grisLetra;
+    background-color: $colorPrincipal;
+    color: $letra;
 }
 .md-button.md-raised:not([disabled]).md-focused {
-    background-color: $naranja;
+    background-color: $colorPrincipal;
 }
 
 /*Tab*/
@@ -235,7 +235,7 @@ md-tabs.md-accent > md-tabs-wrapper {
 }
 
 md-content md-tabs {
-    background: $grisFondo;
+    background: $fondo;
     vertical-align: middle;
 }
 
@@ -248,8 +248,8 @@ md-tabs.md-accent > md-tabs-wrapper > md-tabs-canvas > md-pagination-wrapper > m
 }
 
 md-tabs.md-accent > md-tabs-wrapper > md-tabs-canvas > md-pagination-wrapper > md-ink-bar {
-    color: $naranja;
-    background: $naranja;
+    color: $colorPrincipal;
+    background: $colorPrincipal;
 }
 
 md-tabs:not(.md-no-tab-content):not(.md-dynamic-height) {
@@ -267,7 +267,7 @@ md-tabs:not(.md-no-tab-content):not(.md-dynamic-height) {
 }
 
 .md-button.md-fab {
-    background-color: $naranja;
+    background-color: $colorPrincipal;
 }
 
 .md-button.md-fab:not([disabled]):hover {
@@ -284,8 +284,8 @@ md-tabs:not(.md-no-tab-content):not(.md-dynamic-height) {
 }
 
 md-toolbar:not(.md-menu-toolbar) {
-    background-color: $naranja;
-    color: $grisLetra;
+    background-color: $colorPrincipal;
+    color: $letra;
 }
 
 .dialogdemoBasicUsage #popupContainer {
@@ -308,7 +308,7 @@ md-tabs .md-tab .md-ripple-container {
 }
 
 md-tabs md-ink-bar {
-   background: $naranja;
+   background: $colorPrincipal;
 }
 
 .contenidoTablaCrear {
@@ -316,20 +316,20 @@ md-tabs md-ink-bar {
 }
 
 md-slider .md-thumb:after {
-    border-color: $naranja;
-    background-color: $naranja;
+    border-color: $colorPrincipal;
+    background-color: $colorPrincipal;
 }
 
 md-slider .md-sign {
-    background-color: $naranja;
+    background-color: $colorPrincipal;
 }
 
 md-slider .md-sign:after {
-    border-top-color: $naranja;
+    border-top-color: $colorPrincipal;
 }
 
 md-slider .md-track.md-track-fill {
-    background-color: $naranja;
+    background-color: $colorPrincipal;
 }
 
 .sliderdemoBasicUsage input[type="number"] {
@@ -338,15 +338,15 @@ md-slider .md-track.md-track-fill {
 }
 
 md-chips .md-chips.md-focused {
-    box-shadow: 0 2px $naranja;
+    box-shadow: 0 2px $colorPrincipal;
 }
 
 md-radio-button.md-checked .md-off {
-    border-color: $naranja;
+    border-color: $colorPrincipal;
 }
 
 md-radio-button .md-on {
-    background-color: $naranja;
+    background-color: $colorPrincipal;
 }
 
 md-radio-group .md-checked .md-ink-ripple {
@@ -379,13 +379,13 @@ md-checkbox.respuesta {
 }
 
 md-radio-group.md-default-theme.md-focused:not(:empty) .md-checked .md-container:before, md-radio-group.md-focused:not(:empty) .md-checked .md-container:before {
-    background-color: $naranjaClaro;
+    background-color: $colorPrincipalClaro;
 }
 
 /*Ver pregunta*/
 
 md-checkbox[disabled].md-checked .md-icon {
-    background-color: $naranja;
+    background-color: $colorPrincipal;
 }
 
 md-checkbox[disabled] .md-label {
@@ -438,7 +438,7 @@ md-checkbox[disabled] .md-label {
 }
 
 .md-button.icon.md-ink-ripple:focus {
-	background: $grisFondo;
+	background: $fondo;
 	border-radius: 50%;
 }
 
@@ -638,32 +638,32 @@ rzslider .rz-bubble.rz-limit {
     opacity: 0!important;
 }
 rzslider .rz-pointer:after {
-    //background: $naranja;
+    //background: $colorPrincipal;
     display: none;
     background: none;
 }
 rzslider .rz-pointer:hover:after {
-    //background-color: $naranja;
+    //background-color: $colorPrincipal;
     display: none;
     background-color: none;
 }/*
 rzslider .rz-pointer:before {
-    background: $naranja;
+    background: $colorPrincipal;
 }
 rzslider .rz-pointer:after {
-    background: $naranja;
+    background: $colorPrincipal;
 }*/
 rzslider .rz-pointer {
-    background-color: $naranja;
+    background-color: $colorPrincipal;
     top: -7px;
     width: 16px;
     height: 16px;
 }
 rzslider .rz-bar.rz-selection {
-    background: $naranja;
+    background: $colorPrincipal;
 }
 rzslider .rz-pointer.rz-active:after {
-    //background-color: $naranja;
+    //background-color: $colorPrincipal;
     display: none;
 }
 rzslider .rz-bar {
