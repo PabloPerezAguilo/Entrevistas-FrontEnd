@@ -412,17 +412,29 @@ md-list md-list-item.md-3-line .md-list-item-text h3 {
     margin-top: 1%;
     margin-right: 1%; } }
 
-@media screen and (min-height: 551px) and (max-height: 700px) {
+@media screen and (min-height: 620px) and (max-height: 700px) {
   .listaPreguntas {
-    height: 400px; } }
+    height: 300px; } }
 
-@media screen and (min-height: 701px) and (max-height: 820px) {
+@media screen and (min-height: 801px) and (max-height: 900px) {
   .listaPreguntas {
     height: 500px; } }
 
-@media screen and (min-height: 440px) and (max-height: 550px) {
+@media screen and (min-height: 701px) and (max-height: 800px) {
   .listaPreguntas {
-    height: 210px; } }
+    height: 400px; } }
+
+@media screen and (min-height: 560px) and (max-height: 620px) {
+  .listaPreguntas {
+    height: 250px; } }
+
+@media screen and (min-height: 510px) and (max-height: 561px) {
+  .listaPreguntas {
+    height: 200px; } }
+
+@media screen and (min-height: 250px) and (max-height: 511px) {
+  .listaPreguntas {
+    height: 140px; } }
 
 @media screen and (max-width: 784px) {
   .listaPreguntas {
