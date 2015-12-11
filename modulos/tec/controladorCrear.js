@@ -248,9 +248,9 @@ app.controller('controladorCrear', function (servicioRest, $scope, $mdDialog, $m
 		if(index === 0) { 
 			$scope.temasAbierta = [];
 		} else {
-			$scope.temasAbierta[index] = null;
-			$scope.deleteChip()
-		}
+			$scope.temasAbierta.splice(index,1);
+        }
+        
 	}
 	
     function createFilterFor(query) {
