@@ -205,10 +205,22 @@ app.controller('controladorCrear', function (servicioRest, $scope, $mdDialog, $m
 		// If it is an object, it's already a known chip
 		if (angular.isObject(chip)) {
 			return chip;
-		}		
+		}
+		$scope.confirmacionAbierta = true;
+		$scope.tema = chip;
 		
-		// Otherwise, create a new one
-		servicioRest.postTema(chip)
+		console.log($rootScope.temas);
+		return { valor: chip};
+	}
+	
+	$scope.deleteChip = function() {
+		$scope.confirmacionAbierta = false;
+	}
+	
+	/*confirmacion*/
+	
+	$scope.crearTema = function(chip) {
+		servicioRest.postTema($scope.tema)
 			.then(function(data) {
 				$rootScope.obtenerTemas();
             })
@@ -217,8 +229,28 @@ app.controller('controladorCrear', function (servicioRest, $scope, $mdDialog, $m
 			console.log(err);
 			});
 		
-		console.log($rootScope.temas);
-		return { valor: chip};
+		$scope.confirmacionAbierta = false;
+	}
+	
+	//obtener la posicion de un tema en el array del md-chip, no he conseguido hacerlo con $index
+	function buscarTema(tema) {
+		for(var i = 0; i < $scope.temasAbierta.length; i++) {
+			if(tema === $scope.temasAbierta[i].valor || tema === $scope.temasAbierta[i].valor.toLowerCase()) {
+				return i;
+			}
+		}
+	}
+	
+	$scope.cerrarConfirm = function(chip) {
+		$scope.confirmacionAbierta = false;
+		console.log(chip);
+		var index = buscarTema($scope.tema);
+		if(index === 0) { 
+			$scope.temasAbierta = [];
+		} else {
+			$scope.temasAbierta[index] = null;
+			$scope.deleteChip()
+		}
 	}
 	
     function createFilterFor(query) {

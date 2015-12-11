@@ -1,4 +1,4 @@
-<md-dialog fullscreen="true">
+<md-dialog fullscreen="true" ng-init="confirmacionAbierta=false;confirmacionTest=false;confirmacionTestAbierto=false">
     <form>
         <md-toolbar>
             <div class="md-toolbar-tools">
@@ -23,7 +23,8 @@
                             </md-slider>
 
                             <md-chips ng-model="temasAbierta" md-autocomplete-snap="" 
-                                      md-transform-chip="transformChip($chip)" md-require-match="false">
+                                      md-transform-chip="transformChip($chip)" md-require-match="false"
+									  md-on-remove="deleteChip()">
                                 <md-autocomplete md-selected-item="selectedItem" md-search-text="searchText"
                                                  md-items="item in queryBuscarTema(searchText)"
                                                  md-item-text="item.valor"
@@ -37,6 +38,14 @@
                                     <span> {{$chip.valor}} </span>
                                 </md-chip-template>
                             </md-chips>
+							
+							<div class="cntConf" ng-show="confirmacionAbierta">
+								<p>¿Está seguro de que quiere crear el tema {{tema}}?</p>
+								<div class="cntBtn">
+									<md-button class="md-raised confirm" ng-click="crearTema($chip)">Si</md-button>
+									<md-button class="md-raised confirm" ng-click="cerrarConfirm($chip)">No</md-button>
+								</div>
+							</div>
 
                             <md-input-container class="md-block">
                                 <label>Enunciado de la pregunta</label>
