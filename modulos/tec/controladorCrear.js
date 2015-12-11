@@ -201,26 +201,59 @@ app.controller('controladorCrear', function (servicioRest, $scope, $mdDialog, $m
       });
 	}
 	
-    $scope.transformChip = function transformChip(chip) {
+    $scope.transformChip = function transformChipAbierta(chip, tipo) {
 		// If it is an object, it's already a known chip
-		if (angular.isObject(chip)) {
-			return chip;
+		if (buscarTema(chip, $scope.temasCargados) != -1) {
+			var tema = {
+				tag: chip,
+				valor: chip.toLowerCase()	
+			}
+			return tema;
 		}
-		$scope.confirmacionAbierta = true;
-		$scope.tema = chip;
+		
+		if(tipo === 'ABIERTA') {		
+			$scope.confirmacionAbierta = true;
+			$scope.temaAbierta = chip;
+			$scope.desabilitadoAbierta = true;
+		}
+		
+		if(tipo === 'TEST') {		
+			$scope.confirmacionTest = true;
+			$scope.temaTest = chip;
+			$scope.desabilitadoTest = true;
+		}
+		
+		if(tipo === 'TEST_ABIERTO') {		
+			$scope.confirmacionTestAbierto = true;
+			$scope.temaTestAbierto = chip;
+			$scope.desabilitadoTestAbierto = true;
+		}
 		
 		console.log($rootScope.temas);
 		return { valor: chip};
 	}
 	
 	$scope.deleteChip = function() {
-		$scope.confirmacionAbierta = false;
+		if($scope.confirmacionAbierta) {
+			$scope.confirmacionAbierta = false;
+			$scope.desabilitadoAbierta = false;
+		}
+		
+		if($scope.confirmacionTest) {
+			$scope.confirmacionTest = false;
+			$scope.desabilitadoTest = false;
+		}
+		
+		if($scope.confirmacionTestAbierto) {
+			$scope.confirmacionTestAbierto = false;
+			$scope.desabilitadoTestAbierto = false;
+		}        
 	}
 	
 	/*confirmacion*/
 	
-	$scope.crearTema = function(chip) {
-		servicioRest.postTema($scope.tema)
+	function nuevoTema(tema) {
+		servicioRest.postTema(tema)
 			.then(function(data) {
 				$rootScope.obtenerTemas();
             })
@@ -228,29 +261,71 @@ app.controller('controladorCrear', function (servicioRest, $scope, $mdDialog, $m
 			console.log("Error");
 			console.log(err);
 			});
-		
-		$scope.confirmacionAbierta = false;
 	}
 	
-	//obtener la posicion de un tema en el array del md-chip, no he conseguido hacerlo con $index
-	function buscarTema(tema) {
-		for(var i = 0; i < $scope.temasAbierta.length; i++) {
-			if(tema === $scope.temasAbierta[i].valor || tema === $scope.temasAbierta[i].valor.toLowerCase()) {
-				return i;
-			}
+	$scope.crearTema = function(chip) {
+		if($scope.confirmacionAbierta) {
+			nuevoTema($scope.temaAbierta);
+			$scope.confirmacionAbierta = false;
+			$scope.desabilitadoAbierta = false;
+		}
+		
+		if($scope.confirmacionTest) {
+			nuevoTema($scope.temaTest);
+			$scope.confirmacionTest = false;
+			$scope.desabilitadoTest = false;
+		}
+		
+		if($scope.confirmacionTestAbierto) {
+			nuevoTema($scope.temaTestAbierto);
+			$scope.confirmacionTestAbierto = false;
+			$scope.desabilitadoTestAbierto = false;
 		}
 	}
 	
+	//obtener la posicion de un tema en el array del md-chip, no he conseguido hacerlo con $index
+	function buscarTema(tema, array) {
+		for(var i = 0; i < array.length; i++) {
+			if(tema === array[i].valor || tema === array[i].valor.toLowerCase()) {
+				return i;
+			}
+		}
+		return -1;
+	}
+	
 	$scope.cerrarConfirm = function(chip) {
-		$scope.confirmacionAbierta = false;
-		console.log(chip);
-		var index = buscarTema($scope.tema);
-		if(index === 0) { 
-			$scope.temasAbierta = [];
-		} else {
-			$scope.temasAbierta.splice(index,1);
-        }
-        
+		if($scope.confirmacionAbierta) {
+			$scope.confirmacionAbierta = false;
+			$scope.desabilitadoAbierta = false;
+			var indexAbierta = buscarTema($scope.temaAbierta, $scope.temasAbierta);
+			if(indexAbierta === 0) { 
+				$scope.temasAbierta = [];
+			} else {
+				$scope.temasAbierta.splice(indexAbierta, 1);
+			}
+		}
+		
+		if($scope.confirmacionTest) {
+			$scope.confirmacionTest = false;
+			$scope.desabilitadoTest = false;
+			var indexTest = buscarTema($scope.temaTest, $scope.temasTest);
+			if(indexTest === 0) { 
+				$scope.temasTest = [];
+			} else {
+				$scope.temasTest.splice(indexTest, 1);
+			}
+		}
+		
+		if($scope.confirmacionTestAbierto) {
+			$scope.confirmacionTestAbierto = false;
+			$scope.desabilitadoTestAbierto = false;
+			var indexTestAbierto = buscarTema($scope.temaTestAbierto, $scope.temasTestAbierto);
+			if(indexTestAbierto === 0) { 
+				$scope.temasTestAbierto = [];
+			} else {
+				$scope.temasTestAbierto.splice(indexTestAbierto, 1);
+			}
+		}        
 	}
 	
     function createFilterFor(query) {
