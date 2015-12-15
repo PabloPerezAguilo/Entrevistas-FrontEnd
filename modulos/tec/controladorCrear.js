@@ -203,30 +203,34 @@ app.controller('controladorCrear', function (servicioRest, $scope, $mdDialog, $m
 	
     $scope.transformChip = function transformChipAbierta(chip, tipo) {
 		// If it is an object, it's already a known chip
-		if (buscarTema(chip, $scope.temasCargados) != -1) {
+		if (buscarTema(chip, $scope.temasCargados) != -1)  {
 			var tema = {
 				tag: chip,
 				valor: chip.toLowerCase()	
 			}
-			return tema;
+			return tema;			
+		}
+		
+		if(angular.isObject(chip)) {
+			return chip;
 		}
 		
 		if(tipo === 'ABIERTA') {		
 			$scope.confirmacionAbierta = true;
 			$scope.temaAbierta = chip;
-			$scope.desabilitadoAbierta = true;
+			$scope.deshabilitadoAbierta = true;
 		}
 		
 		if(tipo === 'TEST') {		
 			$scope.confirmacionTest = true;
 			$scope.temaTest = chip;
-			$scope.desabilitadoTest = true;
+			$scope.deshabilitadoTest = true;
 		}
 		
 		if(tipo === 'TEST_ABIERTO') {		
 			$scope.confirmacionTestAbierto = true;
 			$scope.temaTestAbierto = chip;
-			$scope.desabilitadoTestAbierto = true;
+			$scope.deshabilitadoTestAbierto = true;
 		}
 		
 		console.log($rootScope.temas);
@@ -236,17 +240,17 @@ app.controller('controladorCrear', function (servicioRest, $scope, $mdDialog, $m
 	$scope.deleteChip = function() {
 		if($scope.confirmacionAbierta) {
 			$scope.confirmacionAbierta = false;
-			$scope.desabilitadoAbierta = false;
+			$scope.deshabilitadoAbierta = false;
 		}
 		
 		if($scope.confirmacionTest) {
 			$scope.confirmacionTest = false;
-			$scope.desabilitadoTest = false;
+			$scope.deshabilitadoTest = false;
 		}
 		
 		if($scope.confirmacionTestAbierto) {
 			$scope.confirmacionTestAbierto = false;
-			$scope.desabilitadoTestAbierto = false;
+			$scope.dehsabilitadoTestAbierto = false;
 		}        
 	}
 	
@@ -267,19 +271,19 @@ app.controller('controladorCrear', function (servicioRest, $scope, $mdDialog, $m
 		if($scope.confirmacionAbierta) {
 			nuevoTema($scope.temaAbierta);
 			$scope.confirmacionAbierta = false;
-			$scope.desabilitadoAbierta = false;
+			$scope.deshabilitadoAbierta = false;
 		}
 		
 		if($scope.confirmacionTest) {
 			nuevoTema($scope.temaTest);
 			$scope.confirmacionTest = false;
-			$scope.desabilitadoTest = false;
+			$scope.deshabilitadoTest = false;
 		}
 		
 		if($scope.confirmacionTestAbierto) {
 			nuevoTema($scope.temaTestAbierto);
 			$scope.confirmacionTestAbierto = false;
-			$scope.desabilitadoTestAbierto = false;
+			$scope.deshabilitadoTestAbierto = false;
 		}
 	}
 	
@@ -296,7 +300,7 @@ app.controller('controladorCrear', function (servicioRest, $scope, $mdDialog, $m
 	$scope.cerrarConfirm = function(chip) {
 		if($scope.confirmacionAbierta) {
 			$scope.confirmacionAbierta = false;
-			$scope.desabilitadoAbierta = false;
+			$scope.deshabilitadoAbierta = false;
 			var indexAbierta = buscarTema($scope.temaAbierta, $scope.temasAbierta);
 			if(indexAbierta === 0) { 
 				$scope.temasAbierta = [];
@@ -307,7 +311,7 @@ app.controller('controladorCrear', function (servicioRest, $scope, $mdDialog, $m
 		
 		if($scope.confirmacionTest) {
 			$scope.confirmacionTest = false;
-			$scope.desabilitadoTest = false;
+			$scope.deshabilitadoTest = false;
 			var indexTest = buscarTema($scope.temaTest, $scope.temasTest);
 			if(indexTest === 0) { 
 				$scope.temasTest = [];
@@ -318,7 +322,7 @@ app.controller('controladorCrear', function (servicioRest, $scope, $mdDialog, $m
 		
 		if($scope.confirmacionTestAbierto) {
 			$scope.confirmacionTestAbierto = false;
-			$scope.desabilitadoTestAbierto = false;
+			$scope.deshabilitadoTestAbierto = false;
 			var indexTestAbierto = buscarTema($scope.temaTestAbierto, $scope.temasTestAbierto);
 			if(indexTestAbierto === 0) { 
 				$scope.temasTestAbierto = [];
