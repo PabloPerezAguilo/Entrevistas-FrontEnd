@@ -25,22 +25,22 @@ app.controller('controladorCrear', function (servicioRest, $scope, $mdDialog, $m
 	}
     
 	/* ----------- Respuestas tests ----------- */
-	$scope.nivelAbierta = 1;
-    $scope.nivelTest = 1;
-    $scope.nivelTestAbierto = 1;
+	$scope.nivelAbierta = 5;
+    $scope.nivelTest = 5;
+    $scope.nivelTestAbierto = 5;
 		
 	$scope.respuestasTest = [];
 	$scope.test = ['1', '2'];
-	$scope.contTest = 2;
+	var contTest = 2;
 	$scope.radioTest = 1;
 	
 	$scope.respuestasTestAbierto = [];
 	$scope.testAbierto = ['1', '2'];
-	$scope.contTestAbierto = 2;
+	var contTestAbierto = 2;
 	$scope.checkTestAbierto = [false, false];
 	
-	$scope.temas;
-	$scope.temasCargados;
+	var temas;
+	var temasCargados;
 	$scope.temasAbierta = [];
 	$scope.temasTest = [];
 	$scope.temasTestAbierto = [];
@@ -81,8 +81,8 @@ app.controller('controladorCrear', function (servicioRest, $scope, $mdDialog, $m
             pregunta.type = "SINGLE_CHOICE";
             servicioRest.getTemas()
 			.then(function(data) {
-				$scope.temas = data;			
-				$scope.temasCargados = cargarTemas();
+				temas = data;			
+				temasCargados = cargarTemas();
 			})
 			.catch(function (err) {
 			});
@@ -93,7 +93,7 @@ app.controller('controladorCrear', function (servicioRest, $scope, $mdDialog, $m
             pregunta.level = $scope.nivelTest;
             pregunta.answers = [];
 
-            for (i = 0;i < $scope.contTest;i++) {            
+            for (i = 0;i < contTest;i++) {            
                 pregunta.answers.push({title: $scope.respuestasTest[i], valid: false});
             }
 
@@ -114,8 +114,8 @@ app.controller('controladorCrear', function (servicioRest, $scope, $mdDialog, $m
             pregunta.type = "MULTI_CHOICE";
             servicioRest.getTemas()
 		.then(function(data) {
-			$scope.temas = data;			
-			$scope.temasCargados = cargarTemas();
+			temas = data;			
+			temasCargados = cargarTemas();
 		})
 		.catch(function (err) {
 		});
@@ -126,7 +126,7 @@ app.controller('controladorCrear', function (servicioRest, $scope, $mdDialog, $m
             pregunta.level = $scope.nivelTestAbierto;
             pregunta.answers = [];
 
-            for (i = 0; i < $scope.contTestAbierto; i++) {            
+            for (i = 0; i < contTestAbierto; i++) {            
                 pregunta.answers.push({title: $scope.respuestasTestAbierto[i], valid: $scope.checkTestAbierto[i]});
             }
 
@@ -172,13 +172,13 @@ app.controller('controladorCrear', function (servicioRest, $scope, $mdDialog, $m
     };
 	
 	$scope.aniadirRespuestaTest = function () {
-		$scope.contTest += 1;
-		$scope.test.push($scope.contTest);
+		contTest += 1;
+		$scope.test.push(contTest);
 	};
 	
 	$scope.aniadirRespuestaTestAbierto = function () {
-		$scope.contTestAbierto += 1;
-		$scope.testAbierto.push($scope.contTestAbierto);
+		contTestAbierto += 1;
+		$scope.testAbierto.push(contTestAbierto);
 		$scope.checkTestAbierto.push(false);
 	};
 	
@@ -187,25 +187,25 @@ app.controller('controladorCrear', function (servicioRest, $scope, $mdDialog, $m
 	
 	servicioRest.getTemas()
 		.then(function(data) {
-			$scope.temas = data;			
-			$scope.temasCargados = cargarTemas();
+			temas = data;			
+			temasCargados = cargarTemas();
 		})
 		.catch(function (err) {
 		});
 	
     function cargarTemas() {
-		$scope.temasCargados = $scope.temas;
-		return $scope.temasCargados.map( function (tema) {
+		temasCargados = temas;
+		return temasCargados.map( function (tema) {
 			tema.valor = tema.tag.toLowerCase();
 			return tema;          
       });
 	}
 	
     $scope.transformChip = function (chip, tipo) {
-		var index = buscarTema(chip, $scope.temasCargados);
-		console.log($scope.temasCargados)
+		var index = buscarTema(chip, temasCargados);
+		console.log(temasCargados)
 		//si existe el tema
-		if (buscarTema(chip, $scope.temasCargados) != -1)  {
+		if (buscarTema(chip, temasCargados) != -1)  {
 			var tema = {
 				tag: chip,
 				valor: chip.toLowerCase()
@@ -235,7 +235,7 @@ app.controller('controladorCrear', function (servicioRest, $scope, $mdDialog, $m
 			if(tipo === 'ABIERTA') {
 				//si no esta en la lista de los temas ya seleccionados añadirlo
 				if(buscarTema(chip, $scope.temasAbierta) === -1) {
-					console.log($scope.temasCargados);
+					console.log(temasCargados);
 					return chip;	
 				}
 			}
@@ -395,7 +395,7 @@ app.controller('controladorCrear', function (servicioRest, $scope, $mdDialog, $m
 	}
 		
     $scope.queryBuscarTema = function (query) {
-		var results = query ? $scope.temasCargados.filter(filtrar(query)) : [];
+		var results = query ? temasCargados.filter(filtrar(query)) : [];
 		return results;
 	}
 });
