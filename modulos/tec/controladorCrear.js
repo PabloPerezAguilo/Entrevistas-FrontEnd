@@ -80,12 +80,12 @@ app.controller('controladorCrear', function (servicioRest, $scope, $mdDialog, $m
             pregunta.title = $scope.tituloTest;
             pregunta.type = "SINGLE_CHOICE";
             servicioRest.getTemas()
-		.then(function(data) {
-			$scope.temas = data;			
-			$scope.temasCargados = cargarTemas();
-		})
-		.catch(function (err) {
-		});
+			.then(function(data) {
+				$scope.temas = data;			
+				$scope.temasCargados = cargarTemas();
+			})
+			.catch(function (err) {
+			});
             for(i=0;i<$scope.temasTest.length;i++)
             {
                 pregunta.tags[i] = $scope.temasTest[i].valor;
@@ -194,47 +194,93 @@ app.controller('controladorCrear', function (servicioRest, $scope, $mdDialog, $m
 		});
 	
     function cargarTemas() {
-		var temasCargados = $scope.temas;
-		return temasCargados.map( function (tema) {
+		$scope.temasCargados = $scope.temas;
+		return $scope.temasCargados.map( function (tema) {
 			tema.valor = tema.tag.toLowerCase();
 			return tema;          
       });
 	}
 	
-    $scope.transformChip = function transformChipAbierta(chip, tipo) {
-		// If it is an object, it's already a known chip
+    $scope.transformChip = function (chip, tipo) {
+		var index = buscarTema(chip, $scope.temasCargados);
+		console.log($scope.temasCargados)
+		//si existe el tema
 		if (buscarTema(chip, $scope.temasCargados) != -1)  {
 			var tema = {
 				tag: chip,
-				valor: chip.toLowerCase()	
+				valor: chip.toLowerCase()
 			}
-			return tema;			
+			if(tipo === 'ABIERTA') {
+				//si no esta en la lista de los temas ya seleccionados añadirlo
+				if(buscarTema(chip, $scope.temasAbierta) === -1) {
+					return tema;	
+				}
+			}
+			if(tipo === 'TEST') {
+				//si no esta en la lista de los temas ya seleccionados añadirlo
+				if(buscarTema(chip, $scope.temasTest) === -1) {
+					return tema;	
+				}
+			}
+			if(tipo === 'TEST_ABIERTO') {
+				//si no esta en la lista de los temas ya seleccionados añadirlo
+				if(buscarTema(chip, $scope.temasTestAbierto) === -1) { 
+					return tema;	
+				}
+			}
 		}
 		
+		//si lo selecciona de la lista desplegable
 		if(angular.isObject(chip)) {
-			return chip;
+			if(tipo === 'ABIERTA') {
+				//si no esta en la lista de los temas ya seleccionados añadirlo
+				if(buscarTema(chip, $scope.temasAbierta) === -1) {
+					console.log($scope.temasCargados);
+					return chip;	
+				}
+			}
+			if(tipo === 'TEST') {
+				//si no esta en la lista de los temas ya seleccionados añadirlo
+				if(buscarTema(chip, $scope.temasTest) === -1) {
+					return chip;	
+				}
+			}
+			if(tipo === 'TEST_ABIERTO') {
+				//si no esta en la lista de los temas ya seleccionados añadirlo
+				if(buscarTema(chip, $scope.temasTestAbierto) === -1) { 
+					return chip;	
+				}
+			}
 		}
 		
-		if(tipo === 'ABIERTA') {		
-			$scope.confirmacionAbierta = true;
-			$scope.temaAbierta = chip;
-			$scope.deshabilitadoAbierta = true;
+		//si no existe el tema
+		if(tipo === 'ABIERTA') {			
+			if(buscarTema(chip, $scope.temasAbierta) === -1) {
+				$scope.confirmacionAbierta = true;
+				$scope.temaAbierta = chip;
+				$scope.deshabilitadoAbierta = true;
+				return { valor: chip};
+			}
 		}
 		
-		if(tipo === 'TEST') {		
-			$scope.confirmacionTest = true;
-			$scope.temaTest = chip;
-			$scope.deshabilitadoTest = true;
+		if(tipo === 'TEST') {
+			if(buscarTema(chip, $scope.temasTest) === -1) {
+				$scope.confirmacionTest = true;
+				$scope.temaTest = chip;
+				$scope.deshabilitadoTest = true;
+				return { valor: chip};
+			}
 		}
 		
-		if(tipo === 'TEST_ABIERTO') {		
-			$scope.confirmacionTestAbierto = true;
-			$scope.temaTestAbierto = chip;
-			$scope.deshabilitadoTestAbierto = true;
+		if(tipo === 'TEST_ABIERTO') {
+			if(buscarTema(chip, $scope.temasTest) === -1) {
+				$scope.confirmacionTestAbierto = true;
+				$scope.temaTestAbierto = chip;
+				$scope.deshabilitadoTestAbierto = true;
+				return { valor: chip};
+			}
 		}
-		
-		console.log($rootScope.temas);
-		return { valor: chip};
+		return null;
 	}
 	
 	$scope.deleteChip = function() {
