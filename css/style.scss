@@ -261,6 +261,19 @@ md-tabs:not(.md-no-tab-content):not(.md-dynamic-height) {
 }
 
 /*------------------------------TECNICO*------------------------------*/
+/*md-chips*/
+md-chips .md-chip.md-focused {
+	background-color: $colorPrincipal;
+}
+
+.md-autocomplete-suggestions li:not(.md-not-found-wrapper):hover {
+	background-color: $colorPrincipalClaro;
+}
+
+.md-autocomplete-suggestions li:not(.md-not-found-wrapper).selected {
+	background-color: $colorPrincipalClaro;
+}
+
 /*Crear pregunta*/
 .enLinea {
 	display: inline-block;
@@ -634,6 +647,23 @@ md-list md-list-item.md-3-line .md-list-item-text h3 {
     }
 }
 
+
+/*------------------------------ADMIN----------------------*/
+.md-datepicker-open .md-datepicker-calendar-icon {
+    fill: $colorPrincipal;
+}
+
+.md-datepicker-input-container.md-datepicker-focused {
+	border-bottom-color: $colorPrincipal;
+}
+
+.md-calendar-date.md-focus.md-calendar-selected-date .md-calendar-date-selection-indicator {
+	background-color: $colorPrincipal;
+}
+
+.md-calendar-date.md-calendar-date-today .md-calendar-date-selection-indicator {
+	    border: 1px solid $colorPrincipal;
+}
 
 /*Range Slider*/
 rzslider .rz-bubble.rz-limit {
