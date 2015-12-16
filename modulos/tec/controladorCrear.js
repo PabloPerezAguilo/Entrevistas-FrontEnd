@@ -335,8 +335,9 @@ app.controller('controladorCrear', function (servicioRest, $scope, $mdDialog, $m
 	
 	//obtener la posicion de un tema en el array del md-chip, no he conseguido hacerlo con $index
 	function buscarTema(tema, array) {
+		tema = tema.toLowerCase();
 		for(var i = 0; i < array.length; i++) {
-			if(tema === array[i].valor || tema === array[i].valor.toLowerCase()) {
+			if(tema === array[i].valor) {
 				return i;
 			}
 		}
