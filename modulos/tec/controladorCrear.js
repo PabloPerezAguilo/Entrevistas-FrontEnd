@@ -1,19 +1,17 @@
-app.controller('controladorCrear', function (servicioRest, $scope, $mdDialog, $mdToast, $rootScope) {
+app.controller('controladorCrear', function (servicioRest, $scope, $mdDialog, $mdToast, $rootScope, $log) {
     
     var Options = {
         title: { type: String },
         valid: { type: Boolean }
-    };
-    
-    var pregunta = {
-        _id: { type: String },
+    }, pregunta = {
+		_id: { type: String },
 		title: { type: String, required: true },
         type: { type: String, required: true },
         tags: [String],
         level: { type: Number, min: 1, max: 10, required: true },
         directive: { type: String },
         answers: [Options]
-    };
+    }, temas, temasCargados, contTest = 2, contTestAbierto = 2;
 	
     function toast(texto) {
 		$mdToast.show(
@@ -25,22 +23,19 @@ app.controller('controladorCrear', function (servicioRest, $scope, $mdDialog, $m
 	$scope.nivelAbierta = 5;
     $scope.nivelTest = 5;
     $scope.nivelTestAbierto = 5;
-		
+	
 	$scope.respuestasTest = [];
 	$scope.test = ['1', '2'];
-	var contTest = 2;
 	$scope.radioTest = 1;
 	
 	$scope.respuestasTestAbierto = [];
 	$scope.testAbierto = ['1', '2'];
-	var contTestAbierto = 2;
 	$scope.checkTestAbierto = [false, false];
 	
-	var temas;
-	var temasCargados;
 	$scope.temasAbierta = [];
 	$scope.temasTest = [];
 	$scope.temasTestAbierto = [];
+	
 	$scope.readonly = false;
     $scope.selectedItem = null;
     $scope.searchText = null;
@@ -88,42 +83,17 @@ app.controller('controladorCrear', function (servicioRest, $scope, $mdDialog, $m
 	}
 	
     $scope.crearPTest = function () {
-		var i;
-        if (preguntaVacia("test")) {
+		if (preguntaVacia("test")) {
             toast("Rellena todos los campos obligatorios");
         } else {
+			var i;
             pregunta.title = $scope.tituloTest;
             pregunta.type = "SINGLE_CHOICE";
-            
-			
-			
-			
-			
-			
-			
-			
-			
-			/*
-			servicioRest.getTemas()
-				.then(function (data) {
-					temas = data;
-					temasCargados = cargarTemas();
-			})
-			.catch(function (err) {
-			});*/
-			
-			
-			
-			
-			
-			
-			
             for (i = 0; i < $scope.temasTest.length; i++) {
                 pregunta.tags[i] = $scope.temasTest[i].valor;
             }
-            pregunta.level = $scope.nivelTest;
+			pregunta.level = $scope.nivelTest;
             pregunta.answers = [];
-
             for (i = 0; i < contTest; i++) {
                 pregunta.answers.push({title: $scope.respuestasTest[i], valid: false});
             }
@@ -134,40 +104,17 @@ app.controller('controladorCrear', function (servicioRest, $scope, $mdDialog, $m
     };
 	
     $scope.crearPTestAbierta = function () {
-		var i;
         if (preguntaVacia("testAbierta")) {
             toast("Rellena todos los campos obligatorios");
         } else {
             pregunta.title = $scope.tituloTestAbierto;
             pregunta.type = "MULTI_CHOICE";
-            
-			
-			
-			
-			
-			
-			
-			
-			
-			/*
-			servicioRest.getTemas()
-				.then(function (data) {
-					temas = data;
-					temasCargados = cargarTemas();
-				})
-				.catch(function (err) {
-			});*/
-			
-			
-			
-			
-			
+			var i;
             for (i = 0; i < $scope.temasTestAbierto.length; i++) {
                 pregunta.tags[i] = $scope.temasTestAbierto[i].valor;
             }
             pregunta.level = $scope.nivelTestAbierto;
             pregunta.answers = [];
-
             for (i = 0; i < contTestAbierto; i++) {
                 pregunta.answers.push({title: $scope.respuestasTestAbierto[i], valid: $scope.checkTestAbierto[i]});
             }
@@ -207,6 +154,7 @@ app.controller('controladorCrear', function (servicioRest, $scope, $mdDialog, $m
 			temasCargados = cargarTemas();
 		})
 		.catch(function (err) {
+			$log.error("Error al cargar los temas: " + err);
 		});
 	
 	function buscarTema(tema, array) {
@@ -222,9 +170,9 @@ app.controller('controladorCrear', function (servicioRest, $scope, $mdDialog, $m
 	
     $scope.transformChip = function (chip, tipo) {
 		var index = buscarTema(chip, temasCargados);
-		console.log(temasCargados);
+
 		//si existe el tema
-		if (buscarTema(chip, temasCargados) !== -1)  {
+		if (buscarTema(chip, temasCargados) !== -1) {
 			var tema = {
 				tag: chip,
 				valor: chip.toLowerCase()
@@ -254,7 +202,6 @@ app.controller('controladorCrear', function (servicioRest, $scope, $mdDialog, $m
 			if (tipo === 'ABIERTA') {
 				//si no esta en la lista de los temas ya seleccionados añadirlo
 				if (buscarTema(chip, $scope.temasAbierta) === -1) {
-					console.log(temasCargados);
 					return chip;
 				}
 			}
@@ -327,8 +274,7 @@ app.controller('controladorCrear', function (servicioRest, $scope, $mdDialog, $m
 				$rootScope.obtenerTemas();
             })
 			.catch(function (err) {
-				console.log("Error");
-				console.log(err);
+				$log.error("Error al crear el tema: " + err);
 			});
 	}
 	
