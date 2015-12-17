@@ -1,5 +1,4 @@
-<div>
-    <md-dialog>
+<md-dialog>
         <form>
             <md-toolbar>
                 <div class="md-toolbar-tools">
@@ -33,10 +32,11 @@
                         </md-input-container>
                         <md-datepicker ng-model="fecha" md-placeholder="Introducir fecha"></md-datepicker>
                         <md-input-container class="md-inline">
-                            <input type="number" step="any" ng-model="horas" min="00" max="23">
+                            <input type="number" step="any" ng-model="horas" min="00" max="23" placeholder="Hora">
                         </md-input-container>
+						:
                         <md-input-container class="md-inline">
-                            <input type="number" step="any" ng-model="minutos" min="00" max="59">
+                            <input type="number" step="any" ng-model="minutos" min="00" max="59" placeholder="Minutos">
                         </md-input-container>
                         <!--http://simeonc.github.io/sc-date-time/index.html-->
 
@@ -72,7 +72,8 @@
                                     </span>
                                 </div>
 
-                                <md-button class="md-fab md-mini" ng-click="$root.aniadirRespuestaTest()" aria-label="crearPregunta">
+                                <md-button class="md-fab md-mini" ng-click="$root.aniadirRespuestaTest()" 
+										   aria-label="crearPregunta">
                                     <md-icon md-svg-src="img/mas.svg"></md-icon>
                                 </md-button>
                         </div>
@@ -85,7 +86,6 @@
             </md-dialog-content>
         </form>
     </md-dialog>
-</div>
 
 
 
