@@ -1,4 +1,4 @@
-app.controller('controladorTec', function (servicioRest, $scope, $rootScope, $mdDialog, $timeout, $q, $log, $mdToast) {
+app.controller('controladorTec', function (servicioRest, $scope, $rootScope, $mdDialog, $timeout, $q, $log, $mdToast, $location) {
 	
 	function toast(texto) {
 		$mdToast.show(
@@ -30,6 +30,9 @@ app.controller('controladorTec', function (servicioRest, $scope, $rootScope, $md
 			.catch(function (err) {
 				console.log("Error");
 				console.log(err);
+				if(err === 'No token provided.') {
+					$location.path('/');
+				}
 			});
 	}
     
@@ -67,7 +70,7 @@ app.controller('controladorTec', function (servicioRest, $scope, $rootScope, $md
 				servicioRest.getTemas()
 				.then(function(data) {
 					$scope.temas = data;			
-					$scope.temasCargados = cargarTemas();
+					$scope.temasCargados = $rootScope.cargarTemas();
 				})
 		.catch(function (err) {
 		});
@@ -75,6 +78,9 @@ app.controller('controladorTec', function (servicioRest, $scope, $rootScope, $md
 			.catch(function(err) {
 				console.log("Error");
             	console.log(err);
+				if(err === 'No token provided.'){
+					$location.path('/');
+				}
 			});
 	};
     
@@ -145,12 +151,11 @@ app.controller('controladorTec', function (servicioRest, $scope, $rootScope, $md
 	};
 	
 	/* ----------------- AUTOCOMPLETE ---------------- */
-	var self = this;
 	$rootScope.temas;
 	$rootScope.temasCargados;
     $scope.selectedItemChange = selectedItemChange;	
 	$scope.listaTemas = [];
-	self.simulateQuery = false;
+	var simulateQuery = false;
 	
 	$rootScope.obtenerTemas = function () {
 		servicioRest.getTemas()
@@ -195,7 +200,7 @@ app.controller('controladorTec', function (servicioRest, $scope, $rootScope, $md
 		
 		var results = query ? $scope.temasCargados.filter( filtrar(query) ) : $scope.temasCargados,
 			deferred;
-		if (self.simulateQuery) {
+		if (simulateQuery) {
 			deferred = $q.defer();
 			$timeout(function () {
 				deferred.resolve( results );

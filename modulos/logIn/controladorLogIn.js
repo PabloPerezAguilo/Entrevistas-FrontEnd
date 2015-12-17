@@ -1,4 +1,4 @@
-app.controller('controladorLogIn', function(servicioRest, config, $scope, $location, $rootScope, $mdToast) {
+app.controller('controladorLogIn', function(servicioRest, config, $scope, $location, $rootScope, $mdToast, $http) {
 
 	function toast(texto) {
 		$mdToast.show(
@@ -18,6 +18,7 @@ app.controller('controladorLogIn', function(servicioRest, config, $scope, $locat
 		servicioRest.postAuthenticate(user)
 			.then(function(data) {
 				console.log(data.role);
+				$http.defaults.headers.common['x-access-token'] = data.token;
 				if(data.role === "ROLE_ADMIN") {
 					$location.path("/admin");
 				} else {
