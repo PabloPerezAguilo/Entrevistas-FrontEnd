@@ -280,6 +280,10 @@ md-chips .md-chip.md-focused {
 	background-color: $colorPrincipalClaro;
 }
 
+.asd {
+	margin-top: 2.5%;
+}
+
 /*Crear pregunta*/
 .enLinea {
 	display: inline-block;
@@ -491,7 +495,7 @@ md-list md-list-item.md-3-line .md-list-item-text h3, md-list.md-default-theme m
 	margin-right: 10%;
 }
 
-.md-chips .md-chip-input-container md-autocomplete input {
+.buscarTemas .md-chips .md-chip-input-container md-autocomplete input {
     padding-left: 8%;
 }
 

@@ -17,10 +17,7 @@ app.controller('controladorCrear', function (servicioRest, $scope, $mdDialog, $m
 	
     function toast(texto) {
 		$mdToast.show(
-	      $mdToast.simple()
-	        .content(texto)
-	        .position('top right')
-	        .hideDelay(1500)
+			$mdToast.simple().content(texto).position('top right').hideDelay(1500)
 		);
 	}
     
@@ -48,19 +45,32 @@ app.controller('controladorCrear', function (servicioRest, $scope, $mdDialog, $m
     $scope.selectedItem = null;
     $scope.searchText = null;
 	
+	function preguntaVacia(tipoP) {
+        var resp = false;
+        if (tipoP === "abierta") {
+            if ($scope.tituloAbierta === undefined || $scope.temasAbierta === undefined || $scope.tituloAbierta === "" || $scope.temasAbierta === "") {
+				resp = true;
+            }
+        } else if (tipoP === "test") {
+			if ($scope.tituloTest === undefined || $scope.temasTest === undefined || $scope.respuestasTest[0] === undefined || $scope.respuestasTest[1] === undefined || $scope.tituloTest === "" || $scope.temasTest === "" || $scope.respuestasTest[0] === "" || $scope.respuestasTest[1] === "") {
+                resp = true;
+            }
+        } else if (tipoP === "testAbierta") {
+            if ($scope.tituloTestAbierto === undefined || $scope.temasTestAbierto === undefined || $scope.respuestasTestAbierto[0] === undefined || $scope.respuestasTestAbierto[1] === undefined || $scope.tituloTestAbierto === "" || $scope.temasTestAbierto === "" || $scope.respuestasTestAbierto[0] === "" || $scope.respuestasTestAbierto[1] === "") {
+                resp = true;
+            }
+        }
+        return resp;
+    }
 	
     $scope.crearPAbierta = function () {
-        if(preguntaVacia("abierta"))
-        {
+        if (preguntaVacia("abierta")) {
             toast("Rellena todos los campos obligatorios");
-        }
-        else
-        {
+        } else {
             pregunta.title = $scope.tituloAbierta;
             pregunta.type = "FREE";
-
-            for(var i=0;i<$scope.temasAbierta.length;i++)
-            {
+			var i;
+            for (i = 0; i < $scope.temasAbierta.length; i++) {
                 pregunta.tags[i] = $scope.temasAbierta[i].valor;
             }
             pregunta.level = $scope.nivelAbierta;
@@ -69,31 +79,52 @@ app.controller('controladorCrear', function (servicioRest, $scope, $mdDialog, $m
         }
     };
     
+	function cargarTemas() {
+		temasCargados = temas;
+		return temasCargados.map(function (tema) {
+			tema.valor = tema.tag.toLowerCase();
+			return tema;
+		});
+	}
+	
     $scope.crearPTest = function () {
 		var i;
-        if(preguntaVacia("test"))
-        {
+        if (preguntaVacia("test")) {
             toast("Rellena todos los campos obligatorios");
-        }
-        else
-        {
+        } else {
             pregunta.title = $scope.tituloTest;
             pregunta.type = "SINGLE_CHOICE";
-            servicioRest.getTemas()
-			.then(function(data) {
-				temas = data;			
-				temasCargados = cargarTemas();
+            
+			
+			
+			
+			
+			
+			
+			
+			
+			/*
+			servicioRest.getTemas()
+				.then(function (data) {
+					temas = data;
+					temasCargados = cargarTemas();
 			})
 			.catch(function (err) {
-			});
-            for(i=0;i<$scope.temasTest.length;i++)
-            {
+			});*/
+			
+			
+			
+			
+			
+			
+			
+            for (i = 0; i < $scope.temasTest.length; i++) {
                 pregunta.tags[i] = $scope.temasTest[i].valor;
             }
             pregunta.level = $scope.nivelTest;
             pregunta.answers = [];
 
-            for (i = 0;i < contTest;i++) {            
+            for (i = 0; i < contTest; i++) {
                 pregunta.answers.push({title: $scope.respuestasTest[i], valid: false});
             }
 
@@ -101,64 +132,49 @@ app.controller('controladorCrear', function (servicioRest, $scope, $mdDialog, $m
             $scope.hide(pregunta);
         }
     };
-    
+	
     $scope.crearPTestAbierta = function () {
 		var i;
-        if(preguntaVacia("testAbierta"))
-        {
+        if (preguntaVacia("testAbierta")) {
             toast("Rellena todos los campos obligatorios");
-        }
-        else
-        {
+        } else {
             pregunta.title = $scope.tituloTestAbierto;
             pregunta.type = "MULTI_CHOICE";
-            servicioRest.getTemas()
-		.then(function(data) {
-			temas = data;			
-			temasCargados = cargarTemas();
-		})
-		.catch(function (err) {
-		});
-            for(i=0;i<$scope.temasTestAbierto.length;i++)
-            {
+            
+			
+			
+			
+			
+			
+			
+			
+			
+			/*
+			servicioRest.getTemas()
+				.then(function (data) {
+					temas = data;
+					temasCargados = cargarTemas();
+				})
+				.catch(function (err) {
+			});*/
+			
+			
+			
+			
+			
+            for (i = 0; i < $scope.temasTestAbierto.length; i++) {
                 pregunta.tags[i] = $scope.temasTestAbierto[i].valor;
             }
             pregunta.level = $scope.nivelTestAbierto;
             pregunta.answers = [];
 
-            for (i = 0; i < contTestAbierto; i++) {            
+            for (i = 0; i < contTestAbierto; i++) {
                 pregunta.answers.push({title: $scope.respuestasTestAbierto[i], valid: $scope.checkTestAbierto[i]});
             }
 
             $scope.hide(pregunta);
         }
     };
-    
-    function preguntaVacia(tipoP){
-       var resp=false;
-        if(tipoP==="abierta")
-        {
-            if($scope.tituloAbierta===undefined||$scope.temasAbierta===undefined||$scope.tituloAbierta===""||$scope.temasAbierta==="")
-            {
-                resp=true;
-            }
-        }
-        else if(tipoP==="test")
-        {
-            if($scope.tituloTest===undefined||$scope.temasTest===undefined||$scope.respuestasTest[0]===undefined||$scope.respuestasTest[1]===undefined||$scope.tituloTest===""||$scope.temasTest===""||$scope.respuestasTest[0]===""||$scope.respuestasTest[1]==="")
-            {
-                resp=true;
-            }
-        }
-        else if(tipoP==="testAbierta")
-        {
-            if($scope.tituloTestAbierto===undefined||$scope.temasTestAbierto===undefined||$scope.respuestasTestAbierto[0]===undefined||$scope.respuestasTestAbierto[1]===undefined||$scope.tituloTestAbierto===""||$scope.temasTestAbierto===""||$scope.respuestasTestAbierto[0]===""||$scope.respuestasTestAbierto[1]==="")
-            {
-                resp=true;
-            }
-        }
-        return resp;
-    }
     
     $scope.hide = function (respuesta) {
         $mdDialog.hide(respuesta);
@@ -186,76 +202,79 @@ app.controller('controladorCrear', function (servicioRest, $scope, $mdDialog, $m
 	/* ----------- Input temas ----------- */
 	
 	servicioRest.getTemas()
-		.then(function(data) {
-			temas = data;			
+		.then(function (data) {
+			temas = data;
 			temasCargados = cargarTemas();
 		})
 		.catch(function (err) {
 		});
 	
-    function cargarTemas() {
-		temasCargados = temas;
-		return temasCargados.map( function (tema) {
-			tema.valor = tema.tag.toLowerCase();
-			return tema;          
-      });
+	function buscarTema(tema, array) {
+		tema = tema.toLowerCase();
+		var i;
+		for (i = 0; i < array.length; i++) {
+			if (tema === array[i].valor) {
+				return i;
+			}
+		}
+		return -1;
 	}
 	
     $scope.transformChip = function (chip, tipo) {
 		var index = buscarTema(chip, temasCargados);
-		console.log(temasCargados)
+		console.log(temasCargados);
 		//si existe el tema
-		if (buscarTema(chip, temasCargados) != -1)  {
+		if (buscarTema(chip, temasCargados) !== -1)  {
 			var tema = {
 				tag: chip,
 				valor: chip.toLowerCase()
-			}
-			if(tipo === 'ABIERTA') {
+			};
+			if (tipo === 'ABIERTA') {
 				//si no esta en la lista de los temas ya seleccionados añadirlo
-				if(buscarTema(chip, $scope.temasAbierta) === -1) {
-					return tema;	
+				if (buscarTema(chip, $scope.temasAbierta) === -1) {
+					return tema;
 				}
 			}
-			if(tipo === 'TEST') {
+			if (tipo === 'TEST') {
 				//si no esta en la lista de los temas ya seleccionados añadirlo
-				if(buscarTema(chip, $scope.temasTest) === -1) {
-					return tema;	
+				if (buscarTema(chip, $scope.temasTest) === -1) {
+					return tema;
 				}
 			}
-			if(tipo === 'TEST_ABIERTO') {
+			if (tipo === 'TEST_ABIERTO') {
 				//si no esta en la lista de los temas ya seleccionados añadirlo
-				if(buscarTema(chip, $scope.temasTestAbierto) === -1) { 
-					return tema;	
+				if (buscarTema(chip, $scope.temasTestAbierto) === -1) {
+					return tema;
 				}
 			}
 		}
 		
 		//si lo selecciona de la lista desplegable
-		if(angular.isObject(chip)) {
-			if(tipo === 'ABIERTA') {
+		if (angular.isObject(chip)) {
+			if (tipo === 'ABIERTA') {
 				//si no esta en la lista de los temas ya seleccionados añadirlo
-				if(buscarTema(chip, $scope.temasAbierta) === -1) {
+				if (buscarTema(chip, $scope.temasAbierta) === -1) {
 					console.log(temasCargados);
-					return chip;	
+					return chip;
 				}
 			}
-			if(tipo === 'TEST') {
+			if (tipo === 'TEST') {
 				//si no esta en la lista de los temas ya seleccionados añadirlo
-				if(buscarTema(chip, $scope.temasTest) === -1) {
-					return chip;	
+				if (buscarTema(chip, $scope.temasTest) === -1) {
+					return chip;
 				}
 			}
-			if(tipo === 'TEST_ABIERTO') {
+			if (tipo === 'TEST_ABIERTO') {
 				//si no esta en la lista de los temas ya seleccionados añadirlo
-				if(buscarTema(chip, $scope.temasTestAbierto) === -1) { 
-					return chip;	
+				if (buscarTema(chip, $scope.temasTestAbierto) === -1) {
+					return chip;
 				}
 			}
 		}
 		
 		//si no existe el tema
-		if(tipo === 'ABIERTA') {			
-			if(buscarTema(chip, $scope.temasAbierta) === -1) {
+		if (tipo === 'ABIERTA') {
+			if (buscarTema(chip, $scope.temasAbierta) === -1) {
 				$scope.confirmacionAbierta = true;
 				$scope.temaAbierta = chip;
 				$scope.deshabilitadoAbierta = true;
@@ -263,8 +282,8 @@ app.controller('controladorCrear', function (servicioRest, $scope, $mdDialog, $m
 			}
 		}
 		
-		if(tipo === 'TEST') {
-			if(buscarTema(chip, $scope.temasTest) === -1) {
+		if (tipo === 'TEST') {
+			if (buscarTema(chip, $scope.temasTest) === -1) {
 				$scope.confirmacionTest = true;
 				$scope.temaTest = chip;
 				$scope.deshabilitadoTest = true;
@@ -272,8 +291,8 @@ app.controller('controladorCrear', function (servicioRest, $scope, $mdDialog, $m
 			}
 		}
 		
-		if(tipo === 'TEST_ABIERTO') {
-			if(buscarTema(chip, $scope.temasTest) === -1) {
+		if (tipo === 'TEST_ABIERTO') {
+			if (buscarTema(chip, $scope.temasTest) === -1) {
 				$scope.confirmacionTestAbierto = true;
 				$scope.temaTestAbierto = chip;
 				$scope.deshabilitadoTestAbierto = true;
@@ -281,103 +300,93 @@ app.controller('controladorCrear', function (servicioRest, $scope, $mdDialog, $m
 			}
 		}
 		return null;
-	}
+	};
 	
-	$scope.deleteChip = function() {
-		if($scope.confirmacionAbierta) {
+	$scope.deleteChip = function () {
+		if ($scope.confirmacionAbierta) {
 			$scope.confirmacionAbierta = false;
 			$scope.deshabilitadoAbierta = false;
 		}
 		
-		if($scope.confirmacionTest) {
+		if ($scope.confirmacionTest) {
 			$scope.confirmacionTest = false;
 			$scope.deshabilitadoTest = false;
 		}
 		
-		if($scope.confirmacionTestAbierto) {
+		if ($scope.confirmacionTestAbierto) {
 			$scope.confirmacionTestAbierto = false;
 			$scope.dehsabilitadoTestAbierto = false;
-		}        
-	}
+		}
+	};
 	
 	/*confirmacion*/
 	
 	function nuevoTema(tema) {
 		servicioRest.postTema(tema)
-			.then(function(data) {
+			.then(function (data) {
 				$rootScope.obtenerTemas();
             })
-			.catch(function(err) {
-			console.log("Error");
-			console.log(err);
+			.catch(function (err) {
+				console.log("Error");
+				console.log(err);
 			});
 	}
 	
-	$scope.crearTema = function(chip) {
-		if($scope.confirmacionAbierta) {
+	$scope.crearTema = function (chip) {
+		if ($scope.confirmacionAbierta) {
 			nuevoTema($scope.temaAbierta);
 			$scope.confirmacionAbierta = false;
 			$scope.deshabilitadoAbierta = false;
 		}
 		
-		if($scope.confirmacionTest) {
+		if ($scope.confirmacionTest) {
 			nuevoTema($scope.temaTest);
 			$scope.confirmacionTest = false;
 			$scope.deshabilitadoTest = false;
 		}
 		
-		if($scope.confirmacionTestAbierto) {
+		if ($scope.confirmacionTestAbierto) {
 			nuevoTema($scope.temaTestAbierto);
 			$scope.confirmacionTestAbierto = false;
 			$scope.deshabilitadoTestAbierto = false;
 		}
-	}
+	};
 	
 	//obtener la posicion de un tema en el array del md-chip, no he conseguido hacerlo con $index
-	function buscarTema(tema, array) {
-		tema = tema.toLowerCase();
-		for(var i = 0; i < array.length; i++) {
-			if(tema === array[i].valor) {
-				return i;
-			}
-		}
-		return -1;
-	}
-	
-	$scope.cerrarConfirm = function(chip) {
-		if($scope.confirmacionAbierta) {
+	$scope.cerrarConfirm = function (chip) {
+		if ($scope.confirmacionAbierta) {
 			$scope.confirmacionAbierta = false;
 			$scope.deshabilitadoAbierta = false;
 			var indexAbierta = buscarTema($scope.temaAbierta, $scope.temasAbierta);
-			if(indexAbierta === 0) { 
+			if (indexAbierta === 0) {
 				$scope.temasAbierta = [];
 			} else {
 				$scope.temasAbierta.splice(indexAbierta, 1);
 			}
 		}
 		
-		if($scope.confirmacionTest) {
+		if ($scope.confirmacionTest) {
 			$scope.confirmacionTest = false;
 			$scope.deshabilitadoTest = false;
 			var indexTest = buscarTema($scope.temaTest, $scope.temasTest);
-			if(indexTest === 0) { 
+			if (indexTest === 0) {
 				$scope.temasTest = [];
 			} else {
 				$scope.temasTest.splice(indexTest, 1);
 			}
 		}
 		
-		if($scope.confirmacionTestAbierto) {
+		if ($scope.confirmacionTestAbierto) {
 			$scope.confirmacionTestAbierto = false;
 			$scope.deshabilitadoTestAbierto = false;
 			var indexTestAbierto = buscarTema($scope.temaTestAbierto, $scope.temasTestAbierto);
-			if(indexTestAbierto === 0) { 
+			if (indexTestAbierto === 0) {
 				$scope.temasTestAbierto = [];
 			} else {
 				$scope.temasTestAbierto.splice(indexTestAbierto, 1);
 			}
-		}        
-	}
+		}
+	};
 	
     function createFilterFor(query) {
 		var lowercaseQuery = angular.lowercase(query);
@@ -398,5 +407,5 @@ app.controller('controladorCrear', function (servicioRest, $scope, $mdDialog, $m
     $scope.queryBuscarTema = function (query) {
 		var results = query ? temasCargados.filter(filtrar(query)) : [];
 		return results;
-	}
+	};
 });
