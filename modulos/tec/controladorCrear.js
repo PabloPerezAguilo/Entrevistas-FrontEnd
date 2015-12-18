@@ -3,7 +3,8 @@ app.controller('controladorCrear', function (servicioRest, $scope, $mdDialog, $m
     var Options = {
         title: { type: String },
         valid: { type: Boolean }
-    }, pregunta = {
+    };
+	var pregunta = {
 		_id: { type: String },
 		title: { type: String, required: true },
         type: { type: String, required: true },
@@ -11,7 +12,7 @@ app.controller('controladorCrear', function (servicioRest, $scope, $mdDialog, $m
         level: { type: Number, min: 1, max: 10, required: true },
         directive: { type: String },
         answers: [Options]
-    }, temas, temasCargados, contTest = 2, contTestAbierto = 2;
+    };
 	
     function toast(texto) {
 		$mdToast.show(
@@ -20,6 +21,7 @@ app.controller('controladorCrear', function (servicioRest, $scope, $mdDialog, $m
 	}
     
 	/* ----------- Respuestas tests ----------- */
+	var temas, temasCargados;
 	$scope.nivelAbierta = 5;
     $scope.nivelTest = 5;
     $scope.nivelTestAbierto = 5;
@@ -27,10 +29,12 @@ app.controller('controladorCrear', function (servicioRest, $scope, $mdDialog, $m
 	$scope.respuestasTest = [];
 	$scope.test = ['1', '2'];
 	$scope.radioTest = 1;
+	var contTest = 2;
 	
 	$scope.respuestasTestAbierto = [];
 	$scope.testAbierto = ['1', '2'];
 	$scope.checkTestAbierto = [false, false];
+	var contTestAbierto = 2;
 	
 	$scope.temasAbierta = [];
 	$scope.temasTest = [];
@@ -64,8 +68,7 @@ app.controller('controladorCrear', function (servicioRest, $scope, $mdDialog, $m
         } else {
             pregunta.title = $scope.tituloAbierta;
             pregunta.type = "FREE";
-			var i;
-            for (i = 0; i < $scope.temasAbierta.length; i++) {
+            for (var i = 0; i < $scope.temasAbierta.length; i++) {
                 pregunta.tags[i] = $scope.temasAbierta[i].valor;
             }
             pregunta.level = $scope.nivelAbierta;
@@ -86,15 +89,14 @@ app.controller('controladorCrear', function (servicioRest, $scope, $mdDialog, $m
 		if (preguntaVacia("test")) {
             toast("Rellena todos los campos obligatorios");
         } else {
-			var i;
             pregunta.title = $scope.tituloTest;
             pregunta.type = "SINGLE_CHOICE";
-            for (i = 0; i < $scope.temasTest.length; i++) {
+            for (var i = 0; i < $scope.temasTest.length; i++) {
                 pregunta.tags[i] = $scope.temasTest[i].valor;
             }
 			pregunta.level = $scope.nivelTest;
             pregunta.answers = [];
-            for (i = 0; i < contTest; i++) {
+            for (var i = 0; i < contTest; i++) {
                 pregunta.answers.push({title: $scope.respuestasTest[i], valid: false});
             }
 
@@ -109,13 +111,12 @@ app.controller('controladorCrear', function (servicioRest, $scope, $mdDialog, $m
         } else {
             pregunta.title = $scope.tituloTestAbierto;
             pregunta.type = "MULTI_CHOICE";
-			var i;
-            for (i = 0; i < $scope.temasTestAbierto.length; i++) {
+            for (var i = 0; i < $scope.temasTestAbierto.length; i++) {
                 pregunta.tags[i] = $scope.temasTestAbierto[i].valor;
             }
             pregunta.level = $scope.nivelTestAbierto;
             pregunta.answers = [];
-            for (i = 0; i < contTestAbierto; i++) {
+            for (var i = 0; i < contTestAbierto; i++) {
                 pregunta.answers.push({title: $scope.respuestasTestAbierto[i], valid: $scope.checkTestAbierto[i]});
             }
 
@@ -159,8 +160,7 @@ app.controller('controladorCrear', function (servicioRest, $scope, $mdDialog, $m
 	
 	function buscarTema(tema, array) {
 		tema = tema.toLowerCase();
-		var i;
-		for (i = 0; i < array.length; i++) {
+		for (var i = 0; i < array.length; i++) {
 			if (tema === array[i].valor) {
 				return i;
 			}

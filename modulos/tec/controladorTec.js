@@ -7,8 +7,7 @@ app.controller('controladorTec', function (servicioRest, $scope, $rootScope, $md
 	}
 	
 	function escribirTipo(preguntas) {
-		var i;
-		for (i = 0; i < preguntas.length; i++) {
+		for (var i = 0; i < preguntas.length; i++) {
 			if (preguntas[i].type === "FREE") {
 				preguntas[i].type = "Pregunta Abierta";
 			} else if (preguntas[i].type === "SINGLE_CHOICE") {
@@ -39,7 +38,8 @@ app.controller('controladorTec', function (servicioRest, $scope, $rootScope, $md
     var Options = {
         title: String,
         valid: Boolean
-    }, pregunta = {
+	};
+	var pregunta = {
         _id: { type: String },
         title: { type: String, required: true },
         type: { type: String, required: true },
@@ -47,7 +47,9 @@ app.controller('controladorTec', function (servicioRest, $scope, $rootScope, $md
         level: { type: Number, min: 1, max: 10, required: true },
         directive: { type: String },
         answers: [Options]
-	}, simulateQuery = false;
+	};
+	
+	var simulateQuery = false;
 	
 	$rootScope.cargando = false;
     $rootScope.logueado = true;

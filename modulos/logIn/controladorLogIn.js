@@ -12,10 +12,9 @@ app.controller('controladorLogIn', function (servicioRest, config, $scope, $loca
 		user.username = $scope.user;
 		user.password = $scope.pass;
 		servicioRest.postAuthenticate(user)
-			.then(function(data) {
-				console.log(data.role);
+			.then(function (data) {
 				$http.defaults.headers.common['x-access-token'] = data.token;
-				if(data.role === "ROLE_ADMIN") {
+				if (data.role === "ROLE_ADMIN") {
 					$location.path("/admin");
 				} else {
 					$location.path("/tec");
