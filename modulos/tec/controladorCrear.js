@@ -159,7 +159,6 @@ app.controller('controladorCrear', function (servicioRest, $scope, $mdDialog, $m
 		});
 	
 	function buscarTema(tema, array) {
-		tema = tema.toLowerCase();
 		for (var i = 0; i < array.length; i++) {
 			if (tema === array[i].valor) {
 				return i;
@@ -169,51 +168,29 @@ app.controller('controladorCrear', function (servicioRest, $scope, $mdDialog, $m
 	}
 	
     $scope.transformChip = function (chip, tipo) {
-		var index = buscarTema(chip, temasCargados);
-
-		//si existe el tema
-		if (buscarTema(chip, temasCargados) !== -1) {
-			var tema = {
+		if (!angular.isObject(chip)) {
+			chip = {
 				tag: chip,
 				valor: chip.toLowerCase()
-			};
-			if (tipo === 'ABIERTA') {
-				//si no esta en la lista de los temas ya seleccionados añadirlo
-				if (buscarTema(chip, $scope.temasAbierta) === -1) {
-					return tema;
-				}
-			}
-			if (tipo === 'TEST') {
-				//si no esta en la lista de los temas ya seleccionados añadirlo
-				if (buscarTema(chip, $scope.temasTest) === -1) {
-					return tema;
-				}
-			}
-			if (tipo === 'TEST_ABIERTO') {
-				//si no esta en la lista de los temas ya seleccionados añadirlo
-				if (buscarTema(chip, $scope.temasTestAbierto) === -1) {
-					return tema;
-				}
 			}
 		}
 		
-		//si lo selecciona de la lista desplegable
-		if (angular.isObject(chip)) {
+		var index = buscarTema(chip.valor, temasCargados);
+		//si existe el tema
+		if (index !== -1) {
+			//si no esta en la lista de los temas ya seleccionados de la pregunta correspondiente añadirlo
 			if (tipo === 'ABIERTA') {
-				//si no esta en la lista de los temas ya seleccionados añadirlo
-				if (buscarTema(chip, $scope.temasAbierta) === -1) {
+				if (buscarTema(chip.valor, $scope.temasAbierta) === -1) {
 					return chip;
 				}
 			}
 			if (tipo === 'TEST') {
-				//si no esta en la lista de los temas ya seleccionados añadirlo
-				if (buscarTema(chip, $scope.temasTest) === -1) {
+				if (buscarTema(chip.valor, $scope.temasTest) === -1) {
 					return chip;
 				}
 			}
 			if (tipo === 'TEST_ABIERTO') {
-				//si no esta en la lista de los temas ya seleccionados añadirlo
-				if (buscarTema(chip, $scope.temasTestAbierto) === -1) {
+				if (buscarTema(chip.valor, $scope.temasTestAbierto) === -1) {
 					return chip;
 				}
 			}
@@ -221,29 +198,29 @@ app.controller('controladorCrear', function (servicioRest, $scope, $mdDialog, $m
 		
 		//si no existe el tema
 		if (tipo === 'ABIERTA') {
-			if (buscarTema(chip, $scope.temasAbierta) === -1) {
+			if (buscarTema(chip.valor, $scope.temasAbierta) === -1) {
 				$scope.confirmacionAbierta = true;
-				$scope.temaAbierta = chip;
+				$scope.temaAbierta = chip.valor;
 				$scope.deshabilitadoAbierta = true;
-				return { valor: chip};
+				return chip;
 			}
 		}
 		
 		if (tipo === 'TEST') {
-			if (buscarTema(chip, $scope.temasTest) === -1) {
+			if (buscarTema(chip.valor, $scope.temasTest) === -1) {
 				$scope.confirmacionTest = true;
-				$scope.temaTest = chip;
+				$scope.temaTest = chip.valor;
 				$scope.deshabilitadoTest = true;
-				return { valor: chip};
+				return chip;
 			}
 		}
 		
 		if (tipo === 'TEST_ABIERTO') {
-			if (buscarTema(chip, $scope.temasTest) === -1) {
+			if (buscarTema(chip.valor, $scope.temasTest) === -1) {
 				$scope.confirmacionTestAbierto = true;
-				$scope.temaTestAbierto = chip;
+				$scope.temaTestAbierto = chip.valor;
 				$scope.deshabilitadoTestAbierto = true;
-				return { valor: chip};
+				return chip;
 			}
 		}
 		return null;
