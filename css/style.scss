@@ -417,7 +417,7 @@ md-checkbox[disabled].md-checked .md-icon {
 md-checkbox[disabled] .md-label {
     color: $negro;
 }
-#checkboxVer {
+.displayInline {
     display: inline;
 }
 #textoTemaNivel {
@@ -432,9 +432,6 @@ md-checkbox[disabled] .md-label {
 #textoDirectiva {
     margin-bottom: 7%;
     margin-left: 6%;
-}
-#textoResp {
-    display: inline;
 }
 
 /*div del md-chips para buscar por temas*/

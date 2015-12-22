@@ -17,8 +17,8 @@
             <p id="textoTitulo" ng-bind="titulo"></p>       
             <p id="textoDirectiva" ng-bind="directiva"></p>
             <div ng-repeat="item in items">
-                <md-checkbox id="checkboxVer" ng-disabled="true" ng-model="item.esCorrecta"></md-checkbox>
-                <p id="textoResp" ng-bind="item.respuesta"></p>
+                <md-checkbox class="displayInline" ng-disabled="true" ng-model="item.esCorrecta" aria-label="checkbox ver"></md-checkbox>
+                <p class="displayInline" ng-bind="item.respuesta"></p>
             </div>
       </div>
 		
