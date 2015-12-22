@@ -6,14 +6,14 @@ app.controller('controladorTec', function (servicioRest, $scope, $rootScope, $md
 		);
 	}
 	
-	function escribirTipo(preguntas) {
-		for (var i = 0; i < preguntas.length; i++) {
-			if (preguntas[i].type === "FREE") {
-				preguntas[i].type = "Pregunta Abierta";
-			} else if (preguntas[i].type === "SINGLE_CHOICE") {
-				preguntas[i].type = "Pregunta Tipo Test";
+	function escribirTipo() {
+		for (var i = 0; i < $scope.preguntas.length; i++) {
+			if ($scope.preguntas[i].type === "FREE") {
+				$scope.preguntas[i].type = "Pregunta abierta";
+			} else if ($scope.preguntas[i].type === "SINGLE_CHOICE") {
+				$scope.preguntas[i].type = "Pregunta tipo test";
 			} else {
-				preguntas[i].type  = "Pregunta Tipo Test Abierto";
+				$scope.preguntas[i].type  = "Pregunta de selección múltiple";
 			}
 		}
 	}
@@ -22,7 +22,7 @@ app.controller('controladorTec', function (servicioRest, $scope, $rootScope, $md
 		servicioRest.getPreguntas()
 			.then(function (data) {
 				$scope.preguntas = data;
-				escribirTipo($scope.preguntas);
+				escribirTipo();
 			})
 			.catch(function (err) {
 				console.log("Error");
@@ -49,7 +49,10 @@ app.controller('controladorTec', function (servicioRest, $scope, $rootScope, $md
         answers: [Options]
 	};
 	
-	var simulateQuery = false;
+	var simulateQuery = false, temas, temasCargados;
+	var filtroTemas = {
+		tags: []
+	};
 	
 	$rootScope.cargando = false;
     $rootScope.logueado = true;
@@ -60,14 +63,13 @@ app.controller('controladorTec', function (servicioRest, $scope, $rootScope, $md
 	getPreguntas();
     
     /*--------------------------Funciones--------------------------*/
-
-	$rootScope.cargarTemas = function () {
-		var temasCargados = $rootScope.temas;
+	function cargarTemas() {
+		temasCargados = temas;
 		return temasCargados.map(function (tema) {
 			tema.valor = tema.tag.toLowerCase();
 			return tema;
 		});
-	};
+	}
     
     $scope.eliminar = function (indice) {
         var idPregunta = $scope.preguntas[indice]._id;
@@ -76,8 +78,8 @@ app.controller('controladorTec', function (servicioRest, $scope, $rootScope, $md
 				$scope.preguntas.splice(indice, 1);
 				servicioRest.getTemas()
 					.then(function (data) {
-						$scope.temas = data;
-						$scope.temasCargados = cargarTemas();
+						temas = data;
+						temasCargados = cargarTemas();
 					})
 					.catch(function (err) {
 						$log.error("Error cargar los temas: " + err);
@@ -129,8 +131,6 @@ app.controller('controladorTec', function (servicioRest, $scope, $rootScope, $md
                             answers: pregunta.answers,
                             type: tipo
                         });
-                        console.log(data);
-						$rootScope.obtenerTemas();
                     })
                     .catch(function (err) {
                         $log.error("Error al crear la pregunta: " + err);
@@ -153,17 +153,14 @@ app.controller('controladorTec', function (servicioRest, $scope, $rootScope, $md
 	};
 	
 	/* ----------------- AUTOCOMPLETE ---------------- */
-	$rootScope.temas;
-	$rootScope.temasCargados;
-    $scope.selectedItemChange = selectedItemChange;	
 	$scope.listaTemas = [];
 	var simulateQuery = false;
 	
 	$rootScope.obtenerTemas = function () {
 		servicioRest.getTemas()
 			.then(function (data) {
-				$rootScope.temas = data;
-				$rootScope.temasCargados = $rootScope.cargarTemas();
+				temas = data;
+				temasCargados = cargarTemas();
 			})
 			.catch(function (err) {
 				$log.error("Error al cargar los temas: " + err);
@@ -172,9 +169,17 @@ app.controller('controladorTec', function (servicioRest, $scope, $rootScope, $md
 	
 	$rootScope.obtenerTemas();
 	
-	//Al seleccionar un chip lo crea o lo añade al array de tags
-	function selectedItemChange(item) {
-		$log.info('Item recogido ' + JSON.stringify(item));
+	function buscarTema(tema) {
+		for (var i = 0; i < temasCargados .length; i++) {
+			if (tema === temasCargados[i].valor) {
+				return i;
+			}
+		}
+		return -1;
+	}
+	
+	//Al introducir un tema nuevo filtra las preguntas por el mismo
+	/*function selectedItemChange(item) {
 		if (item !== undefined) {
 			var tema = {
 				tags: [String]
@@ -183,12 +188,41 @@ app.controller('controladorTec', function (servicioRest, $scope, $rootScope, $md
 			servicioRest.postPreguntasByTag(tema)
 				.then(function (data) {
 					$scope.preguntas = data;
-					escribirTipo($scope.preguntas);
+					escribirTipo();
 				})
 				.catch(function (err) {
 					$scope.preguntas = null;
-					$log.error("Error al crear el tema: " + err);
+					$log.error("Error al filtrar el tema: " + err);
 				});
+		}
+    }*/
+	
+	//Al introducir un tema nuevo filtra las preguntas por el mismo
+	function selectedItemChange(item) {
+		
+		if(item !== undefined) {
+			if (!angular.isObject(item)) {
+				item = {
+					tag: item,
+					valor: item.toLowerCase()
+				};
+			}
+			var index = buscarTema(item.valor);
+
+			if (index !== -1) {
+				filtroTemas.tags.push(temasCargados[index].tag);
+				
+				servicioRest.postPreguntasByTag(filtroTemas)
+				.then(function (data) {
+					$scope.preguntas = data;
+					escribirTipo();
+				})
+				.catch(function (err) {
+					$scope.preguntas = null;
+					$log.error("Error al filtrar el tema: " + err);
+				});			
+			}
+			
 		}
     }
 	
@@ -204,7 +238,7 @@ app.controller('controladorTec', function (servicioRest, $scope, $rootScope, $md
 	
     $scope.queryBuscarTema = function (query) {
 		
-		var results = query ? $scope.temasCargados.filter(filtrar(query)) : $scope.temasCargados,
+		var results = query ? temasCargados.filter(filtrar(query)) : temasCargados,
 			deferred;
 		if (simulateQuery) {
 			deferred = $q.defer();
@@ -218,20 +252,32 @@ app.controller('controladorTec', function (servicioRest, $scope, $rootScope, $md
 	};
 	
 	$scope.deleteChip = function () {
+		filtroTemas.tags = [];
 		if ($scope.listaTemas.length === 0) {
 			getPreguntas();
 		} else {
-			var tema = {
-				tags: [String]
-			}, i;
-			for (i = 0; i < $scope.listaTemas.length; i++) {
-				tema.tags[i] = $scope.listaTemas[i].tag;
+			for (var i = 0; i < $scope.listaTemas.length; i++) {
+				filtroTemas.tags[i] = $scope.listaTemas[i].tag;
 			}
-			servicioRest.postPreguntasByTag(tema)
+			servicioRest.postPreguntasByTag(filtroTemas)
 				.then(function (data) {
 					$scope.preguntas = data;
-					escribirTipo($scope.preguntas);
+					escribirTipo();
 				});
 		}
 	};
+	
+	//Cada vez que se crea un chip se llama a esta funcion
+	$scope.transformChip = function (chip) {
+		if (angular.isObject(chip)) {
+			return chip;
+		}
+		
+		var index = buscarTema(chip.toLowerCase());
+		if (index !== -1) {
+			selectedItemChange(chip)
+			return temasCargados[index];
+		}
+		return null;
+    }
 });

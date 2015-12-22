@@ -62,21 +62,6 @@ app.controller('controladorCrear', function (servicioRest, $scope, $mdDialog, $m
         return resp;
     }
 	
-    $scope.crearPAbierta = function () {
-        if (preguntaVacia("abierta")) {
-            toast("Rellena todos los campos obligatorios");
-        } else {
-            pregunta.title = $scope.tituloAbierta;
-            pregunta.type = "FREE";
-            for (var i = 0; i < $scope.temasAbierta.length; i++) {
-                pregunta.tags[i] = $scope.temasAbierta[i].valor;
-            }
-            pregunta.level = $scope.nivelAbierta;
-            pregunta.directive = $scope.directivasAbierta;
-            $scope.hide(pregunta);
-        }
-    };
-    
 	function cargarTemas() {
 		temasCargados = temas;
 		return temasCargados.map(function (tema) {
@@ -85,6 +70,21 @@ app.controller('controladorCrear', function (servicioRest, $scope, $mdDialog, $m
 		});
 	}
 	
+    $scope.crearPAbierta = function () {
+        if (preguntaVacia("abierta")) {
+            toast("Rellena todos los campos obligatorios");
+        } else {
+            pregunta.title = $scope.tituloAbierta;
+            pregunta.type = "FREE";
+            for (var i = 0; i < $scope.temasAbierta.length; i++) {
+                pregunta.tags[i] = $scope.temasAbierta[i].tag;
+            }
+            pregunta.level = $scope.nivelAbierta;
+            pregunta.directive = $scope.directivasAbierta;
+            $scope.hide(pregunta);
+        }
+    };
+	
     $scope.crearPTest = function () {
 		if (preguntaVacia("test")) {
             toast("Rellena todos los campos obligatorios");
@@ -92,7 +92,7 @@ app.controller('controladorCrear', function (servicioRest, $scope, $mdDialog, $m
             pregunta.title = $scope.tituloTest;
             pregunta.type = "SINGLE_CHOICE";
             for (var i = 0; i < $scope.temasTest.length; i++) {
-                pregunta.tags[i] = $scope.temasTest[i].valor;
+                pregunta.tags[i] = $scope.temasTest[i].tag;
             }
 			pregunta.level = $scope.nivelTest;
             pregunta.answers = [];
@@ -112,7 +112,7 @@ app.controller('controladorCrear', function (servicioRest, $scope, $mdDialog, $m
             pregunta.title = $scope.tituloTestAbierto;
             pregunta.type = "MULTI_CHOICE";
             for (var i = 0; i < $scope.temasTestAbierto.length; i++) {
-                pregunta.tags[i] = $scope.temasTestAbierto[i].valor;
+                pregunta.tags[i] = $scope.temasTestAbierto[i].tag;
             }
             pregunta.level = $scope.nivelTestAbierto;
             pregunta.answers = [];
@@ -167,40 +167,44 @@ app.controller('controladorCrear', function (servicioRest, $scope, $mdDialog, $m
 		return -1;
 	}
 	
-    $scope.transformChip = function (chip, tipo) {
+	$scope.transformChip = function (chip, tipo) {
+		var index;
 		if (!angular.isObject(chip)) {
-			chip = {
-				tag: chip,
-				valor: chip.toLowerCase()
-			}
+			index = buscarTema(chip.toLowerCase(), temasCargados);
+		} else {
+			index = buscarTema(chip.valor, temasCargados);
 		}
 		
-		var index = buscarTema(chip.valor, temasCargados);
 		//si existe el tema
 		if (index !== -1) {
 			//si no esta en la lista de los temas ya seleccionados de la pregunta correspondiente añadirlo
 			if (tipo === 'ABIERTA') {
-				if (buscarTema(chip.valor, $scope.temasAbierta) === -1) {
-					return chip;
+				if (buscarTema(temasCargados[index].valor, $scope.temasAbierta) === -1) {
+					return temasCargados[index];
 				}
 			}
 			if (tipo === 'TEST') {
-				if (buscarTema(chip.valor, $scope.temasTest) === -1) {
-					return chip;
+				if (buscarTema(temasCargados[index].valor, $scope.temasTest) === -1) {
+					return temasCargados[index].valor;
 				}
 			}
 			if (tipo === 'TEST_ABIERTO') {
 				if (buscarTema(chip.valor, $scope.temasTestAbierto) === -1) {
-					return chip;
+					return temasCargados[index].valor;
 				}
 			}
 		}
+		
+		chip = {
+			tag: chip,
+			valor: chip.toLowerCase()
+		};
 		
 		//si no existe el tema
 		if (tipo === 'ABIERTA') {
 			if (buscarTema(chip.valor, $scope.temasAbierta) === -1) {
 				$scope.confirmacionAbierta = true;
-				$scope.temaAbierta = chip.valor;
+				$scope.temaAbierta = chip.tag;
 				$scope.deshabilitadoAbierta = true;
 				return chip;
 			}
@@ -209,7 +213,7 @@ app.controller('controladorCrear', function (servicioRest, $scope, $mdDialog, $m
 		if (tipo === 'TEST') {
 			if (buscarTema(chip.valor, $scope.temasTest) === -1) {
 				$scope.confirmacionTest = true;
-				$scope.temaTest = chip.valor;
+				$scope.temaTest = chip.tag;
 				$scope.deshabilitadoTest = true;
 				return chip;
 			}
@@ -218,7 +222,7 @@ app.controller('controladorCrear', function (servicioRest, $scope, $mdDialog, $m
 		if (tipo === 'TEST_ABIERTO') {
 			if (buscarTema(chip.valor, $scope.temasTest) === -1) {
 				$scope.confirmacionTestAbierto = true;
-				$scope.temaTestAbierto = chip.valor;
+				$scope.temaTestAbierto = chip.tag;
 				$scope.deshabilitadoTestAbierto = true;
 				return chip;
 			}

@@ -1,5 +1,4 @@
 app.controller('controladorVer', function ($scope, $mdDialog, indice) {
-    
     if ($scope.preguntas[indice].type === "Pregunta Abierta") {
         $scope.cabeceraVer = "- Abierta";
         $scope.temas_nivel = $scope.preguntas[indice].tags[0];
@@ -14,7 +13,7 @@ app.controller('controladorVer', function ($scope, $mdDialog, indice) {
         if ($scope.preguntas[indice].type === "Pregunta Tipo Test") {
             $scope.cabeceraVer = "- Test";
         } else {
-            $scope.cabeceraVer = "- Test abierta";
+            $scope.cabeceraVer = "- Selección múltiple";
         }
         
         $scope.temas_nivel = $scope.preguntas[indice].tags[0];

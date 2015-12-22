@@ -13,7 +13,7 @@
 			<md-chips ng-model="listaTemas" 
 					  md-autocomplete-snap=""
 					  md-transform-chip="transformChip($chip)" 
-					  md-require-match="true"
+					  md-require-match="false"
 					  md-on-remove="deleteChip()">
 				<md-autocomplete md-selected-item="selectedItem" 
 								 md-search-text-change="searchTextChange(searchText)" 
@@ -24,11 +24,11 @@
 								 md-min-length="0"
 								 placeholder="Buscar por temas">
 					<span md-highlight-text="searchText">
-						{{item.valor}}
+						{{item.tag}}
 					</span>
 				</md-autocomplete>
 				<md-chip-template>
-					<span> {{$chip.valor}} </span>
+					<span> {{$chip.tag}} </span>
 				</md-chip-template>
 			</md-chips>
 		</div>
