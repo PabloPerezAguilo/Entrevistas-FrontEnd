@@ -47,15 +47,16 @@ app.controller('controladorCrear', function (servicioRest, $scope, $mdDialog, $m
 	function preguntaVacia(tipoP) {
         var resp = false;
         if (tipoP === "abierta") {
-            if ($scope.tituloAbierta === undefined || $scope.temasAbierta === undefined || $scope.tituloAbierta === "" || $scope.temasAbierta === "") {
+			console.log($scope.temasAbierta);
+            if ($scope.tituloAbierta === undefined || $scope.temasAbierta === undefined || $scope.tituloAbierta === "" || $scope.temasAbierta.length === 0) {
 				resp = true;
             }
         } else if (tipoP === "test") {
-			if ($scope.tituloTest === undefined || $scope.temasTest === undefined || $scope.respuestasTest[0] === undefined || $scope.respuestasTest[1] === undefined || $scope.tituloTest === "" || $scope.temasTest === "" || $scope.respuestasTest[0] === "" || $scope.respuestasTest[1] === "") {
+			if ($scope.tituloTest === undefined || $scope.temasTest === undefined || $scope.respuestasTest[0] === undefined || $scope.respuestasTest[1] === undefined || $scope.tituloTest === "" || $scope.temasTest.length === 0 || $scope.respuestasTest[0] === "" || $scope.respuestasTest[1] === "") {
                 resp = true;
             }
         } else if (tipoP === "testAbierta") {
-            if ($scope.tituloTestAbierto === undefined || $scope.temasTestAbierto === undefined || $scope.respuestasTestAbierto[0] === undefined || $scope.respuestasTestAbierto[1] === undefined || $scope.tituloTestAbierto === "" || $scope.temasTestAbierto === "" || $scope.respuestasTestAbierto[0] === "" || $scope.respuestasTestAbierto[1] === "") {
+            if ($scope.tituloTestAbierto === undefined || $scope.temasTestAbierto === undefined || $scope.respuestasTestAbierto[0] === undefined || $scope.respuestasTestAbierto[1] === undefined || $scope.tituloTestAbierto === "" || $scope.temasTestAbierto.length === 0 || $scope.respuestasTestAbierto[0] === "" || $scope.respuestasTestAbierto[1] === "" || ($scope.checkTestAbierto[0] === false && $scope.checkTestAbierto[1] === false)) {
                 resp = true;
             }
         }
@@ -185,12 +186,12 @@ app.controller('controladorCrear', function (servicioRest, $scope, $mdDialog, $m
 			}
 			if (tipo === 'TEST') {
 				if (buscarTema(temasCargados[index].valor, $scope.temasTest) === -1) {
-					return temasCargados[index].valor;
+					return temasCargados[index];
 				}
 			}
 			if (tipo === 'TEST_ABIERTO') {
 				if (buscarTema(chip.valor, $scope.temasTestAbierto) === -1) {
-					return temasCargados[index].valor;
+					return temasCargados[index];
 				}
 			}
 		}
