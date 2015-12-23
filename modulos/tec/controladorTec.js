@@ -25,8 +25,7 @@ app.controller('controladorTec', function (servicioRest, $scope, $rootScope, $md
 				escribirTipo();
 			})
 			.catch(function (err) {
-				console.log("Error");
-				console.log(err);
+				$log.error("Error al cargar las preguntas: " + err);
 				if(err === 'No token provided.') {
 					$location.path('/');
 				}
@@ -267,6 +266,13 @@ app.controller('controladorTec', function (servicioRest, $scope, $rootScope, $md
 		}
 	};
 	
+	$scope.showAlert = function(ev) {
+    // Appending dialog to document.body to cover sidenav in docs app
+    // Modal dialogs should fully cover application
+    // to prevent interaction outside of dialog
+    
+  };
+	
 	//Cada vez que se crea un chip se llama a esta funcion
 	$scope.transformChip = function (chip) {
 		if (angular.isObject(chip)) {
@@ -278,6 +284,16 @@ app.controller('controladorTec', function (servicioRest, $scope, $rootScope, $md
 			selectedItemChange(chip)
 			return temasCargados[index];
 		}
+		
+		$mdDialog.show(
+			$mdDialog.alert()
+			.parent(angular.element(document.querySelector('.popupContainer')))
+			.clickOutsideToClose(true)
+			.title('El tema no existe')
+			.textContent('Debes escoger un tema de la lista')
+			.ariaLabel('Alert no existe tema')
+			.ok('Ok')
+    );
 		return null;
     }
 });

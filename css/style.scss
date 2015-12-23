@@ -149,7 +149,7 @@ md-progress-linear .md-bar {
 }
 
 md-progress-linear .md-container {
-    background-color: rgba(239,108,0,0.17);
+    background-color: $colorPrincipalClaro;
 }
 
 /* ------------------------- LOG IN --------------------------------------- */
@@ -280,11 +280,27 @@ md-chips .md-chip.md-focused {
 	background-color: $colorPrincipalClaro;
 }
 
-.asd {
+.centrarIconosLista {
 	margin-top: 2.5%;
 }
 
-/*Crear pregunta*/
+/* -------------------- Crear pregunta -------------------- */
+
+
+/* alert al escoger tema no creado */
+.md-button.md-default-theme.md-primary, .md-button.md-primary {
+	background-color: $colorPrincipal;
+	color: $letra;
+}
+
+md-dialog.md-transition-in {
+	width: 350px;
+}
+
+.md-button.md-default-theme:not([disabled]).md-focused, .md-button:not([disabled]).md-focused {
+	background-color: $colorPrincipal;
+}
+
 .enLinea {
 	display: inline-block;
 }
@@ -315,11 +331,7 @@ md-toolbar:not(.md-menu-toolbar) {
     color: $letra;
 }
 
-.dialogdemoBasicUsage #popupContainer {
-  position: relative;
-}
-
-md-dialog.md-transition-in {
+md-dialog.md-transition-in.crearPregunta {
     margin: auto;
     min-width: 700px;
     min-height: 300px;
@@ -417,18 +429,22 @@ md-checkbox[disabled].md-checked .md-icon {
 md-checkbox[disabled] .md-label {
     color: $negro;
 }
+
 .displayInline {
     display: inline;
 }
+
 #textoTemaNivel {
     margin-bottom: 3%;
     font-weight: bold;
 }
+
 #textoTitulo {
     margin-bottom: 3%;
     text-align: center;
     font-size: 150%;
 }
+
 #textoDirectiva {
     margin-bottom: 7%;
     margin-left: 6%;
@@ -444,10 +460,6 @@ md-checkbox[disabled] .md-label {
 .md-button.md-fab.md-mini {
     float: right;
 	margin-top: 1.8%;
-}
-
-.md-button .md-ripple-container {
-	border-radius: 50%;	
 }
 
 .md-button.icon.md-ink-ripple {
@@ -551,22 +563,19 @@ md-list md-list-item.md-3-line .md-list-item-text h3 {
 rzslider .rz-bubble.rz-limit {
     opacity: 0!important;
 }
+
 rzslider .rz-pointer:after {
     //background: $colorPrincipal;
     display: none;
     background: none;
 }
+
 rzslider .rz-pointer:hover:after {
     //background-color: $colorPrincipal;
     display: none;
     background-color: none;
-}/*
-rzslider .rz-pointer:before {
-    background: $colorPrincipal;
 }
-rzslider .rz-pointer:after {
-    background: $colorPrincipal;
-}*/
+
 rzslider .rz-pointer {
     background-color: $colorPrincipal;
     top: -7px;
@@ -574,13 +583,16 @@ rzslider .rz-pointer {
     height: 16px;
 	left: 634px;
 }
+
 rzslider .rz-bar.rz-selection {
     background: $colorPrincipal;
 }
+
 rzslider .rz-pointer.rz-active:after {
     //background-color: $colorPrincipal;
     display: none;
 }
+
 rzslider .rz-bar {
     height: 2px;
 	width: 99%;
@@ -733,4 +745,3 @@ rzslider .rz-bar-wrapper {
 		left: 592px;
 	}
 }
-

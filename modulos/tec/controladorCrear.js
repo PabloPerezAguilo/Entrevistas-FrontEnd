@@ -47,7 +47,6 @@ app.controller('controladorCrear', function (servicioRest, $scope, $mdDialog, $m
 	function preguntaVacia(tipoP) {
         var resp = false;
         if (tipoP === "abierta") {
-			console.log($scope.temasAbierta);
             if ($scope.tituloAbierta === undefined || $scope.temasAbierta === undefined || $scope.tituloAbierta === "" || $scope.temasAbierta.length === 0) {
 				resp = true;
             }
@@ -59,6 +58,12 @@ app.controller('controladorCrear', function (servicioRest, $scope, $mdDialog, $m
             if ($scope.tituloTestAbierto === undefined || $scope.temasTestAbierto === undefined || $scope.respuestasTestAbierto[0] === undefined || $scope.respuestasTestAbierto[1] === undefined || $scope.tituloTestAbierto === "" || $scope.temasTestAbierto.length === 0 || $scope.respuestasTestAbierto[0] === "" || $scope.respuestasTestAbierto[1] === "" || ($scope.checkTestAbierto[0] === false && $scope.checkTestAbierto[1] === false)) {
                 resp = true;
             }
+			for (var i = 2; i < $scope.checkTestAbierto.length; i++) {
+				if ($scope.checkTestAbierto[i] === true) {
+					resp = false;
+					break;
+				}
+			}
         }
         return resp;
     }
