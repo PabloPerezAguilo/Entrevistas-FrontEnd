@@ -1,5 +1,5 @@
 app.controller('controladorVer', function ($scope, $mdDialog, indice) {
-    if ($scope.preguntas[indice].type === "Pregunta Abierta") {
+    if ($scope.preguntas[indice].type === "Pregunta abierta") {
         $scope.cabeceraVer = "- Abierta";
         $scope.temas_nivel = $scope.preguntas[indice].tags[0];
         for (var i = 1; i < $scope.preguntas[indice].tags.length; i++) {
@@ -10,7 +10,7 @@ app.controller('controladorVer', function ($scope, $mdDialog, indice) {
         $scope.titulo = $scope.preguntas[indice].title;
         $scope.directiva = $scope.preguntas[indice].directive;
     } else {
-        if ($scope.preguntas[indice].type === "Pregunta Tipo Test") {
+        if ($scope.preguntas[indice].type === "Pregunta tipo Test") {
             $scope.cabeceraVer = "- Test";
         } else {
             $scope.cabeceraVer = "- Selección múltiple";

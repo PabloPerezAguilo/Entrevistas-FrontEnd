@@ -12,7 +12,7 @@ app.controller('controladorTec', function (servicioRest, $scope, $rootScope, $md
 			if ($scope.preguntas[i].type === "FREE") {
 				$scope.preguntas[i].type = "Pregunta abierta";
 			} else if ($scope.preguntas[i].type === "SINGLE_CHOICE") {
-				$scope.preguntas[i].type = "Pregunta Tipo Test";
+				$scope.preguntas[i].type = "Pregunta tipo Test";
 			} else {
 				$scope.preguntas[i].type  = "Pregunta de selección múltiple";
 			}
@@ -111,11 +111,11 @@ app.controller('controladorTec', function (servicioRest, $scope, $rootScope, $md
 						pregunta._id = data.data._id;
 						var tipo = '';
 						if (pregunta.type === "FREE") {
-							tipo = "Pregunta Abierta";
+							tipo = "Pregunta abierta";
 						} else if (pregunta.type === "SINGLE_CHOICE") {
-							tipo = "Pregunta Tipo Test";
+							tipo = "Pregunta tipo Test";
 						} else {
-							tipo = "Pregunta Tipo Test Abierto";
+							tipo = "Pregunta de selección múltiple";
 						}
                         $scope.preguntas.push({
                             _id: pregunta._id,
