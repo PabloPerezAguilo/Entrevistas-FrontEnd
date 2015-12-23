@@ -4,6 +4,10 @@ app.controller('controladorAdmin', function(servicioRest, config, $scope, $locat
     $rootScope.logueado=true;
     $rootScope.rolUsuario="img/administrador.svg";
     $scope.entrevistas=[];
+	
+	if($rootScope.token === undefined || $rootScope.rol !== 'ROLE_ADMIN') {
+		$location.path('/');
+	}
     
     var Options = {
         tag: String,
@@ -29,29 +33,6 @@ app.controller('controladorAdmin', function(servicioRest, config, $scope, $locat
                 
             },
             clickOutsideToClose: false
-        })
-        .then(function (datosPregunta) {
-				entrevista.name = datosPregunta.name;
-                entrevista.surname = datosPregunta.surname;
-                entrevista.DNI = datosPregunta.DNI;
-                entrevista.date = datosPregunta.date;
-                entrevista.leveledTags = datosPregunta.leveledTags;
-                servicioRest.postInterview(entrevista)
-                    .then(function(data) {
-                        $scope.entrevistas.push({
-                            _id: data.data._id,
-                            name: data.data.name,
-                            surname: data.data.surname,
-                            DNI: data.data.DNI,
-                            date: data.data.date,
-                            leveledTags: data.data.leveledTags
-                        })
-                        console.log(data);
-                    })
-                    .catch(function(err) {
-                        console.log("Error");
-                    	console.log(err);
-                    });
-			});
-    };
+        });
+	}
 });
