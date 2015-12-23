@@ -284,21 +284,7 @@ md-chips .md-chip.md-focused {
 	margin-top: 2.5%;
 }
 
-/* ------------------ Crear pregunta* ------------------ */
-//alert al poner un tema que no existe
-md-dialog.md-transition-in {
-	width: 350px;
-}/*e*/
-
-.md-button.md-default-theme.md-primary, .md-button.md-primary {
-	background-color: $colorPrincipal;
-	color: $letra;
-}
-
-.md-button.md-default-theme:not([disabled]).md-focused, .md-button:not([disabled]).md-focused {
-	background-color: $colorPrincipal;
-}
-
+/*Crear pregunta*/
 .enLinea {
 	display: inline-block;
 }
@@ -422,7 +408,21 @@ md-radio-group.md-default-theme.md-focused:not(:empty) .md-checked .md-container
     background-color: $colorPrincipalClaro;
 }
 
-/*Ver pregunta*/
+/* ------------- Ver pregunta --------------------- */
+
+//alert al poner un tema que no existe
+md-dialog.md-transition-in {
+	width: 350px;
+}
+
+.md-button.md-default-theme.md-primary, .md-button.md-primary {
+	background-color: $colorPrincipal;
+	color: $letra;
+}
+
+.md-button.md-default-theme:not([disabled]).md-focused, .md-button:not([disabled]).md-focused {
+	background-color: $colorPrincipal;
+}
 
 md-checkbox[disabled].md-checked .md-icon {
     background-color: $colorPrincipal;
