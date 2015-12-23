@@ -6,9 +6,15 @@ function ServicioREST($http, $q, $rootScope, config) {
 	function tratarError(data, status, defered) {
 		if (data === null || status === 404 || status === 0) {
 			defered.reject("Servicio no disponible");
-		} else if (data === undefined || data.message === undefined) {
+		} else if (data === undefined || data.message === undefined || status === 403) {
 			//defered.reject("Error: " + status);
 			defered.reject(status);
+		} else if (status === 405) {
+			var error = {
+				data: data,
+				status: status
+			}; 
+			defered.reject(error);
 		} else {
 			defered.reject(data.message);
 		}

@@ -7,11 +7,12 @@ app.controller('controladorTec', function (servicioRest, $scope, $rootScope, $md
 	}
 	
 	function escribirTipo() {
-		for (var i = 0; i < $scope.preguntas.length; i++) {
+		var i;
+		for (i = 0; i < $scope.preguntas.length; i++) {
 			if ($scope.preguntas[i].type === "FREE") {
 				$scope.preguntas[i].type = "Pregunta abierta";
 			} else if ($scope.preguntas[i].type === "SINGLE_CHOICE") {
-				$scope.preguntas[i].type = "Pregunta tipo test";
+				$scope.preguntas[i].type = "Pregunta Tipo Test";
 			} else {
 				$scope.preguntas[i].type  = "Pregunta de selección múltiple";
 			}
@@ -26,10 +27,9 @@ app.controller('controladorTec', function (servicioRest, $scope, $rootScope, $md
 			})
 			.catch(function (err) {
 				$log.error("Error al cargar las preguntas: " + err);
-				if(err === 'No token provided.') {
+				if (err === 403) {
 					$location.path('/');
 				}
-				$log.error("Error al cargar los temas: " + err);
 			});
 	}
     
@@ -37,8 +37,7 @@ app.controller('controladorTec', function (servicioRest, $scope, $rootScope, $md
     var Options = {
         title: String,
         valid: Boolean
-	};
-	var pregunta = {
+	}, pregunta = {
         _id: { type: String },
         title: { type: String, required: true },
         type: { type: String, required: true },
@@ -46,10 +45,7 @@ app.controller('controladorTec', function (servicioRest, $scope, $rootScope, $md
         level: { type: Number, min: 1, max: 10, required: true },
         directive: { type: String },
         answers: [Options]
-	};
-	
-	var simulateQuery = false, temas, temasCargados;
-	var filtroTemas = {
+	}, simulateQuery = false, temas, temasCargados, filtroTemas = {
 		tags: []
 	};
 	
@@ -153,7 +149,6 @@ app.controller('controladorTec', function (servicioRest, $scope, $rootScope, $md
 	
 	/* ----------------- AUTOCOMPLETE ---------------- */
 	$scope.listaTemas = [];
-	var simulateQuery = false;
 	
 	$rootScope.obtenerTemas = function () {
 		servicioRest.getTemas()
@@ -169,32 +164,14 @@ app.controller('controladorTec', function (servicioRest, $scope, $rootScope, $md
 	$rootScope.obtenerTemas();
 	
 	function buscarTema(tema) {
-		for (var i = 0; i < temasCargados .length; i++) {
+		var i;
+		for (i = 0; i < temasCargados.length; i++) {
 			if (tema === temasCargados[i].valor) {
 				return i;
 			}
 		}
 		return -1;
 	}
-	
-	//Al introducir un tema nuevo filtra las preguntas por el mismo
-	/*function selectedItemChange(item) {
-		if (item !== undefined) {
-			var tema = {
-				tags: [String]
-			};
-			tema.tags = item.tag.toLowerCase();
-			servicioRest.postPreguntasByTag(tema)
-				.then(function (data) {
-					$scope.preguntas = data;
-					escribirTipo();
-				})
-				.catch(function (err) {
-					$scope.preguntas = null;
-					$log.error("Error al filtrar el tema: " + err);
-				});
-		}
-    }*/
 	
 	//Al introducir un tema nuevo filtra las preguntas por el mismo
 	function selectedItemChange(item) {
@@ -219,7 +196,7 @@ app.controller('controladorTec', function (servicioRest, $scope, $rootScope, $md
 				.catch(function (err) {
 					$scope.preguntas = null;
 					$log.error("Error al filtrar el tema: " + err);
-				});			
+				});
 			}
 			
 		}
@@ -265,14 +242,7 @@ app.controller('controladorTec', function (servicioRest, $scope, $rootScope, $md
 				});
 		}
 	};
-	
-	$scope.showAlert = function(ev) {
-    // Appending dialog to document.body to cover sidenav in docs app
-    // Modal dialogs should fully cover application
-    // to prevent interaction outside of dialog
-    
-  };
-	
+		
 	//Cada vez que se crea un chip se llama a esta funcion
 	$scope.transformChip = function (chip) {
 		if (angular.isObject(chip)) {
@@ -281,13 +251,12 @@ app.controller('controladorTec', function (servicioRest, $scope, $rootScope, $md
 		
 		var index = buscarTema(chip.toLowerCase());
 		if (index !== -1) {
-			selectedItemChange(chip)
+			selectedItemChange(chip);
 			return temasCargados[index];
 		}
 		
 		$mdDialog.show(
 			$mdDialog.alert()
-			.parent(angular.element(document.querySelector('.popupContainer')))
 			.clickOutsideToClose(true)
 			.title('El tema no existe')
 			.textContent('Debes escoger un tema de la lista')
@@ -295,5 +264,5 @@ app.controller('controladorTec', function (servicioRest, $scope, $rootScope, $md
 			.ok('Ok')
     );
 		return null;
-    }
+    };
 });

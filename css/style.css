@@ -59,12 +59,17 @@ header {
   display: inline-block;
   margin-left: 5%; }
 
+.iconoRole {
+  color: #EFEFEF;
+  width: 40px;
+  height: 40px; }
+
 #iconoUsuario {
   position: relative;
   display: inline-block;
   float: right;
-  margin-right: 1%;
-  margin-top: 4%; }
+  margin-right: 2%;
+  margin-top: 2%; }
 
 footer {
   position: fixed;
@@ -206,7 +211,31 @@ md-tabs:not(.md-no-tab-content):not(.md-dynamic-height) {
   padding: 0px; }
 
 /*------------------------------TECNICO*------------------------------*/
-/*Crear pregunta*/
+/*md-chips*/
+md-chips .md-chip.md-focused {
+  background-color: #EF6C00; }
+
+.md-autocomplete-suggestions li:not(.md-not-found-wrapper):hover {
+  background-color: rgba(239, 108, 0, 0.17); }
+
+.md-autocomplete-suggestions li:not(.md-not-found-wrapper).selected {
+  background-color: rgba(239, 108, 0, 0.17); }
+
+.centrarIconosLista {
+  margin-top: 2.5%; }
+
+/* -------------------- Crear pregunta -------------------- */
+/* alert al escoger tema no creado */
+.md-button.md-default-theme.md-primary, .md-button.md-primary {
+  background-color: #EF6C00;
+  color: #EFEFEF; }
+
+md-dialog.md-transition-in {
+  width: 350px; }
+
+.md-button.md-default-theme:not([disabled]).md-focused, .md-button:not([disabled]).md-focused {
+  background-color: #EF6C00; }
+
 .enLinea {
   display: inline-block; }
 
@@ -223,14 +252,14 @@ md-tabs:not(.md-no-tab-content):not(.md-dynamic-height) {
   margin-left: 3px;
   margin-top: 1px; }
 
+.btnPosDerecha {
+  margin-right: 12%; }
+
 md-toolbar:not(.md-menu-toolbar) {
   background-color: #EF6C00;
   color: #EFEFEF; }
 
-.dialogdemoBasicUsage #popupContainer {
-  position: relative; }
-
-md-dialog.md-transition-in {
+md-dialog.md-transition-in.crearPregunta {
   margin: auto;
   min-width: 700px;
   min-height: 300px;
@@ -290,7 +319,6 @@ md-radio-button {
   padding-top: 2%; }
 
 md-checkbox.respuesta {
-  float: left;
   padding-top: 5%;
   margin: 0; }
 
@@ -304,7 +332,7 @@ md-checkbox[disabled].md-checked .md-icon {
 md-checkbox[disabled] .md-label {
   color: #1E1E1E; }
 
-#checkboxVer {
+.displayInline {
   display: inline; }
 
 #textoTemaNivel {
@@ -320,9 +348,6 @@ md-checkbox[disabled] .md-label {
   margin-bottom: 7%;
   margin-left: 6%; }
 
-#textoResp {
-  display: inline; }
-
 /*div del md-chips para buscar por temas*/
 .buscarTemas {
   margin-top: 1%;
@@ -331,11 +356,7 @@ md-checkbox[disabled] .md-label {
 
 .md-button.md-fab.md-mini {
   float: right;
-  margin-top: 1.8%;
-  margin-right: 12%; }
-
-.md-button .md-ripple-container {
-  border-radius: 50%; }
+  margin-top: 1.8%; }
 
 .md-button.icon.md-ink-ripple {
   min-width: 0;
@@ -371,7 +392,7 @@ md-list md-list-item.md-3-line .md-list-item-text h3, md-list.md-default-theme m
   margin-left: 10%;
   margin-right: 10%; }
 
-.md-chips .md-chip-input-container md-autocomplete input {
+.buscarTemas .md-chips .md-chip-input-container md-autocomplete input {
   padding-left: 8%; }
 
 .md-subheader .md-subheader-content {
@@ -401,7 +422,54 @@ md-list md-list-item.md-3-line .md-list-item-text h3 {
   margin-top: 0%;
   margin-bottom: 0%; }
 
-/* media queries */
+/*------------------------------ADMIN----------------------*/
+.md-datepicker-open .md-datepicker-calendar-icon {
+  fill: #EF6C00; }
+
+.md-datepicker-input-container.md-datepicker-focused {
+  border-bottom-color: #EF6C00; }
+
+.md-calendar-date.md-focus.md-calendar-selected-date .md-calendar-date-selection-indicator {
+  background-color: #EF6C00; }
+
+.md-calendar-date.md-calendar-date-today .md-calendar-date-selection-indicator {
+  border: 1px solid #EF6C00; }
+
+/*Range Slider*/
+rzslider .rz-bubble.rz-limit {
+  opacity: 0 !important; }
+
+rzslider .rz-pointer:after {
+  display: none;
+  background: none; }
+
+rzslider .rz-pointer:hover:after {
+  display: none;
+  background-color: none; }
+
+rzslider .rz-pointer {
+  background-color: #EF6C00;
+  top: -7px;
+  width: 16px;
+  height: 16px;
+  left: 634px; }
+
+rzslider .rz-bar.rz-selection {
+  background: #EF6C00; }
+
+rzslider .rz-pointer.rz-active:after {
+  display: none; }
+
+rzslider .rz-bar {
+  height: 2px;
+  width: 99%; }
+
+rzslider .rz-bar-wrapper {
+  opacity: 1;
+  width: 640px;
+  left: 8px; }
+
+/*--------------------- media queries ------------------------*/
 @media screen and (min-height: 1024px) {
   .listaPreguntas {
     height: 975px;
@@ -481,7 +549,13 @@ md-list md-list-item.md-3-line .md-list-item-text h3 {
     max-height: 100%;
     min-width: 100%;
     max-width: 100%;
-    overflow-y: hidden; } }
+    overflow-y: hidden; }
+  rzslider .rz-bar-wrapper {
+    opacity: 1;
+    width: 1196px;
+    left: 8px; }
+  span.rz-pointer {
+    left: 1203px; } }
 
 @media screen and (max-width: 750px) {
   md-dialog.md-transition-in {
@@ -492,38 +566,12 @@ md-list md-list-item.md-3-line .md-list-item-text h3 {
     max-width: 100%;
     overflow-y: hidden; } }
 
-/*Range Slider*/
-rzslider .rz-bubble.rz-limit {
-  opacity: 0 !important; }
-
-rzslider .rz-pointer:after {
-  display: none;
-  background: none; }
-
-rzslider .rz-pointer:hover:after {
-  display: none;
-  background-color: none; }
-
-/*
-rzslider .rz-pointer:before {
-    background: $naranja;
-}
-rzslider .rz-pointer:after {
-    background: $naranja;
-}*/
-rzslider .rz-pointer {
-  background-color: #EF6C00;
-  top: -7px;
-  width: 16px;
-  height: 16px; }
-
-rzslider .rz-bar.rz-selection {
-  background: #EF6C00; }
-
-rzslider .rz-pointer.rz-active:after {
-  display: none; }
-
-rzslider .rz-bar {
-  height: 2px; }
+@media screen and (max-width: 650px) {
+  rzslider .rz-bar-wrapper {
+    opacity: 1;
+    width: 600px;
+    left: 8px; }
+  span.rz-pointer {
+    left: 592px; } }
 
 /*# sourceMappingURL=style.css.map */
