@@ -11,7 +11,8 @@
 		<!-- build:CSSCDNs -->
 		
 		<!-- AQUI IRAN LOS CSS QUE TENGAN CDN-->
-		<link rel="stylesheet" href="https://cdn.gitcdn.xyz/cdn/angular/bower-material/v1.0.0-rc2/angular-material.css">
+		<link rel="stylesheet" href="https://cdn.gitcdn.xyz/cdn/angular/bower-material/v1.0.0-rc4/angular-material.css">
+        <link rel="stylesheet" type="text/css" href="css/rzslider.css"/>
 		<!-- endbuild -->
        
 		<!-- AQUI IRAN LOS CSS NUESTROS QUE NO TENGAN CDN-->
@@ -19,8 +20,12 @@
 	</head>
 	<body>
 
-		<header ng-init="cargando=false">
-            <img id="logo" src="logo.png">
+		<header ng-init="cargando=false;logueado=false">
+            <img id="logo" src="logo.png" ng-hide="logueado">
+            <img id="logoLogeado" src="logo.png" ng-show="logueado" ng-cloak>
+            <p id="iconoUsuario" nh-model="rolUsuario" ng-show="logueado" ng-cloak>
+                <md-icon md-svg-src="{{rolUsuario}}" class="iconoRole"></md-icon>
+            </p>
             <div id="doneLoading" ng-hide="cargando"></div>
             <md-progress-linear id="progressBar" md-mode="indeterminate" ng-show="cargando"></md-progress-linear>
 		</header>
@@ -36,13 +41,15 @@
 		</footer>
 
 		<!-- build:JSCDNs -->
-		<script src="js/angular.min.js"></script>        
+		<script src="js/angular.js"></script>
+        <script src="js/rzslider.min.js"></script>
 		<script src="js/angular-animate.js"></script>
 		<script src="js/angular-route.min.js"></script>
 		<script src="js/angular-messages.min.js"></script>
 		<script src="js/angular-aria.min.js"></script>
 		<script src="js/angular-material.js"></script>
 		<script src="js/assets-cache.js"></script>
+		<script src="js/angular-material-icons.min.js"></script>
 		<!-- endbuild -->
 		<!-- build:JS -->
 		<script src="services.js"></script>
@@ -50,8 +57,12 @@
 		<script src="config.js"></script>
 		<script src="modulos/logIn/controladorLogIn.js"></script>
         <script src="modulos/admin/controladorAdmin.js"></script>
-        <script src="modulos/tech/controladorTech.js"></script>
+        <script src="modulos/admin/controladorAdminCrear.js"></script>
+        <script src="modulos/tec/controladorTec.js"></script>
+        <script src="modulos/tec/controladorCrear.js"></script>
+		<script src="modulos/tec/controladorVer.js"></script>
         <script src="modulos/entrevista/controladorEntrevista.js"></script>
+		
 		<!-- endbuild -->
 		<script src="js/AES.min.js"></script>
 

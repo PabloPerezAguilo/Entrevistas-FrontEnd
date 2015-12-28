@@ -11,12 +11,14 @@ article, aside, canvas, details, embed,
 figure, figcaption, footer, header, hgroup, 
 menu, nav, output, ruby, section, summary,
 time, mark, audio, video {
-	margin: 0;
 	padding: 0;
 	border: 0;
 	font-size: 100%;
 	font: sans-serif;
 	vertical-align: baseline;
+}
+.ng-scope {
+	//overflow: hidden;
 }
 /* HTML5 display-role reset for older browsers */
 article, aside, details, figcaption, figure, 
@@ -45,10 +47,10 @@ table {
 /* ---------------------------------------------------------------------*/
 
 $negro: #1E1E1E;
-$naranja: #EF6C00;
-$grisLetra: #EFEFEF;
-$grisFondo: #F6F6F6;
-$naranjaClaro: rgba(239,108,0,0.17);
+$colorPrincipal: #EF6C00;
+$letra: #EFEFEF;
+$fondo: #F6F6F6;
+$colorPrincipalClaro: rgba(239,108,0,0.17);
 
 @mixin sombra($h,$v,$blur,$spread, $color) {
 	-webkit-box-shadow: $h $v $blur $spread $color;
@@ -70,9 +72,31 @@ $naranjaClaro: rgba(239,108,0,0.17);
 /* ------------------------- HEADER & FOOTER --------------------------------------- */
 header {
     background-color: $negro;
-    color: $grisLetra;
+    color: $letra;
     height: 90px;
     box-shadow: 2px 2px 30px grey;
+}
+
+#logoLogeado {
+    margin-top:0.3%;
+    max-width:85%;
+    max-height:85%;
+    display: inline-block;
+    margin-left: 5%;
+}
+
+.iconoRole {
+	color: $letra;
+	width: 40px;
+	height: 40px;
+}
+
+#iconoUsuario {
+    position: relative;
+    display: inline-block;
+    float: right;
+    margin-right: 2%;
+    margin-top: 2%;
 }
 
 footer {
@@ -102,7 +126,7 @@ footer {
 #magniVersion {
     display: inline;
     float: right;
-    color: $grisLetra;
+    color: $letra;
     margin-top: 2%;
     margin-right: 2%;
 }
@@ -110,7 +134,7 @@ footer {
 #doneLoading {
     height: 5px;
     position: relative;
-    background-color: $naranja;
+    background-color: $colorPrincipal;
     top: 8%;
     box-shadow: 2px 2px 30px grey;
 }
@@ -121,7 +145,7 @@ footer {
 }
 
 md-progress-linear .md-bar {
-    background-color: $naranja;
+    background-color: $colorPrincipal;
 }
 
 md-progress-linear .md-container {
@@ -165,20 +189,20 @@ md-progress-linear .md-container {
 
 /*Textbox*/
 md-input-container:not(.md-input-invalid).md-input-focused .md-input{
-    border-color: $naranja;
+    border-color: $colorPrincipal;
 }
 
 md-input-container:not(.md-input-invalid).md-input-focused label {
-    color: $naranja;
+    color: $colorPrincipal;
 }
 
 /*Checkbox*/
 md-checkbox.md-checked .md-ink-ripple {
-    color: $naranja;
+    color: $colorPrincipal;
 }
 
 md-checkbox.md-checked .md-icon {
-    background-color: $naranja;
+    background-color: $colorPrincipal;
 }
 
 md-checkbox.md-default-theme.md-checked.md-focused .md-container:before, md-checkbox.md-checked.md-focused .md-container:before {
@@ -187,8 +211,8 @@ md-checkbox.md-default-theme.md-checked.md-focused .md-container:before, md-chec
 
 /*Button*/
 .md-button.md-raised {
-    color: $grisLetra;
-    background-color: $naranja;
+    color: $letra;
+    background-color: $colorPrincipal;
     width: 70%;
     margin-left: 15%;
     margin-right: 15%;
@@ -204,34 +228,34 @@ md-checkbox.md-default-theme.md-checked.md-focused .md-container:before, md-chec
 
 /*Toast*/
 md-toast.md-default-theme, md-toast {
-    background-color: $naranja;
-    color: $grisLetra;
+    background-color: $colorPrincipal;
+    color: $letra;
 }
 .md-button.md-raised:not([disabled]).md-focused {
-    background-color: $naranja;
+    background-color: $colorPrincipal;
 }
 
-/*TAB*/
+/*Tab*/
 md-tabs.md-accent > md-tabs-wrapper {
     background-color: white;
 }
 
 md-content md-tabs {
-    background: $grisFondo;
+    background: $fondo;
     vertical-align: middle;
 }
 
 md-tabs.md-accent > md-tabs-wrapper > md-tabs-canvas > md-pagination-wrapper > md-tab-item:not([disabled]) {
     color: #B5B4B4;
-}
+} 
 
 md-tabs.md-accent > md-tabs-wrapper > md-tabs-canvas > md-pagination-wrapper > md-tab-item:not([disabled]).md-active {
     color: $negro;
 }
 
 md-tabs.md-accent > md-tabs-wrapper > md-tabs-canvas > md-pagination-wrapper > md-ink-bar {
-    color: $naranja;
-    background: $naranja;
+    color: $colorPrincipal;
+    background: $colorPrincipal;
 }
 
 md-tabs:not(.md-no-tab-content):not(.md-dynamic-height) {
@@ -241,3 +265,478 @@ md-tabs:not(.md-no-tab-content):not(.md-dynamic-height) {
 .md-padding {
     padding: 0px;
 }
+
+/*------------------------------TECNICO*------------------------------*/
+/*md-chips*/
+md-chips .md-chip.md-focused {
+	background-color: $colorPrincipal;
+}
+
+.md-autocomplete-suggestions li:not(.md-not-found-wrapper):hover {
+	background-color: $colorPrincipalClaro;
+}
+
+.md-autocomplete-suggestions li:not(.md-not-found-wrapper).selected {
+	background-color: $colorPrincipalClaro;
+}
+
+.centrarIconoLista {
+	margin-top: 2.5%;
+}
+
+/*Crear pregunta*/
+.enLinea {
+	display: inline-block;
+}
+
+.md-button.md-fab {
+    background-color: $colorPrincipal;
+}
+
+.md-button.md-fab:not([disabled]):hover {
+    background-color: #F19E5A;
+}
+
+.md-button.md-fab:not([disabled]).md-focused {
+    background-color: #BC5500;
+}
+
+.btnIconoCentrado {
+	margin-left: 3px;
+    margin-top: 1px;
+}
+
+.btnPosDerecha {
+	margin-right: 12%;
+}
+
+md-toolbar:not(.md-menu-toolbar) {
+    background-color: $colorPrincipal;
+    color: $letra;
+}
+
+.dialogdemoBasicUsage #popupContainer {
+  position: relative;
+}
+
+md-dialog.md-transition-in.redimensionar {
+    margin: auto;
+    min-width: 700px;
+    min-height: 300px;
+	max-height: 700px;
+}
+
+md-tabs .md-tab.md-active {
+    color: $negro;
+}
+
+md-tabs .md-tab .md-ripple-container {
+    color: rgba(255, 141, 0, 0.26);
+}
+
+md-tabs md-ink-bar {
+   background: $colorPrincipal;
+}
+
+.contenidoTablaCrear {
+    padding: 22px;
+}
+
+md-slider .md-thumb:after {
+    border-color: $colorPrincipal;
+    background-color: $colorPrincipal;
+}
+
+md-slider .md-sign {
+    background-color: $colorPrincipal;
+}
+
+md-slider .md-sign:after {
+    border-top-color: $colorPrincipal;
+}
+
+md-slider .md-track.md-track-fill {
+    background-color: $colorPrincipal;
+}
+
+.sliderdemoBasicUsage input[type="number"] {
+  text-align: center;
+  padding-left: 10px;
+}
+
+md-chips .md-chips.md-focused {
+    box-shadow: 0 2px $colorPrincipal;
+}
+
+md-radio-button.md-checked .md-off {
+    border-color: $colorPrincipal;
+}
+
+md-radio-button .md-on {
+    background-color: $colorPrincipal;
+}
+
+md-radio-group .md-checked .md-ink-ripple {
+    color: rgba(255, 161, 0, 0.26);
+}
+
+.md-checked .md-container:before {
+    background-color: rgba(255, 141, 0, 0.26);
+}
+
+md-input-container.md-block.respuesta {
+	display: inline-block;
+    width: 90%;
+}
+
+md-radio-button {
+	display: inline-block;
+    float: left;
+    padding-top: 2%;
+}
+
+md-radio-button, .md-switch-thumb {
+    
+}
+
+md-checkbox.respuesta {
+    padding-top: 5%;
+    margin: 0;
+}
+
+md-radio-group.md-default-theme.md-focused:not(:empty) .md-checked .md-container:before, md-radio-group.md-focused:not(:empty) .md-checked .md-container:before {
+    background-color: $colorPrincipalClaro;
+}
+
+/* ------------- Ver pregunta --------------------- */
+
+//alert al poner un tema que no existe
+md-dialog.md-transition-in {
+	width: 350px;
+}
+
+.md-button.md-default-theme.md-primary, .md-button.md-primary {
+	background-color: $colorPrincipal;
+	color: $letra;
+}
+
+.md-button.md-default-theme:not([disabled]).md-focused, .md-button:not([disabled]).md-focused {
+	background-color: $colorPrincipal;
+}
+
+md-checkbox[disabled].md-checked .md-icon {
+    background-color: $colorPrincipal;
+}
+
+md-checkbox[disabled] .md-label {
+    color: $negro;
+}
+.displayInline {
+    display: inline;
+}
+#textoTemaNivel {
+    margin-bottom: 3%;
+    font-weight: bold;
+}
+#textoTitulo {
+    margin-bottom: 3%;
+    text-align: center;
+    font-size: 150%;
+}
+#textoDirectiva {
+    margin-bottom: 7%;
+    margin-left: 6%;
+}
+
+/*div del md-chips para buscar por temas*/
+.buscarTemas {
+    margin-top: 1%;
+	margin-left: 10%;
+	margin-right: 10%;
+}
+
+.md-button.md-fab.md-mini {
+    float: right;
+	margin-top: 1.8%;
+}
+
+.explosionIcono.md-button .md-ripple-container {
+	border-radius: 50%;	
+}
+
+.md-button.icon.md-ink-ripple {
+	min-width: 0;
+	line-height: 40px;
+    width: 40px;
+    height: 40px;
+	border-radius: 50%
+}
+
+.md-button.icon.md-ink-ripple:focus {
+	background: $fondo;
+	border-radius: 50%;
+}
+
+.md-button.icon.md-ink-ripple:hover {
+	border-radius: 50%;
+	background-color: rgba(119, 113, 113, 0.41);
+}
+
+md-icon {
+    color: #5D5D5D;
+}
+
+/*lista de preguntas*/
+
+md-list md-list-item.md-3-line .md-list-item-text h3, md-list.md-default-theme md-list-item.md-3-line .md-list-item-text h4, md-list md-list-item.md-3-line .md-list-item-text h4 {
+    color: #5D5D5D;
+}
+
+.iconoBuscar{
+    float: right;
+    margin-top: 1.5%;
+	margin-right: 13%;
+    z-index: auto;
+}
+
+.listaPreguntas {
+    height: 600px;
+    margin-bottom: 70px;
+    overflow: auto;
+	margin-left: 10%;
+	margin-right: 10%;
+}
+
+.buscarTemas .md-chips .md-chip-input-container md-autocomplete input {
+    padding-left: 8%;
+}
+
+.md-subheader .md-subheader-content {
+    margin-top: 1%;
+	margin-right: 10%;
+	margin-left: 9%;
+    font-size: xx-large;
+    
+}
+
+/*Divider de preguntas */
+md-divider.dividerPrincipal {
+	margin-right: 10%;
+    margin-left: 10%;
+}
+
+/*items de la lista de preguntas*/
+md-list-item.md-3-line, md-list-item.md-3-line > .md-no-style {
+    padding-left: 2%;
+	padding-right: 1%;
+}
+
+md-list md-list-item.md-3-line .md-list-item-text h3 {
+	font-weight: bolder;
+}
+
+
+/*confirmacion*/
+.md-button.md-raised.confirm {
+	width: 5%;
+	margin-right: 0%;
+	margin-left: 0%;
+	margin-top: 0%;
+	margin-bottom: 0%;
+}
+
+/*------------------------------ADMIN----------------------*/
+.md-datepicker-open .md-datepicker-calendar-icon {
+    fill: $colorPrincipal;
+}
+
+.md-datepicker-input-container.md-datepicker-focused {
+	border-bottom-color: $colorPrincipal;
+}
+
+.md-calendar-date.md-focus.md-calendar-selected-date .md-calendar-date-selection-indicator {
+	background-color: $colorPrincipal;
+}
+
+.md-calendar-date.md-calendar-date-today .md-calendar-date-selection-indicator {
+	    border: 1px solid $colorPrincipal;
+}
+
+/*Range Slider*/
+rzslider .rz-bubble.rz-limit {
+    opacity: 0!important;
+}
+
+rzslider .rz-pointer:after {
+    display: none;
+    background: none;
+}
+
+rzslider .rz-pointer:hover:after {
+    display: none;
+    background-color: none;
+}
+
+rzslider .rz-pointer {
+    background-color: $colorPrincipal;
+    top: -7px;
+    width: 16px;
+    height: 16px;
+	left: 634px;
+}
+
+rzslider .rz-bar.rz-selection {
+    background: $colorPrincipal;
+}
+
+rzslider .rz-pointer.rz-active:after {
+    display: none;
+}
+
+rzslider .rz-bar {
+    height: 2px;
+	width: 99%;
+}
+
+rzslider .rz-bar-wrapper {
+	opacity: 1;
+    width: 640px;
+    left: 8px;
+}
+
+/*--------------------- media queries ------------------------*/
+
+@media screen and (min-height: 1024px) {
+    .listaPreguntas {
+		height: 975px;
+		margin-left: 0%;
+		margin-right: 0%;
+		margin-bottom: 70px;
+	}
+	md-divider.dividerPrincipal {
+		margin-right: 0%;
+		margin-left: 0%;
+	}
+	.md-subheader .md-subheader-content {
+		margin-right: 0%;
+		margin-left: 0%
+	}
+	.buscarTemas {
+		padding-left: 2%;
+		margin-top: 1%;
+		margin-left: 0%;
+		margin-right: 0%;
+	}
+	.md-button.md-fab.md-mini {
+		float: right;
+		margin-top: 1%;
+		margin-right: 1%;
+	}
+}
+
+@media screen and (min-height: 620px) and (max-height: 700px) {
+    .listaPreguntas {
+		height: 300px;
+	}
+}
+
+@media screen and (min-height: 801px) and (max-height: 900px) {
+    .listaPreguntas {
+		height: 500px;
+	}
+}
+
+@media screen and (min-height: 701px) and (max-height: 800px) {
+    .listaPreguntas {
+		height: 400px;
+	}
+}
+
+@media screen and (min-height: 560px) and (max-height: 620px) {
+    .listaPreguntas {
+		height: 250px;
+	}
+}
+
+@media screen and (min-height: 510px) and (max-height: 561px) {
+    .listaPreguntas {
+		height: 200px;
+	}
+}
+
+@media screen and (min-height: 250px) and (max-height: 511px) {
+    .listaPreguntas {
+		height: 140px;
+	}
+}
+
+@media screen and (max-width: 784px) {
+    .listaPreguntas {
+		margin-left: 0%;
+		margin-right: 0%;
+		margin-bottom: 70px;
+	}
+	md-divider.dividerPrincipal {
+		margin-right: 0%;
+		margin-left: 0%;
+	}
+	.md-subheader .md-subheader-content {
+		margin-right: 0%;
+		margin-left: 0%
+	}
+	.buscarTemas {
+		padding-left: 2%;
+		margin-top: 1%;
+		margin-left: 0%;
+		margin-right: 0%;
+	}
+	.md-button.md-fab.md-mini {
+		float: right;
+		margin-top: 1%;
+		margin-right: 1%;
+	}
+}
+
+@media screen and (max-height: 620px) {
+   md-dialog.md-transition-in.redimensionar {
+       float: inherit;
+       min-height: 100%;
+       max-height: 100%;
+       min-width: 100%;
+       max-width: 100%;
+       overflow-y: hidden;  
+    }
+	
+	rzslider .rz-bar-wrapper {
+		opacity: 1;
+		width: 1196px;
+		left: 8px;
+	}
+	
+	span.rz-pointer {
+		left: 1203px;
+	}
+}
+@media screen and (max-width: 750px) {
+   md-dialog.md-transition-in.redimensionar {
+       float: inherit;
+       min-height: 100%;
+       max-height: 100%;
+       min-width: 100%;
+       max-width: 100%;
+       overflow-y: hidden;    
+    }
+}
+
+@media screen and (max-width: 650px) {
+   rzslider .rz-bar-wrapper {
+		opacity: 1;
+		width: 600px;
+		left: 8px;
+	}
+	
+	span.rz-pointer {
+		left: 592px;
+	}
+}
+

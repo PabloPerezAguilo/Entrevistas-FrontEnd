@@ -1,0 +1,27 @@
+<md-dialog class="redimensionar" aria-label="Mango (Fruit)"  ng-cloak>
+	<form>
+    	<md-toolbar>
+      		<div class="md-toolbar-tools">
+        		<h2 ng-model="cabeceraVer">Ver pregunta {{cabeceraVer}}</h2>
+                <span flex></span>
+				<md-button class="md-icon-button" ng-click="cancel()">
+					<md-icon md-svg-src="img/cerrar.svg" aria-label="Close dialog"></md-icon>
+                </md-button>
+      </div>
+    </md-toolbar>
+    <md-dialog-content>
+      
+		<div class="md-dialog-content">
+            
+            <p id="textoTemaNivel" ng-bind="temas_nivel"></p>  
+            <p id="textoTitulo" ng-bind="titulo"></p>       
+            <p id="textoDirectiva" ng-bind="directiva"></p>
+            <div ng-repeat="item in items">
+                <md-checkbox class="displayInline" ng-disabled="true" ng-model="item.esCorrecta" aria-label="checkbox ver"></md-checkbox>
+                <p class="displayInline" ng-bind="item.respuesta"></p>
+            </div>
+      </div>
+		
+    </md-dialog-content>
+  </form>
+</md-dialog>

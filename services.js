@@ -6,21 +6,27 @@ function ServicioREST($http, $q, $rootScope, config) {
 	function tratarError(data, status, defered) {
 		if (data === null || status === 404 || status === 0) {
 			defered.reject("Servicio no disponible");
-		} else if (data === undefined || data.message === undefined) {
+		} else if (data === undefined || data.message === undefined || status === 403) {
 			//defered.reject("Error: " + status);
 			defered.reject(status);
+		} else if (status === 405) {
+			var error = {
+				data: data,
+				status: status
+			}; 
+			defered.reject(error);
 		} else {
 			defered.reject(data.message);
 		}
 	}
 
 	/* ---------- SERVICIOS ENTIDAD ---------- */
-	function postEntidad(objetoAEnviar) {
+	function postPregunta(objetoAEnviar) {
 		var defered = $q.defer();
 		var promise = defered.promise;
 		$http({
 			method: 'POST',
-			url: url + '/entidad',
+			url: url + '/question',
 			data: objetoAEnviar
 		})
 		.success(function(data, status, headers, config) {
@@ -33,12 +39,29 @@ function ServicioREST($http, $q, $rootScope, config) {
 		return promise;
 	}
 
-	function getEntidades() {
+	function getPreguntas() {
 		var defered = $q.defer();
 		var promise = defered.promise;
 		$http({
 			method: 'GET',
-			url: url + '/resource/'
+			url: url + '/question/'
+		})
+		.success(function(data, status, headers, config) {
+			defered.resolve(data);
+		})
+		.error(function(data, status, headers, config) {
+			tratarError(data, status,defered);
+		});
+
+		return promise;
+	}
+    
+    function deletePregunta(idPregunta) {
+		var defered = $q.defer();
+		var promise = defered.promise;
+		$http({
+			method: 'DELETE',
+			url: url + '/question/'+idPregunta
 		})
 		.success(function(data, status, headers, config) {
 			defered.resolve(data);
@@ -108,13 +131,93 @@ function ServicioREST($http, $q, $rootScope, config) {
 		});
 
 		return promise;
-    }
-		
+	}  
+    
+    function postInterview(entrevista) {
+		var defered = $q.defer();
+		var promise = defered.promise;
+		$http({
+			method: 'POST',
+			url: url + '/interview/',
+            data: entrevista
+		})
+		.success(function(data, status, headers, config) {
+			defered.resolve(data);
+		})
+		.error(function(data, status, headers, config) {
+			tratarError(data, status,defered);
+		});
+
+		return promise;
+	}
+	
+	/* --------------- GET TEMAS --------------- */
+	
+	function getTemas() {
+		var defered = $q.defer();
+		var promise = defered.promise;
+		$http({
+			method: 'GET',
+			url: url + '/tag/'
+		})
+		.success(function(data, status, headers, config) {
+			defered.resolve(data);
+		})
+		.error(function(data, status, headers, config) {
+			tratarError(data, status,defered);
+		});
+
+		return promise;
+	}
+	
+	/* ------------- GET PREGUNTAS BY TAG ------------- */
+	
+	function postPreguntasByTag(tag) {
+		var defered = $q.defer();
+		var promise = defered.promise;
+		$http({
+			method: 'POST',
+			url: url + '/questionByTags/',
+			data: tag
+		})
+		.success(function(data, status, headers, config) {
+			defered.resolve(data);
+		})
+		.error(function(data, status, headers, config) {
+			tratarError(data, status, defered);
+		});
+
+		return promise;
+	}
+	
+	function postTema(tema) {
+		var defered = $q.defer();
+		var promise = defered.promise;
+		$http({
+			method: 'POST',
+			url: url + '/tag/',
+			data: { tag: tema }
+		})
+		.success(function(data, status, headers, config) {
+			defered.resolve(data);
+		})
+		.error(function(data, status, headers, config) {
+			tratarError(data, status, defered);
+		});
+
+		return promise;
+	}
+	
 	return {
-		getEntidades: getEntidades,
+		getPreguntas: getPreguntas,
 		getEntidad: getEntidad,
-		postEntidad: postEntidad,
+		postPregunta: postPregunta,
+        deletePregunta: deletePregunta,
 		postAuthenticate: postAuthenticate,
-        getInterview: getInterview
+        getInterview: getInterview,
+        postInterview: postInterview,
+		getTemas: getTemas,
+		postTema: postTema,
+		postPreguntasByTag: postPreguntasByTag
 	}
 }
