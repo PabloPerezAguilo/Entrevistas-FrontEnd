@@ -91,13 +91,14 @@ gulp.task('cdnReplace', function() {
 	.pipe(htmlreplace({
 		
 		'JSCDNs': [
-		'https://ajax.googleapis.com/ajax/libs/angularjs/1.4.7/angular.js',
-		'https://ajax.googleapis.com/ajax/libs/angularjs/1.4.7/angular-route.min.js',
+		'https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.js',
+		'https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-route.min.js',
 		'https://ajax.googleapis.com/ajax/libs/angularjs/1.4.7/angular-mocks.js',
-		'https://ajax.googleapis.com/ajax/libs/angularjs/1.4.7/angular-messages.min.js',
-		'https://ajax.googleapis.com/ajax/libs/angularjs/1.4.7/angular-animate.min.js',
-		'https://ajax.googleapis.com/ajax/libs/angularjs/1.4.7/angular-aria.min.js',
-		'https://cdn.gitcdn.xyz/cdn/angular/bower-material/v1.0.0-rc4/angular-material.js',
+		'https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-messages.min.js',
+		'https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-animate.min.js',
+		'https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-aria.min.js',
+		'https://cdn.gitcdn.xyz/cdn/angular/bower-material/v1.0.1-master-a687bfc/angular-material.js',
+		//'https://cdn.gitcdn.xyz/cdn/angular/bower-material/v1.0.0-rc4/angular-material.js',
 		'https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js',
 		'https://cdnjs.cloudflare.com/ajax/libs/ng-tags-input/2.3.0/ng-tags-input.min.js',
 		'https://s3-us-west-2.amazonaws.com/s.cdpn.io/t-114/assets-cache.js',

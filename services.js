@@ -116,12 +116,12 @@ function ServicioREST($http, $q, $rootScope, config) {
     
     /* ------------- GET INTERVIEW -------------- */
     
-    function getInterview(dni) {
+    function getEntrevistasByNombre(nombre) {
         var defered = $q.defer();
 		var promise = defered.promise;
 		$http({
 			method: 'GET',
-			url: url + '/interview/' + dni
+			url: url + '/interview/' + nombre
 		})
 		.success(function(data, status, headers, config) {
 			defered.resolve(data);
@@ -131,7 +131,24 @@ function ServicioREST($http, $q, $rootScope, config) {
 		});
 
 		return promise;
-	}  
+	}
+	
+	function getEntrevistas() {
+        var defered = $q.defer();
+		var promise = defered.promise;
+		$http({
+			method: 'GET',
+			url: url + '/interview/',
+		})
+		.success(function(data, status, headers, config) {
+			defered.resolve(data);
+		})
+		.error(function(data, status, headers, config) {
+			tratarError(data, status,defered);
+		});
+
+		return promise;
+	} 
     
     function postInterview(entrevista) {
 		var defered = $q.defer();
@@ -140,6 +157,25 @@ function ServicioREST($http, $q, $rootScope, config) {
 			method: 'POST',
 			url: url + '/interview/',
             data: entrevista
+		})
+		.success(function(data, status, headers, config) {
+			defered.resolve(data);
+		})
+		.error(function(data, status, headers, config) {
+			tratarError(data, status,defered);
+		});
+
+		return promise;
+	}
+	
+	/* ------------- GET NOMBRES ENTREVISTAS -------------- */
+	
+	function getNombres() {
+		var defered = $q.defer();
+		var promise = defered.promise;
+		$http({
+			method: 'GET',
+			url: url + '/interviewNames/'
 		})
 		.success(function(data, status, headers, config) {
 			defered.resolve(data);
@@ -214,10 +250,12 @@ function ServicioREST($http, $q, $rootScope, config) {
 		postPregunta: postPregunta,
         deletePregunta: deletePregunta,
 		postAuthenticate: postAuthenticate,
-        getInterview: getInterview,
+        getEntrevistas: getEntrevistas,
         postInterview: postInterview,
 		getTemas: getTemas,
 		postTema: postTema,
-		postPreguntasByTag: postPreguntasByTag
+		postPreguntasByTag: postPreguntasByTag,
+		getNombres: getNombres,
+		getEntrevistasByNombre: getEntrevistasByNombre
 	}
 }

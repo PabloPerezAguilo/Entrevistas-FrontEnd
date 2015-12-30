@@ -604,6 +604,24 @@ rzslider .rz-bar-wrapper {
     left: 8px;
 }
 
+/* ------------------- ENTREVISTA ---------------------------*/
+
+md-datepicker {
+    padding-right: 0px;
+    margin-right: 10%;
+	margin-top: 4px;
+	float: right;
+}
+
+.md-datepicker-input-container {
+	margin-left: 0px;
+}
+
+md-autocomplete {
+	width: 80%;
+}
+
+
 /*--------------------- media queries ------------------------*/
 
 @media screen and (min-height: 1024px) {
