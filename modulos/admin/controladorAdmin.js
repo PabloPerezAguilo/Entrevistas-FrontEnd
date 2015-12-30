@@ -12,7 +12,7 @@ app.controller('controladorAdmin', function(servicioRest, config, $scope, $locat
   
 	var nombresCargados, simulateQuery = false;
 	
-	$scope.myDate = new Date();
+	$scope.fecha = new Date();
 
     $scope.crear = function(ev) {
         $mdDialog.show({
@@ -28,11 +28,19 @@ app.controller('controladorAdmin', function(servicioRest, config, $scope, $locat
         });
 	};
 	
+	/* -------------------- LISTAR ENTREVISTAS ---------------------------- */
+	function escribirHora() {
+		for (var i = 0; i < $scope.entrevistas.length; i++) {
+			$scope.entrevistas[i].date = $scope.entrevistas[i].date.slice(11,16);
+		}	
+	}
 	
 	function getEntrevistas() {
+		//servicioRest.getEntrevistas($scope.fecha.getFullYear() + "-" + ($scope.fecha.getMonth()+1) + "-" + $scope.fecha.getDate())
 		servicioRest.getEntrevistas()
 			.then(function (data) {
 				$scope.entrevistas = data;
+				escribirHora();
 			})
 			.catch(function (err) {
 				$log.error("Error al cargar las entrevistas: " + err);
