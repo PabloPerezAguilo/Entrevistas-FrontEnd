@@ -1,0 +1,24 @@
+<md-dialog class="redimensionar" aria-label="Mango (Fruit)"  ng-cloak>
+	<form>
+		<md-toolbar>
+      		<div class="md-toolbar-tools">
+        		<h2 ng-model="cabeceraVer">Entrevista</h2>
+                <span flex></span>
+				<md-button class="md-icon-button" ng-click="cancel()">
+					<md-icon md-svg-src="img/cerrar.svg" aria-label="Close dialog"></md-icon>
+                </md-button>
+			</div>
+		</md-toolbar>
+		<md-dialog-content>
+			<div class="md-dialog-content">
+				<p ng-bind="DNI"></p>  
+				<p ng-bind="nombre"></p>       
+				<p ng-bind="status"></p>
+				<p ng-bind="questions"></p>
+				<span ng-repeat="tags in leveledTags" ng-if="$first"> {{ tags.tag }} </span>
+				<span ng-repeat="tags in leveledTags" ng-if="!$first">, {{ tags.tag }} </span>
+      		</div>
+		
+    	</md-dialog-content>
+  	</form>
+</md-dialog>

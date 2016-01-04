@@ -10,7 +10,7 @@ app.controller('controladorAdmin', function(servicioRest, config, $scope, $locat
 	}
     
   
-	var nombresCargados, simulateQuery = false;
+	var nombresCargados, simulateQuery = false, nombreSeleccionado = null;
 	
 	$scope.fecha = new Date();
 
@@ -28,30 +28,6 @@ app.controller('controladorAdmin', function(servicioRest, config, $scope, $locat
         });
 	};
 	
-	/* -------------------- LISTAR ENTREVISTAS ---------------------------- */
-	function escribirHora() {
-		for (var i = 0; i < $scope.entrevistas.length; i++) {
-			$scope.entrevistas[i].date = $scope.entrevistas[i].date.slice(11,16);
-		}	
-	}
-	
-	function getEntrevistas() {
-		//servicioRest.getEntrevistas($scope.fecha.getFullYear() + "-" + ($scope.fecha.getMonth()+1) + "-" + $scope.fecha.getDate())
-		servicioRest.getEntrevistas()
-			.then(function (data) {
-				$scope.entrevistas = data;
-				escribirHora();
-			})
-			.catch(function (err) {
-				$log.error("Error al cargar las entrevistas: " + err);
-				if (err === 403) {
-					$location.path('/');
-				}
-			});
-	}
-	
-	getEntrevistas();
-	
 	/* ----------------- AUTOCOMPLETE ---------------- */
 	function cargarNombres(nombres) {
 		return nombres.map(function (nombre) {
@@ -61,7 +37,23 @@ app.controller('controladorAdmin', function(servicioRest, config, $scope, $locat
 	}
 	
 	$rootScope.obtenerNombres = function () {
-		servicioRest.getNombres()
+		var dia, mes;
+		
+		if ($scope.fecha.getDate() < 10) {
+			dia = "0" + $scope.fecha.getDate();
+		} else {
+			dia = $scope.fecha.getDate();
+		}
+		
+		if ($scope.fecha.getMonth() + 1 < 10) {
+			mes = "0" + ($scope.fecha.getMonth() + 1);
+		} else {
+			mes = $scope.fecha.getMonth() + 1;
+		}
+		
+		console.log($scope.fecha.getFullYear() + "-" + mes + "-" + dia);
+			
+		servicioRest.getNombresEntrevistas("?fecha=" + $scope.fecha.getFullYear() + "-" + mes + "-" + dia)
 			.then(function (data) {
 				nombresCargados = cargarNombres(data);
 			})
@@ -93,15 +85,8 @@ app.controller('controladorAdmin', function(servicioRest, config, $scope, $locat
 			var index = buscarNombre(item.valor);
 
 			if (index !== -1) {
-				
-				servicioRest.getEntrevistasByNombre(nombresCargados[index].name)
-				.then(function (data) {
-					$scope.entrevistas = data;
-				})
-				.catch(function (err) {
-					$scope.entrevistas = null;
-					$log.error("Error al filtrar el nombre: " + err);
-				});
+				nombreSeleccionado = nombresCargados[index].name;
+				getEntrevistas(nombreSeleccionado);
 			}
 			
 		}
@@ -109,7 +94,8 @@ app.controller('controladorAdmin', function(servicioRest, config, $scope, $locat
 	
     $scope.searchTextChange = function searchTextChange(text) {
 		if (text === "") {
-			getEntrevistas();
+			nombreSeleccionado = null;
+			getEntrevistas(nombreSeleccionado);
 		}
     }
 	
@@ -136,5 +122,79 @@ app.controller('controladorAdmin', function(servicioRest, config, $scope, $locat
 		}
 	};
 	
+	/* -------------------- LISTAR ENTREVISTAS ---------------------------- */
+	function escribirHora() {
+		for (var i = 0; i < $scope.entrevistas.length; i++) {
+			$scope.entrevistas[i].date = $scope.entrevistas[i].date.slice(11,16);
+		}	
+	}
+	
+	function getEntrevistas(nombre) {
+		var dia, mes, query;
+		
+		if ($scope.fecha.getDate() < 10) {
+			dia = "0" + $scope.fecha.getDate();
+		} else {
+			dia = $scope.fecha.getDate();
+		}
+		
+		if ($scope.fecha.getMonth() + 1 < 10) {
+			mes = "0" + ($scope.fecha.getMonth() + 1);
+		} else {
+			mes = $scope.fecha.getMonth() + 1;
+		}
+		if (nombre === null) {
+			query = "?fecha=" + $scope.fecha.getFullYear() + "-" + mes + "-" + dia;
+		} else {
+			query = "?fecha=" + $scope.fecha.getFullYear() + "-" + mes + "-" + dia + "&nombre=" + nombre;
+		}
+		
+		servicioRest.getEntrevistas(query)
+			.then(function (data) {
+				$scope.entrevistas = data;
+				escribirHora();
+			})
+			.catch(function (err) {
+				$log.error("Error al cargar las entrevistas: " + err);
+				if (err === 403) {
+					$location.path('/');
+				}
+			});
+	}
+	
+	getEntrevistas(nombreSeleccionado);
+	
+	$scope.cambioFecha = function() {
+		getEntrevistas(nombreSeleccionado);
+		$rootScope.obtenerNombres();
+	}
+	
+	/* ------------------------------- Borrar y ver entrevista ------------------------------- */
+	
+	$scope.eliminar = function (indice) {
+        var idEntrevista = $scope.entrevistas[indice]._id;
+        servicioRest.deleteEntrevista(idEntrevista)
+			.then(function (data) {
+				$scope.entrevistas.splice(indice, 1);
+				$rootScope.obtenerNombres();
+			})
+			.catch(function (err) {
+				$log.error("Error al eliminar la entrevista: " + err);
+			});
+	};
+	
+	$scope.ver = function (ev, ind) {
+		$mdDialog.show(
+			{
+				locals: { indice: ind },
+				scope: $scope.$new(),
+				controller: 'controladorVer',
+				templateUrl: 'modulos/admin/ver.tmpl.html',
+				parent: angular.element(document.body),
+				targetEvent: ev,
+				clickOutsideToClose: true
+			}
+		);
+	};
 
 });

@@ -12,10 +12,10 @@ app.run(function(servicioRest, $rootScope, $http, $location) {
 app.config(function($routeProvider) {
 
 	$routeProvider
-	/*.when('/', {
+	.when('/c', {
 		templateUrl: 'modulos/logIn/logIn.html',
 		controller: 'controladorLogIn'
-	})*/
+	})
 	.when('/', {
 		templateUrl: 'modulos/admin/admin.html',
         controller: 'controladorAdmin'

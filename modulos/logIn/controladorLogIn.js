@@ -42,21 +42,4 @@ app.controller('controladorLogIn', function (servicioRest, config, $scope, $loca
 			}
 		});
 	};
-
-	$scope.hacerEntrevista = function () {
-		$rootScope.cargando = true;
-		servicioRest.getInterview($scope.dni)
-			.then(function (data) {
-			$location.path("/entrevista");
-		})
-			.catch(function (err) {
-			$rootScope.cargando = false;
-			if (err === "Servicio no disponible") {
-				toast("Error de conexión");
-				$log.error("Error al conectar con el servidor: " + err);
-			} else {
-				toast("DNI inválido");
-			}
-		});
-	};
 });

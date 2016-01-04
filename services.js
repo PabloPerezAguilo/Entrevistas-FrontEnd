@@ -114,14 +114,14 @@ function ServicioREST($http, $q, $rootScope, config) {
 
 	}
     
-    /* ------------- GET INTERVIEW -------------- */
+    /* ------------- INTERVIEW -------------- */
     
-    function getEntrevistasByNombre(nombre) {
+    function getEntrevistas(atributos) {
         var defered = $q.defer();
 		var promise = defered.promise;
 		$http({
 			method: 'GET',
-			url: url + '/interview/' + nombre
+			url: url + '/interview/' + atributos //?fecha=VARIABLEFECHA&nombre=VARIABLENOMBRE
 		})
 		.success(function(data, status, headers, config) {
 			defered.resolve(data);
@@ -132,23 +132,6 @@ function ServicioREST($http, $q, $rootScope, config) {
 
 		return promise;
 	}
-	
-	function getEntrevistas() {
-        var defered = $q.defer();
-		var promise = defered.promise;
-		$http({
-			method: 'GET',
-			url: url + '/interview/',
-		})
-		.success(function(data, status, headers, config) {
-			defered.resolve(data);
-		})
-		.error(function(data, status, headers, config) {
-			tratarError(data, status,defered);
-		});
-
-		return promise;
-	} 
     
     function postInterview(entrevista) {
 		var defered = $q.defer();
@@ -168,14 +151,29 @@ function ServicioREST($http, $q, $rootScope, config) {
 		return promise;
 	}
 	
-	/* ------------- GET NOMBRES ENTREVISTAS -------------- */
-	
-	function getNombres() {
+	function getNombresEntrevistas(fecha) {
 		var defered = $q.defer();
 		var promise = defered.promise;
 		$http({
 			method: 'GET',
-			url: url + '/interviewNames/'
+			url: url + '/interviewNames/' + fecha //?fecha=VARIABLEFECHA
+		})
+		.success(function(data, status, headers, config) {
+			defered.resolve(data);
+		})
+		.error(function(data, status, headers, config) {
+			tratarError(data, status,defered);
+		});
+
+		return promise;
+	}
+	
+	function deleteEntrevista(idEntrevista) {
+		var defered = $q.defer();
+		var promise = defered.promise;
+		$http({
+			method: 'DELETE',
+			url: url + '/interview/' + idEntrevista
 		})
 		.success(function(data, status, headers, config) {
 			defered.resolve(data);
@@ -255,7 +253,7 @@ function ServicioREST($http, $q, $rootScope, config) {
 		getTemas: getTemas,
 		postTema: postTema,
 		postPreguntasByTag: postPreguntasByTag,
-		getNombres: getNombres,
-		getEntrevistasByNombre: getEntrevistasByNombre
+		getNombresEntrevistas: getNombresEntrevistas,
+		deleteEntrevista: deleteEntrevista
 	}
 }
