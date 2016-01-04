@@ -128,7 +128,7 @@ md-progress-linear .md-container {
   top: 50%;
   transform: translate(-50%, -50%);
   width: 480px;
-  height: 300px; }
+  height: 290px; }
 
 .enBloque {
   margin: auto;
@@ -221,21 +221,10 @@ md-chips .md-chip.md-focused {
 .md-autocomplete-suggestions li:not(.md-not-found-wrapper).selected {
   background-color: rgba(239, 108, 0, 0.17); }
 
-.centrarIconosLista {
+.centrarIconoLista {
   margin-top: 2.5%; }
 
-/* -------------------- Crear pregunta -------------------- */
-/* alert al escoger tema no creado */
-.md-button.md-default-theme.md-primary, .md-button.md-primary {
-  background-color: #EF6C00;
-  color: #EFEFEF; }
-
-md-dialog.md-transition-in {
-  width: 350px; }
-
-.md-button.md-default-theme:not([disabled]).md-focused, .md-button:not([disabled]).md-focused {
-  background-color: #EF6C00; }
-
+/*Crear pregunta*/
 .enLinea {
   display: inline-block; }
 
@@ -259,7 +248,10 @@ md-toolbar:not(.md-menu-toolbar) {
   background-color: #EF6C00;
   color: #EFEFEF; }
 
-md-dialog.md-transition-in.crearPregunta {
+.dialogdemoBasicUsage #popupContainer {
+  position: relative; }
+
+md-dialog.md-transition-in.redimensionar {
   margin: auto;
   min-width: 700px;
   min-height: 300px;
@@ -325,7 +317,17 @@ md-checkbox.respuesta {
 md-radio-group.md-default-theme.md-focused:not(:empty) .md-checked .md-container:before, md-radio-group.md-focused:not(:empty) .md-checked .md-container:before {
   background-color: rgba(239, 108, 0, 0.17); }
 
-/*Ver pregunta*/
+/* ------------- Ver pregunta --------------------- */
+md-dialog.md-transition-in {
+  width: 350px; }
+
+.md-button.md-default-theme.md-primary, .md-button.md-primary {
+  background-color: #EF6C00;
+  color: #EFEFEF; }
+
+.md-button.md-default-theme:not([disabled]).md-focused, .md-button:not([disabled]).md-focused {
+  background-color: #EF6C00; }
+
 md-checkbox[disabled].md-checked .md-icon {
   background-color: #EF6C00; }
 
@@ -358,6 +360,9 @@ md-checkbox[disabled] .md-label {
   float: right;
   margin-top: 1.8%; }
 
+.explosionIcono.md-button .md-ripple-container {
+  border-radius: 50%; }
+
 .md-button.icon.md-ink-ripple {
   min-width: 0;
   line-height: 40px;
@@ -370,7 +375,8 @@ md-checkbox[disabled] .md-label {
   border-radius: 50%; }
 
 .md-button.icon.md-ink-ripple:hover {
-  border-radius: 50%; }
+  border-radius: 50%;
+  background-color: rgba(119, 113, 113, 0.41); }
 
 md-icon {
   color: #5D5D5D; }
@@ -469,6 +475,23 @@ rzslider .rz-bar-wrapper {
   width: 640px;
   left: 8px; }
 
+.letraNegrita {
+  font-weight: bold;
+  font-family: sans-serif; }
+
+/* ------------------- ENTREVISTA ---------------------------*/
+md-datepicker {
+  padding-right: 0px;
+  margin-right: 10%;
+  margin-top: 4px;
+  float: right; }
+
+.md-datepicker-input-container {
+  margin-left: 0px; }
+
+md-autocomplete {
+  width: 80%; }
+
 /*--------------------- media queries ------------------------*/
 @media screen and (min-height: 1024px) {
   .listaPreguntas {
@@ -537,13 +560,8 @@ rzslider .rz-bar-wrapper {
     margin-top: 1%;
     margin-right: 1%; } }
 
-/*@media screen and (max-height: 768px) {
-    .listaPreguntas {
-		height: 448px;
-	}
-}*/
 @media screen and (max-height: 620px) {
-  md-dialog.md-transition-in {
+  md-dialog.md-transition-in.redimensionar {
     float: inherit;
     min-height: 100%;
     max-height: 100%;
@@ -558,7 +576,7 @@ rzslider .rz-bar-wrapper {
     left: 1203px; } }
 
 @media screen and (max-width: 750px) {
-  md-dialog.md-transition-in {
+  md-dialog.md-transition-in.redimensionar {
     float: inherit;
     min-height: 100%;
     max-height: 100%;

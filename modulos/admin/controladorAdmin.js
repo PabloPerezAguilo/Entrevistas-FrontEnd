@@ -50,8 +50,6 @@ app.controller('controladorAdmin', function(servicioRest, config, $scope, $locat
 		} else {
 			mes = $scope.fecha.getMonth() + 1;
 		}
-		
-		console.log($scope.fecha.getFullYear() + "-" + mes + "-" + dia);
 			
 		servicioRest.getNombresEntrevistas("?fecha=" + $scope.fecha.getFullYear() + "-" + mes + "-" + dia)
 			.then(function (data) {
@@ -188,7 +186,7 @@ app.controller('controladorAdmin', function(servicioRest, config, $scope, $locat
 			{
 				locals: { indice: ind },
 				scope: $scope.$new(),
-				controller: 'controladorVer',
+				controller: 'controladorVerAdmin',
 				templateUrl: 'modulos/admin/ver.tmpl.html',
 				parent: angular.element(document.body),
 				targetEvent: ev,
