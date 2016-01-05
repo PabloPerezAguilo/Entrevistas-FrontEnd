@@ -11,12 +11,24 @@
 		</md-toolbar>
 		<md-dialog-content>
 			<div class="md-dialog-content">
-				<p ng-bind="DNI"></p>  
-				<p ng-bind="nombre"></p>       
-				<p ng-bind="status"></p>
-				<p ng-bind="questions"></p>
-				<span ng-repeat="tags in leveledTags" ng-if="$first"> {{ tags.tag }} </span>
-				<span ng-repeat="tags in leveledTags" ng-if="!$first">, {{ tags.tag }} </span>
+				<span class="letraNegrita"> Nombre y apellidos: </span><span ng-bind="nombre"></span>
+				<p ng-show="tieneDNI">
+					<span class="letraNegrita"> DNI: </span>
+					<span ng-bind="DNI"></span>
+				</p>
+				<p>
+					<span class="letraNegrita"> Estado: </span>
+					<span ng-bind="status"></span>
+				</p>
+				<p>
+					<span class="letraNegrita"> Preguntas: </span>
+					<span ng-bind="questions"></span>
+				</p>
+				<p>
+					<span class="letraNegrita"> Aptitudes: </span>
+					<span ng-repeat="tags in leveledTags" ng-if="$first">{{ tags.tag }} </span>
+					<span ng-repeat="tags in leveledTags" ng-if="!$first">, {{ tags.tag }} </span>
+				</p>
       		</div>
 		
     	</md-dialog-content>
