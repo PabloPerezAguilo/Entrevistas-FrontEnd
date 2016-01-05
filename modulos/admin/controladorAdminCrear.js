@@ -1,16 +1,14 @@
-app.controller('controladorAdminCrear', function (servicioRest, $scope, $mdDialog, $mdToast, $rootScope) {
+app.controller('controladorAdminCrear', function (servicioRest, $scope, $mdDialog, $mdToast, $rootScope, $log) {
     
     $scope.minSliderValue = [];
-    $scope.temasTestAbierto = [];
-    
-    
-    
+    $scope.temasEntrevista = [];
+	$scope.errorTema = [];
+	
     var Options = {
         tag: String,
         max: Number,
         min: Number
-    };
-    var entrevista = {
+    }, entrevista = {
         name: { type: String, required: true },
         surname: { type: String, required: true },
         DNI: { type: String, required: true },
@@ -20,14 +18,14 @@ app.controller('controladorAdminCrear', function (servicioRest, $scope, $mdDialo
 
     function toast(texto) {
 		$mdToast.show(
-	      $mdToast.simple()
-	        .content(texto)
+			$mdToast.simple()
+			.content(texto)
 	        .position('top right')
 	        .hideDelay(1500)
 		);
 	}
     
-	/* ----------- Respuestas tests ----------- */		
+	/* ----------- Respuestas tests ----------- */
 	$scope.respuestasTest = [];
 	$scope.test = [];
 	$scope.contTest = 0;
@@ -36,48 +34,123 @@ app.controller('controladorAdminCrear', function (servicioRest, $scope, $mdDialo
 
 	
 	/* ----------- Input temas ----------- */
-
 	
+	//comprueba que hay temas en todos los autocomplete
+	function sinTemas() {
+		if ($scope.temasEntrevista.length === 0) {
+			return true;
+		} else {
+			for (var i = 0; i < $scope.temasEntrevista.length; i++) {
+				if ($scope.temasEntrevista[i].length === 0) {
+					return true;
+				}
+			}
+		}
+		return false;
+	}
+    
+	//comprueba que estén rellenos todos los campos obligatorios
+    function preguntaVacia(){
+		if($scope.nombreEntrevista === undefined || $scope.nombreEntrevista === "" || sinTemas() 
+		   || $scope.fecha === undefined || $scope.horas === undefined || $scope.minutos === undefined) {
+			return true;
+		}
+		return false;
+    }
     
     $scope.crearEntrevista = function () {
-		var i;
-        var j;
-        var fecha_hora        
+		var i, j, fecha_hora, dia, mes, minutos;
         
-        if(false)//preguntaVacia())
-        {
+        if (preguntaVacia()) {
             toast("Rellena todos los campos obligatorios");
-        }
-        else
-        {
+        } else {
+			dia = $scope.fecha.getDate();
+			mes = $scope.fecha.getMonth() + 1;
+			minutos = $scope.minutos;
+			
+			if (dia < 10) {
+				dia = '0' + dia;
+			}
+			
+			if (mes < 10) {
+				mes = '0' + mes;
+			}
+			
+			if (minutos < 10) {
+				minutos = '0' + minutos;
+			}
 
-            entrevista.leveledTags=[];
+            entrevista.leveledTags = [];
             entrevista.name = $scope.nombreEntrevista;
-            entrevista.surname = $scope.apellidosEntrevista;
-            entrevista.DNI = $scope.dniEntrevista
-            entrevista.date = $scope.fecha.getFullYear() + "-" + ($scope.fecha.getMonth()+1) + "-" + $scope.fecha.getDate();
-            entrevista.date +=  "T" + $scope.horas + ":" + $scope.minutos;
-            
-            console.log($scope.temasTestAbierto.length);
-            for (i = 0;i < $scope.contTest;i++) {
-                for (j = 0;j < $scope.temasTestAbierto[i].length;j++)
-                entrevista.leveledTags.push({tag: $scope.temasTestAbierto[i][j].valor, max: $scope.minSliderValue[i].maxSliderG, min: $scope.minSliderValue[i].minSliderG});
+            entrevista.DNI = $scope.dniEntrevista;
+            entrevista.date = $scope.fecha.getFullYear() + "-" + mes + "-" + dia + "T" + $scope.horas + ":" + minutos;
+			
+            for (i = 0; i < $scope.contTest; i++) {
+                for (j = 0; j < $scope.temasEntrevista[i].length; j++) {
+					entrevista.leveledTags.push({tag: $scope.temasEntrevista[i][j].tag,
+											 max: $scope.minSliderValue[i].maxSliderG,
+											 min: $scope.minSliderValue[i].minSliderG});
+				}
             }
-            
+			
+			$scope.entrevistas = [];
+			servicioRest.postInterview(entrevista)
+				.then(function(data) {
+					console.log("Crear Entrevista");
+					console.log(data);
+					$scope.entrevistas.push({
+						_id: data.data._id,
+						name: data.data.name,
+						DNI: data.data.DNI,
+						date: data.data.date,
+						leveledTags: data.data.leveledTags
+					});
+					
+					console.log(data);
+					$scope.hide(entrevista);
+
+					var resul = "Se ha creado una entrevista con: ";
+					for (var i = 0; i < data.recuento.length; i++) {
+						if (i === data.recuento.length - 1) {
+							resul += data.recuento[i].count + " del tema " + data.recuento[i].tag + ".";
+						} else {
+							resul += data.recuento[i].count + " del tema " + data.recuento[i].tag + ", ";
+						}
+					}
+
+					$mdDialog.show(
+					  $mdDialog.alert()
+						.clickOutsideToClose(true)
+						.title('Entrevista creada')
+						.textContent(resul)
+						.ariaLabel('Alert Dialog Demo')
+						.ok('Ok')
+					);
+
+				})
+				.catch(function(err) {
+					$log.error("Error al crear la entrevista");
+					if (err.status === 500) {
+						console.log(err)
+						$scope.error = true;
+						$scope.temas = err.data.leveledTags;
+					}
+				});
+
             console.log(entrevista);
-            $scope.hide(entrevista);
         }
     };
-    
-    function preguntaVacia(){
-       var resp=false;
-            if($scope.nombreEntrevista===undefined||$scope.apellidosEntrevista===undefined||$scope.dniEntrevista===undefined||$scope.preguntasEntrevistas[0]===undefined||$scope.preguntasEntrevistas[1]===undefined||$scope.nombreEntrevista===""||$scope.apellidosEntrevista===""||$scope.dniEntrevista===""||$scope.preguntasEntrevistas[0]===""||$scope.preguntasEntrevistas[1]==="")
-            {
-                resp=true;
-            }
-
-        return resp;
-    }
+	
+	$scope.cerrarError = function (indice) {
+		console.log(indice)
+		if ($scope.error) {
+			$scope.error = false;
+		}
+		
+		if ($scope.errorTema[indice]) {
+			$scope.errorTema[indice] = false;
+		}
+	}
     
     $scope.hide = function (respuesta) {
         $mdDialog.hide(respuesta);
@@ -102,62 +175,89 @@ app.controller('controladorAdminCrear', function (servicioRest, $scope, $mdDialo
                         step: 1
                     }
                 };
-        $scope.temasTestAbierto[$scope.contTest-1] = [];
+        $scope.temasEntrevista[$scope.contTest - 1] = [];
 	};
 	
-
+	$scope.deshabilitar = function () {
+		if($scope.error === true) {
+			return true;
+		}
+		for(var i = 0; i < $scope.errorTema.length; i++) {
+			if($scope.errorTema[i] === true) {
+				return true;
+			}
+		}
+		return false;
+	}
 	
-	
-	
-	
-	
-	
-	
-	
-	$scope.temas;
-	$scope.temasCargados;
 	$scope.temasAbierta = [];
 	$scope.temasTest = [];
-	$scope.temasTestAbierto = [];
+	$scope.temasEntrevista = [];
 	$scope.readonly = false;
     $scope.selectedItem = null;
     $scope.searchText = null;
-    $scope.numberBuffer = '';	
+    $scope.numberBuffer = '';
 	
+	var temasCargados, temas;
 	
-	servicioRest.getTemas()
-		.then(function(data) {
-			$scope.temas = data;			
-			$scope.temasCargados = cargarTemas();
-		})
-		.catch(function (err) {
-		});
-	
-    function cargarTemas() {
-		var temasCargados = $scope.temas;
+	function cargarTemas() {
+		temasCargados = temas;
 		return temasCargados.map( function (tema) {
 			tema.valor = tema.tag.toLowerCase();
 			return tema;          
       });
 	}
 	
+	servicioRest.getTemas()
+		.then(function(data) {
+			temas = data;			
+			$scope.temasCargados = cargarTemas();
+		})
+		.catch(function (err) {
+		});
+	
+	function buscarTema(tema) {
+		var i;
+		for (i = 0; i < temasCargados.length; i++) {
+			if (tema === temasCargados[i].valor) {
+				return i;
+			}
+		}
+		return -1;
+	}
+	
+	function selectedItemChange(item) {
+		
+		if(item !== undefined) {
+			if (!angular.isObject(item)) {
+				item = {
+					tag: item,
+					valor: item.toLowerCase()
+				};
+			}			
+		}
+    }
+	
+	$scope.selectedItemChange = selectedItemChange;
     /**
      * Return the proper object when the append is called.
      */
-    $scope.transformChip = function transformChip(chip) {
+    $scope.transformChip = function transformChip(chip, indice) {
 		// If it is an object, it's already a known chip
 		if (angular.isObject(chip)) {
 			return chip;
 		}
-		// Otherwise, create a new one
-		servicioRest.postTema(chip)
-			.then(function(data) {
-            })
-			.catch(function(err) {
-			console.log("Error");
-			console.log(err);
-			});
-		return { valor: chip};
+		
+		var index = buscarTema(chip.toLowerCase());
+		if (index !== -1) {
+			selectedItemChange(chip);
+			return temasCargados[index];
+		}
+		console.log(indice)
+		$scope.errorTema[indice] = true;
+		console.log($scope.errorTema[indice]);
+		console.log($scope.errorTema);
+		return null;
 	}
 	
     function createFilterFor(query) {
@@ -171,7 +271,7 @@ app.controller('controladorAdminCrear', function (servicioRest, $scope, $mdDialo
 	function filtrar(texto) {
 		var lowercaseQuery = angular.lowercase(texto);
 		return function (tema) {
-			$scope.texto = tema.tag;
+			$scope.texto = tema.valor;
 			return ($scope.texto.indexOf(lowercaseQuery) === 0 || $scope.texto.search(lowercaseQuery) > 0);
 		};
 	}
