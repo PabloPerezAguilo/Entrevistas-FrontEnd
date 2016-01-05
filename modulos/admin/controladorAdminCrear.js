@@ -59,7 +59,7 @@ app.controller('controladorAdminCrear', function (servicioRest, $scope, $mdDialo
     }
     
     $scope.crearEntrevista = function () {
-		var i, j, fecha_hora, dia, mes, minutos;
+		var i, j, fecha_hora, dia, mes, minutos, hora;
         
         if (preguntaVacia()) {
             toast("Rellena todos los campos obligatorios");
@@ -67,6 +67,7 @@ app.controller('controladorAdminCrear', function (servicioRest, $scope, $mdDialo
 			dia = $scope.fecha.getDate();
 			mes = $scope.fecha.getMonth() + 1;
 			minutos = $scope.minutos;
+			hora = $scope.horas;
 			
 			if (dia < 10) {
 				dia = '0' + dia;
@@ -79,11 +80,15 @@ app.controller('controladorAdminCrear', function (servicioRest, $scope, $mdDialo
 			if (minutos < 10) {
 				minutos = '0' + minutos;
 			}
+			
+			if(hora < 10) {
+				hora = '0' + hora;
+			}
 
             entrevista.leveledTags = [];
             entrevista.name = $scope.nombreEntrevista;
             entrevista.DNI = $scope.dniEntrevista;
-            entrevista.date = $scope.fecha.getFullYear() + "-" + mes + "-" + dia + "T" + $scope.horas + ":" + minutos;
+            entrevista.date = $scope.fecha.getFullYear() + "-" + mes + "-" + dia + "T" + hora + ":" + minutos;
 			
             for (i = 0; i < $scope.contTest; i++) {
                 for (j = 0; j < $scope.temasEntrevista[i].length; j++) {
