@@ -231,6 +231,11 @@ md-toast.md-default-theme, md-toast {
     background-color: $colorPrincipal;
     color: $letra;
 }
+
+md-toast.md-default-theme .md-toast-content, md-toast .md-toast-content {
+	background-color: $colorPrincipal;
+}
+
 .md-button.md-raised:not([disabled]).md-focused {
     background-color: $colorPrincipal;
 }
@@ -611,7 +616,7 @@ rzslider .rz-bar-wrapper {
 
 /* ------------------- ENTREVISTA ---------------------------*/
 
-md-datepicker {
+md-datepicker.admin {
     padding-right: 0px;
     margin-right: 10%;
 	margin-top: 4px;
@@ -624,6 +629,11 @@ md-datepicker {
 
 md-autocomplete {
 	width: 80%;
+}
+
+.md-button.md-raised.error {
+	width: 0%;
+    margin: 0;
 }
 
 

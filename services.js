@@ -9,7 +9,7 @@ function ServicioREST($http, $q, $rootScope, config) {
 		} else if (data === undefined || data.message === undefined || status === 403) {
 			//defered.reject("Error: " + status);
 			defered.reject(status);
-		} else if (status === 405) {
+		} else if (status === 500) {
 			var error = {
 				data: data,
 				status: status

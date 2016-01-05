@@ -1,4 +1,4 @@
-<md-dialog>
+<md-dialog class="redimensionar" ng-init="error=false">
         <form>
             <md-toolbar>
                 <div class="md-toolbar-tools">
@@ -19,67 +19,89 @@
 
 
                         <md-input-container class="md-block">
-                            <label>Nombre</label>
-                            <textarea required="hola" ng-Required=true ng-model="nombreEntrevista"></textarea>
-                        </md-input-container>
-                        <md-input-container class="md-block">
-                            <label>Apellidos</label>
-                            <textarea ng-model="apellidosEntrevista"></textarea>
+                            <label>Nombre y apellidos *</label>
+                            <textarea required ng-model="nombreEntrevista"></textarea>
+							<div ng-messages="nombreEntrevista.$error">
+								<div ng-message="required">Este campo es obligatorio</div>								
+							</div>
                         </md-input-container>
                         <md-input-container class="md-block">
                             <label>DNI</label>
                             <textarea ng-model="dniEntrevista"></textarea>
                         </md-input-container>
-                        <md-datepicker ng-model="fecha" md-placeholder="Introducir fecha"></md-datepicker>
+                        <md-datepicker ng-model="fecha" md-placeholder="Introducir fecha *"></md-datepicker>
                         <md-input-container class="md-inline">
-                            <input type="number" step="any" ng-model="horas" min="00" max="23" placeholder="Hora">
+                            <input required type="number" step="any" ng-model="horas" min="08" max="20" placeholder="Hora *">
+							<div ng-messages="horas.$error" multiple>
+								<div ng-message="required">Este campo es obligatorio</div>
+								<div ng-message="max">La jornada acaba a las 20</div>
+								<div ng-message="min">La jornada empieza a las 8</div>
+							</div>
                         </md-input-container>
-						:
+						<span>:</span>
                         <md-input-container class="md-inline">
-                            <input type="number" step="any" ng-model="minutos" min="00" max="59" placeholder="Minutos">
+                            <input required type="number" step="any" ng-model="minutos" min="00" max="59" 
+								   placeholder="Minutos *">
+							<div ng-messages="minutos.$error" multiple>
+								<div ng-message="required">Este campo es obligatorio</div>
+								<div ng-message="max">El mínimo es 0</div>
+								<div ng-message="min">El máximo es 59</div>
+							</div>
                         </md-input-container>
                         <!--http://simeonc.github.io/sc-date-time/index.html-->
 
                         <div>
-                                <div ng-repeat="respuestas in test">
-                                    <span>	
-                                   
-                                        <rzslider rz-slider-model="minSliderValue[$index].minSliderG"
+							<div ng-repeat="respuestas in test">
+								<span>	
+									<rzslider rz-slider-model="minSliderValue[$index].minSliderG"
 												  rz-slider-high="minSliderValue[$index].maxSliderG" 
 												  rz-slider-options="minSliderValue[$index].options"></rzslider>
-                                        
-                                    
-                                 
-                            <md-chips ng-model="temasTestAbierto[$index]" md-autocomplete-snap="" 
-										  md-transform-chip="transformChip($chip)" md-require-match="false">
-									<md-autocomplete md-selected-item="selectedItem" md-search-text="searchText"
+									<md-chips ng-model="temasEntrevista[$index]" md-autocomplete-snap="" 
+										  md-transform-chip="transformChip($chip, $index)" md-require-match="false">
+										<md-autocomplete md-selected-item="selectedItem" md-search-text="searchText"
 													 md-items="item in queryBuscarTema(searchText)"
 													 md-item-text="item.valor"
 													 placeholder="Temas de la pregunta">
-										
-										<span md-highlight-text="searchText">
-											{{item.valor}}
-										</span>
-									</md-autocomplete>
-									<md-chip-template>
-										<span> {{$chip.valor}} </span>
-									</md-chip-template>
-								</md-chips>
+											<span md-highlight-text="searchText">
+												{{item.tag}}
+											</span>
+										</md-autocomplete>
+										<md-chip-template>
+											<span> {{$chip.tag}} </span>
+										</md-chip-template>
+									</md-chips>
                                         <!--https://github.com/rzajac/angularjs-slider-->
                                         <!--http://rzajac.github.io/angularjs-slider/index.html-->
                                         <!--PARA INSTALAR: "npm i angularjs-slider"-->
-                                    
-                                    </span>
+								</span>
+								<div ng-if="errorTema[$index]">
+									<p>Debe seleccionar un tema de la lista</p>
+									<md-button class="md-raised error" ng-click="cerrarError($index)">Entendido</md-button>
+									</div>
                                 </div>
-
-                                <md-button class="md-fab md-mini" ng-click="$root.aniadirRespuestaTest()" 
-										   aria-label="crearPregunta">
-                                    <md-icon md-svg-src="img/mas.svg"></md-icon>
-                                </md-button>
-                        </div>
-
+							
+							<md-button class="md-fab md-mini" ng-click="$root.aniadirRespuestaTest()" 
+									   aria-label="crearPregunta">
+								<md-icon md-svg-src="img/mas.svg"></md-icon>
+							</md-button>
+						</div>
+						
+						<div ng-if="error">
+							<p>No hay suficientes preguntas para el/los tema(s)
+								<span ng-repeat="tema in temas" ng-if="$first">{{tema.tag}}</span>
+								<span ng-repeat="tema in temas" ng-if="!$first">, {{tema.tag}}</span>
+							</p>
+							<p>Se podría crear una entrevista con el tema {{tema}} con el rango (x,y)</p>
+							 <md-button class="md-raised error" ng-click="cerrarError()">Entendido</md-button>
+						</div>
+						
+						<!--<div ng-if="errorTema">
+							<p>Debe seleccionar un tema de la lista</p>
+							 <md-button class="md-raised error" ng-click="cerrarError()">Entendido</md-button>
+						</div>-->
                         
-                        <md-button class="md-raised" ng-click="crearEntrevista()">Guardar</md-button>
+                        <md-button class="md-raised" ng-click="crearEntrevista()" ng-disabled="deshabilitar()">
+							Guardar</md-button>
                     </div>      
                 </md-content>
 
