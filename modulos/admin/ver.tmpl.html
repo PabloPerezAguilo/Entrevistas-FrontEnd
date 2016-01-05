@@ -20,17 +20,15 @@
 					<span class="letraNegrita"> Estado: </span>
 					<span ng-bind="status"></span>
 				</p>
-				<p>
-					<span class="letraNegrita"> Preguntas: </span>
-					<span ng-bind="questions"></span>
-				</p>
-				<p>
-					<span class="letraNegrita"> Aptitudes: </span>
-					<span ng-repeat="tags in leveledTags" ng-if="$first">{{ tags.tag }} </span>
-					<span ng-repeat="tags in leveledTags" ng-if="!$first">, {{ tags.tag }} </span>
-				</p>
+				<md-chips class="custom-chips" ng-model="preguntas" readonly="true">
+					<md-chip-template>
+						<span>
+							<strong>{{$chip.tag}}</strong>
+							({{$chip.count}})
+						</span>
+					</md-chip-template>
+				</md-chips>
       		</div>
-		
     	</md-dialog-content>
   	</form>
 </md-dialog>

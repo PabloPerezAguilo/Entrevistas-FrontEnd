@@ -1,6 +1,6 @@
 app.controller('controladorVerAdmin', function ($scope, $mdDialog, indice) {
     
-	console.log($scope.entrevistas[indice].leveledTags);
+	console.log($scope.entrevistas[indice]);
 	$scope.tieneDNI = false;
 	
 	if ($scope.entrevistas[indice].DNI != undefined) {
@@ -10,8 +10,8 @@ app.controller('controladorVerAdmin', function ($scope, $mdDialog, indice) {
 	
 	$scope.nombre = $scope.entrevistas[indice].name;
 	$scope.status = $scope.entrevistas[indice].status;
-	$scope.leveledTags = $scope.entrevistas[indice].leveledTags;
-	$scope.questions = "X preguntas de Java, Y pregunas de HTML";
+	$scope.preguntas = $scope.entrevistas[indice].nquestions;
+	$scope.chipText = 'Football';
 	
 	$scope.hide = function () {
 		$mdDialog.hide();
