@@ -49,8 +49,11 @@
 							</div>
 
                             <md-input-container class="md-block">
-                                <label>Enunciado de la pregunta</label>
-                                <textarea ng-model="tituloAbierta"></textarea>
+                                <label>Enunciado de la pregunta *</label>
+                                <textarea required ng-model="tituloAbierta"></textarea>
+								<div ng-messages="tituloAbierta.$error">
+									<div ng-message="required">Este campo es obligatorio</div>								
+								</div>
                             </md-input-container>
 
                             <md-input-container class="md-block">
@@ -97,8 +100,11 @@
 							</div>
 
                             <md-input-container class="md-block">
-                                <label>Enunciado de la pregunta</label>
-                                <textarea ng-model="tituloTest"></textarea>
+                                <label>Enunciado de la pregunta *</label>
+                                <textarea required ng-model="tituloTest"></textarea>
+								<div ng-messages="tituloTest.$error">
+									<div ng-message="required">Este campo es obligatorio</div>								
+								</div>
                             </md-input-container>
                             <md-radio-group ng-model="radioTest">
                                 <div ng-repeat="respuestas in test">
@@ -107,8 +113,11 @@
                                     </md-radio-button>
 
                                     <md-input-container class="md-block respuesta">
-                                        <label>Respuesta {{respuestas}}</label>
-                                        <textarea ng-model="respuestasTest[$index]"></textarea>
+                                        <label>Respuesta {{respuestas}} *</label>
+                                        <textarea required ng-model="respuestasTest[$index]"></textarea>
+										<div ng-messages="respuestasTest[$index].$error">
+											<div ng-message="required">Debe introucir una respuesta</div>					
+										</div>
                                     </md-input-container>
                                     </span>
                                 </div>
@@ -157,8 +166,11 @@
 							</div>
 
                             <md-input-container class="md-block">
-                                <label>Enunciado de la pregunta</label>
-                                <textarea ng-model="tituloTestAbierto"></textarea>
+                                <label>Enunciado de la pregunta *</label>
+                                <textarea required ng-model="tituloTestAbierto"></textarea>
+								<div ng-messages="tituloTestAbierto.$error">
+									<div ng-message="required">Este campo es obligatorio</div>
+								</div>
                             </md-input-container>
 
                             <div ng-repeat="respuestasAbierto in testAbierto">
@@ -166,8 +178,11 @@
                                              aria-label="respuestas test abierto">
                                 </md-checkbox>
                                 <md-input-container class="md-block respuesta">
-                                    <label>Respuesta {{respuestasAbierto}}</label>
+                                    <label>Respuesta {{respuestasAbierto}} *</label>
                                     <textarea ng-model="respuestasTestAbierto[$index]"></textarea>
+									<div required ng-messages="respuestasTestAbierto[$index].$error">
+										<div ng-message="required">Debe introucir una respuesta</div>			
+									</div>
                                 </md-input-container>
                             </div>
 
