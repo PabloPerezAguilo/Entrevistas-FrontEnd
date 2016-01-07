@@ -10,7 +10,6 @@ app.controller('controladorAdminCrear', function (servicioRest, $scope, $mdDialo
         min: Number
     }, entrevista = {
         name: { type: String, required: true },
-        surname: { type: String, required: true },
         DNI: { type: String, required: true },
         date: { type: String, required: true },
         leveledTags: [Options]
@@ -25,12 +24,15 @@ app.controller('controladorAdminCrear', function (servicioRest, $scope, $mdDialo
 		);
 	}
     
-	/* ----------- Respuestas tests ----------- */
-	$scope.respuestasTest = [];
-	$scope.test = [];
-	$scope.contTest = 0;
-	$scope.radioTest = 1;
+	$scope.temas = [];
+	$scope.contTemasChip = 0;
 	
+	$scope.temasEntrevista = [];
+	$scope.readonly = false;
+    $scope.selectedItem = null;
+    $scope.searchText = null;
+	
+	var temasCargados;
 
 	
 	/* ----------- Input temas ----------- */
@@ -90,7 +92,7 @@ app.controller('controladorAdminCrear', function (servicioRest, $scope, $mdDialo
             entrevista.DNI = $scope.dniEntrevista;
             entrevista.date = $scope.fecha.getFullYear() + "-" + mes + "-" + dia + "T" + hora + ":" + minutos;
 			
-            for (i = 0; i < $scope.contTest; i++) {
+            for (i = 0; i < $scope.contTemasChip; i++) {
                 for (j = 0; j < $scope.temasEntrevista[i].length; j++) {
 					entrevista.leveledTags.push({tag: $scope.temasEntrevista[i][j].tag,
 											 max: $scope.minSliderValue[i].maxSliderG,
@@ -101,8 +103,6 @@ app.controller('controladorAdminCrear', function (servicioRest, $scope, $mdDialo
 			$scope.entrevistas = [];
 			servicioRest.postInterview(entrevista)
 				.then(function(data) {
-					console.log("Crear Entrevista");
-					console.log(data);
 					$scope.entrevistas.push({
 						_id: data.data._id,
 						name: data.data.name,
@@ -111,8 +111,7 @@ app.controller('controladorAdminCrear', function (servicioRest, $scope, $mdDialo
 						leveledTags: data.data.leveledTags
 					});
 					
-					console.log(data);
-					$scope.hide(entrevista);
+					$scope.hide();
 
 					var resul = "Se ha creado una entrevista con: ";
 					for (var i = 0; i < data.recuento.length; i++) {
@@ -122,6 +121,7 @@ app.controller('controladorAdminCrear', function (servicioRest, $scope, $mdDialo
 							resul += data.recuento[i].count + " del tema " + data.recuento[i].tag + ", ";
 						}
 					}
+				$rootScope.obtenerNombres();
 
 					$mdDialog.show(
 					  $mdDialog.alert()
@@ -136,18 +136,14 @@ app.controller('controladorAdminCrear', function (servicioRest, $scope, $mdDialo
 				.catch(function(err) {
 					$log.error("Error al crear la entrevista");
 					if (err.status === 500) {
-						console.log(err)
 						$scope.error = true;
 						$scope.temas = err.data.leveledTags;
 					}
 				});
-
-            console.log(entrevista);
         }
     };
 	
 	$scope.cerrarError = function (indice) {
-		console.log(indice)
 		if ($scope.error) {
 			$scope.error = false;
 		}
@@ -157,8 +153,8 @@ app.controller('controladorAdminCrear', function (servicioRest, $scope, $mdDialo
 		}
 	}
     
-    $scope.hide = function (respuesta) {
-        $mdDialog.hide(respuesta);
+    $scope.hide = function () {
+        $mdDialog.hide();
     };
     $scope.answer = function (answer) {
         $mdDialog.hide(answer);
@@ -168,10 +164,11 @@ app.controller('controladorAdminCrear', function (servicioRest, $scope, $mdDialo
         $mdDialog.cancel();
     };
 	
-	$rootScope.aniadirRespuestaTest = function () {
-		$scope.contTest += 1;
-		$scope.test.push($scope.contTest);
-        $scope.minSliderValue[$scope.contTest-1] = {
+	//al dar al boton mas añade un nuevo slider y un tema
+	$rootScope.aniadirSliderTemas = function () {
+		$scope.contTemasChip += 1;
+		$scope.temas.push($scope.contTemasChip);
+        $scope.minSliderValue[$scope.contTemasChip-1] = {
                     minSliderG: 1,
                     maxSliderG: 10,
                     options: {
@@ -180,7 +177,7 @@ app.controller('controladorAdminCrear', function (servicioRest, $scope, $mdDialo
                         step: 1
                     }
                 };
-        $scope.temasEntrevista[$scope.contTest - 1] = [];
+        $scope.temasEntrevista[$scope.contTemasChip - 1] = [];
 	};
 	
 	$scope.deshabilitar = function () {
@@ -195,30 +192,21 @@ app.controller('controladorAdminCrear', function (servicioRest, $scope, $mdDialo
 		return false;
 	}
 	
-	$scope.temasAbierta = [];
-	$scope.temasTest = [];
-	$scope.temasEntrevista = [];
-	$scope.readonly = false;
-    $scope.selectedItem = null;
-    $scope.searchText = null;
-    $scope.numberBuffer = '';
+	/* ----------------------- CHIPS TEMAS ----------------------- */
 	
-	var temasCargados, temas;
-	
-	function cargarTemas() {
-		temasCargados = temas;
-		return temasCargados.map( function (tema) {
+	function cargarTemas(temas) {
+		return temas.map( function (tema) {
 			tema.valor = tema.tag.toLowerCase();
 			return tema;          
       });
 	}
 	
 	servicioRest.getTemas()
-		.then(function(data) {
-			temas = data;			
-			$scope.temasCargados = cargarTemas();
+		.then(function(data) {			
+			$scope.temasCargados = cargarTemas(data);
 		})
 		.catch(function (err) {
+			$log.error("Error al cargar los temas: " + err);
 		});
 	
 	function buscarTema(tema) {
@@ -229,39 +217,24 @@ app.controller('controladorAdminCrear', function (servicioRest, $scope, $mdDialo
 			}
 		}
 		return -1;
-	}
+	}   
 	
-	function selectedItemChange(item) {
-		
-		if(item !== undefined) {
-			if (!angular.isObject(item)) {
-				item = {
-					tag: item,
-					valor: item.toLowerCase()
-				};
-			}			
-		}
-    }
-	
-	$scope.selectedItemChange = selectedItemChange;
-    /**
-     * Return the proper object when the append is called.
-     */
     $scope.transformChip = function transformChip(chip, indice) {
-		// If it is an object, it's already a known chip
 		if (angular.isObject(chip)) {
 			return chip;
+		} else {
+			chip = {
+				tag: chip,
+				valor: chip.toLowerCase()
+			};
 		}
 		
-		var index = buscarTema(chip.toLowerCase());
+		var index = buscarTema(chip.valor);
 		if (index !== -1) {
-			selectedItemChange(chip);
 			return temasCargados[index];
 		}
-		console.log(indice)
+		//aparece mensaje de error en el chip en el que estes cuando no existe ese tema
 		$scope.errorTema[indice] = true;
-		console.log($scope.errorTema[indice]);
-		console.log($scope.errorTema);
 		return null;
 	}
 	

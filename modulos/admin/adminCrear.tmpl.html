@@ -51,7 +51,7 @@
                         <!--http://simeonc.github.io/sc-date-time/index.html-->
 
                         <div>
-							<div ng-repeat="respuestas in test">
+							<div ng-repeat="respuestas in temas">
 								<span>	
 									<rzslider rz-slider-model="minSliderValue[$index].minSliderG"
 												  rz-slider-high="minSliderValue[$index].maxSliderG" 
@@ -80,7 +80,7 @@
 									</div>
                                 </div>
 							
-							<md-button class="md-fab md-mini" ng-click="$root.aniadirRespuestaTest()" 
+							<md-button class="md-fab md-mini" ng-click="$root.aniadirSliderTemas()" 
 									   aria-label="crearPregunta">
 								<md-icon md-svg-src="img/mas.svg"></md-icon>
 							</md-button>

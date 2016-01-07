@@ -15,6 +15,50 @@ app.controller('controladorAdmin', function(servicioRest, config, $scope, $locat
 	
 	$scope.fecha = new Date();
 
+	function escribirHora() {
+		for (var i = 0; i < $scope.entrevistas.length; i++) {
+			$scope.entrevistas[i].date = $scope.entrevistas[i].date.slice(11,16);
+		}	
+	}
+	
+	function getEntrevistas(nombre) {
+		var dia, mes, query;
+		
+		if ($scope.fecha.getDate() < 10) {
+			dia = "0" + $scope.fecha.getDate();
+		} else {
+			dia = $scope.fecha.getDate();
+		}
+		
+		if ($scope.fecha.getMonth() + 1 < 10) {
+			mes = "0" + ($scope.fecha.getMonth() + 1);
+		} else {
+			mes = $scope.fecha.getMonth() + 1;
+		}
+		if (nombre === null) {
+			query = "?fecha=" + $scope.fecha.getFullYear() + "-" + mes + "-" + dia;
+		} else {
+			query = "?fecha=" + $scope.fecha.getFullYear() + "-" + mes + "-" + dia + "&nombre=" + nombre;
+		}
+		
+		servicioRest.getEntrevistas(query)
+			.then(function (data) {
+				$scope.entrevistas = data;
+				escribirHora();
+				if (data.length === 0) {
+					$scope.hayEntrevistas = true;
+				} else {
+					$scope.hayEntrevistas = false;
+				}
+			})
+			.catch(function (err) {
+				$log.error("Error al cargar las entrevistas: " + err);
+				if (err === 403) {
+					$location.path('/');
+				}
+			});
+	}
+	
     $scope.crear = function(ev) {
         $mdDialog.show({
             controller: 'controladorAdminCrear',
@@ -22,11 +66,18 @@ app.controller('controladorAdmin', function(servicioRest, config, $scope, $locat
             parent: angular.element(document.body),
             targetEvent: ev,
             onComplete: function(){
-                $rootScope.aniadirRespuestaTest();
+                $rootScope.aniadirSliderTemas();
                 
             },
             clickOutsideToClose: false
-        });
+        })
+			.then(function (data) {
+				getEntrevistas(nombreSeleccionado);
+			})
+			.catch(function (err) {
+            	$log.error("Error al crear la entrevista: " + err);
+            });
+			
 	};
 	
 	/* ----------------- AUTOCOMPLETE ---------------- */
@@ -121,51 +172,7 @@ app.controller('controladorAdmin', function(servicioRest, config, $scope, $locat
 		}
 	};
 	
-	/* -------------------- LISTAR ENTREVISTAS ---------------------------- */
-	function escribirHora() {
-		for (var i = 0; i < $scope.entrevistas.length; i++) {
-			$scope.entrevistas[i].date = $scope.entrevistas[i].date.slice(11,16);
-		}	
-	}
-	
-	function getEntrevistas(nombre) {
-		var dia, mes, query;
-		
-		if ($scope.fecha.getDate() < 10) {
-			dia = "0" + $scope.fecha.getDate();
-		} else {
-			dia = $scope.fecha.getDate();
-		}
-		
-		if ($scope.fecha.getMonth() + 1 < 10) {
-			mes = "0" + ($scope.fecha.getMonth() + 1);
-		} else {
-			mes = $scope.fecha.getMonth() + 1;
-		}
-		if (nombre === null) {
-			query = "?fecha=" + $scope.fecha.getFullYear() + "-" + mes + "-" + dia;
-		} else {
-			query = "?fecha=" + $scope.fecha.getFullYear() + "-" + mes + "-" + dia + "&nombre=" + nombre;
-		}
-		
-		servicioRest.getEntrevistas(query)
-			.then(function (data) {
-				$scope.entrevistas = data;
-				escribirHora();
-				if (data.length === 0) {
-					$scope.hayEntrevistas = true;
-				} else {
-					$scope.hayEntrevistas = false;
-				}
-			})
-			.catch(function (err) {
-				$log.error("Error al cargar las entrevistas: " + err);
-				if (err === 403) {
-					$location.path('/');
-				}
-			});
-	}
-	
+	/* -------------------- LISTAR ENTREVISTAS ---------------------------- */	
 	getEntrevistas(nombreSeleccionado);
 	
 	$scope.cambioFecha = function() {

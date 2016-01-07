@@ -1,6 +1,5 @@
 app.controller('controladorVerAdmin', function ($scope, $mdDialog, indice) {
     
-	console.log($scope.entrevistas[indice]);
 	$scope.tieneDNI = false;
 	
 	if ($scope.entrevistas[indice].DNI != undefined) {
