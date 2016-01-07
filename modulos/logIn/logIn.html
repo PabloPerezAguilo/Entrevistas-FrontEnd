@@ -4,13 +4,19 @@
 		<md-input-container class="md-block">
 			<label>Usuario</label>
 			<input required name="user" ng-model="user">
+			<div ng-messages="user.$error">
+				<div ng-message="required">Debe introducir un usuario</div>
+			</div>
 		</md-input-container>
 	</div>
 	
 	<div class="enBloque">
 		<md-input-container class="md-block">
 			<label>Contraseña</label>
-			<input type="password" required name="pass" ng-model="pass">
+			<input required type="password" name="pass" ng-model="pass">
+			<div ng-messages="pass.$error">
+				<div ng-message="required">Debe introducir una contraseña</div>
+			</div>
 		</md-input-container>
 	</div>
 	
