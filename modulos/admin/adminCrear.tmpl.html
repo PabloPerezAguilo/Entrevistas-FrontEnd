@@ -1,4 +1,4 @@
-<md-dialog class="redimensionar" ng-init="error=false">
+<md-dialog class="redimensionar" ng-init="error=false;req=false;mini=false;maxi=false">
         <form>
             <md-toolbar>
                 <div class="md-toolbar-tools">
@@ -16,8 +16,6 @@
             <md-dialog-content ng-model="conte">
                 <md-content>
                     <div class="contenidoTablaCrear">
-
-
                         <md-input-container class="md-block">
                             <label>Nombre y apellidos *</label>
                             <textarea required ng-model="nombreEntrevista"></textarea>
@@ -29,25 +27,35 @@
                             <label>DNI</label>
                             <textarea ng-model="dniEntrevista"></textarea>
                         </md-input-container>
-                        <md-datepicker ng-model="fecha" md-placeholder="Introducir fecha *"></md-datepicker>
-                        <md-input-container class="md-inline">
-                            <input required type="number" step="any" ng-model="horas" min="08" max="20" placeholder="Hora *">
-							<div ng-messages="horas.$error" multiple>
-								<div ng-message="required">Este campo es obligatorio</div>
-								<div ng-message="max">La jornada acaba a las 20</div>
-								<div ng-message="min">La jornada empieza a las 8</div>
+      
+                        <md-datepicker required ng-model="fecha" md-placeholder="Introducir fecha" class="crear">
+							<div ng-messages="fecha.$error">
+								<div ng-message="required">
+									Debe introducir una fecha.
+								</div>
 							</div>
-                        </md-input-container>
-						<span>:</span>
-                        <md-input-container class="md-inline">
-                            <input required type="number" step="any" ng-model="minutos" min="00" max="59" 
-								   placeholder="Minutos *">
-							<div ng-messages="minutos.$error" multiple>
-								<div ng-message="required">Este campo es obligatorio</div>
-								<div ng-message="max">El mínimo es 0</div>
-								<div ng-message="min">El máximo es 59</div>
-							</div>
-                        </md-input-container>
+						</md-datepicker>
+                        <div>
+							<md-input-container class="md-inline horas">
+								<input required type="number" step="any" ng-model="horas" min="08" max="20" 
+									   placeholder="Hora *" class="horas">
+								<div ng-messages="horas.$error">
+									<div ng-message-exp="['required', 'min', 'max']">
+										La jornada comprende entre las 8 y 20 h.
+									</div>
+								</div>
+							</md-input-container>
+							<span class="puntos">:</span>
+							<md-input-container class="md-inline minutos">
+								<input required type="number" step="any" ng-model="minutos" min="00" max="59" 
+									   placeholder="Minutos *" class="minutos">
+								<div ng-messages="horas.$error">
+									<div ng-message-exp="['required', 'min', 'max']">
+										Los valores deben estar entre 0 y 59.
+									</div>
+								</div>
+							</md-input-container>
+						</div>
                         <!--http://simeonc.github.io/sc-date-time/index.html-->
 
                         <div>
@@ -94,11 +102,6 @@
 							<p>Se podría crear una entrevista con el tema {{tema}} con el rango (x,y)</p>
 							 <md-button class="md-raised error" ng-click="cerrarError()">Entendido</md-button>
 						</div>
-						
-						<!--<div ng-if="errorTema">
-							<p>Debe seleccionar un tema de la lista</p>
-							 <md-button class="md-raised error" ng-click="cerrarError()">Entendido</md-button>
-						</div>-->
                         
                         <md-button class="md-raised" ng-click="crearEntrevista()" ng-disabled="deshabilitar()">
 							Guardar</md-button>

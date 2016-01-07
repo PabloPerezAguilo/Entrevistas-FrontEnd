@@ -44,6 +44,7 @@ table {
 	border-spacing: 0;
 }
 
+
 /* ---------------------------------------------------------------------*/
 
 $negro: #1E1E1E;
@@ -623,8 +624,34 @@ md-datepicker.admin {
 	float: right;
 }
 
-.md-datepicker-input-container {
+.puntos {
+	margin-left: -4%;
+    position: absolute;
+    margin-top: 2%;
+}
+
+md-datepicker {
+	float: left;
+}
+
+md-input-container.minutos {
+	width: 28%;
+	margin-left: -1%;
+}
+
+md-input-container.horas {
+	width: 33%;
+}
+
+md-input-container {
+    margin-top: 0.44%;
+	margin-right: 2%;
+	margin-left: 2%;
+}
+
+.md-datepicker-input-container.crear {
 	margin-left: 0px;
+	width: 22%;
 }
 
 md-autocomplete {
@@ -636,10 +663,12 @@ md-autocomplete {
     margin: 0;
 }
 
-.mensajeEntrevista {
-	padding-left: 1.5%;
-    color: #7C7C7C;
-    font-size: 14px;
+input.minutos {
+	width: 82%;
+}
+
+input.horas {
+	width: 83%;
 }
 
 
@@ -745,6 +774,32 @@ md-autocomplete {
        max-width: 100%;
        overflow-y: hidden;  
     }
+	
+	md-datepicker {
+		float: left;
+	}
+	
+	.md-datepicker-input-container.crear {
+		margin-left: 0px;
+		width: 70%;
+	}
+	
+	md-input-container.minutos {
+		margin-left: 2%;
+	}
+	
+	.puntos {
+		margin-left: 0%;
+		margin-top: 1.5%
+	}
+	
+	input.minutos {
+		width: 100%;
+	}
+
+	input.horas {
+		width: 100%;
+	}
 	
 	rzslider .rz-bar-wrapper {
 		opacity: 1;
