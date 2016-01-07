@@ -24,7 +24,7 @@ app.controller('controladorAdminCrear', function (servicioRest, $scope, $mdDialo
 		);
 	}
     
-	$scope.temas = [];
+	$scope.temasChip = [];
 	$scope.contTemasChip = 0;
 	
 	$scope.temasEntrevista = [];
@@ -137,7 +137,7 @@ app.controller('controladorAdminCrear', function (servicioRest, $scope, $mdDialo
 					$log.error("Error al crear la entrevista");
 					if (err.status === 500) {
 						$scope.error = true;
-						$scope.temas = err.data.leveledTags;
+						$scope.temasChip = err.data.leveledTags;
 					}
 				});
         }
@@ -167,7 +167,7 @@ app.controller('controladorAdminCrear', function (servicioRest, $scope, $mdDialo
 	//al dar al boton mas añade un nuevo slider y un tema
 	$rootScope.aniadirSliderTemas = function () {
 		$scope.contTemasChip += 1;
-		$scope.temas.push($scope.contTemasChip);
+		$scope.temasChip.push($scope.contTemasChip);
         $scope.minSliderValue[$scope.contTemasChip-1] = {
                     minSliderG: 1,
                     maxSliderG: 10,
