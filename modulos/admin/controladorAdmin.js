@@ -4,6 +4,7 @@ app.controller('controladorAdmin', function(servicioRest, config, $scope, $locat
     $rootScope.logueado=true;
     $rootScope.rolUsuario="img/administrador.svg";
     $scope.entrevistas=[];
+	$scope.hayEntrevistas = false;
 	
 	if($rootScope.token === undefined || $rootScope.rol !== 'ROLE_ADMIN') {
 		$location.path('/');
@@ -151,6 +152,11 @@ app.controller('controladorAdmin', function(servicioRest, config, $scope, $locat
 			.then(function (data) {
 				$scope.entrevistas = data;
 				escribirHora();
+				if (data.length === 0) {
+					$scope.hayEntrevistas = true;
+				} else {
+					$scope.hayEntrevistas = false;
+				}
 			})
 			.catch(function (err) {
 				$log.error("Error al cargar las entrevistas: " + err);
