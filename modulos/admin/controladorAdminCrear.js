@@ -168,7 +168,7 @@ app.controller('controladorAdminCrear', function (servicioRest, $scope, $mdDialo
 	$rootScope.aniadirSliderTemas = function () {
 		$scope.contTemasChip += 1;
 		$scope.temasChip.push($scope.contTemasChip);
-        $scope.minSliderValue[$scope.contTemasChip-1] = {
+        $scope.minSliderValue[$scope.contTemasChip - 1] = {
                     minSliderG: 1,
                     maxSliderG: 10,
                     options: {
