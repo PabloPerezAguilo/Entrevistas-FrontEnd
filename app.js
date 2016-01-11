@@ -16,7 +16,7 @@ app.config(function($routeProvider) {
 		templateUrl: 'modulos/logIn/logIn.html',
 		controller: 'controladorLogIn'
 	})
-	.when('/', {
+	.when('/admin', {
 		templateUrl: 'modulos/admin/admin.html',
         controller: 'controladorAdmin'
 	})
@@ -24,7 +24,7 @@ app.config(function($routeProvider) {
 		templateUrl: 'modulos/tec/tec.html',
         controller: 'controladorTec'
 	})
-	.when('/entrevista', {
+	.when('/', {
 		templateUrl: 'modulos/entrevista/entrevista.html',
         controller: 'controladorEntrevista'
 	})

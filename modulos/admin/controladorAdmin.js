@@ -125,6 +125,7 @@ app.controller('controladorAdmin', function(servicioRest, config, $scope, $locat
 	}
 	
     $scope.selectedItemChange = function selectedItemChange(item) {
+		console.log(item);
 		if(item !== undefined) {
 			if (!angular.isObject(item)) {
 				item = {
