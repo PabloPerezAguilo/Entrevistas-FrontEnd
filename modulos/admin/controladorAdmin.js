@@ -1,29 +1,21 @@
-app.controller('controladorAdmin', function(servicioRest, config, $scope, $location, $rootScope, $mdDialog, $timeout, $q, $log) {
+app.controller('controladorAdmin', function (servicioRest, config, $scope, $location, $rootScope, $mdDialog, $timeout, $q, $log) {
 	
-    $rootScope.cargando=false;
-    $rootScope.logueado=true;
-    $rootScope.rolUsuario="img/administrador.svg";
-    $scope.entrevistas=[];
+    $rootScope.cargando = false;
+    $rootScope.logueado = true;
+    $rootScope.rolUsuario = "img/administrador.svg";
+    $scope.entrevistas = [];
 	$scope.hayEntrevistas = false;
+	
 	/*
 	if($rootScope.token === undefined || $rootScope.rol !== 'ROLE_ADMIN') {
 		$location.path('/');
 	}*/
-    
   
-	var nombresCargados, simulateQuery = false, nombreSeleccionado = null;
+	var nombresCargados, simulateQuery = false, nombreSeleccionado = null, dia, mes;
 	
 	$scope.fecha = new Date();
-
-	function escribirHora() {
-		for (var i = 0; i < $scope.entrevistas.length; i++) {
-			$scope.entrevistas[i].date = $scope.entrevistas[i].date.slice(11,16);
-		}	
-	}
 	
-	function getEntrevistas(nombre) {
-		var dia, mes, query;
-		
+	function escribirDiaMes() {
 		if ($scope.fecha.getDate() < 10) {
 			dia = "0" + $scope.fecha.getDate();
 		} else {
@@ -35,6 +27,19 @@ app.controller('controladorAdmin', function(servicioRest, config, $scope, $locat
 		} else {
 			mes = $scope.fecha.getMonth() + 1;
 		}
+	}
+
+	function escribirHora() {
+		for (var i = 0; i < $scope.entrevistas.length; i++) {
+			$scope.entrevistas[i].date = $scope.entrevistas[i].date.slice(11, 16);
+		}
+	}
+	
+	function getEntrevistas(nombre) {
+		var query;
+		
+		escribirDiaMes();
+		
 		if (nombre === null) {
 			query = "?fecha=" + $scope.fecha.getFullYear() + "-" + mes + "-" + dia;
 		} else {
@@ -59,13 +64,13 @@ app.controller('controladorAdmin', function(servicioRest, config, $scope, $locat
 			});
 	}
 	
-    $scope.crear = function(ev) {
+    $scope.crear = function (ev) {
         $mdDialog.show({
             controller: 'controladorAdminCrear',
             templateUrl: 'modulos/admin/adminCrear.tmpl.html',
             parent: angular.element(document.body),
             targetEvent: ev,
-            onComplete: function(){
+            onComplete: function () {
                 $rootScope.aniadirSliderTemas();
                 
             },
@@ -75,7 +80,7 @@ app.controller('controladorAdmin', function(servicioRest, config, $scope, $locat
 				getEntrevistas(nombreSeleccionado);
 			})
 			.catch(function (err) {
-            	$log.error("Error al crear la entrevista: " + err);
+				$log.error("Error al crear la entrevista: " + err);
             });
 			
 	};
@@ -89,19 +94,7 @@ app.controller('controladorAdmin', function(servicioRest, config, $scope, $locat
 	}
 	
 	$rootScope.obtenerNombres = function () {
-		var dia, mes;
-		
-		if ($scope.fecha.getDate() < 10) {
-			dia = "0" + $scope.fecha.getDate();
-		} else {
-			dia = $scope.fecha.getDate();
-		}
-		
-		if ($scope.fecha.getMonth() + 1 < 10) {
-			mes = "0" + ($scope.fecha.getMonth() + 1);
-		} else {
-			mes = $scope.fecha.getMonth() + 1;
-		}
+		escribirDiaMes();
 			
 		servicioRest.getNombresEntrevistas("?fecha=" + $scope.fecha.getFullYear() + "-" + mes + "-" + dia)
 			.then(function (data) {
@@ -125,13 +118,7 @@ app.controller('controladorAdmin', function(servicioRest, config, $scope, $locat
 	}
 	
     $scope.selectedItemChange = function selectedItemChange(item) {
-		if(item !== undefined) {
-			if (!angular.isObject(item)) {
-				item = {
-					name: item,
-					valor: item.toLowerCase()
-				};
-			}
+		if (item !== undefined) {
 			var index = buscarNombre(item.valor);
 
 			if (index !== -1) {
@@ -140,14 +127,14 @@ app.controller('controladorAdmin', function(servicioRest, config, $scope, $locat
 			}
 			
 		}
-    }
+    };
 	
     $scope.searchTextChange = function searchTextChange(text) {
 		if (text === "") {
 			nombreSeleccionado = null;
 			getEntrevistas(nombreSeleccionado);
 		}
-    }
+    };
 	
 	//filtra por el nombre dado
 	function filtrar(texto) {
@@ -172,13 +159,13 @@ app.controller('controladorAdmin', function(servicioRest, config, $scope, $locat
 		}
 	};
 	
-	/* -------------------- LISTAR ENTREVISTAS ---------------------------- */	
+	/* -------------------- LISTAR ENTREVISTAS ---------------------------- */
 	getEntrevistas(nombreSeleccionado);
 	
 	$scope.cambioFecha = function() {
 		getEntrevistas(nombreSeleccionado);
 		$rootScope.obtenerNombres();
-	}
+	};
 	
 	/* ------------------------------- Borrar, ver y hacer entrevista ------------------------------- */
 	
@@ -208,9 +195,9 @@ app.controller('controladorAdmin', function(servicioRest, config, $scope, $locat
 		);
 	};
 	
-	$scope.hacerEntrevista = function(ind) {
+	$scope.hacerEntrevista = function (ind) {
 		$rootScope.indiceEntrevistaSeleccionada = $scope.entrevistas[ind]._id;
 		$location.path("/entrevista");
-	}
+	};
 
 });
