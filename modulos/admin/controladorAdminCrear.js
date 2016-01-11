@@ -137,7 +137,7 @@ app.controller('controladorAdminCrear', function (servicioRest, $scope, $mdDialo
 					$log.error("Error al crear la entrevista");
 					if (err.status === 500) {
 						$scope.error = true;
-						$scope.temasChip = err.data.leveledTags;
+						$scope.temas = err.data.leveledTags;
 					}
 				});
         }

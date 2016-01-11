@@ -14,10 +14,10 @@ app.controller('controladorVerAdmin', function ($scope, $mdDialog, indice) {
 	$scope.hide = function () {
 		$mdDialog.hide();
 	};
-  	$scope.cancel = function () {
-    	$mdDialog.cancel();
+	$scope.cancel = function () {
+		$mdDialog.cancel();
 	};
-  	$scope.answer = function (answer) {
-    	$mdDialog.hide(answer);
+	$scope.answer = function (answer) {
+		$mdDialog.hide(answer);
 	};
 });
