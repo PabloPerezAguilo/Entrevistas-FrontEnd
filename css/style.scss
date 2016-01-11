@@ -670,6 +670,33 @@ input.horas {
 	width: 83%;
 }
 
+.respuestas {
+	font-size: 12px;
+	margin: 0px;
+	width: 500px;
+}
+
+.contenedorRespuestas {
+	padding-bottom: 20px;
+}
+
+.entrevistado {
+	height: 600px;
+    margin-bottom: 70px;
+    overflow: auto;
+	margin-left: 10%;
+	margin-right: 10%;
+	margin-top: 3%;
+}
+
+.dividerCorto {
+	width: 95%;
+	border-top-color: rgba(81, 80, 80, 0.4);
+}
+
+.btnEntrevistadoGuardar {
+	width: 100px;
+}
 
 /*--------------------- media queries ------------------------*/
 

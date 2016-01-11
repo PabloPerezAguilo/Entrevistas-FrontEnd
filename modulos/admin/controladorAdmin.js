@@ -5,10 +5,10 @@ app.controller('controladorAdmin', function(servicioRest, config, $scope, $locat
     $rootScope.rolUsuario="img/administrador.svg";
     $scope.entrevistas=[];
 	$scope.hayEntrevistas = false;
-	
+	/*
 	if($rootScope.token === undefined || $rootScope.rol !== 'ROLE_ADMIN') {
 		$location.path('/');
-	}
+	}*/
     
   
 	var nombresCargados, simulateQuery = false, nombreSeleccionado = null;
@@ -180,7 +180,7 @@ app.controller('controladorAdmin', function(servicioRest, config, $scope, $locat
 		$rootScope.obtenerNombres();
 	}
 	
-	/* ------------------------------- Borrar y ver entrevista ------------------------------- */
+	/* ------------------------------- Borrar, ver y hacer entrevista ------------------------------- */
 	
 	$scope.eliminar = function (indice) {
         var idEntrevista = $scope.entrevistas[indice]._id;
@@ -207,5 +207,10 @@ app.controller('controladorAdmin', function(servicioRest, config, $scope, $locat
 			}
 		);
 	};
+	
+	$scope.hacerEntrevista = function(ind) {
+		$rootScope.indiceEntrevistaSeleccionada = $scope.entrevistas[ind]._id;
+		$location.path("/entrevista");
+	}
 
 });

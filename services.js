@@ -89,8 +89,63 @@ function ServicioREST($http, $q, $rootScope, config) {
 
 		return promise;
 	}
+	
+	/* --------------- GET TEMAS --------------- */
+	
+	function getTemas() {
+		var defered = $q.defer();
+		var promise = defered.promise;
+		$http({
+			method: 'GET',
+			url: url + '/tag/'
+		})
+		.success(function(data, status, headers, config) {
+			defered.resolve(data);
+		})
+		.error(function(data, status, headers, config) {
+			tratarError(data, status,defered);
+		});
 
+		return promise;
+	}
+	
+	/* ------------- GET PREGUNTAS BY TAG ------------- */
+	
+	function postPreguntasByTag(tag) {
+		var defered = $q.defer();
+		var promise = defered.promise;
+		$http({
+			method: 'POST',
+			url: url + '/questionByTags/',
+			data: tag
+		})
+		.success(function(data, status, headers, config) {
+			defered.resolve(data);
+		})
+		.error(function(data, status, headers, config) {
+			tratarError(data, status, defered);
+		});
 
+		return promise;
+	}
+	
+	function postTema(tema) {
+		var defered = $q.defer();
+		var promise = defered.promise;
+		$http({
+			method: 'POST',
+			url: url + '/tag/',
+			data: { tag: tema }
+		})
+		.success(function(data, status, headers, config) {
+			defered.resolve(data);
+		})
+		.error(function(data, status, headers, config) {
+			tratarError(data, status, defered);
+		});
+
+		return promise;
+	}
 
 	/* ---------- POST AUTHENTICATE ------------- */
 
@@ -185,14 +240,12 @@ function ServicioREST($http, $q, $rootScope, config) {
 		return promise;
 	}
 	
-	/* --------------- GET TEMAS --------------- */
-	
-	function getTemas() {
+	function getEntrevistasById(idEntrevista) {
 		var defered = $q.defer();
 		var promise = defered.promise;
 		$http({
 			method: 'GET',
-			url: url + '/tag/'
+			url: url + '/interviewQuestions/' + idEntrevista
 		})
 		.success(function(data, status, headers, config) {
 			defered.resolve(data);
@@ -204,43 +257,7 @@ function ServicioREST($http, $q, $rootScope, config) {
 		return promise;
 	}
 	
-	/* ------------- GET PREGUNTAS BY TAG ------------- */
 	
-	function postPreguntasByTag(tag) {
-		var defered = $q.defer();
-		var promise = defered.promise;
-		$http({
-			method: 'POST',
-			url: url + '/questionByTags/',
-			data: tag
-		})
-		.success(function(data, status, headers, config) {
-			defered.resolve(data);
-		})
-		.error(function(data, status, headers, config) {
-			tratarError(data, status, defered);
-		});
-
-		return promise;
-	}
-	
-	function postTema(tema) {
-		var defered = $q.defer();
-		var promise = defered.promise;
-		$http({
-			method: 'POST',
-			url: url + '/tag/',
-			data: { tag: tema }
-		})
-		.success(function(data, status, headers, config) {
-			defered.resolve(data);
-		})
-		.error(function(data, status, headers, config) {
-			tratarError(data, status, defered);
-		});
-
-		return promise;
-	}
 	
 	return {
 		getPreguntas: getPreguntas,
@@ -254,6 +271,7 @@ function ServicioREST($http, $q, $rootScope, config) {
 		postTema: postTema,
 		postPreguntasByTag: postPreguntasByTag,
 		getNombresEntrevistas: getNombresEntrevistas,
-		deleteEntrevista: deleteEntrevista
+		deleteEntrevista: deleteEntrevista,
+		getEntrevistasById: getEntrevistasById
 	}
 }
