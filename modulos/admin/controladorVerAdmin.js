@@ -10,15 +10,14 @@ app.controller('controladorVerAdmin', function ($scope, $mdDialog, indice) {
 	$scope.nombre = $scope.entrevistas[indice].name;
 	$scope.status = $scope.entrevistas[indice].status;
 	$scope.preguntas = $scope.entrevistas[indice].nquestions;
-	$scope.chipText = 'Football';
 	
 	$scope.hide = function () {
 		$mdDialog.hide();
 	};
-  	$scope.cancel = function () {
-    	$mdDialog.cancel();
+	$scope.cancel = function () {
+		$mdDialog.cancel();
 	};
-  	$scope.answer = function (answer) {
-    	$mdDialog.hide(answer);
+	$scope.answer = function (answer) {
+		$mdDialog.hide(answer);
 	};
 });
