@@ -20,6 +20,7 @@ time, mark, audio, video {
 .ng-scope {
 	//overflow: hidden;
 }
+
 /* HTML5 display-role reset for older browsers */
 article, aside, details, figcaption, figure, 
 footer, header, hgroup, menu, nav, section {
@@ -96,8 +97,8 @@ header {
     position: relative;
     display: inline-block;
     float: right;
-    margin-right: 2%;
-    margin-top: 2%;
+    margin-right: 0%;
+    margin-top: 4%;
 }
 
 footer {
@@ -239,6 +240,10 @@ md-toast.md-default-theme .md-toast-content, md-toast .md-toast-content {
 
 .md-button.md-raised:not([disabled]).md-focused {
     background-color: $colorPrincipal;
+}
+
+.md-button.md-ink-ripple:not([disabled]).md-focused {
+	background-color: rgba(158,158,158,0.2);
 }
 
 /*Tab*/
@@ -461,9 +466,17 @@ md-checkbox[disabled] .md-label {
 	margin-right: 10%;
 }
 
-.md-button.md-fab.md-mini {
+.md-button.md-fab.md-mini.admin {
     float: right;
 	margin-top: 1.8%;
+	//margin-right: -5%;
+	margin-right: -11%;
+}
+
+.md-button.md-fab.md-mini.tec {
+    float: right;
+	margin-top: 1.8%;
+	margin-right: -5%;
 }
 
 .explosionIcono.md-button .md-ripple-container {

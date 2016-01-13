@@ -1,4 +1,9 @@
-app.controller('controladorEntrevista', function (servicioRest, $scope, $rootScope, $log) {
+app.controller('controladorEntrevista', function (servicioRest, $scope, $rootScope, $log, $location) {
+	
+	if ($rootScope.pulsaBoton === undefined || !$rootScope.pulsaBoton) {
+		$location.path('/admin');
+	}
+	
  /* ------------------------------------------------------
 	-------------------- Para probar ---------------------
 	--------------------------------------------------- */

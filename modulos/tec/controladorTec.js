@@ -1,9 +1,29 @@
-app.controller('controladorTec', function (servicioRest, $scope, $rootScope, $mdDialog, $timeout, $q, $log, $mdToast, $location) {
+app.controller('controladorTec', function (servicioRest, $scope, $rootScope, $mdDialog, $timeout, $q, $log, $mdToast, $location, $http) {
+	
+	if (localStorage.getItem("usuario") !== null) {
+		$rootScope.usuario = localStorage.getItem("usuario");
+	} else {
+		$rootScope.usuario = sessionStorage.getItem("usuario");
+	}
+	
+	if (localStorage.getItem("rol") === "ROLE_TECH" || sessionStorage.getItem("rol") === "ROLE_TECH") {
+		$rootScope.rol = "técnico";
+	}
+	
+	var token = sessionStorage.getItem("token");
+	if(token !== null) {
+		$http.defaults.headers.common['x-access-token'] = token;
+	}
 	
 	function toast(texto) {
 		$mdToast.show(
 			$mdToast.simple().content(texto).position('top right').hideDelay(1500)
 		);
+	}
+	
+	$scope.cerrarSesion = function () {
+		$rootScope.limpiarCredenciales();
+		$location.path("/");
 	}
 	
 	function escribirTipo() {
@@ -27,7 +47,11 @@ app.controller('controladorTec', function (servicioRest, $scope, $rootScope, $md
 			})
 			.catch(function (err) {
 				$log.error("Error al cargar las preguntas: " + err);
-				if (err === 403) {
+				console.log($rootScope.rol);
+				if (err === 403 && token !== null) {
+					//cuando entra a tec desde admin
+					$location.path('/admin');
+				} else {
 					$location.path('/');
 				}
 			});
