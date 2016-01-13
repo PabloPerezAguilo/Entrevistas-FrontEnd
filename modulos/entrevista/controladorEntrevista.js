@@ -10,16 +10,14 @@ app.controller('controladorEntrevista', function (servicioRest, $scope, $rootSco
 	
 	//$rootScope.indiceEntrevistaSeleccionada = "568fb07cccef6ff8108d085a"; //2 preguntas abierta
 	//$rootScope.indiceEntrevistaSeleccionada = "568fb06fccef6ff8108d0859"; //2 preguntas test
-	$rootScope.indiceEntrevistaSeleccionada = "568fb061ccef6ff8108d0858"; //2 preguntas multiples
-	//$rootScope.indiceEntrevistaSeleccionada = "568fb0a0d4ee6a282327f5df"; //6 preguntas combinadas
+	//$rootScope.indiceEntrevistaSeleccionada = "568fb061ccef6ff8108d0858"; //2 preguntas multiples
+	$rootScope.indiceEntrevistaSeleccionada = "568fb0a0d4ee6a282327f5df"; //6 preguntas combinadas
  /* ------------------------------------------------------
 	-------------------- Para probar ---------------------
 	--------------------------------------------------- */
-	$scope.respuestasAbierta = [];
-	$scope.radioTest = [];
-	$scope.checkTestAbierto = [];
+	$scope.respuestas = [];
 	
-	var respondidas;
+	var respondidas = [];
 	
 	function getPreguntas() {
 		servicioRest.getEntrevistasById($rootScope.indiceEntrevistaSeleccionada)
@@ -35,12 +33,6 @@ app.controller('controladorEntrevista', function (servicioRest, $scope, $rootSco
 	getPreguntas();
 	
 	$scope.guardarRespuestas = function () {
-		console.log("abierta");
-		console.log($scope.respuestasAbierta);
-		console.log($scope.respuestasAbierta.length);
-		console.log("test");
-		console.log($scope.radioTest);
-		console.log("multiple");
-		console.log($scope.checkTestAbierto);
+		console.log($scope.respuestas);
 	};
 });

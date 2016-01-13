@@ -52,7 +52,7 @@ app.controller('controladorAdminCrear', function (servicioRest, $scope, $mdDialo
 	}
     
 	//comprueba que estén rellenos todos los campos obligatorios
-    function preguntaVacia(){
+    function entrevistaVacia(){
 		if($scope.nombreEntrevista === undefined || $scope.nombreEntrevista === "" || sinTemas() 
 		   || $scope.fecha === undefined || $scope.horas === undefined || $scope.minutos === undefined) {
 			return true;
@@ -63,7 +63,7 @@ app.controller('controladorAdminCrear', function (servicioRest, $scope, $mdDialo
     $scope.crearEntrevista = function () {
 		var i, j, fecha_hora, dia, mes, minutos, hora;
         
-        if (preguntaVacia()) {
+        if (entrevistaVacia()) {
             toast("Rellena todos los campos obligatorios");
         } else {
 			dia = $scope.fecha.getDate();
@@ -222,14 +222,9 @@ app.controller('controladorAdminCrear', function (servicioRest, $scope, $mdDialo
     $scope.transformChip = function transformChip(chip, indice) {
 		if (angular.isObject(chip)) {
 			return chip;
-		} else {
-			chip = {
-				tag: chip,
-				valor: chip.toLowerCase()
-			};
 		}
 		
-		var index = buscarTema(chip.valor);
+		var index = buscarTema(chip.toLowerCase());
 		if (index !== -1) {
 			return temasCargados[index];
 		}

@@ -1,5 +1,4 @@
 <div class="entrevistado">
-	<md-button class="md-raised btnEntrevistadoGuardar" ng-click="guardarRespuestas()">Guardar</md-button>
 	<md-content>
 		<md-list>
 			<md-list-item  ng-repeat="pregunta in preguntas">
@@ -7,15 +6,15 @@
 					<h3>{{ $index  + 1}}. {{ pregunta.title }} </h3>
 					<md-input-container class="respuestas">
 						<label>Respuesta a la pregunta</label>
-						<textarea  ng-model="respuestasAbierta[$index]"></textarea>
+						<textarea  ng-model="respuestas[$index]"></textarea>
 					</md-input-container>
 				</div>
 				
 				<div ng-if="pregunta.type === 'SINGLE_CHOICE'" class="contenedorRespuestas">
 					<h3>{{ $index  + 1}}. {{ pregunta.title }} </h3>
-					<md-radio-group ng-model="radioTest[$index]">
+					<md-radio-group ng-model="respuestas[$index]">
 						<p class="respuestas displayInline" ng-repeat="answer in pregunta.answers"> 
-							<md-radio-button value="{{answer}}" aria-label="respuestas test">
+							<md-radio-button value="{{answer.title}}" aria-label="respuestas test">
 								{{ answer.title }}
 							</md-radio-button>
 						</p>
@@ -25,7 +24,7 @@
 				<div ng-if="pregunta.type === 'MULTI_CHOICE'" class="contenedorRespuestas">
 					<h3>{{ $index  + 1}}. {{ pregunta.title }} </h3>
 					<p class="respuestas displayInline" ng-repeat="answer in pregunta.answers">
-						<md-checkbox ng-model="checkTestAbierto[$index]" aria-label="respuestas test abierto">
+						<md-checkbox ng-model="respuestas[$parent.$index][$index]" aria-label="respuestas test abierto">
 							{{ answer.title }}
 						</md-checkbox> 
 					</p>
@@ -35,4 +34,5 @@
 			</md-list-item>
 		</md-list>
 	</md-content>
+	<md-button class="md-raised btnEntrevistadoGuardar" ng-click="guardarRespuestas()">Finalizar cuestionario</md-button>
 </div>

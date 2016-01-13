@@ -707,8 +707,9 @@ input.horas {
 	border-top-color: rgba(81, 80, 80, 0.4);
 }
 
-.btnEntrevistadoGuardar {
-	width: 100px;
+.btnEntrevistadoGuardar.md-button.md-raised{
+	width: 25%;
+    margin-left: 32%;
 }
 
 /*--------------------- media queries ------------------------*/
