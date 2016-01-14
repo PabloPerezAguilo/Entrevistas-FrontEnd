@@ -1,15 +1,26 @@
-app.controller('controladorAdmin', function (servicioRest, config, $scope, $location, $rootScope, $mdDialog, $timeout, $q, $log) {
+app.controller('controladorAdmin', function (servicioRest, config, $scope, $location, $rootScope, $mdDialog, $timeout, $q, $log, $http) {
 	
     $rootScope.cargando = false;
     $rootScope.logueado = true;
     $rootScope.rolUsuario = "img/administrador.svg";
     $scope.entrevistas = [];
 	$scope.hayEntrevistas = false;
+	$rootScope.pulsaBoton = false;
 	
-	/*
-	if($rootScope.token === undefined || $rootScope.rol !== 'ROLE_ADMIN') {
-		$location.path('/');
-	}*/
+	if (localStorage.getItem("usuario") !== null) {
+		$rootScope.usuario = localStorage.getItem("usuario");
+	} else {
+		$rootScope.usuario = sessionStorage.getItem("usuario");
+	}
+	
+	if (localStorage.getItem("rol") === "ROLE_ADMIN" || sessionStorage.getItem("rol") === "ROLE_ADMIN") {
+		$rootScope.rol = "administrador";
+	}
+	
+	var token = sessionStorage.getItem("token");
+	if(token !== null) {
+		$http.defaults.headers.common['x-access-token'] = token;
+	}
   
 	var nombresCargados, simulateQuery = false, nombreSeleccionado = null, dia, mes;
 	
@@ -60,7 +71,10 @@ app.controller('controladorAdmin', function (servicioRest, config, $scope, $loca
 			})
 			.catch(function (err) {
 				$log.error("Error al cargar las entrevistas: " + err);
-				if (err === 403) {
+				if (err === 403 && token !== null) {
+					//cuando entra a admin desde tec
+					$location.path('/tec');
+				} else {
 					$location.path('/');
 				}
 			});
@@ -214,6 +228,7 @@ app.controller('controladorAdmin', function (servicioRest, config, $scope, $loca
 	};
 	
 	$scope.hacerEntrevista = function (ind) {
+		$rootScope.pulsaBoton = true;
 		$rootScope.indiceEntrevistaSeleccionada = $scope.entrevistas[ind]._id;
 		$location.path("/entrevista");
 	};

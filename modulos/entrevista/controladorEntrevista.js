@@ -4,6 +4,10 @@ app.controller('controladorEntrevista', function (servicioRest, $scope, $rootSco
     $rootScope.logueado = true;
     $rootScope.rolUsuario = "img/entrevistado.svg";
 	
+	if ($rootScope.pulsaBoton === undefined || !$rootScope.pulsaBoton) {
+		$location.path('/admin');
+	}
+	
 	/* ---------------------------------------------------
 	-------------------- Para probar ---------------------
 	--------------------------------------------------- */

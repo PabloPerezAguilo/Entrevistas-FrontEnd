@@ -3,29 +3,68 @@ app.controller('controladorLogIn', function (servicioRest, config, $scope, $loca
 
 	$rootScope.logueado = false;
 	$rootScope.rolUsuario = "";
+	var checkeado;
+	
+	$scope.cambioCheck = function () {
+		checkeado = $scope.checkRecordar;
+	};	
+	
+	//RECORDAR SESION
+	if (localStorage.getItem("usuario") !== undefined && localStorage.getItem("usuario") !== null) {
+		console.log("usuario guardado en localStorage");
+		var user = {
+			username: localStorage.getItem("usuario"),
+			password: Aes.Ctr.decrypt(localStorage.getItem("password"), localStorage.getItem("usuario"), 256)
+		};
+		$rootScope.user = user.username;
+		servicioRest.postAuthenticate(user)
+			.then(function (data) {
+				$http.defaults.headers.common['x-access-token'] = data.token;
+				$rootScope.token = data.token;
+				$rootScope.rol = data.role;
+				if (data.role === "ROLE_ADMIN") {
+					$location.path("/admin");
+				} else {
+					$location.path("/tec");
+				}
+			})
+			.catch(function (err) {
+				$log.error("Error al recordar sesión: " + err);
+			})
+	}
 
 	function toast(texto) {
 		$mdToast.show(
 			$mdToast.simple().content(texto).position('top right').hideDelay(1500)
 		);
-	}
+	};
 
 	$scope.login = function () {
 		$rootScope.cargando = true;
 		var user = {};
 		user.username = $scope.user;
 		user.password = $scope.pass;
+		$rootScope.usuario = $scope.user;
 		servicioRest.postAuthenticate(user)
 			.then(function (data) {
 				$http.defaults.headers.common['x-access-token'] = data.token;
 				$rootScope.token = data.token;
 				$rootScope.rol = data.role;
-			if (data.role === "ROLE_ADMIN") {
-				$location.path("/admin");
-			} else {
-				$location.path("/tec");
-			}
-		})
+				if(checkeado) {
+					localStorage.setItem("usuario", user.username);
+					localStorage.setItem("password", Aes.Ctr.encrypt(user.username, $scope.pass, 256));
+					localStorage.setItem("rol", data.role);
+				} else {
+					sessionStorage.setItem("usuario", user.username);
+					sessionStorage.setItem("rol", data.role);
+				}
+				sessionStorage.setItem("token", data.token);
+				if (data.role === "ROLE_ADMIN") {
+					$location.path("/admin");
+				} else {
+					$location.path("/tec");
+				}
+			})
 			.catch(function (err) {
 			$rootScope.cargando = false;
 			if (err === "Servicio no disponible") {
@@ -42,4 +81,10 @@ app.controller('controladorLogIn', function (servicioRest, config, $scope, $loca
 			}
 		});
 	};
+	
+	$scope.enter = function (pressEvent) {
+		if (pressEvent.charCode === 13) {
+			$scope.login();
+		}
+	}
 });

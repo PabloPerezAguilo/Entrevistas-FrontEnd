@@ -20,6 +20,7 @@ time, mark, audio, video {
 .ng-scope {
 	//overflow: hidden;
 }
+
 /* HTML5 display-role reset for older browsers */
 article, aside, details, figcaption, figure, 
 footer, header, hgroup, menu, nav, section {
@@ -96,8 +97,8 @@ header {
     position: relative;
     display: inline-block;
     float: right;
-    margin-right: 2%;
-    margin-top: 2%;
+    margin-right: 0%;
+    margin-top: 4%;
 }
 
 footer {
@@ -239,6 +240,10 @@ md-toast.md-default-theme .md-toast-content, md-toast .md-toast-content {
 
 .md-button.md-raised:not([disabled]).md-focused {
     background-color: $colorPrincipal;
+}
+
+.md-button.md-ink-ripple:not([disabled]).md-focused {
+	background-color: rgba(158,158,158,0.2);
 }
 
 /*Tab*/
@@ -459,7 +464,18 @@ md-checkbox[disabled] .md-label {
 
 .md-button.md-fab.md-mini {
     float: right;
+}
+
+.md-button.md-fab.md-mini.admin {
+    float: right;
 	margin-top: 1.8%;
+	margin-right: -11%;
+}
+
+.md-button.md-fab.md-mini.tec {
+    float: right;
+	margin-top: 1.8%;
+	margin-right: -5%;
 }
 
 .explosionIcono.md-button .md-ripple-container {
@@ -879,8 +895,81 @@ input.horas {
 		left: 8px;
 	}
 	
+	md-autocomplete {
+		width: 62%;
+	}
+	
 	span.rz-pointer {
 		left: 592px;
 	}
+	
+	.md-button.md-fab.md-mini.tec {
+		margin-right: 12%;
+	}
 }
 
+@media screen and (max-width: 600px) {
+	
+	md-autocomplete {
+		width: 55%;
+	}
+}
+
+@media screen and (min-width: 650px) and (max-width: 1000px) {
+	
+	md-autocomplete {
+		width: 67%;
+	}
+	
+	.md-button.md-fab.md-mini.admin {
+		margin-right: 14%;
+	}
+	
+	.md-button.md-fab.md-mini.tec {
+		margin-right: 12%;
+	}
+}
+
+@media screen and (min-width: 1001px) and (max-width: 1040px) {
+	
+	md-autocomplete {
+		width: 79%;
+	}
+	
+	.md-button.md-fab.md-mini.tec {
+		margin-right: 12%;
+	}
+}
+
+@media screen and (min-width: 1040px) and (max-width: 1079px) {
+	
+	.md-button.md-fab.md-mini.admin {
+		margin-right: 14%;
+	}
+}
+
+@media screen and (min-width: 1080px) and (max-width: 1100px) {
+	
+	.md-button.md-fab.md-mini.admin {
+		margin-right: -15%;
+	}
+}
+
+@media screen and (max-width: 645px) {
+	
+	.md-button.md-fab.md-mini.admin {
+		margin-right: 12%;
+	}
+	
+	md-datepicker {
+		float: none;
+	}
+	
+	span.rz-pointer {
+		left: 95%;
+	}
+	
+	rzslider .rz-bar-wrapper {
+		width: 95%;
+	}
+}
