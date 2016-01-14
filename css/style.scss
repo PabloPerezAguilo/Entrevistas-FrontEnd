@@ -831,6 +831,10 @@ input.horas {
     .listaPreguntas {
 		height: 250px;
 	}
+	
+	.cortarAlertWarning {
+		width: 95%;
+	}
 }
 
 @media screen and (min-height: 510px) and (max-height: 561px) {
@@ -978,7 +982,11 @@ input.horas {
 @media screen and (min-width: 1001px) and (max-width: 1040px) {
 	
 	md-autocomplete {
-		width: 73%;
+		width: 68%;
+	}
+	
+	md-datepicker {
+		margin-left: -12%;
 	}
 	
 	.listaPreguntas {
@@ -998,6 +1006,13 @@ input.horas {
 	
 	.md-button.md-fab.md-mini.adminBtn {
 		margin-right: 14%;
+	}
+}
+
+@media screen and (min-width: 1040px){
+	
+	.listaPreguntas {
+		width: 80%;
 	}
 }
 
@@ -1032,13 +1047,14 @@ input.horas {
 	md-autocomplete: 65%;
 }
 
-@media screen and (width: 1100px) {
+@media screen and (max-width: 995px) {
 	
 	md-autocomplete {
-		width: 74%;
+		width: 68%;
 	}
 	
-	.listaPreguntas {
-		width: 78%;
+	md-datepicker {
+		margin-left: -10%;
 	}
+	
 }
