@@ -4,9 +4,9 @@ app.controller('controladorEntrevista', function (servicioRest, $scope, $rootSco
     $rootScope.logueado = true;
     $rootScope.rolUsuario = "img/entrevistado.svg";
 	
-	if ($rootScope.pulsaBoton === undefined || !$rootScope.pulsaBoton) {
+	/*if ($rootScope.pulsaBoton === undefined || !$rootScope.pulsaBoton) {
 		$location.path('/admin');
-	}
+	}*/
 	
 	/* ---------------------------------------------------
 	-------------------- Para probar ---------------------
@@ -34,6 +34,7 @@ app.controller('controladorEntrevista', function (servicioRest, $scope, $rootSco
 		servicioRest.getPreguntasEntrevistaById($rootScope.indiceEntrevistaSeleccionada)
 				.then(function (data) {
 					$scope.preguntas = data;
+			console.log(data);
 				})
 				.catch(function (err) {
 					$scope.preguntas = null;
