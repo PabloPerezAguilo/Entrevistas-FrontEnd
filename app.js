@@ -38,7 +38,7 @@ app.config(function($routeProvider) {
 		templateUrl: 'modulos/tec/tec.html',
         controller: 'controladorTec'
 	})
-	.when('/', {
+	.when('/entrevista', {
 		templateUrl: 'modulos/entrevista/entrevista.html',
         controller: 'controladorEntrevista'
 	})
