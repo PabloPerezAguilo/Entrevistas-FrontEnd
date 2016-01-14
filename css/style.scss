@@ -917,27 +917,39 @@ input.horas {
 
 @media screen and (min-width: 650px) and (max-width: 1000px) {
 	
-	md-autocomplete {
+	/*md-autocomplete {
 		width: 67%;
-	}
+	}*/
 	
 	.md-button.md-fab.md-mini.adminBtn {
-		margin-right: 14%;
+		margin-right: 11%;
 	}
 	
 	.md-button.md-fab.md-mini.tec {
 		margin-right: 12%;
+	}
+	
+	.listaPreguntas {
+		width: 78%;
 	}
 }
 
 @media screen and (min-width: 1001px) and (max-width: 1040px) {
 	
 	md-autocomplete {
-		width: 79%;
+		width: 73%;
+	}
+	
+	.listaPreguntas {
+		width: 78%;
 	}
 	
 	.md-button.md-fab.md-mini.tec {
 		margin-right: 12%;
+	}
+	
+	.md-button.md-fab.md-mini.adminBtn {
+		margin-right: 11%;
 	}
 }
 
@@ -971,5 +983,21 @@ input.horas {
 	
 	rzslider .rz-bar-wrapper {
 		width: 95%;
+	}
+}
+
+@media screen and (max-width: 820px) {
+	
+	md-autocomplete: 65%;
+}
+
+@media screen and (width: 1100px) {
+	
+	md-autocomplete {
+		width: 74%;
+	}
+	
+	.listaPreguntas {
+		width: 78%;
 	}
 }
