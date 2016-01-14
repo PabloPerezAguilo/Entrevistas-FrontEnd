@@ -466,10 +466,13 @@ md-checkbox[disabled] .md-label {
 	margin-right: 10%;
 }
 
+.md-button.md-fab.md-mini {
+    float: right;
+}
+
 .md-button.md-fab.md-mini.admin {
     float: right;
 	margin-top: 1.8%;
-	//margin-right: -5%;
 	margin-right: -11%;
 }
 
@@ -869,8 +872,81 @@ input.horas {
 		left: 8px;
 	}
 	
+	md-autocomplete {
+		width: 62%;
+	}
+	
 	span.rz-pointer {
 		left: 592px;
 	}
+	
+	.md-button.md-fab.md-mini.tec {
+		margin-right: 12%;
+	}
 }
 
+@media screen and (max-width: 600px) {
+	
+	md-autocomplete {
+		width: 55%;
+	}
+}
+
+@media screen and (min-width: 650px) and (max-width: 1000px) {
+	
+	md-autocomplete {
+		width: 67%;
+	}
+	
+	.md-button.md-fab.md-mini.admin {
+		margin-right: 14%;
+	}
+	
+	.md-button.md-fab.md-mini.tec {
+		margin-right: 12%;
+	}
+}
+
+@media screen and (min-width: 1001px) and (max-width: 1040px) {
+	
+	md-autocomplete {
+		width: 79%;
+	}
+	
+	.md-button.md-fab.md-mini.tec {
+		margin-right: 12%;
+	}
+}
+
+@media screen and (min-width: 1040px) and (max-width: 1079px) {
+	
+	.md-button.md-fab.md-mini.admin {
+		margin-right: 14%;
+	}
+}
+
+@media screen and (min-width: 1080px) and (max-width: 1100px) {
+	
+	.md-button.md-fab.md-mini.admin {
+		margin-right: -15%;
+	}
+}
+
+@media screen and (max-width: 645px) {
+	
+	.md-button.md-fab.md-mini.admin {
+		margin-right: 12%;
+	}
+	
+	md-datepicker {
+		float: none;
+	}
+	
+	span.rz-pointer {
+		left: 95%;
+	}
+	
+	rzslider .rz-bar-wrapper {
+		width: 95%;
+	}
+}
