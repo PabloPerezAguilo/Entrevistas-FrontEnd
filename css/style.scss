@@ -466,7 +466,7 @@ md-checkbox[disabled] .md-label {
     float: right;
 }
 
-.md-button.md-fab.md-mini.admin {
+.md-button.md-fab.md-mini.adminBtn {
     float: right;
 	margin-top: 1.8%;
 	margin-right: -11%;
@@ -921,7 +921,7 @@ input.horas {
 		width: 67%;
 	}
 	
-	.md-button.md-fab.md-mini.admin {
+	.md-button.md-fab.md-mini.adminBtn {
 		margin-right: 14%;
 	}
 	
@@ -943,21 +943,21 @@ input.horas {
 
 @media screen and (min-width: 1040px) and (max-width: 1079px) {
 	
-	.md-button.md-fab.md-mini.admin {
+	.md-button.md-fab.md-mini.adminBtn {
 		margin-right: 14%;
 	}
 }
 
 @media screen and (min-width: 1080px) and (max-width: 1100px) {
 	
-	.md-button.md-fab.md-mini.admin {
+	.md-button.md-fab.md-mini.adminBtn {
 		margin-right: -15%;
 	}
 }
 
 @media screen and (max-width: 645px) {
 	
-	.md-button.md-fab.md-mini.admin {
+	.md-button.md-fab.md-mini.adminBtn {
 		margin-right: 12%;
 	}
 	
