@@ -1,14 +1,3 @@
-<!---
-.alert-info {
-    color: #9F5421;
-    background-color: #F7F0D9;
-    border-color: #CC8506;
-}
-
-.alert {
-    padding: 13px;
-    margin-top: 5px;
-}-->
 <md-dialog class="redimensionar" fullscreen="true" ng-init="confirmacionAbierta=false;confirmacionTest=false;confirmacionTestAbierto=false;
 									  deshabilitadoAbierta=false;deshabilitadoTest=false;deshabilitadoTestAbierto=false">
     <form>
@@ -54,7 +43,7 @@
 							<div class="alert alert-info" ng-show="!confirmacionAbierta">
   								Los temas seleccionados deberán tener alguna <span class="letraNegrita">relación entre si</span>
 							</div>
-							<div class="alert alert-warning cntConf" ng-show="confirmacionAbierta">
+							<div class="alert alert-warning" ng-show="confirmacionAbierta">
   								¿Está seguro de que quiere crear el tema {{temaAbierta}}?
 								
 									<md-button aria-label="eliminar" ng-click="crearTema()" 
@@ -65,7 +54,6 @@
 											   class="md-button icon explosionIcono cancelCrearTema">
 										<md-icon md-svg-src="img/cerrar.svg"></md-icon>
 									</md-button>
-							
 							</div>
 
                             <md-input-container class="md-block">
@@ -110,15 +98,21 @@
                                     <span> {{$chip.tag}} </span>
                                 </md-chip-template>
                             </md-chips>
-							<div class="alert alert-info">
+							<div class="alert alert-info" ng-show="!confirmacionTest">
   								Los temas seleccionados deberán tener alguna <span class="letraNegrita">relación entre si</span>
 							</div>
-							<div class="cntConf" ng-show="confirmacionTest">
-								<p>¿Está seguro de que quiere crear el tema {{temaTest}}?</p>
-								<div class="cntBtn">
-									<md-button class="md-raised confirm" ng-click="crearTema()">Si</md-button>
-									<md-button class="md-raised confirm" ng-click="cerrarConfirm()">No</md-button>
-								</div>
+							
+							<div class="alert alert-warning" ng-show="confirmacionTest">
+  								¿Está seguro de que quiere crear el tema {{temaAbierta}}?
+								
+									<md-button aria-label="eliminar" ng-click="crearTema()" 
+											   class="md-button icon explosionIcono okCrearTema">
+										<md-icon md-svg-src="img/ok.svg"></md-icon>
+									</md-button>
+									<md-button aria-label="eliminar" ng-click="cerrarConfirm()" 
+											   class="md-button icon explosionIcono cancelCrearTema">
+										<md-icon md-svg-src="img/cerrar.svg"></md-icon>
+									</md-button>
 							</div>
 
                             <md-input-container class="md-block">
@@ -178,16 +172,21 @@
                                     <span> {{$chip.tag}} </span>
                                 </md-chip-template>
                             </md-chips>
-							<div class="alert alert-info">
+							<div class="alert alert-info" ng-show="!confirmacionTestAbierto">
   								Los temas seleccionados deberán tener alguna <span class="letraNegrita">relación entre si</span>
 							</div>
 							
-							<div class="cntConf" ng-show="confirmacionTestAbierto">
-								<p>¿Está seguro de que quiere crear el tema {{temaTestAbierto}}?</p>
-								<div class="cntBtn">
-									<md-button class="md-raised confirm" ng-click="crearTema()">Si</md-button>
-									<md-button class="md-raised confirm" ng-click="cerrarConfirm()">No</md-button>
-								</div>
+							<div class="alert alert-warning" ng-show="confirmacionTestAbierto">
+  								¿Está seguro de que quiere crear el tema {{temaAbierta}}?
+								
+									<md-button aria-label="eliminar" ng-click="crearTema()" 
+											   class="md-button icon explosionIcono okCrearTema">
+										<md-icon md-svg-src="img/ok.svg"></md-icon>
+									</md-button>
+									<md-button aria-label="eliminar" ng-click="cerrarConfirm()" 
+											   class="md-button icon explosionIcono cancelCrearTema">
+										<md-icon md-svg-src="img/cerrar.svg"></md-icon>
+									</md-button>
 							</div>
 
                             <md-input-container class="md-block">

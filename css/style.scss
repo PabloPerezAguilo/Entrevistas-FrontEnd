@@ -296,6 +296,39 @@ md-chips .md-chip.md-focused {
 }
 
 /*Crear pregunta*/
+.alert {
+    padding: 13px;
+    margin-top: 5px;
+}
+
+.alert-info {
+    color: #CC641D;
+    background-color: #F5EAC6;
+    border-color: #CC7206;
+}
+
+.alert-warning {
+	padding: 0px 20px;
+}
+
+.okCrearTema md-icon {
+    color: #62C800;
+}
+
+.okCrearTema.md-button.icon.md-ink-ripple:hover {
+    border-radius: 50%;
+    background-color: rgba(203, 255, 197, 0.51);
+}
+
+.cancelCrearTema md-icon{
+	color: red;
+}
+
+.cancelCrearTema.md-button.icon.md-ink-ripple:hover {
+    border-radius: 50%;
+    background-color: rgba(255, 197, 197, 0.41);
+}
+
 .enLinea {
 	display: inline-block;
 }
@@ -628,6 +661,14 @@ rzslider .rz-bar-wrapper {
 }
 
 /* ------------------- ENTREVISTA ---------------------------*/
+
+.entendidoCrearEntrevista md-icon {
+	color: #8A6D3B;
+}
+
+.cortarAlertWarning {
+	width: 95%;
+}
 
 .admin {
     padding-right: 0px;

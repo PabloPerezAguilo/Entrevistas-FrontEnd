@@ -94,13 +94,15 @@
 							</md-button>
 						</div>
 						
-						<div ng-if="error">
-							<p>No hay suficientes preguntas para el/los tema(s)
-								<span ng-repeat="tema in temas" ng-if="$first">{{tema.tag}}</span>
-								<span ng-repeat="tema in temas" ng-if="!$first">, {{tema.tag}}</span>
-							</p>
-							<p>Se podría crear una entrevista con el tema {{tema}} con el rango (x,y)</p>
-							 <md-button class="md-raised error" ng-click="cerrarError()">Entendido</md-button>
+						<div class="alert alert-warning cortarAlertWarning" ng-if="error">
+							No hay suficientes preguntas para el/los tema(s)
+							<span ng-repeat="tema in temas" ng-if="$first">{{tema.tag}}</span>
+							<span ng-repeat="tema in temas" ng-if="!$first">, {{tema.tag}}</span>
+							
+							<md-button aria-label="eliminar" ng-click="cerrarError()" 
+									   class="md-button icon explosionIcono entendidoCrearEntrevista">
+								<md-icon md-svg-src="img/ok.svg"></md-icon>
+							</md-button>
 						</div>
                         
                         <md-button class="md-raised" ng-click="crearEntrevista()" ng-disabled="deshabilitar()">
