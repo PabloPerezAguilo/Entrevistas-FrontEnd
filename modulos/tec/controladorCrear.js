@@ -105,7 +105,7 @@ app.controller('controladorCrear', function (servicioRest, $scope, $mdDialog, $m
         }
     };
 	
-    $scope.crearPTestAbierta = function () {
+    $scope.crearPTestAbierta = function () {		
         if (preguntaVacia("testAbierta")) {
             toast("Rellena todos los campos obligatorios");
         } else {
@@ -119,7 +119,6 @@ app.controller('controladorCrear', function (servicioRest, $scope, $mdDialog, $m
             for (var i = 0; i < contTestAbierto; i++) {
                 pregunta.answers.push({title: $scope.respuestasTestAbierto[i], valid: $scope.checkTestAbierto[i]});
             }
-
             $scope.hide(pregunta);
         }
     };

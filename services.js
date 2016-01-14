@@ -240,7 +240,7 @@ function ServicioREST($http, $q, $rootScope, config) {
 		return promise;
 	}
 	
-	function getEntrevistasById(idEntrevista) {
+	function getPreguntasEntrevistaById(idEntrevista) {
 		var defered = $q.defer();
 		var promise = defered.promise;
 		$http({
@@ -255,6 +255,28 @@ function ServicioREST($http, $q, $rootScope, config) {
 		});
 
 		return promise;
+	}
+	
+	/* ---------- ENTREVISTADO ------------- */
+
+	function posrtRespuestasEntrevista(idEntrevista, respuestas) {
+
+		var defered = $q.defer();
+		var promise = defered.promise;
+		$http({
+			method: 'POST',
+			url: url + '/answers/' + idEntrevista,
+			data: respuestas
+		})
+		.success(function(data, status, headers, config) {
+			defered.resolve(data);
+		})
+		.error(function(data, status, headers, config) {
+			tratarError(data, status, defered);
+		});
+
+		return promise;
+
 	}
 	
 	
@@ -272,6 +294,7 @@ function ServicioREST($http, $q, $rootScope, config) {
 		postPreguntasByTag: postPreguntasByTag,
 		getNombresEntrevistas: getNombresEntrevistas,
 		deleteEntrevista: deleteEntrevista,
-		getEntrevistasById: getEntrevistasById
+		getPreguntasEntrevistaById: getPreguntasEntrevistaById,
+		posrtRespuestasEntrevista: posrtRespuestasEntrevista
 	}
 }

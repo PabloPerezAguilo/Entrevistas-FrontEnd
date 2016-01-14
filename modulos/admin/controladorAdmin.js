@@ -36,14 +36,16 @@ app.controller('controladorAdmin', function (servicioRest, config, $scope, $loca
 	}
 	
 	function getEntrevistas(nombre) {
-		var query;
+		var query = "";
 		
-		escribirDiaMes();
+		if(!$scope.mostrarTodasEntrevistas) {
+			escribirDiaMes();
 		
-		if (nombre === null) {
-			query = "?fecha=" + $scope.fecha.getFullYear() + "-" + mes + "-" + dia;
-		} else {
-			query = "?fecha=" + $scope.fecha.getFullYear() + "-" + mes + "-" + dia + "&nombre=" + nombre;
+			if (nombre === null) {
+				query = "?fecha=" + $scope.fecha.getFullYear() + "-" + mes + "-" + dia;
+			} else {
+				query = "?fecha=" + $scope.fecha.getFullYear() + "-" + mes + "-" + dia + "&nombre=" + nombre;
+			}
 		}
 		
 		servicioRest.getEntrevistas(query)
@@ -94,9 +96,14 @@ app.controller('controladorAdmin', function (servicioRest, config, $scope, $loca
 	}
 	
 	$rootScope.obtenerNombres = function () {
-		escribirDiaMes();
+		var query = "";
+		if(!$scope.mostrarTodasEntrevistas) {
+			escribirDiaMes();
+			query = "?fecha=" + $scope.fecha.getFullYear() + "-" + mes + "-" + dia;
+		}
+		
 			
-		servicioRest.getNombresEntrevistas("?fecha=" + $scope.fecha.getFullYear() + "-" + mes + "-" + dia)
+		servicioRest.getNombresEntrevistas(query)
 			.then(function (data) {
 				nombresCargados = cargarNombres(data);
 			})
@@ -161,6 +168,17 @@ app.controller('controladorAdmin', function (servicioRest, config, $scope, $loca
 	
 	/* -------------------- LISTAR ENTREVISTAS ---------------------------- */
 	getEntrevistas(nombreSeleccionado);
+	
+	//si no se filtra por fecha ni por nombre se desactivan dichos elementos y se hace un get entrevistas
+	$scope.mostrarTodasEntrevistas = false;
+	$scope.disableCalendario = false;
+	
+	$scope.getTodasEntervistas = function () {
+		$scope.disableCalendario = !$scope.disableCalendario;
+		getEntrevistas(nombreSeleccionado);
+		$rootScope.obtenerNombres();
+	}
+	
 	
 	$scope.cambioFecha = function() {
 		getEntrevistas(nombreSeleccionado);

@@ -212,7 +212,7 @@ md-checkbox.md-default-theme.md-checked.md-focused .md-container:before, md-chec
 
 /*Button*/
 .md-button.md-raised {
-    color: $letra;
+    color: #FFFFFF;
     background-color: $colorPrincipal;
     width: 70%;
     margin-left: 15%;
@@ -401,10 +401,6 @@ md-radio-button {
     padding-top: 2%;
 }
 
-md-radio-button, .md-switch-thumb {
-    
-}
-
 md-checkbox.respuesta {
     padding-top: 5%;
     margin: 0;
@@ -423,7 +419,7 @@ md-dialog.md-transition-in {
 
 .md-button.md-default-theme.md-primary, .md-button.md-primary {
 	background-color: $colorPrincipal;
-	color: $letra;
+	color: #FFFFFF;
 }
 
 .md-button.md-default-theme:not([disabled]).md-focused, .md-button:not([disabled]).md-focused {
@@ -617,11 +613,15 @@ rzslider .rz-bar-wrapper {
 
 /* ------------------- ENTREVISTA ---------------------------*/
 
-md-datepicker.admin {
+.admin {
     padding-right: 0px;
     margin-right: 10%;
 	margin-top: 4px;
 	float: right;
+}
+
+.adminCheck {
+	padding-top: 1.9%;
 }
 
 .puntos {
@@ -654,7 +654,8 @@ md-input-container.horas {
 }
 
 md-autocomplete {
-	width: 80%;
+	width: 75%;
+	width: 75%;
 }
 
 .md-button.md-raised.error {
@@ -671,7 +672,7 @@ input.horas {
 }
 
 .respuestas {
-	font-size: 12px;
+	font-size: 13px;
 	margin: 0px;
 	width: 500px;
 }
@@ -697,6 +698,28 @@ input.horas {
 .btnEntrevistadoGuardar.md-button.md-raised{
 	width: 25%;
     margin-left: 32%;
+}
+
+.checkMostrarEntrevistas {
+	display: inline-block;
+	font-size: 14px;
+	left: 9.8%;
+}
+
+.letraCursiva {
+	font-style: italic;
+}
+
+ md-radio-button[disabled] {
+	 color: $negro;
+ }
+.correccionRespuestas md-checkbox {
+	padding-left: 0px;
+	padding-right: 3px;
+}
+
+.respuestas md-radio-button {
+	padding-top: 0px;
 }
 
 /*--------------------- media queries ------------------------*/

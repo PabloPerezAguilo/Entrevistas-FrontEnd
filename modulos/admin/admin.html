@@ -1,15 +1,19 @@
-<div>
-    <md-button mfb-button class="md-fab md-mini btnPosDerecha" ng-click="crear($event)" aria-label="crear entrevista">
-        <md-icon md-svg-src="img/crear.svg" class="btnIconoCentrado"></md-icon>
-    </md-button>
-    
-    <p></p>
-
+<div>	
+	<md-button mfb-button class="md-fab md-mini btnPosDerecha" ng-click="crear($event)" aria-label="crear entrevista">
+		<md-icon md-svg-src="img/crear.svg" class="btnIconoCentrado"></md-icon>
+	</md-button>
+	<p></p>
     <md-list>
-        <md-subheader class="md-no-sticky">Entrevistas</md-subheader>
+        <md-subheader class="md-no-sticky">
+			Entrevistas
+		</md-subheader>
+		 
         <md-divider class="dividerPrincipal"></md-divider>
-        <div>
-			<md-datepicker ng-model="fecha" ng-change="cambioFecha()" md-placeholder="Enter date" class="admin"></md-datepicker>
+        <div class="admin">
+			<md-datepicker ng-model="fecha" ng-change="cambioFecha()" md-placeholder="Enter date" 
+						   ng-disabled="disableCalendario"></md-datepicker>
+			<md-checkbox ng-model="mostrarTodasEntrevistas" ng-change="getTodasEntervistas()" 
+						 class="adminCheck" aria-label="mostrar todas las entrevistas"></md-checkbox> 
 		</div>
 		
 		<div class="buscarTemas">
