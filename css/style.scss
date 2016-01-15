@@ -597,6 +597,10 @@ md-list md-list-item.md-3-line .md-list-item-text h3 {
 }
 
 /*------------------------------ADMIN----------------------*/
+md-datepicker.adminFecha {
+	margin-left: -15%;
+}
+
 .md-datepicker-open .md-datepicker-calendar-icon {
     fill: $colorPrincipal;
 }
@@ -689,6 +693,7 @@ rzslider .rz-bar-wrapper {
 
 .adminCheck {
 	padding-top: 1.9%;
+	margin-left: 6%;
 }
 
 .puntos {
@@ -882,6 +887,7 @@ input.horas {
 		margin-left: 0%;
 		margin-right: 0%;
 		margin-bottom: 70px;
+		width: 99%;
 	}
 	md-divider.dividerPrincipal {
 		margin-right: 0%;
@@ -901,6 +907,10 @@ input.horas {
 		float: right;
 		margin-top: 1%;
 		margin-right: 1%;
+	}
+	
+	#iconoUsuario {
+		margin-top:6.5%;
 	}
 }
 
@@ -969,7 +979,7 @@ input.horas {
 	}
 	
 	md-autocomplete {
-		width: 62%;
+		width: 55%;
 	}
 	
 	span.rz-pointer {
@@ -979,6 +989,11 @@ input.horas {
 	.md-button.md-fab.md-mini.tec {
 		margin-right: 12%;
 	}
+	
+	.admin {
+		width: 38%;
+		margin-right: 0%;
+	}
 }
 
 @media screen and (max-width: 600px) {
@@ -986,16 +1001,20 @@ input.horas {
 	md-autocomplete {
 		width: 55%;
 	}
+	
+	md-datepicker.adminFecha {
+		margin-left: -18%;
+	}
 }
 
 @media screen and (min-width: 650px) and (max-width: 1000px) {
 	
-	/*md-autocomplete {
-		width: 67%;
-	}*/
+	#iconoUsuario {
+		margin-top: 6%;
+	}
 	
 	.md-button.md-fab.md-mini.adminBtn {
-		margin-right: 11%;
+		margin-right: -18%;
 	}
 	
 	.md-button.md-fab.md-mini.tec {
@@ -1054,7 +1073,7 @@ input.horas {
 @media screen and (max-width: 645px) {
 	
 	.md-button.md-fab.md-mini.adminBtn {
-		margin-right: 12%;
+		margin-right: 6%;
 	}
 	
 	md-datepicker {
@@ -1075,14 +1094,91 @@ input.horas {
 	md-autocomplete: 65%;
 }
 
-@media screen and (max-width: 995px) {
+@media screen and (max-width: 995px) and (min-width: 651px) {
 	
 	md-autocomplete {
 		width: 68%;
 	}
+}
+
+@media screen and (min-width: 650px) and (max-width: 795px) {
 	
-	md-datepicker {
-		margin-left: -10%;
+	.listaPreguntas {
+		width: 99%;
+	}
+	
+	.md-button.md-fab.md-mini.adminBtn {
+    	margin-right: -36%;
+	}
+	
+	.admin {
+		margin-right: 0%;
+	}
+	
+	.adminCheck {
+		margin-left: 3%;
+	}
+	
+	md-datepicker.adminFecha {
+		margin-left: -15%;
+	}
+	
+	md-autocomplete {
+		width: 62%;
+	}
+	
+	#iconoUsuario {
+		margin-top:	6%;
+	}
+	
+	.md-button.md-fab.md-mini.adminBtn {
+		margin-right: -34%;
+	}
+}
+
+@media screen and (min-width: 800px) and (max-width: 1000px) {
+	
+	md-autocomplete {
+		width: 60%;
+	}
+	
+	md-datepicker.adminFecha {
+		margin-left: -22%;
+	}
+}
+
+@media screen and (min-width: 1041px) and (max-width: 1225px) {
+	
+	#iconoUsuario {
+		margin-top: 5%;
+	}
+	
+	
+	.md-button.md-fab.md-mini.adminBtn {
+		margin-right: -14%;
+	}
+	
+	md-autocomplete {
+		width: 68%;
+	}
+}
+
+@media screen and (min-width: 900px) and (max-width: 1000px) {
+	
+	#iconoUsuario {
+		margin-top: 5%;
+	}
+	
+	.md-button.md-fab.md-mini.adminBtn {
+		margin-right: -17%;
+	}
+	
+	md-autocomplete {
+		width: 62%;
+	}
+	
+	md-datepicker.adminFecha {
+		margin-left: -24%;
 	}
 	
 }
