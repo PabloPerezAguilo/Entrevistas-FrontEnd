@@ -15,7 +15,7 @@ app.controller('controladorEntrevista', function (servicioRest, $scope, $rootSco
 	//$rootScope.indiceEntrevistaSeleccionada = "5694e974f371495c2291c5c2"; //2 preguntas abierta
 	//$rootScope.indiceEntrevistaSeleccionada = "568fb06fccef6ff8108d0859"; //2 preguntas test
 	//$rootScope.indiceEntrevistaSeleccionada = "568fb061ccef6ff8108d0858"; //2 preguntas multiples
-	$rootScope.indiceEntrevistaSeleccionada = "56962a9d8c5d19002284d4e4"; //6 preguntas combinadas
+	//$rootScope.indiceEntrevistaSeleccionada = "56962a9d8c5d19002284d4e4"; //6 preguntas combinadas
 	/* ---------------------------------------------------
 	-------------------- Para probar ---------------------
 	--------------------------------------------------- */
@@ -26,7 +26,7 @@ app.controller('controladorEntrevista', function (servicioRest, $scope, $rootSco
 	$scope.correccion = [];
 	$scope.correccionStyle = {};
 	$scope.correccionTest = [];
-	$scope.tieneDirectiva = false;
+	$scope.tieneDirectiva = [];
 	
 	var respondidas = [];
 	
@@ -34,7 +34,6 @@ app.controller('controladorEntrevista', function (servicioRest, $scope, $rootSco
 		servicioRest.getPreguntasEntrevistaById($rootScope.indiceEntrevistaSeleccionada)
 				.then(function (data) {
 					$scope.preguntas = data;
-			console.log(data);
 				})
 				.catch(function (err) {
 					$scope.preguntas = null;
@@ -89,7 +88,7 @@ app.controller('controladorEntrevista', function (servicioRest, $scope, $rootSco
 					}
 					if($scope.preguntas[i].directive != undefined) {
 						auxCorreccion.directive = $scope.preguntas[i].directive;
-						$scope.tieneDirectiva = true;
+						$scope.tieneDirectiva[i] = true;
 					} else {
 						auxCorreccion.directive = "";
 					}			
