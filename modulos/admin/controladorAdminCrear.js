@@ -102,25 +102,25 @@ app.controller('controladorAdminCrear', function (servicioRest, $scope, $mdDialo
 			
 			$scope.entrevistas = [];
 			servicioRest.postInterview(entrevista)
-				.then(function(data) {
-					$scope.entrevistas.push({
-						_id: data.data._id,
-						name: data.data.name,
-						DNI: data.data.DNI,
-						date: data.data.date,
-						leveledTags: data.data.leveledTags
-					});
-					
-					$scope.hide();
-
+				.then(function(data) {				
 					var resul = "Se ha creado una entrevista con: ";
 					for (var i = 0; i < data.recuento.length; i++) {
 						if (i === data.recuento.length - 1) {
-							resul += data.recuento[i].count + " del tema " + data.recuento[i].tag + ".";
+							if (data.recuento[i].count === 1) {
+								resul += data.recuento[i].count + " pregunta del tema  " + data.recuento[i].tag + ".";
+							} else {
+								resul += data.recuento[i].count + " preguntas del tema " + data.recuento[i].tag + ".";
+							}
 						} else {
-							resul += data.recuento[i].count + " del tema " + data.recuento[i].tag + ", ";
+							if (data.recuento[i].count === 1) {
+								resul += data.recuento[i].count + " pregunta del tema " + data.recuento[i].tag + ",";
+							} else {
+								resul += data.recuento[i].count + " preguntas del tema " + data.recuento[i].tag + ",";
+							}
 						}
 					}
+					
+				$scope.hide();
 				$rootScope.obtenerNombres();
 
 					$mdDialog.show(

@@ -55,6 +55,9 @@
 	<md-content>
 		<md-list>
 			<md-list-item  ng-repeat="pregunta in correccion">
+				<div ng-if="pregunta === null">
+					{{ $index + 1 }}. La pregunta ha sido borrada
+				</div>
 				<div ng-if="pregunta.type === 'FREE'" class="contenedorRespuestas">
 					<h3>{{ $index  + 1}}. {{ pregunta.title }}</h3>
 					<p ng-style="correccionStyle[$index]">{{ pregunta.answer }}</p>

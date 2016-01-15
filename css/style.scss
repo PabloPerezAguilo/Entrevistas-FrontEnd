@@ -661,6 +661,9 @@ rzslider .rz-bar-wrapper {
 }
 
 /* ------------------- ENTREVISTA ---------------------------*/
+.alert-success {
+    padding: 0px 15px;
+}
 
 .entendidoCrearEntrevista md-icon {
 	color: #8A6D3B;
@@ -807,11 +810,19 @@ input.horas {
 		margin-top: 1%;
 		margin-right: 1%;
 	}
+	
+	.cortarAlertWarning {
+    	width: 90%;
+	}
 }
 
 @media screen and (min-height: 620px) and (max-height: 700px) {
     .listaPreguntas {
 		height: 300px;
+	}
+	
+	.cortarAlertWarning {
+    	width: 90%;
 	}
 }
 
@@ -821,9 +832,19 @@ input.horas {
 	}
 }
 
+@media screen and (min-height: 801px) {
+ 	.cortarAlertWarning {
+    	width: 90%;
+	}
+}
+
 @media screen and (min-height: 701px) and (max-height: 800px) {
     .listaPreguntas {
 		height: 400px;
+	}
+	
+	.cortarAlertWarning {
+    	width: 90%;
 	}
 }
 

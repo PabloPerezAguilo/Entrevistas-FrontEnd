@@ -1,5 +1,5 @@
 app.controller('controladorAdmin', function (servicioRest, config, $scope, $location, $rootScope, $mdDialog, $timeout, $q, $log, $http) {
-	
+	$scope.mensajeEntrevistaCreada = true;
     $rootScope.cargando = false;
     $rootScope.logueado = true;
     $rootScope.rolUsuario = "img/administrador.svg";
