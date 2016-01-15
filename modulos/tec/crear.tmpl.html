@@ -40,8 +40,12 @@
                                 </md-chip-template>
                             </md-chips>
 							
-							<div class="alert alert-info" ng-show="!confirmacionAbierta">
+							<div class="alert alert-info" ng-show="!confirmacionAbierta && entendidoAbierta">
   								Los temas seleccionados deberán tener alguna <span class="letraNegrita">relación entre si</span>
+								<md-button class="md-icon-button" aria-label="cerrarCrearPregunta" 
+										   ng-click="entendidoAbierta = false">
+									<md-icon md-svg-src="img/cerrar.svg"></md-icon>
+								</md-button>
 							</div>
 							<div class="alert alert-warning" ng-show="confirmacionAbierta">
   								¿Está seguro de que quiere crear el tema {{temaAbierta}}?
@@ -98,8 +102,11 @@
                                     <span> {{$chip.tag}} </span>
                                 </md-chip-template>
                             </md-chips>
-							<div class="alert alert-info" ng-show="!confirmacionTest">
+							<div class="alert alert-info" ng-show="!confirmacionTest && entendidoTest">
   								Los temas seleccionados deberán tener alguna <span class="letraNegrita">relación entre si</span>
+								<md-button class="md-icon-button" aria-label="cerrarCrearPregunta" ng-click="entendidoTest = false">
+									<md-icon md-svg-src="img/cerrar.svg"></md-icon>
+								</md-button>
 							</div>
 							
 							<div class="alert alert-warning" ng-show="confirmacionTest">
@@ -172,8 +179,12 @@
                                     <span> {{$chip.tag}} </span>
                                 </md-chip-template>
                             </md-chips>
-							<div class="alert alert-info" ng-show="!confirmacionTestAbierto">
+							<div class="alert alert-info" ng-show="!confirmacionTestAbierto && entendidoTestAbierto">
   								Los temas seleccionados deberán tener alguna <span class="letraNegrita">relación entre si</span>
+								<md-button class="md-icon-button" aria-label="cerrarCrearPregunta" 
+										   ng-click="entendidoTestAbierto = false">
+									<md-icon md-svg-src="img/cerrar.svg"></md-icon>
+								</md-button>
 							</div>
 							
 							<div class="alert alert-warning" ng-show="confirmacionTestAbierto">

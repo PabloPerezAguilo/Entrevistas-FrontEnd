@@ -4,21 +4,10 @@ app.controller('controladorEntrevista', function (servicioRest, $scope, $rootSco
     $rootScope.logueado = true;
     $rootScope.rolUsuario = "img/entrevistado.svg";
 	
-	/*if ($rootScope.pulsaBoton === undefined || !$rootScope.pulsaBoton) {
+	if ($rootScope.pulsaBoton === undefined || !$rootScope.pulsaBoton) {
 		$location.path('/admin');
-	}*/
-	
-	/* ---------------------------------------------------
-	-------------------- Para probar ---------------------
-	--------------------------------------------------- */
-	
-	//$rootScope.indiceEntrevistaSeleccionada = "5694e974f371495c2291c5c2"; //2 preguntas abierta
-	//$rootScope.indiceEntrevistaSeleccionada = "568fb06fccef6ff8108d0859"; //2 preguntas test
-	//$rootScope.indiceEntrevistaSeleccionada = "568fb061ccef6ff8108d0858"; //2 preguntas multiples
-	//$rootScope.indiceEntrevistaSeleccionada = "56962a9d8c5d19002284d4e4"; //6 preguntas combinadas
-	/* ---------------------------------------------------
-	-------------------- Para probar ---------------------
-	--------------------------------------------------- */
+	}
+
 	$scope.hacerPreguntas = true;
 	$scope.aceptarPreguntas = false;
 	$scope.acabarEntrevista = false;
@@ -68,7 +57,6 @@ app.controller('controladorEntrevista', function (servicioRest, $scope, $rootSco
 				});
     	});
   };
-	
 	
 	$scope.seguirEntrevista = function () {
 		$scope.aceptarPreguntas = false;

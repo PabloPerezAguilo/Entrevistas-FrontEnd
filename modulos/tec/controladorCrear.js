@@ -1,5 +1,9 @@
 app.controller('controladorCrear', function (servicioRest, $scope, $mdDialog, $mdToast, $rootScope, $log) {
     
+	$scope.entendido = true;
+	$scope.entendidoAbierta = true;
+	$scope.entendidoTest = true;
+	$scope.entendidoTestAbierto = true;
     var Options = {
         title: { type: String },
         valid: { type: Boolean }
