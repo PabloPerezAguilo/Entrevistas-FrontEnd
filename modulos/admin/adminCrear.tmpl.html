@@ -6,7 +6,8 @@
                         Crear entrevista
                     </h2>
                     <span flex></span>
-                    <md-button class="md-icon-button" aria-label="cerrarCrearPregunta" ng-click="cancel()">
+                    <md-button class="md-icon-button" aria-label="cerrarCrearPregunta" ng-click="cancel()" 
+							   ng-show="haciendoEntrevista">
                         <md-icon md-svg-src="img/cerrar.svg"></md-icon>
                     </md-button>
 
@@ -15,7 +16,7 @@
             
             <md-dialog-content ng-model="conte">
                 <md-content>
-                    <div class="contenidoTablaCrear">
+                    <div class="contenidoTablaCrear" ng-show="haciendoEntrevista">
                         <md-input-container class="md-block">
                             <label>Nombre y apellidos *</label>
                             <textarea required ng-model="nombreEntrevista"></textarea>
@@ -56,7 +57,6 @@
 								</div>
 							</md-input-container>
 						</div>
-                        <!--http://simeonc.github.io/sc-date-time/index.html-->
 
                         <div>
 							<div ng-repeat="respuestas in temasChip">
@@ -78,9 +78,6 @@
 											<span> {{$chip.tag}} </span>
 										</md-chip-template>
 									</md-chips>
-                                        <!--https://github.com/rzajac/angularjs-slider-->
-                                        <!--http://rzajac.github.io/angularjs-slider/index.html-->
-                                        <!--PARA INSTALAR: "npm i angularjs-slider"-->
 								</span>
 								<div ng-if="errorTema[$index]">
 									<p>Debe seleccionar un tema de la lista</p>
@@ -106,14 +103,25 @@
 						</div>
                         
                         <md-button class="md-raised" ng-click="crearEntrevista()" ng-disabled="deshabilitar()">
-							Guardar</md-button>
-                    </div>      
+							Guardar
+						</md-button>
+					</div>
+						<div class="mensajeEntrevistaCreada" ng-show="!haciendoEntrevista">
+							<p ng-repeat="linea in mensaje" ng-if="$first" class="txtMensajeEntrevista">
+								{{ linea }}
+							</p>
+							<p ng-repeat="linea in mensaje" ng-if="!$first" class="txtMensajeEntrevista">
+								- {{ linea }}
+							</p>
+							<md-button class="md-raised btnMensajeEntrevista" ng-click="hide()">
+								Cerrar
+							</md-button>
+						</div>
+                    
                 </md-content>
-
-            </md-dialog-content>
-        </form>
-    </md-dialog>
-
+			</md-dialog-content>
+	</form>
+</md-dialog>
 
 
 

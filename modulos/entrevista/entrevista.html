@@ -61,7 +61,6 @@
 				<div ng-if="pregunta.type === 'FREE'" class="contenedorRespuestas">
 					<h3>{{ $index  + 1}}. {{ pregunta.title }}</h3>
 					<p ng-style="correccionStyle[$index]">{{ pregunta.answer }}</p>
-					<!--<p class="letraCursiva" ng-show="tieneDirectiva">{{ pregunta.directive }}</p>-->
 					<div class="alert alert-warning directivaEntrevista" ng-show="tieneDirectiva[$index]">
 						{{ pregunta.directive }}
 					</div>
