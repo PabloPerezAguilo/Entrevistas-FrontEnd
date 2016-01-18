@@ -1,18 +1,16 @@
-app.controller('controladorAdminCrear', function (servicioRest, $scope, $mdDialog, $mdToast, $rootScope) {
+app.controller('controladorAdminCrear', function (servicioRest, $scope, $mdDialog, $mdToast, $rootScope, $log) {
     
     $scope.minSliderValue = [];
-    $scope.temasTestAbierto = [];
-    
-    
-    
+    $scope.temasEntrevista = [];
+	$scope.errorTema = [];
+	$scope.haciendoEntrevista = true;
+	
     var Options = {
         tag: String,
         max: Number,
         min: Number
-    };
-    var entrevista = {
+    }, entrevista = {
         name: { type: String, required: true },
-        surname: { type: String, required: true },
         DNI: { type: String, required: true },
         date: { type: String, required: true },
         leveledTags: [Options]
@@ -20,67 +18,133 @@ app.controller('controladorAdminCrear', function (servicioRest, $scope, $mdDialo
 
     function toast(texto) {
 		$mdToast.show(
-	      $mdToast.simple()
-	        .content(texto)
+			$mdToast.simple()
+			.content(texto)
 	        .position('top right')
 	        .hideDelay(1500)
 		);
 	}
     
-	/* ----------- Respuestas tests ----------- */		
-	$scope.respuestasTest = [];
-	$scope.test = [];
-	$scope.contTest = 0;
-	$scope.radioTest = 1;
+	$scope.temasChip = [];
+	$scope.contTemasChip = 0;
 	
+	$scope.temasEntrevista = [];
+	$scope.readonly = false;
+    $scope.selectedItem = null;
+    $scope.searchText = null;
+	
+	var temasCargados;
 
 	
 	/* ----------- Input temas ----------- */
-
 	
+	//comprueba que hay temas en todos los autocomplete
+	function sinTemas() {
+		if ($scope.temasEntrevista.length === 0) {
+			return true;
+		} else {
+			for (var i = 0; i < $scope.temasEntrevista.length; i++) {
+				if ($scope.temasEntrevista[i].length === 0) {
+					return true;
+				}
+			}
+		}
+		return false;
+	}
     
-    $scope.crearEntrevista = function () {
-		var i;
-        var j;
-        var fecha_hora        
-        
-        if(false)//preguntaVacia())
-        {
-            toast("Rellena todos los campos obligatorios");
-        }
-        else
-        {
-
-            entrevista.leveledTags=[];
-            entrevista.name = $scope.nombreEntrevista;
-            entrevista.surname = $scope.apellidosEntrevista;
-            entrevista.DNI = $scope.dniEntrevista
-            entrevista.date = $scope.fecha.getFullYear() + "-" + ($scope.fecha.getMonth()+1) + "-" + $scope.fecha.getDate();
-            entrevista.date +=  "T" + $scope.horas + ":" + $scope.minutos;
-            
-            console.log($scope.temasTestAbierto.length);
-            for (i = 0;i < $scope.contTest;i++) {
-                for (j = 0;j < $scope.temasTestAbierto[i].length;j++)
-                entrevista.leveledTags.push({tag: $scope.temasTestAbierto[i][j].valor, max: $scope.minSliderValue[i].maxSliderG, min: $scope.minSliderValue[i].minSliderG});
-            }
-            
-            console.log(entrevista);
-            $scope.hide(entrevista);
-        }
-    };
-    
-    function preguntaVacia(){
-       var resp=false;
-            if($scope.nombreEntrevista===undefined||$scope.apellidosEntrevista===undefined||$scope.dniEntrevista===undefined||$scope.preguntasEntrevistas[0]===undefined||$scope.preguntasEntrevistas[1]===undefined||$scope.nombreEntrevista===""||$scope.apellidosEntrevista===""||$scope.dniEntrevista===""||$scope.preguntasEntrevistas[0]===""||$scope.preguntasEntrevistas[1]==="")
-            {
-                resp=true;
-            }
-
-        return resp;
+	//comprueba que estén rellenos todos los campos obligatorios
+    function entrevistaVacia(){
+		if($scope.nombreEntrevista === undefined || $scope.nombreEntrevista === "" || sinTemas() 
+		   || $scope.fecha === undefined || $scope.horas === undefined || $scope.minutos === undefined) {
+			return true;
+		}
+		return false;
     }
     
-    $scope.hide = function (respuesta) {
-        $mdDialog.hide(respuesta);
+    $scope.crearEntrevista = function () {
+		var i, j, fecha_hora, dia, mes, minutos, hora;
+        
+        if (entrevistaVacia()) {
+            toast("Rellena todos los campos obligatorios");
+        } else {
+			dia = $scope.fecha.getDate();
+			mes = $scope.fecha.getMonth() + 1;
+			minutos = $scope.minutos;
+			hora = $scope.horas;
+			
+			if (dia < 10) {
+				dia = '0' + dia;
+			}
+			
+			if (mes < 10) {
+				mes = '0' + mes;
+			}
+			
+			if (minutos < 10) {
+				minutos = '0' + minutos;
+			}
+			
+			if(hora < 10) {
+				hora = '0' + hora;
+			}
+
+            entrevista.leveledTags = [];
+            entrevista.name = $scope.nombreEntrevista;
+            entrevista.DNI = $scope.dniEntrevista;
+            entrevista.date = $scope.fecha.getFullYear() + "-" + mes + "-" + dia + "T" + hora + ":" + minutos;
+			
+            for (i = 0; i < $scope.contTemasChip; i++) {
+                for (j = 0; j < $scope.temasEntrevista[i].length; j++) {
+					entrevista.leveledTags.push({tag: $scope.temasEntrevista[i][j].tag,
+											 max: $scope.minSliderValue[i].maxSliderG,
+											 min: $scope.minSliderValue[i].minSliderG});
+				}
+            }
+			
+			servicioRest.postInterview(entrevista)
+				.then(function(data) {
+					$scope.mensaje = [];
+					$scope.mensaje[0] = "Se ha creado una entrevista con: ";
+					for (var i = 0; i < data.recuento.length; i++) {
+						if (i === data.recuento.length - 1) {
+							if (data.recuento[i].count === 1) {
+								$scope.mensaje[i + 1] = data.recuento[i].count + " pregunta de la aptitud  " + data.recuento[i].tag + ".";
+							} else {
+								$scope.mensaje[i + 1] = data.recuento[i].count + " preguntas de las aptitudes " + data.recuento[i].tag + ".";
+							}
+						} else {
+							if (data.recuento[i].count === 1) {
+								$scope.mensaje[i + 1] = data.recuento[i].count + " pregunta de la aptitud " + data.recuento[i].tag + ",";
+							} else {
+								$scope.mensaje[i + 1] = data.recuento[i].count + " preguntas de las aptitudes " + data.recuento[i].tag + ",";
+							}
+						}
+					}
+				$scope.haciendoEntrevista = false;
+				console.log($scope.haciendoEntrevista);
+			})
+				.catch(function(err) {
+					$log.error("Error al crear la entrevista");
+					if (err.status === 500) {
+						$scope.error = true;
+						$scope.temas = err.data.leveledTags;
+					}
+				});
+        }
+    };
+	
+	$scope.cerrarError = function (indice) {
+		if ($scope.error) {
+			$scope.error = false;
+		}
+		
+		if ($scope.errorTema[indice]) {
+			$scope.errorTema[indice] = false;
+		}
+	}
+    
+    $scope.hide = function () {
+        $mdDialog.hide();
     };
     $scope.answer = function (answer) {
         $mdDialog.hide(answer);
@@ -90,10 +154,11 @@ app.controller('controladorAdminCrear', function (servicioRest, $scope, $mdDialo
         $mdDialog.cancel();
     };
 	
-	$rootScope.aniadirRespuestaTest = function () {
-		$scope.contTest += 1;
-		$scope.test.push($scope.contTest);
-        $scope.minSliderValue[$scope.contTest-1] = {
+	//al dar al boton mas añade un nuevo slider y un tema
+	$rootScope.aniadirSliderTemas = function () {
+		$scope.contTemasChip += 1;
+		$scope.temasChip.push($scope.contTemasChip);
+        $scope.minSliderValue[$scope.contTemasChip - 1] = {
                     minSliderG: 1,
                     maxSliderG: 10,
                     options: {
@@ -102,62 +167,60 @@ app.controller('controladorAdminCrear', function (servicioRest, $scope, $mdDialo
                         step: 1
                     }
                 };
-        $scope.temasTestAbierto[$scope.contTest-1] = [];
+        $scope.temasEntrevista[$scope.contTemasChip - 1] = [];
 	};
 	
-
+	$scope.deshabilitar = function () {
+		if($scope.error === true) {
+			return true;
+		}
+		for(var i = 0; i < $scope.errorTema.length; i++) {
+			if($scope.errorTema[i] === true) {
+				return true;
+			}
+		}
+		return false;
+	}
 	
+	/* ----------------------- CHIPS TEMAS ----------------------- */
 	
-	
-	
-	
-	
-	
-	
-	$scope.temas;
-	$scope.temasCargados;
-	$scope.temasAbierta = [];
-	$scope.temasTest = [];
-	$scope.temasTestAbierto = [];
-	$scope.readonly = false;
-    $scope.selectedItem = null;
-    $scope.searchText = null;
-    $scope.numberBuffer = '';	
-	
-	
-	servicioRest.getTemas()
-		.then(function(data) {
-			$scope.temas = data;			
-			$scope.temasCargados = cargarTemas();
-		})
-		.catch(function (err) {
-		});
-	
-    function cargarTemas() {
-		var temasCargados = $scope.temas;
-		return temasCargados.map( function (tema) {
+	function cargarTemas(temas) {
+		return temas.map( function (tema) {
 			tema.valor = tema.tag.toLowerCase();
 			return tema;          
       });
 	}
 	
-    /**
-     * Return the proper object when the append is called.
-     */
-    $scope.transformChip = function transformChip(chip) {
-		// If it is an object, it's already a known chip
+	servicioRest.getTemas()
+		.then(function(data) {			
+			$scope.temasCargados = cargarTemas(data);
+		})
+		.catch(function (err) {
+			$log.error("Error al cargar las aptitudes: " + err);
+		});
+	
+	function buscarTema(tema) {
+		var i;
+		for (i = 0; i < temasCargados.length; i++) {
+			if (tema === temasCargados[i].valor) {
+				return i;
+			}
+		}
+		return -1;
+	}   
+	
+    $scope.transformChip = function transformChip(chip, indice) {
 		if (angular.isObject(chip)) {
 			return chip;
 		}
-		// Otherwise, create a new one
-		servicioRest.postTema(chip)
-			.then(function(data) {
-            })
-			.catch(function(err) {
-			console.log("Error");
-			console.log(err);
-			});
-		return { valor: chip};
+		
+		var index = buscarTema(chip.toLowerCase());
+		if (index !== -1) {
+			return temasCargados[index];
+		}
+		//aparece mensaje de error en el chip en el que estes cuando no existe ese tema
+		$scope.errorTema[indice] = true;
+		return null;
 	}
 	
     function createFilterFor(query) {
@@ -171,7 +234,7 @@ app.controller('controladorAdminCrear', function (servicioRest, $scope, $mdDialo
 	function filtrar(texto) {
 		var lowercaseQuery = angular.lowercase(texto);
 		return function (tema) {
-			$scope.texto = tema.tag;
+			$scope.texto = tema.valor;
 			return ($scope.texto.indexOf(lowercaseQuery) === 0 || $scope.texto.search(lowercaseQuery) > 0);
 		};
 	}

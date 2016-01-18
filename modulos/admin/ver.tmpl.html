@@ -1,0 +1,34 @@
+<md-dialog class="redimensionar" aria-label="Mango (Fruit)"  ng-cloak>
+	<form>
+		<md-toolbar>
+      		<div class="md-toolbar-tools">
+        		<h2 ng-model="cabeceraVer">Entrevista</h2>
+                <span flex></span>
+				<md-button class="md-icon-button" ng-click="cancel()">
+					<md-icon md-svg-src="img/cerrar.svg" aria-label="Close dialog"></md-icon>
+                </md-button>
+			</div>
+		</md-toolbar>
+		<md-dialog-content>
+			<div class="md-dialog-content">
+				<span class="letraNegrita"> Nombre y apellidos: </span><span ng-bind="nombre"></span>
+				<p ng-show="tieneDNI">
+					<span class="letraNegrita"> DNI: </span>
+					<span ng-bind="DNI"></span>
+				</p>
+				<p>
+					<span class="letraNegrita"> Estado: </span>
+					<span ng-bind="status"></span>
+				</p>
+				<md-chips class="custom-chips" ng-model="preguntas" readonly="true">
+					<md-chip-template>
+						<span>
+							<strong>{{$chip.tag}}</strong>
+							({{$chip.count}})
+						</span>
+					</md-chip-template>
+				</md-chips>
+      		</div>
+    	</md-dialog-content>
+  	</form>
+</md-dialog>

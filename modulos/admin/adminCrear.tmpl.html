@@ -1,4 +1,4 @@
-<md-dialog>
+<md-dialog class="redimensionar" ng-init="error=false;req=false;mini=false;maxi=false">
         <form>
             <md-toolbar>
                 <div class="md-toolbar-tools">
@@ -6,7 +6,8 @@
                         Crear entrevista
                     </h2>
                     <span flex></span>
-                    <md-button class="md-icon-button" aria-label="cerrarCrearPregunta" ng-click="cancel()">
+                    <md-button class="md-icon-button" aria-label="cerrarCrearPregunta" ng-click="cancel()" 
+							   ng-show="haciendoEntrevista">
                         <md-icon md-svg-src="img/cerrar.svg"></md-icon>
                     </md-button>
 
@@ -15,78 +16,108 @@
             
             <md-dialog-content ng-model="conte">
                 <md-content>
-                    <div class="contenidoTablaCrear">
-
-
+                    <div class="contenidoTablaCrear" ng-show="haciendoEntrevista">
                         <md-input-container class="md-block">
-                            <label>Nombre</label>
-                            <textarea required="hola" ng-Required=true ng-model="nombreEntrevista"></textarea>
-                        </md-input-container>
-                        <md-input-container class="md-block">
-                            <label>Apellidos</label>
-                            <textarea ng-model="apellidosEntrevista"></textarea>
+                            <label>Nombre y apellidos *</label>
+                            <textarea required ng-model="nombreEntrevista"></textarea>
+							<div ng-messages="nombreEntrevista.$error">
+								<div ng-message="required">Este campo es obligatorio</div>								
+							</div>
                         </md-input-container>
                         <md-input-container class="md-block">
                             <label>DNI</label>
                             <textarea ng-model="dniEntrevista"></textarea>
                         </md-input-container>
-                        <md-datepicker ng-model="fecha" md-placeholder="Introducir fecha"></md-datepicker>
-                        <md-input-container class="md-inline">
-                            <input type="number" step="any" ng-model="horas" min="00" max="23" placeholder="Hora">
-                        </md-input-container>
-						:
-                        <md-input-container class="md-inline">
-                            <input type="number" step="any" ng-model="minutos" min="00" max="59" placeholder="Minutos">
-                        </md-input-container>
-                        <!--http://simeonc.github.io/sc-date-time/index.html-->
+      
+                        <md-datepicker required ng-model="fecha" md-placeholder="Introducir fecha" class="crear">
+							<div ng-messages="fecha.$error">
+								<div ng-message="required">
+									Debe introducir una fecha.
+								</div>
+							</div>
+						</md-datepicker>
+                        <div>
+							<md-input-container class="md-inline horas">
+								<input required type="number" step="any" ng-model="horas" min="08" max="20" 
+									   placeholder="Hora *" class="horas">
+								<div ng-messages="horas.$error">
+									<div ng-message-exp="['required', 'min', 'max']">
+										La jornada comprende entre las 8 y 20 h.
+									</div>
+								</div>
+							</md-input-container>
+							<span class="puntos">:</span>
+							<md-input-container class="md-inline minutos">
+								<input required type="number" step="any" ng-model="minutos" min="00" max="59" 
+									   placeholder="Minutos *" class="minutos">
+								<div ng-messages="horas.$error">
+									<div ng-message-exp="['required', 'min', 'max']">
+										Los valores deben estar entre 0 y 59.
+									</div>
+								</div>
+							</md-input-container>
+						</div>
 
                         <div>
-                                <div ng-repeat="respuestas in test">
-                                    <span>	
-                                   
-                                        <rzslider rz-slider-model="minSliderValue[$index].minSliderG"
+							<div ng-repeat="respuestas in temasChip">
+								<span>	
+									<rzslider rz-slider-model="minSliderValue[$index].minSliderG"
 												  rz-slider-high="minSliderValue[$index].maxSliderG" 
 												  rz-slider-options="minSliderValue[$index].options"></rzslider>
-                                        
-                                    
-                                 
-                            <md-chips ng-model="temasTestAbierto[$index]" md-autocomplete-snap="" 
-										  md-transform-chip="transformChip($chip)" md-require-match="false">
-									<md-autocomplete md-selected-item="selectedItem" md-search-text="searchText"
+									<md-chips ng-model="temasEntrevista[$index]" md-autocomplete-snap="" 
+										  md-transform-chip="transformChip($chip, $index)" md-require-match="false">
+										<md-autocomplete md-selected-item="selectedItem" md-search-text="searchText"
 													 md-items="item in queryBuscarTema(searchText)"
 													 md-item-text="item.valor"
-													 placeholder="Temas de la pregunta">
-										
-										<span md-highlight-text="searchText">
-											{{item.valor}}
-										</span>
-									</md-autocomplete>
-									<md-chip-template>
-										<span> {{$chip.valor}} </span>
-									</md-chip-template>
-								</md-chips>
-                                        <!--https://github.com/rzajac/angularjs-slider-->
-                                        <!--http://rzajac.github.io/angularjs-slider/index.html-->
-                                        <!--PARA INSTALAR: "npm i angularjs-slider"-->
-                                    
-                                    </span>
-                                </div>
-
-                                <md-button class="md-fab md-mini" ng-click="$root.aniadirRespuestaTest()" 
-										   aria-label="crearPregunta">
-                                    <md-icon md-svg-src="img/mas.svg"></md-icon>
-                                </md-button>
-                        </div>
-
+													 placeholder="Aptitudes">
+											<span md-highlight-text="searchText">
+												{{item.tag}}
+											</span>
+										</md-autocomplete>
+										<md-chip-template>
+											<span> {{$chip.tag}} </span>
+										</md-chip-template>
+									</md-chips>
+								</span>
+							</div>
+							
+							<md-button class="md-fab md-mini" ng-click="$root.aniadirSliderTemas()" 
+									   aria-label="crearPregunta">
+								<md-icon md-svg-src="img/mas.svg"></md-icon>
+							</md-button>
+						</div>
+						
+						<div class="alert alert-warning cortarAlertWarning" ng-if="error">
+							No hay suficientes preguntas para esta(s) aptitud(es): 
+							<span ng-repeat="tema in temas" ng-if="$first">{{tema.tag}}</span>
+							<span ng-repeat="tema in temas" ng-if="!$first">, {{tema.tag}}</span>
+							
+							<md-button aria-label="eliminar" ng-click="cerrarError()" 
+									   class="md-button icon explosionIcono entendidoCrearEntrevista">
+								<md-icon md-svg-src="img/ok.svg"></md-icon>
+							</md-button>
+						</div>
                         
-                        <md-button class="md-raised" ng-click="crearEntrevista()">Guardar</md-button>
-                    </div>      
+                        <md-button class="md-raised" ng-click="crearEntrevista()" ng-disabled="deshabilitar()">
+							Guardar
+						</md-button>
+					</div>
+						<div class="mensajeEntrevistaCreada" ng-show="!haciendoEntrevista">
+							<p ng-repeat="linea in mensaje" ng-if="$first" class="txtMensajeEntrevista">
+								{{ linea }}
+							</p>
+							<p ng-repeat="linea in mensaje" ng-if="!$first" class="txtMensajeEntrevista">
+								- {{ linea }}
+							</p>
+							<md-button class="md-raised btnMensajeEntrevista" ng-click="hide()">
+								Cerrar
+							</md-button>
+						</div>
+                    
                 </md-content>
-
-            </md-dialog-content>
-        </form>
-    </md-dialog>
-
+			</md-dialog-content>
+	</form>
+</md-dialog>
 
 
 

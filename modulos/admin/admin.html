@@ -1,7 +1,78 @@
-<div ng-model="inicializar">
-    <md-button mfb-button class="md-fab md-mini" ng-click="crear($event)" aria-label="crearPregunta">
-        <md-icon class="btnIconoCentrado" md-svg-src="img/crear.svg"></md-icon>
+<div>
+    <md-button mfb-button class="md-fab md-mini btnPosDerecha adminBtn" ng-click="crear($event)" aria-label="crear entrevista">
+        <md-icon md-svg-src="img/crear.svg" class="btnIconoCentrado"></md-icon>
     </md-button>
-    <md-input-container class="md-block">
-    </md-input-container>
+    
+    <p></p>
+
+    <md-list>
+        <md-subheader class="md-no-sticky">
+			Entrevistas
+		</md-subheader>
+		 
+        <md-divider class="dividerPrincipal"></md-divider>
+        <div class="admin">
+			<md-datepicker ng-model="fecha" ng-change="cambioFecha()" md-placeholder="Enter date" 
+						   ng-disabled="disableCalendario" class="adminFecha"></md-datepicker>
+			<md-checkbox ng-model="mostrarTodasEntrevistas" ng-change="getTodasEntervistas()" 
+						 class="adminCheck" aria-label="mostrar todas las entrevistas"></md-checkbox> 
+		</div>
+		
+		<div class="buscarTemas">
+			<md-autocomplete ng-disabled="false" md-no-cache="noCache" 
+							 md-selected-item="selectedItem" md-search-text-change="searchTextChange(searchText)" 
+							 md-search-text="searchText" md-selected-item-change="selectedItemChange(item)" 
+							 md-items="item in queryBuscarNombre(searchText)" md-item-text="item.valor" 
+							 md-min-length="0" placeholder="Buscar por nombre del entrevistado">
+				<md-item-template>
+					<span md-highlight-text="searchText" md-highlight-flags="^i">{{item.name}}</span>
+				</md-item-template>
+				<md-not-found>
+					El nombre "{{searchText}}" no tiene ninguna entrevista asociada
+				</md-not-found>
+			</md-autocomplete>
+		</div>
+      	<div class="listaPreguntas">
+			<p ng-show="hayEntrevistas" class="mensajeEntrevista">No hay entrevistas para el día seleccionado</p>
+			<md-list-item class="md-3-line hoverLista" ng-repeat="item in entrevistas">
+				<div class="md-list-item-text" layout="column">
+					<h3>
+						{{ item.name }}
+					</h3>
+					<h4>
+						{{ item.date }}
+					</h4>
+					<p>
+						<span ng-repeat="tags in item.leveledTags" ng-if="$first"> {{ tags.tag }} </span>
+						<span ng-repeat="tags in item.leveledTags" ng-if="!$first">, {{ tags.tag }} </span>
+						
+					</p>
+				</div>
+				<md-button ng-click="ver($event,$index)" aria-label="ver pegrunta" 
+						   class="md-button icon centrarIconoLista explosionIcono">
+					<md-icon md-svg-src="img/ojo.svg"></md-icon>
+					<md-tooltip md-direction="bottom">
+					  Ver
+					</md-tooltip>
+				 </md-button>
+
+				<md-button aria-label="eliminar" ng-click="eliminar($index)" class="md-button icon centrarIconoLista explosionIcono">
+					<md-icon md-svg-src="img/delete.svg"></md-icon>
+					<md-tooltip md-direction="bottom">
+						Eliminar
+					</md-tooltip>
+				</md-button>
+				
+				<md-button aria-label="hacer entrevista" ng-click="hacerEntrevista($index)" 
+						   class="md-button icon centrarIconoLista explosionIcono">
+					<md-icon md-svg-src="img/hacerEntrevista.svg"></md-icon>
+					<md-tooltip md-direction="bottom">
+						Hacer entrevista
+					</md-tooltip>
+				</md-button>
+				<md-divider></md-divider>
+			</md-list-item>
+		</div>
+    </md-list>
+
 </div>

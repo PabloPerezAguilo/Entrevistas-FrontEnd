@@ -1,50 +1,32 @@
 
 <div class="logIn">
-    <md-content class="md-padding">
-        <md-tabs class="md-accent" md-selected="data.selectedIndex" md-align-tabs="{{data.bottom ? 'bottom' : 'top'}}">
-            <md-tab id="tab1">
-                <md-tab-label>Iniciar sesión</md-tab-label>
-                <md-tab-body>
-                   <div class="enBloque">
-                       <md-input-container class="md-block">
-                           <label>Usuario</label>
-                           <input required name="user" ng-model="user">
-    	               </md-input-container>
-	               </div>
+	<div class="enBloque">
+		<md-input-container class="md-block">
+			<label>Usuario</label>
+			<input required name="user" ng-model="user">
+			<div ng-messages="user.$error">
+				<div ng-message="required">Debe introducir un usuario</div>
+			</div>
+		</md-input-container>
+	</div>
 	
-	               <div class="enBloque">
-                    	<md-input-container class="md-block">
-        	               <label>Contraseña</label>
-        	               <input type="password" required name="pass" ng-model="pass">
-    	               </md-input-container>
-                    </div>
-
-                    <div class="derecha">
-                        <md-checkbox ng-model="checkRecordar">
-                            No cerrar sesión
-                        </md-checkbox>     
-                    </div>
-
-                    <div>
-    	               <md-button class="md-raised" ng-click="login()">Iniciar sesión</md-button>
-                    </div>
-                </md-tab-body>
-            </md-tab>
-            <md-tab id="tab2">
-                <md-tab-label>DNI</md-tab-label>
-                <md-tab-body>
-                    <div class="enBloqueCentrado">
-                    	<md-input-container class="md-block">
-        	               <label>DNI</label>
-        	               <input required name="dni" ng-model="dni">
-    	               </md-input-container>
-                    </div>
-
-                    <div>
-    	               <md-button class="md-raised" ng-click="hacerEntrevista()">Iniciar entrevista</md-button>
-                    </div>
-                </md-tab-body>
-            </md-tab>
-        </md-tabs>
-    </md-content>
+	<div class="enBloque">
+		<md-input-container class="md-block">
+			<label>Contraseña</label>
+			<input required type="password" name="pass" ng-model="pass" ng-keypress="enter($event)">
+			<div ng-messages="pass.$error">
+				<div ng-message="required">Debe introducir una contraseña</div>
+			</div>
+		</md-input-container>
+	</div>
+	
+	<div class="derecha">
+		<md-checkbox ng-model="checkRecordar" ng-change="cambioCheck()">
+			No cerrar sesión
+		</md-checkbox>
+	</div>
+	
+	<div>
+		<md-button class="md-raised" ng-click="login()">Iniciar sesión</md-button>
+	</div>
 </div>

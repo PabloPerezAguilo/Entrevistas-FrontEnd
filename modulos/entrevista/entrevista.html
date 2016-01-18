@@ -1,0 +1,102 @@
+<div class="entrevistado" ng-show="hacerPreguntas">
+	<md-content>
+		<md-list>
+			<md-list-item  ng-repeat="pregunta in preguntas">
+				<div ng-if="pregunta === null">
+					{{ $index + 1 }}. La pregunta ha sido borrada
+				</div>
+				<div ng-if="pregunta.type === 'FREE'" class="contenedorRespuestas">
+					<h3>{{ $index  + 1}}. {{ pregunta.title }} </h3>
+					<md-input-container class="respuestas">
+						<label>Respuesta a la pregunta</label>
+						<textarea  ng-model="respuestas[$index]"></textarea>
+					</md-input-container>
+				</div>
+				
+				<div ng-if="pregunta.type === 'SINGLE_CHOICE'" class="contenedorRespuestas">
+					<h3>{{ $index  + 1}}. {{ pregunta.title }} </h3>
+					<md-radio-group ng-model="respuestas[$index]">
+						<p class="respuestas displayInline" ng-repeat="answer in pregunta.answers"> 
+							<md-radio-button value="{{$index}}" aria-label="respuestas test">
+								{{ answer.title }}
+							</md-radio-button>
+						</p>
+					</md-radio-group>
+				</div>
+				
+				<div ng-if="pregunta.type === 'MULTI_CHOICE'" class="contenedorRespuestas">
+					<h3>{{ $index  + 1}}. {{ pregunta.title }} </h3>
+					<p class="respuestas displayInline" ng-repeat="answer in pregunta.answers">
+						<md-checkbox ng-model="respuestas[$parent.$index][$index]" aria-label="respuestas test abierto">
+							{{ answer.title }}
+						</md-checkbox> 
+					</p>
+				</div>
+				
+				<md-divider class="dividerCorto"></md-divider>
+			</md-list-item>
+		</md-list>
+	</md-content>
+	<md-button class="md-raised btnEntrevistadoGuardar" ng-click="guardarRespuestas($event)">
+		Finalizar cuestionario
+	</md-button>
+</div>
+
+<div ng-show="aceptarPreguntas">
+	<p>
+		Ha completado el cuestionario correctamente.
+		En breve llegara el entrevistador tecnico.
+		Por favor, espere y no pulse continuar hasta su llegada
+	</p>
+	<md-button class="md-raised btnEntrevistadoGuardar" ng-click="seguirEntrevista()">
+		Aceptar
+	</md-button>	
+</div>
+
+<div class="entrevistado" ng-show="acabarEntrevista">
+	<md-content>
+		<md-list>
+			<md-list-item  ng-repeat="pregunta in correccion">
+				<div ng-if="pregunta === null">
+					{{ $index + 1 }}. La pregunta ha sido borrada
+				</div>
+				<div ng-if="pregunta.type === 'FREE'" class="contenedorRespuestas">
+					<h3>{{ $index  + 1}}. {{ pregunta.title }}</h3>
+					<p ng-style="correccionStyle[$index]">{{ pregunta.answer }}</p>
+					<div class="alert alert-warning directivaEntrevista" ng-show="tieneDirectiva[$index]">
+						{{ pregunta.directive }}
+					</div>
+				</div>
+				
+				<div ng-if="pregunta.type === 'SINGLE_CHOICE'" class="contenedorRespuestas">
+					<h3>{{ $index  + 1 }}. {{ pregunta.title }} </h3>
+					<md-radio-group ng-model="correccionTest[$index]">
+						<span class="respuestas displayInline" ng-repeat="answer in pregunta.answers"> 
+							<md-radio-button value="{{$index}}" ng-style="correccionStyle[$parent.$index][$index]" 
+											 ng-disabled="true" aria-label="correccion test">
+								{{ answer.title }}
+							</md-radio-button>
+						</span>
+					</md-radio-group>
+				</div>
+				
+				<div ng-if="pregunta.type === 'MULTI_CHOICE'" class="contenedorRespuestas">
+					<h3>{{ $index  + 1}}. {{ pregunta.title }} </h3>
+					<p class="respuestas correccionRespuestas displayInline" ng-repeat="answer in pregunta.answers">
+						<md-checkbox ng-model="correccionTest[$parent.$index][$index]" 
+									 ng-disabled="true" aria-label="respuestas test abierto">
+						</md-checkbox> 
+						<span ng-style="correccionStyle[$parent.$index][$index]">
+							{{ answer.title }}
+						</span>
+					</p>
+				</div>
+				
+				<md-divider class="dividerCorto"></md-divider>
+			</md-list-item>
+		</md-list>
+	</md-content>
+	<md-button class="md-raised btnEntrevistadoGuardar" ng-click="cerrarEntrevista()">
+		Cerrar
+	</md-button>
+</div>

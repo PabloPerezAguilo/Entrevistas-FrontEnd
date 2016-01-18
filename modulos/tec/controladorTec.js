@@ -1,9 +1,29 @@
-app.controller('controladorTec', function (servicioRest, $scope, $rootScope, $mdDialog, $timeout, $q, $log, $mdToast, $location) {
+app.controller('controladorTec', function (servicioRest, $scope, $rootScope, $mdDialog, $timeout, $q, $log, $mdToast, $location, $http) {
+	
+	if (localStorage.getItem("usuario") !== null) {
+		$rootScope.usuario = localStorage.getItem("usuario");
+	} else {
+		$rootScope.usuario = sessionStorage.getItem("usuario");
+	}
+	
+	if (localStorage.getItem("rol") === "ROLE_TECH" || sessionStorage.getItem("rol") === "ROLE_TECH") {
+		$rootScope.rol = "técnico";
+	}
+	
+	var token = sessionStorage.getItem("token");
+	if(token !== null) {
+		$http.defaults.headers.common['x-access-token'] = token;
+	}
 	
 	function toast(texto) {
 		$mdToast.show(
 			$mdToast.simple().content(texto).position('top right').hideDelay(1500)
 		);
+	}
+	
+	$scope.cerrarSesion = function () {
+		$rootScope.limpiarCredenciales();
+		$location.path("/");
 	}
 	
 	function escribirTipo() {
@@ -27,7 +47,11 @@ app.controller('controladorTec', function (servicioRest, $scope, $rootScope, $md
 			})
 			.catch(function (err) {
 				$log.error("Error al cargar las preguntas: " + err);
-				if (err === 403) {
+				console.log($rootScope.rol);
+				if (err === 403 && token !== null) {
+					//cuando entra a tec desde admin
+					$location.path('/admin');
+				} else {
 					$location.path('/');
 				}
 			});
@@ -37,7 +61,8 @@ app.controller('controladorTec', function (servicioRest, $scope, $rootScope, $md
     var Options = {
         title: String,
         valid: Boolean
-	}, pregunta = {
+	};
+	var pregunta = {
         _id: { type: String },
         title: { type: String, required: true },
         type: { type: String, required: true },
@@ -45,7 +70,9 @@ app.controller('controladorTec', function (servicioRest, $scope, $rootScope, $md
         level: { type: Number, min: 1, max: 10, required: true },
         directive: { type: String },
         answers: [Options]
-	}, simulateQuery = false, temas, temasCargados, filtroTemas = {
+	};
+	var simulateQuery = false, temasCargados;
+	var filtroTemas = {
 		tags: []
 	};
 	
@@ -57,28 +84,30 @@ app.controller('controladorTec', function (servicioRest, $scope, $rootScope, $md
     
 	getPreguntas();
     
-    /*--------------------------Funciones--------------------------*/
-	function cargarTemas() {
-		temasCargados = temas;
-		return temasCargados.map(function (tema) {
+    /*--------------------------Funciones--------------------------*/	
+	function cargarTemas(temas) {
+		return temas.map(function (tema) {
 			tema.valor = tema.tag.toLowerCase();
 			return tema;
 		});
 	}
-    
+	
+	function getTemas () {
+		servicioRest.getTemas()
+			.then(function (data) {
+				temasCargados = cargarTemas(data);
+			})
+			.catch(function (err) {
+				$log.error("Error cargar las aptitudes: " + err);
+			});
+	}
+	
     $scope.eliminar = function (indice) {
         var idPregunta = $scope.preguntas[indice]._id;
         servicioRest.deletePregunta(idPregunta)
 			.then(function (data) {
 				$scope.preguntas.splice(indice, 1);
-				servicioRest.getTemas()
-					.then(function (data) {
-						temas = data;
-						temasCargados = cargarTemas();
-					})
-					.catch(function (err) {
-						$log.error("Error cargar los temas: " + err);
-					});
+				getTemas();
 			})
 			.catch(function (err) {
 				$log.error("Error al eliminar la pregunta: " + err);
@@ -130,6 +159,20 @@ app.controller('controladorTec', function (servicioRest, $scope, $rootScope, $md
                     .catch(function (err) {
                         $log.error("Error al crear la pregunta: " + err);
                     });
+			
+				if (filtroTemas.tags.length != 0) {
+					servicioRest.postPreguntasByTag(filtroTemas)
+					.then(function (data) {
+						$scope.preguntas = data;
+						escribirTipo();
+					})
+					.catch(function (err) {
+						$scope.preguntas = null;
+						$log.error("Error al filtrar el tema: " + err);
+					});
+				} else {
+					getPreguntas();
+				}
 			});
     };
 	
@@ -150,18 +193,7 @@ app.controller('controladorTec', function (servicioRest, $scope, $rootScope, $md
 	/* ----------------- AUTOCOMPLETE ---------------- */
 	$scope.listaTemas = [];
 	
-	$rootScope.obtenerTemas = function () {
-		servicioRest.getTemas()
-			.then(function (data) {
-				temas = data;
-				temasCargados = cargarTemas();
-			})
-			.catch(function (err) {
-				$log.error("Error al cargar los temas: " + err);
-			});
-	};
-	
-	$rootScope.obtenerTemas();
+	$rootScope.obtenerTemas = getTemas();
 	
 	function buscarTema(tema) {
 		var i;
@@ -258,8 +290,8 @@ app.controller('controladorTec', function (servicioRest, $scope, $rootScope, $md
 		$mdDialog.show(
 			$mdDialog.alert()
 			.clickOutsideToClose(true)
-			.title('El tema no existe')
-			.textContent('Debes escoger un tema de la lista')
+			.title('Esta aptitud no existe')
+			.textContent('Debes escoger una aptitud de la lista')
 			.ariaLabel('Alert no existe tema')
 			.ok('Ok')
     );

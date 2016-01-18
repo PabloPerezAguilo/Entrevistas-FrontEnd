@@ -7,6 +7,20 @@ app.run(function(servicioRest, $rootScope, $http, $location) {
 	$http.defaults.headers.common['Accept'] = 'application/json, text/javascript';
 	$http.defaults.headers.common['Content-Type'] = 'application/json; charset=utf-8';
 	
+	$rootScope.limpiarCredenciales = function () {
+		localStorage.clear();
+		localStorage.removeItem("usuario");
+		localStorage.removeItem("password");
+		sessionStorage.clear();
+		sessionStorage.removeItem("token");
+		$http.defaults.headers.common['x-access-token'] = '';
+	};
+	
+	$rootScope.cerrarSesion = function () {
+		$rootScope.limpiarCredenciales();
+		$location.path("/");
+	};
+	
 });
 
 app.config(function($routeProvider) {

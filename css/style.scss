@@ -20,6 +20,7 @@ time, mark, audio, video {
 .ng-scope {
 	//overflow: hidden;
 }
+
 /* HTML5 display-role reset for older browsers */
 article, aside, details, figcaption, figure, 
 footer, header, hgroup, menu, nav, section {
@@ -43,6 +44,7 @@ table {
 	border-collapse: collapse;
 	border-spacing: 0;
 }
+
 
 /* ---------------------------------------------------------------------*/
 
@@ -95,8 +97,8 @@ header {
     position: relative;
     display: inline-block;
     float: right;
-    margin-right: 2%;
-    margin-top: 2%;
+    margin-right: 0%;
+    margin-top: 4%;
 }
 
 footer {
@@ -164,7 +166,7 @@ md-progress-linear .md-container {
     transform: translate(-50%, -50%);
 
     width: 480px;
-    height: 300px;
+    height: 290px;
 }
 
 .enBloque {
@@ -211,7 +213,7 @@ md-checkbox.md-default-theme.md-checked.md-focused .md-container:before, md-chec
 
 /*Button*/
 .md-button.md-raised {
-    color: $letra;
+    color: #FFFFFF;
     background-color: $colorPrincipal;
     width: 70%;
     margin-left: 15%;
@@ -231,8 +233,17 @@ md-toast.md-default-theme, md-toast {
     background-color: $colorPrincipal;
     color: $letra;
 }
+
+md-toast.md-default-theme .md-toast-content, md-toast .md-toast-content {
+	background-color: $colorPrincipal;
+}
+
 .md-button.md-raised:not([disabled]).md-focused {
     background-color: $colorPrincipal;
+}
+
+.md-button.md-ink-ripple:not([disabled]).md-focused {
+	background-color: rgba(158,158,158,0.2);
 }
 
 /*Tab*/
@@ -285,6 +296,35 @@ md-chips .md-chip.md-focused {
 }
 
 /*Crear pregunta*/
+.alert {
+    padding: 0px 20px;
+    margin-top: 5px;
+}
+
+.alert-info {
+    color: #CC641D;
+    background-color: #F5EAC6;
+    border-color: #CC7206;
+}
+
+.okCrearTema md-icon {
+    color: #62C800;
+}
+
+.okCrearTema.md-button.icon.md-ink-ripple:hover {
+    border-radius: 50%;
+    background-color: rgba(203, 255, 197, 0.51);
+}
+
+.cancelCrearTema md-icon{
+	color: red;
+}
+
+.cancelCrearTema.md-button.icon.md-ink-ripple:hover {
+    border-radius: 50%;
+    background-color: rgba(255, 197, 197, 0.41);
+}
+
 .enLinea {
 	display: inline-block;
 }
@@ -395,10 +435,6 @@ md-radio-button {
     padding-top: 2%;
 }
 
-md-radio-button, .md-switch-thumb {
-    
-}
-
 md-checkbox.respuesta {
     padding-top: 5%;
     margin: 0;
@@ -406,6 +442,10 @@ md-checkbox.respuesta {
 
 md-radio-group.md-default-theme.md-focused:not(:empty) .md-checked .md-container:before, md-radio-group.md-focused:not(:empty) .md-checked .md-container:before {
     background-color: $colorPrincipalClaro;
+}
+
+.hoverLista:hover {
+	background-color: rgba(189, 136, 74, 0.1);
 }
 
 /* ------------- Ver pregunta --------------------- */
@@ -417,7 +457,7 @@ md-dialog.md-transition-in {
 
 .md-button.md-default-theme.md-primary, .md-button.md-primary {
 	background-color: $colorPrincipal;
-	color: $letra;
+	color: #FFFFFF;
 }
 
 .md-button.md-default-theme:not([disabled]).md-focused, .md-button:not([disabled]).md-focused {
@@ -457,7 +497,18 @@ md-checkbox[disabled] .md-label {
 
 .md-button.md-fab.md-mini {
     float: right;
+}
+
+.md-button.md-fab.md-mini.adminBtn {
+    float: right;
 	margin-top: 1.8%;
+	margin-right: -11%;
+}
+
+.md-button.md-fab.md-mini.tec {
+    float: right;
+	margin-top: 1.8%;
+	margin-right: -5%;
 }
 
 .explosionIcono.md-button .md-ripple-container {
@@ -546,6 +597,10 @@ md-list md-list-item.md-3-line .md-list-item-text h3 {
 }
 
 /*------------------------------ADMIN----------------------*/
+md-datepicker.adminFecha {
+	margin-left: -15%;
+}
+
 .md-datepicker-open .md-datepicker-calendar-icon {
     fill: $colorPrincipal;
 }
@@ -604,6 +659,155 @@ rzslider .rz-bar-wrapper {
     left: 8px;
 }
 
+.letraNegrita {
+	font-weight: bold;
+	font-family: sans-serif;
+}
+
+.mensajeEntrevista {
+	padding-top: 10px;
+    padding-left: 15px;
+    font-size: 12px;
+    color: #A5A5A5;
+}
+
+.mensajeEntrevistaCreada {
+	padding: 40px;
+    padding-left: 160px;
+}
+
+.txtMensajeEntrevista {
+	padding-left: 60px;
+}
+
+.btnMensajeEntrevista.md-button.md-raised {
+    margin-left: 0px;
+}
+
+/* ------------------- ENTREVISTA ---------------------------*/
+
+.directivaEntrevista {
+	padding: 15px;
+    width: 100%;
+}
+.entendidoCrearEntrevista md-icon {
+	color: #8A6D3B;
+}
+
+.cortarAlertWarning {
+	width: 95%;
+}
+
+.admin {
+    padding-right: 0px;
+    margin-right: 10%;
+	margin-top: 4px;
+	float: right;
+}
+
+.adminCheck {
+	padding-top: 1.9%;
+	margin-left: 6%;
+}
+
+.puntos {
+	margin-left: -4%;
+    position: absolute;
+    margin-top: 2%;
+}
+
+md-datepicker {
+	float: left;
+}
+
+md-input-container.minutos {
+	width: 28%;
+	margin-left: -1%;
+	margin-top: 0.44%;
+	margin-right: 2%;
+}
+
+md-input-container.horas {
+	width: 33%;
+	margin-top: 0.44%;
+	margin-right: 2%;
+	margin-left: 2%;
+}
+
+.md-datepicker-input-container.crear {
+	margin-left: 0px;
+	width: 22%;
+}
+
+md-autocomplete {
+	width: 75%;
+	width: 75%;
+}
+
+.md-button.md-raised.error {
+	width: 0%;
+    margin: 0;
+}
+
+input.minutos {
+	width: 82%;
+}
+
+input.horas {
+	width: 83%;
+}
+
+.respuestas {
+	font-size: 13px;
+	margin: 0px;
+	width: 500px;
+}
+
+.contenedorRespuestas {
+	padding-bottom: 20px;
+}
+
+.entrevistado {
+	height: 600px;
+    margin-bottom: 70px;
+    overflow: auto;
+	margin-left: 10%;
+	margin-right: 10%;
+	margin-top: 3%;
+}
+
+.dividerCorto {
+	width: 95%;
+	border-top-color: rgba(81, 80, 80, 0.4);
+}
+
+.btnEntrevistadoGuardar.md-button.md-raised{
+	width: 25%;
+    margin-left: 32%;
+}
+
+.checkMostrarEntrevistas {
+	display: inline-block;
+	font-size: 14px;
+	left: 9.8%;
+}
+
+.letraCursiva {
+	font-style: italic;
+}
+
+ md-radio-button[disabled] {
+	 color: $negro;
+ }
+.correccionRespuestas md-checkbox {
+	padding-left: 0px;
+	padding-right: 3px;
+}
+
+.respuestas md-radio-button {
+	padding-top: 0px;
+}
+
 /*--------------------- media queries ------------------------*/
 
 @media screen and (min-height: 1024px) {
@@ -632,11 +836,19 @@ rzslider .rz-bar-wrapper {
 		margin-top: 1%;
 		margin-right: 1%;
 	}
+	
+	.cortarAlertWarning {
+    	width: 90%;
+	}
 }
 
 @media screen and (min-height: 620px) and (max-height: 700px) {
     .listaPreguntas {
 		height: 300px;
+	}
+	
+	.cortarAlertWarning {
+    	width: 90%;
 	}
 }
 
@@ -646,15 +858,29 @@ rzslider .rz-bar-wrapper {
 	}
 }
 
+@media screen and (min-height: 801px) {
+ 	.cortarAlertWarning {
+    	width: 90%;
+	}
+}
+
 @media screen and (min-height: 701px) and (max-height: 800px) {
     .listaPreguntas {
 		height: 400px;
+	}
+	
+	.cortarAlertWarning {
+    	width: 90%;
 	}
 }
 
 @media screen and (min-height: 560px) and (max-height: 620px) {
     .listaPreguntas {
 		height: 250px;
+	}
+	
+	.cortarAlertWarning {
+		width: 95%;
 	}
 }
 
@@ -675,6 +901,7 @@ rzslider .rz-bar-wrapper {
 		margin-left: 0%;
 		margin-right: 0%;
 		margin-bottom: 70px;
+		width: 99%;
 	}
 	md-divider.dividerPrincipal {
 		margin-right: 0%;
@@ -695,6 +922,10 @@ rzslider .rz-bar-wrapper {
 		margin-top: 1%;
 		margin-right: 1%;
 	}
+	
+	#iconoUsuario {
+		margin-top:6.5%;
+	}
 }
 
 @media screen and (max-height: 620px) {
@@ -706,6 +937,32 @@ rzslider .rz-bar-wrapper {
        max-width: 100%;
        overflow-y: hidden;  
     }
+	
+	md-datepicker {
+		float: left;
+	}
+	
+	.md-datepicker-input-container.crear {
+		margin-left: 0px;
+		width: 70%;
+	}
+	
+	md-input-container.minutos {
+		margin-left: 2%;
+	}
+	
+	.puntos {
+		margin-left: 0%;
+		margin-top: 1.5%
+	}
+	
+	input.minutos {
+		width: 100%;
+	}
+
+	input.horas {
+		width: 100%;
+	}
 	
 	rzslider .rz-bar-wrapper {
 		opacity: 1;
@@ -735,8 +992,207 @@ rzslider .rz-bar-wrapper {
 		left: 8px;
 	}
 	
+	md-autocomplete {
+		width: 55%;
+	}
+	
 	span.rz-pointer {
 		left: 592px;
 	}
+	
+	.md-button.md-fab.md-mini.tec {
+		margin-right: 12%;
+	}
+	
+	.admin {
+		width: 38%;
+		margin-right: 0%;
+	}
 }
 
+@media screen and (max-width: 600px) {
+	
+	md-autocomplete {
+		width: 55%;
+	}
+	
+	md-datepicker.adminFecha {
+		margin-left: -18%;
+	}
+}
+
+@media screen and (min-width: 650px) and (max-width: 1000px) {
+	
+	#iconoUsuario {
+		margin-top: 6%;
+	}
+	
+	.md-button.md-fab.md-mini.adminBtn {
+		margin-right: -18%;
+	}
+	
+	.md-button.md-fab.md-mini.tec {
+		margin-right: 12%;
+	}
+	
+	.listaPreguntas {
+		width: 78%;
+	}
+}
+
+@media screen and (min-width: 1001px) and (max-width: 1040px) {
+	
+	md-autocomplete {
+		width: 68%;
+	}
+	
+	md-datepicker {
+		margin-left: -12%;
+	}
+	
+	.listaPreguntas {
+		width: 78%;
+	}
+	
+	.md-button.md-fab.md-mini.tec {
+		margin-right: 12%;
+	}
+	
+	.md-button.md-fab.md-mini.adminBtn {
+		margin-right: 11%;
+	}
+}
+
+@media screen and (min-width: 1040px) and (max-width: 1079px) {
+	
+	.md-button.md-fab.md-mini.adminBtn {
+		margin-right: 14%;
+	}
+}
+
+@media screen and (min-width: 1040px){
+	
+	.listaPreguntas {
+		width: 80%;
+	}
+}
+
+@media screen and (min-width: 1080px) and (max-width: 1100px) {
+	
+	.md-button.md-fab.md-mini.adminBtn {
+		margin-right: -15%;
+	}
+}
+
+@media screen and (max-width: 645px) {
+	
+	.md-button.md-fab.md-mini.adminBtn {
+		margin-right: 6%;
+	}
+	
+	md-datepicker {
+		float: none;
+	}
+	
+	span.rz-pointer {
+		left: 95%;
+	}
+	
+	rzslider .rz-bar-wrapper {
+		width: 95%;
+	}
+}
+
+@media screen and (max-width: 820px) {
+	
+	md-autocomplete: 65%;
+}
+
+@media screen and (max-width: 995px) and (min-width: 651px) {
+	
+	md-autocomplete {
+		width: 68%;
+	}
+}
+
+@media screen and (min-width: 650px) and (max-width: 795px) {
+	
+	.listaPreguntas {
+		width: 99%;
+	}
+	
+	.md-button.md-fab.md-mini.adminBtn {
+    	margin-right: -36%;
+	}
+	
+	.admin {
+		margin-right: 0%;
+	}
+	
+	.adminCheck {
+		margin-left: 3%;
+	}
+	
+	md-datepicker.adminFecha {
+		margin-left: -15%;
+	}
+	
+	md-autocomplete {
+		width: 62%;
+	}
+	
+	#iconoUsuario {
+		margin-top:	6%;
+	}
+	
+	.md-button.md-fab.md-mini.adminBtn {
+		margin-right: -34%;
+	}
+}
+
+@media screen and (min-width: 800px) and (max-width: 1000px) {
+	
+	md-autocomplete {
+		width: 60%;
+	}
+	
+	md-datepicker.adminFecha {
+		margin-left: -22%;
+	}
+}
+
+@media screen and (min-width: 1041px) and (max-width: 1225px) {
+	
+	#iconoUsuario {
+		margin-top: 5%;
+	}
+	
+	
+	.md-button.md-fab.md-mini.adminBtn {
+		margin-right: -14%;
+	}
+	
+	md-autocomplete {
+		width: 68%;
+	}
+}
+
+@media screen and (min-width: 900px) and (max-width: 1000px) {
+	
+	#iconoUsuario {
+		margin-top: 5%;
+	}
+	
+	.md-button.md-fab.md-mini.adminBtn {
+		margin-right: -17%;
+	}
+	
+	md-autocomplete {
+		width: 62%;
+	}
+	
+	md-datepicker.adminFecha {
+		margin-left: -24%;
+	}
+	
+}

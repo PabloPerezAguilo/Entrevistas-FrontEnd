@@ -29,7 +29,7 @@
                                 <md-autocomplete md-selected-item="selectedItem" md-search-text="searchText"
                                                  md-items="item in queryBuscarTema(searchText)"
                                                  md-item-text="item.valor"
-                                                 placeholder="Temas de la pregunta">
+                                                 placeholder="Aptitudes">
 
                                     <span md-highlight-text="searchText">
                                         {{item.tag}}
@@ -40,17 +40,32 @@
                                 </md-chip-template>
                             </md-chips>
 							
-							<div class="cntConf" ng-show="confirmacionAbierta">
-								<p>¿Está seguro de que quiere crear el tema {{temaAbierta}}?</p>
-								<div class="cntBtn">
-									<md-button class="md-raised confirm" ng-click="crearTema()">Si</md-button>
-									<md-button class="md-raised confirm" ng-click="cerrarConfirm()">No</md-button>
-								</div>
+							<div class="alert alert-info" ng-show="!confirmacionAbierta && entendidoAbierta">
+  								Las aptitudes seleccionadas deberán tener alguna <span class="letraNegrita">relación entre si</span>
+								<md-button class="md-icon-button" aria-label="cerrarCrearPregunta" 
+										   ng-click="entendidoAbierta = false">
+									<md-icon md-svg-src="img/cerrar.svg"></md-icon>
+								</md-button>
+								<p>Algo de tema general</p>
+							</div>
+							<div class="alert alert-warning" ng-show="confirmacionAbierta">
+  								¿Está seguro de que quiere crear esta aptitud?
+									<md-button aria-label="eliminar" ng-click="crearTema()" 
+											   class="md-button icon explosionIcono okCrearTema">
+										<md-icon md-svg-src="img/ok.svg"></md-icon>
+									</md-button>
+									<md-button aria-label="eliminar" ng-click="cerrarConfirm()" 
+											   class="md-button icon explosionIcono cancelCrearTema">
+										<md-icon md-svg-src="img/cerrar.svg"></md-icon>
+									</md-button>
 							</div>
 
                             <md-input-container class="md-block">
-                                <label>Enunciado de la pregunta</label>
-                                <textarea ng-model="tituloAbierta"></textarea>
+                                <label>Enunciado de la pregunta *</label>
+                                <textarea required ng-model="tituloAbierta"></textarea>
+								<div ng-messages="tituloAbierta.$error">
+									<div ng-message="required">Este campo es obligatorio</div>								
+								</div>
                             </md-input-container>
 
                             <md-input-container class="md-block">
@@ -77,7 +92,7 @@
                                 <md-autocomplete  md-selected-item="selectedItem" md-search-text="searchText"
                                                  md-items="item in queryBuscarTema(searchText)"
                                                  md-item-text="item.valor"
-                                                 placeholder="Temas de la pregunta">
+                                                 placeholder="Aptitudes">
 
                                     <span md-highlight-text="searchText">
                                         {{item.tag}}
@@ -87,28 +102,45 @@
                                     <span> {{$chip.tag}} </span>
                                 </md-chip-template>
                             </md-chips>
+							<div class="alert alert-info" ng-show="!confirmacionTest && entendidoTest">
+  								Las aptitudes seleccionadas deberán tener alguna <span class="letraNegrita">relación entre si</span>
+								<md-button class="md-icon-button" aria-label="cerrarCrearPregunta" ng-click="entendidoTest = false">
+									<md-icon md-svg-src="img/cerrar.svg"></md-icon>
+								</md-button>
+								<p>Algo de tema general</p>
+							</div>
 							
-							<div class="cntConf" ng-show="confirmacionTest">
-								<p>¿Está seguro de que quiere crear el tema {{temaTest}}?</p>
-								<div class="cntBtn">
-									<md-button class="md-raised confirm" ng-click="crearTema()">Si</md-button>
-									<md-button class="md-raised confirm" ng-click="cerrarConfirm()">No</md-button>
-								</div>
+							<div class="alert alert-warning" ng-show="confirmacionTest">
+  								¿Está seguro de que quiere crear esta aptitud?								
+									<md-button aria-label="eliminar" ng-click="crearTema()" 
+											   class="md-button icon explosionIcono okCrearTema">
+										<md-icon md-svg-src="img/ok.svg"></md-icon>
+									</md-button>
+									<md-button aria-label="eliminar" ng-click="cerrarConfirm()" 
+											   class="md-button icon explosionIcono cancelCrearTema">
+										<md-icon md-svg-src="img/cerrar.svg"></md-icon>
+									</md-button>
 							</div>
 
                             <md-input-container class="md-block">
-                                <label>Enunciado de la pregunta</label>
-                                <textarea ng-model="tituloTest"></textarea>
+                                <label>Enunciado de la pregunta *</label>
+                                <textarea required ng-model="tituloTest"></textarea>
+								<div ng-messages="tituloTest.$error">
+									<div ng-message="required">Este campo es obligatorio</div>								
+								</div>
                             </md-input-container>
                             <md-radio-group ng-model="radioTest">
                                 <div ng-repeat="respuestas in test">
                                     <span>
-                                        <md-radio-button value="{{respuestas}}" aria-label="respuestas test abierto" >
+                                        <md-radio-button value="{{respuestas}}" aria-label="respuestas test" >
                                     </md-radio-button>
 
                                     <md-input-container class="md-block respuesta">
-                                        <label>Respuesta {{respuestas}}</label>
-                                        <textarea ng-model="respuestasTest[$index]"></textarea>
+                                        <label>Respuesta {{respuestas}} *</label>
+                                        <textarea required ng-model="respuestasTest[$index]"></textarea>
+										<div ng-messages="respuestasTest[$index].$error">
+											<div ng-message="required">Debe introucir una respuesta</div>					
+										</div>
                                     </md-input-container>
                                     </span>
                                 </div>
@@ -137,7 +169,7 @@
                                 <md-autocomplete md-selected-item="selectedItem" md-search-text="searchText"
                                                  md-items="item in queryBuscarTema(searchText)"
                                                  md-item-text="item.valor"
-                                                 placeholder="Temas de la pregunta">
+                                                 placeholder="Aptitudes">
 
                                     <span md-highlight-text="searchText">
                                         {{item.tag}}
@@ -147,18 +179,34 @@
                                     <span> {{$chip.tag}} </span>
                                 </md-chip-template>
                             </md-chips>
-
-							<div class="cntConf" ng-show="confirmacionTestAbierto">
-								<p>¿Está seguro de que quiere crear el tema {{temaTestAbierto}}?</p>
-								<div class="cntBtn">
-									<md-button class="md-raised confirm" ng-click="crearTema()">Si</md-button>
-									<md-button class="md-raised confirm" ng-click="cerrarConfirm()">No</md-button>
-								</div>
+							<div class="alert alert-info" ng-show="!confirmacionTestAbierto && entendidoTestAbierto">
+  								Las aptitudes seleccionadas deberán tener alguna <span class="letraNegrita">relación entre si</span>
+								<md-button class="md-icon-button" aria-label="cerrarCrearPregunta" 
+										   ng-click="entendidoTestAbierto = false">
+									<md-icon md-svg-src="img/cerrar.svg"></md-icon>
+								</md-button>
+								<p>Algo de tema general</p>
+							</div>
+							
+							<div class="alert alert-warning" ng-show="confirmacionTestAbierto">
+  								¿Está seguro de que quiere crear esta aptitud?
+								
+									<md-button aria-label="eliminar" ng-click="crearTema()" 
+											   class="md-button icon explosionIcono okCrearTema">
+										<md-icon md-svg-src="img/ok.svg"></md-icon>
+									</md-button>
+									<md-button aria-label="eliminar" ng-click="cerrarConfirm()" 
+											   class="md-button icon explosionIcono cancelCrearTema">
+										<md-icon md-svg-src="img/cerrar.svg"></md-icon>
+									</md-button>
 							</div>
 
                             <md-input-container class="md-block">
-                                <label>Enunciado de la pregunta</label>
-                                <textarea ng-model="tituloTestAbierto"></textarea>
+                                <label>Enunciado de la pregunta *</label>
+                                <textarea required ng-model="tituloTestAbierto"></textarea>
+								<div ng-messages="tituloTestAbierto.$error">
+									<div ng-message="required">Este campo es obligatorio</div>
+								</div>
                             </md-input-container>
 
                             <div ng-repeat="respuestasAbierto in testAbierto">
@@ -166,8 +214,11 @@
                                              aria-label="respuestas test abierto">
                                 </md-checkbox>
                                 <md-input-container class="md-block respuesta">
-                                    <label>Respuesta {{respuestasAbierto}}</label>
+                                    <label>Respuesta {{respuestasAbierto}} *</label>
                                     <textarea ng-model="respuestasTestAbierto[$index]"></textarea>
+									<div required ng-messages="respuestasTestAbierto[$index].$error">
+										<div ng-message="required">Debe introucir una respuesta</div>			
+									</div>
                                 </md-input-container>
                             </div>
 

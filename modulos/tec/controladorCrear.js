@@ -1,5 +1,9 @@
 app.controller('controladorCrear', function (servicioRest, $scope, $mdDialog, $mdToast, $rootScope, $log) {
     
+	$scope.entendido = true;
+	$scope.entendidoAbierta = true;
+	$scope.entendidoTest = true;
+	$scope.entendidoTestAbierto = true;
     var Options = {
         title: { type: String },
         valid: { type: Boolean }
@@ -55,15 +59,9 @@ app.controller('controladorCrear', function (servicioRest, $scope, $mdDialog, $m
                 resp = true;
             }
         } else if (tipoP === "testAbierta") {
-            if ($scope.tituloTestAbierto === undefined || $scope.temasTestAbierto === undefined || $scope.respuestasTestAbierto[0] === undefined || $scope.respuestasTestAbierto[1] === undefined || $scope.tituloTestAbierto === "" || $scope.temasTestAbierto.length === 0 || $scope.respuestasTestAbierto[0] === "" || $scope.respuestasTestAbierto[1] === "" || ($scope.checkTestAbierto[0] === false && $scope.checkTestAbierto[1] === false)) {
+            if ($scope.tituloTestAbierto === undefined || $scope.temasTestAbierto === undefined || $scope.respuestasTestAbierto[0] === undefined || $scope.respuestasTestAbierto[1] === undefined || $scope.tituloTestAbierto === "" || $scope.temasTestAbierto.length === 0 || $scope.respuestasTestAbierto[0] === "" || $scope.respuestasTestAbierto[1] === "") {
                 resp = true;
             }
-			for (var i = 2; i < $scope.checkTestAbierto.length; i++) {
-				if ($scope.checkTestAbierto[i] === true) {
-					resp = false;
-					break;
-				}
-			}
         }
         return resp;
     }
@@ -111,7 +109,7 @@ app.controller('controladorCrear', function (servicioRest, $scope, $mdDialog, $m
         }
     };
 	
-    $scope.crearPTestAbierta = function () {
+    $scope.crearPTestAbierta = function () {		
         if (preguntaVacia("testAbierta")) {
             toast("Rellena todos los campos obligatorios");
         } else {
@@ -125,7 +123,6 @@ app.controller('controladorCrear', function (servicioRest, $scope, $mdDialog, $m
             for (var i = 0; i < contTestAbierto; i++) {
                 pregunta.answers.push({title: $scope.respuestasTestAbierto[i], valid: $scope.checkTestAbierto[i]});
             }
-
             $scope.hide(pregunta);
         }
     };
@@ -154,14 +151,13 @@ app.controller('controladorCrear', function (servicioRest, $scope, $mdDialog, $m
 	
 	
 	/* ----------- Input temas ----------- */
-	
 	servicioRest.getTemas()
 		.then(function (data) {
 			temas = data;
 			temasCargados = cargarTemas();
 		})
 		.catch(function (err) {
-			$log.error("Error al cargar los temas: " + err);
+			$log.error("Error al cargar las aptitudes: " + err);
 		});
 	
 	function buscarTema(tema, array) {
