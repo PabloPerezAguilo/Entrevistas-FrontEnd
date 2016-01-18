@@ -22,7 +22,7 @@
 								 md-items="item in queryBuscarTema(searchText)" 
 								 md-item-text="item.valor" 
 								 md-min-length="0"
-								 placeholder="Buscar por temas">
+								 placeholder="Buscar por aptitudes">
 					<span md-highlight-text="searchText">
 						{{item.tag}}
 					</span>
@@ -33,7 +33,7 @@
 			</md-chips>
 		</div>
       	<div class="listaPreguntas">
-			<md-list-item class="md-3-line" ng-repeat="item in preguntas">
+			<md-list-item class="md-3-line hoverLista" ng-repeat="item in preguntas">
 				<div class="md-list-item-text" layout="column">
 					<h3>
 						{{ item.title }}

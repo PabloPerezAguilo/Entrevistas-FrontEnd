@@ -69,7 +69,7 @@
 										<md-autocomplete md-selected-item="selectedItem" md-search-text="searchText"
 													 md-items="item in queryBuscarTema(searchText)"
 													 md-item-text="item.valor"
-													 placeholder="Temas de la pregunta">
+													 placeholder="Aptitudes">
 											<span md-highlight-text="searchText">
 												{{item.tag}}
 											</span>
@@ -79,11 +79,7 @@
 										</md-chip-template>
 									</md-chips>
 								</span>
-								<div ng-if="errorTema[$index]">
-									<p>Debe seleccionar un tema de la lista</p>
-									<md-button class="md-raised error" ng-click="cerrarError($index)">Entendido</md-button>
-									</div>
-                                </div>
+							</div>
 							
 							<md-button class="md-fab md-mini" ng-click="$root.aniadirSliderTemas()" 
 									   aria-label="crearPregunta">
@@ -92,7 +88,7 @@
 						</div>
 						
 						<div class="alert alert-warning cortarAlertWarning" ng-if="error">
-							No hay suficientes preguntas para el/los tema(s)
+							No hay suficientes preguntas para esta(s) aptitud(es): 
 							<span ng-repeat="tema in temas" ng-if="$first">{{tema.tag}}</span>
 							<span ng-repeat="tema in temas" ng-if="!$first">, {{tema.tag}}</span>
 							

@@ -44,7 +44,9 @@
 
 <div ng-show="aceptarPreguntas">
 	<p>
-		Preguntas realizadas
+		Ha completado el cuestionario correctamente.
+		En breve llegara el entrevistador tecnico.
+		Por favor, espere y no pulse continuar hasta su llegada
 	</p>
 	<md-button class="md-raised btnEntrevistadoGuardar" ng-click="seguirEntrevista()">
 		Aceptar
@@ -67,7 +69,7 @@
 				</div>
 				
 				<div ng-if="pregunta.type === 'SINGLE_CHOICE'" class="contenedorRespuestas">
-					<h3>{{ $index  + 1}}. {{ pregunta.title }} </h3>
+					<h3>{{ $index  + 1 }}. {{ pregunta.title }} </h3>
 					<md-radio-group ng-model="correccionTest[$index]">
 						<span class="respuestas displayInline" ng-repeat="answer in pregunta.answers"> 
 							<md-radio-button value="{{$index}}" ng-style="correccionStyle[$parent.$index][$index]" 

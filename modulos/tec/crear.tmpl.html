@@ -29,7 +29,7 @@
                                 <md-autocomplete md-selected-item="selectedItem" md-search-text="searchText"
                                                  md-items="item in queryBuscarTema(searchText)"
                                                  md-item-text="item.valor"
-                                                 placeholder="Temas de la pregunta">
+                                                 placeholder="Aptitudes">
 
                                     <span md-highlight-text="searchText">
                                         {{item.tag}}
@@ -41,15 +41,15 @@
                             </md-chips>
 							
 							<div class="alert alert-info" ng-show="!confirmacionAbierta && entendidoAbierta">
-  								Los temas seleccionados deberán tener alguna <span class="letraNegrita">relación entre si</span>
+  								Las aptitudes seleccionadas deberán tener alguna <span class="letraNegrita">relación entre si</span>
 								<md-button class="md-icon-button" aria-label="cerrarCrearPregunta" 
 										   ng-click="entendidoAbierta = false">
 									<md-icon md-svg-src="img/cerrar.svg"></md-icon>
 								</md-button>
+								<p>Algo de tema general</p>
 							</div>
 							<div class="alert alert-warning" ng-show="confirmacionAbierta">
-  								¿Está seguro de que quiere crear el tema {{temaAbierta}}?
-								
+  								¿Está seguro de que quiere crear esta aptitud?
 									<md-button aria-label="eliminar" ng-click="crearTema()" 
 											   class="md-button icon explosionIcono okCrearTema">
 										<md-icon md-svg-src="img/ok.svg"></md-icon>
@@ -92,7 +92,7 @@
                                 <md-autocomplete  md-selected-item="selectedItem" md-search-text="searchText"
                                                  md-items="item in queryBuscarTema(searchText)"
                                                  md-item-text="item.valor"
-                                                 placeholder="Temas de la pregunta">
+                                                 placeholder="Aptitudes">
 
                                     <span md-highlight-text="searchText">
                                         {{item.tag}}
@@ -103,15 +103,15 @@
                                 </md-chip-template>
                             </md-chips>
 							<div class="alert alert-info" ng-show="!confirmacionTest && entendidoTest">
-  								Los temas seleccionados deberán tener alguna <span class="letraNegrita">relación entre si</span>
+  								Las aptitudes seleccionadas deberán tener alguna <span class="letraNegrita">relación entre si</span>
 								<md-button class="md-icon-button" aria-label="cerrarCrearPregunta" ng-click="entendidoTest = false">
 									<md-icon md-svg-src="img/cerrar.svg"></md-icon>
 								</md-button>
+								<p>Algo de tema general</p>
 							</div>
 							
 							<div class="alert alert-warning" ng-show="confirmacionTest">
-  								¿Está seguro de que quiere crear el tema {{temaAbierta}}?
-								
+  								¿Está seguro de que quiere crear esta aptitud?								
 									<md-button aria-label="eliminar" ng-click="crearTema()" 
 											   class="md-button icon explosionIcono okCrearTema">
 										<md-icon md-svg-src="img/ok.svg"></md-icon>
@@ -169,7 +169,7 @@
                                 <md-autocomplete md-selected-item="selectedItem" md-search-text="searchText"
                                                  md-items="item in queryBuscarTema(searchText)"
                                                  md-item-text="item.valor"
-                                                 placeholder="Temas de la pregunta">
+                                                 placeholder="Aptitudes">
 
                                     <span md-highlight-text="searchText">
                                         {{item.tag}}
@@ -180,15 +180,16 @@
                                 </md-chip-template>
                             </md-chips>
 							<div class="alert alert-info" ng-show="!confirmacionTestAbierto && entendidoTestAbierto">
-  								Los temas seleccionados deberán tener alguna <span class="letraNegrita">relación entre si</span>
+  								Las aptitudes seleccionadas deberán tener alguna <span class="letraNegrita">relación entre si</span>
 								<md-button class="md-icon-button" aria-label="cerrarCrearPregunta" 
 										   ng-click="entendidoTestAbierto = false">
 									<md-icon md-svg-src="img/cerrar.svg"></md-icon>
 								</md-button>
+								<p>Algo de tema general</p>
 							</div>
 							
 							<div class="alert alert-warning" ng-show="confirmacionTestAbierto">
-  								¿Está seguro de que quiere crear el tema {{temaAbierta}}?
+  								¿Está seguro de que quiere crear esta aptitud?
 								
 									<md-button aria-label="eliminar" ng-click="crearTema()" 
 											   class="md-button icon explosionIcono okCrearTema">

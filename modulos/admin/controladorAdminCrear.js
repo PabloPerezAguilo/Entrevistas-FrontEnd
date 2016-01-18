@@ -108,15 +108,15 @@ app.controller('controladorAdminCrear', function (servicioRest, $scope, $mdDialo
 					for (var i = 0; i < data.recuento.length; i++) {
 						if (i === data.recuento.length - 1) {
 							if (data.recuento[i].count === 1) {
-								$scope.mensaje[i + 1] = data.recuento[i].count + " pregunta del tema  " + data.recuento[i].tag + ".";
+								$scope.mensaje[i + 1] = data.recuento[i].count + " pregunta de la aptitud  " + data.recuento[i].tag + ".";
 							} else {
-								$scope.mensaje[i + 1] = data.recuento[i].count + " preguntas del tema " + data.recuento[i].tag + ".";
+								$scope.mensaje[i + 1] = data.recuento[i].count + " preguntas de las aptitudes " + data.recuento[i].tag + ".";
 							}
 						} else {
 							if (data.recuento[i].count === 1) {
-								$scope.mensaje[i + 1] = data.recuento[i].count + " pregunta del tema " + data.recuento[i].tag + ",";
+								$scope.mensaje[i + 1] = data.recuento[i].count + " pregunta de la aptitud " + data.recuento[i].tag + ",";
 							} else {
-								$scope.mensaje[i + 1] = data.recuento[i].count + " preguntas del tema " + data.recuento[i].tag + ",";
+								$scope.mensaje[i + 1] = data.recuento[i].count + " preguntas de las aptitudes " + data.recuento[i].tag + ",";
 							}
 						}
 					}
@@ -196,7 +196,7 @@ app.controller('controladorAdminCrear', function (servicioRest, $scope, $mdDialo
 			$scope.temasCargados = cargarTemas(data);
 		})
 		.catch(function (err) {
-			$log.error("Error al cargar los temas: " + err);
+			$log.error("Error al cargar las aptitudes: " + err);
 		});
 	
 	function buscarTema(tema) {

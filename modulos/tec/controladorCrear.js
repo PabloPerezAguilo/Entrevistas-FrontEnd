@@ -151,14 +151,13 @@ app.controller('controladorCrear', function (servicioRest, $scope, $mdDialog, $m
 	
 	
 	/* ----------- Input temas ----------- */
-	
 	servicioRest.getTemas()
 		.then(function (data) {
 			temas = data;
 			temasCargados = cargarTemas();
 		})
 		.catch(function (err) {
-			$log.error("Error al cargar los temas: " + err);
+			$log.error("Error al cargar las aptitudes: " + err);
 		});
 	
 	function buscarTema(tema, array) {

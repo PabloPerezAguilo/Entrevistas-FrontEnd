@@ -444,6 +444,10 @@ md-radio-group.md-default-theme.md-focused:not(:empty) .md-checked .md-container
     background-color: $colorPrincipalClaro;
 }
 
+.hoverLista:hover {
+	background-color: rgba(189, 136, 74, 0.1);
+}
+
 /* ------------- Ver pregunta --------------------- */
 
 //alert al poner un tema que no existe
