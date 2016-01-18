@@ -57,6 +57,8 @@ app.controller('controladorAdmin', function (servicioRest, config, $scope, $loca
 			} else {
 				query = "?fecha=" + $scope.fecha.getFullYear() + "-" + mes + "-" + dia + "&nombre=" + nombre;
 			}
+		} else if (nombre != null) {
+			query = nombre;
 		}
 		
 		servicioRest.getEntrevistas(query)
