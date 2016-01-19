@@ -56,6 +56,10 @@
 <div class="entrevistado" ng-show="acabarEntrevista">
 	<md-content>
 		<md-list>
+			<div class="alert alert-info infoNota">
+				La nota obtenida es: <span class="letraNegrita">{{ nota }} / 10</span>
+				<p class="letraPequenia">Las preguntas de libre respuesta no están incluidas en la nota</p>
+			</div>
 			<md-list-item  ng-repeat="pregunta in correccion">
 				<div ng-if="pregunta === null">
 					{{ $index + 1 }}. La pregunta ha sido borrada
@@ -69,27 +73,39 @@
 				</div>
 				
 				<div ng-if="pregunta.type === 'SINGLE_CHOICE'" class="contenedorRespuestas">
-					<h3>{{ $index  + 1 }}. {{ pregunta.title }} </h3>
-					<md-radio-group ng-model="correccionTest[$index]">
-						<span class="respuestas displayInline" ng-repeat="answer in pregunta.answers"> 
-							<md-radio-button value="{{$index}}" ng-style="correccionStyle[$parent.$index][$index]" 
-											 ng-disabled="true" aria-label="correccion test">
-								{{ answer.title }}
-							</md-radio-button>
-						</span>
-					</md-radio-group>
+					<div class="enLinea">
+						<p class="nota">{{ notaPregunta[$index] }}</p>
+					</div>
+					<div class="enLinea">
+						<h3>{{ $index  + 1 }}. {{ pregunta.title }} </h3>
+						<p>
+							<md-radio-group ng-model="correccionTest[$index]">
+								<span class="respuestas displayInline" ng-repeat="answer in pregunta.answers"> 
+									<md-radio-button value="{{$index}}" ng-style="correccionStyle[$parent.$index][$index]" 
+													 ng-disabled="true" aria-label="correccion test">
+										{{ answer.title }}
+									</md-radio-button>
+								</span>
+							</md-radio-group>
+						</p>
+					</div>
 				</div>
 				
 				<div ng-if="pregunta.type === 'MULTI_CHOICE'" class="contenedorRespuestas">
-					<h3>{{ $index  + 1}}. {{ pregunta.title }} </h3>
-					<p class="respuestas correccionRespuestas displayInline" ng-repeat="answer in pregunta.answers">
-						<md-checkbox ng-model="correccionTest[$parent.$index][$index]" 
-									 ng-disabled="true" aria-label="respuestas test abierto">
-						</md-checkbox> 
-						<span ng-style="correccionStyle[$parent.$index][$index]">
-							{{ answer.title }}
-						</span>
-					</p>
+					<div class="enLinea">
+						<p class="nota">{{ notaPregunta[$index] }}</p>
+					</div>
+					<div class="enLinea">
+						<h3>{{ $index  + 1}}. {{ pregunta.title }} </h3>
+						<p class="respuestas correccionRespuestas displayInline" ng-repeat="answer in pregunta.answers">
+							<md-checkbox ng-model="correccionTest[$parent.$index][$index]" 
+										 ng-disabled="true" aria-label="respuestas test abierto">
+							</md-checkbox> 
+							<span ng-style="correccionStyle[$parent.$index][$index]">
+								{{ answer.title }}
+							</span>
+						</p>
+					</div>
 				</div>
 				
 				<md-divider class="dividerCorto"></md-divider>
