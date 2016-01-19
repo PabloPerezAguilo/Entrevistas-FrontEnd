@@ -25,7 +25,12 @@
             <img id="logo" src="logo.png" ng-hide="logueado">
             <img id="logoLogeado" src="logo.png" ng-show="logueado" ng-cloak>
             <p id="iconoUsuario" ng-model="rolUsuario" ng-show="logueado" ng-cloak>
-                {{usuario}}/{{rol}}.<md-button ng-click="$root.cerrarSesion()">Cerrar Sesión</md-button>
+                {{usuario}} / {{rol}}
+				
+				<md-button ng-click="$root.cerrarSesion()" aria-label="cerrar sesion" 
+						   class="md-button icon centrarIconoLista explosionIcono">
+					<md-icon class="iconoBlanco" md-svg-src="img/cerrarSesion.svg"></md-icon>
+				 </md-button>
             </p>
             <div id="doneLoading" ng-hide="cargando"></div>
             <md-progress-linear id="progressBar" md-mode="indeterminate" ng-show="cargando"></md-progress-linear>
