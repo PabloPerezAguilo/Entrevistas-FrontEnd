@@ -176,7 +176,7 @@ function ServicioREST($http, $q, $rootScope, config) {
 		var promise = defered.promise;
 		$http({
 			method: 'GET',
-			url: url + '/interview/' + atributos //?fecha=VARIABLEFECHA&nombre=VARIABLENOMBRE
+			url: url + '/interview/' + atributos //?fecha=VARIABLEFECHA&nombre=VARIABLENOMBRE || idEntrevista
 		})
 		.success(function(data, status, headers, config) {
 			defered.resolve(data);
@@ -240,6 +240,7 @@ function ServicioREST($http, $q, $rootScope, config) {
 		return promise;
 	}
 	
+	/* ---------- ENTREVISTADO ------------- */
 	function getPreguntasEntrevistaById(idEntrevista) {
 		var defered = $q.defer();
 		var promise = defered.promise;
@@ -256,10 +257,8 @@ function ServicioREST($http, $q, $rootScope, config) {
 
 		return promise;
 	}
-	
-	/* ---------- ENTREVISTADO ------------- */
 
-	function posrtRespuestasEntrevista(idEntrevista, respuestas) {
+	function postRespuestasEntrevista(idEntrevista, respuestas) {
 
 		var defered = $q.defer();
 		var promise = defered.promise;
@@ -279,6 +278,23 @@ function ServicioREST($http, $q, $rootScope, config) {
 
 	}
 	
+	function postFeedback(idEntrevista, feedback) {
+
+		var defered = $q.defer();
+		var promise = defered.promise;
+		$http({
+			method: 'POST',
+			url: url + '/interviewFeedback/' + idEntrevista,
+			data: feedback
+		})
+		.success(function(data, status, headers, config) {
+			defered.resolve(data);
+		})
+		.error(function(data, status, headers, config) {
+			tratarError(data, status, defered);
+		});
+		return promise;
+	}
 	
 	
 	return {
@@ -295,6 +311,7 @@ function ServicioREST($http, $q, $rootScope, config) {
 		getNombresEntrevistas: getNombresEntrevistas,
 		deleteEntrevista: deleteEntrevista,
 		getPreguntasEntrevistaById: getPreguntasEntrevistaById,
-		posrtRespuestasEntrevista: posrtRespuestasEntrevista
+		postRespuestasEntrevista: postRespuestasEntrevista,
+		postFeedback: postFeedback
 	}
 }

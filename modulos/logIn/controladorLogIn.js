@@ -11,7 +11,6 @@ app.controller('controladorLogIn', function (servicioRest, config, $scope, $loca
 	
 	//RECORDAR SESION
 	if (localStorage.getItem("usuario") !== undefined && localStorage.getItem("usuario") !== null) {
-		console.log("usuario guardado en localStorage");
 		var user = {
 			username: localStorage.getItem("usuario"),
 			password: Aes.Ctr.decrypt(localStorage.getItem("password"), localStorage.getItem("usuario"), 256)
