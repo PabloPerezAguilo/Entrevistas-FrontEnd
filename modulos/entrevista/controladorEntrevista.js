@@ -157,7 +157,7 @@ app.controller('controladorEntrevista', function (servicioRest, $scope, $rootSco
 							}
 						}
 						if(notaAux > 0) {
-							$scope.notaPregunta[i] = notaAux / $scope.preguntas[i].answers.length;
+							$scope.notaPregunta[i] = (notaAux / $scope.preguntas[i].answers.length).toFixed(2);
 							nota += $scope.notaPregunta[i];
 						}
 					} else {

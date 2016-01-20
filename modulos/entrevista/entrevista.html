@@ -61,22 +61,24 @@
 				<p class="letraPequenia">Las preguntas de libre respuesta no están incluidas en la nota</p>
 			</div>
 			<md-list-item  ng-repeat="pregunta in correccion">
-				<div ng-if="pregunta === null">
+				<div ng-if="pregunta === null" class="notaRespuesta">
 					{{ $index + 1 }}. La pregunta ha sido borrada
 				</div>
 				<div ng-if="pregunta.type === 'FREE'" class="contenedorRespuestas">
-					<h3>{{ $index  + 1}}. {{ pregunta.title }}</h3>
-					<p ng-style="correccionStyle[$index]">{{ pregunta.answer }}</p>
-					<div class="alert alert-warning directivaEntrevista" ng-show="tieneDirectiva[$index]">
-						{{ pregunta.directive }}
+					<div class="notaRespuesta">
+							<h3>{{ $index  + 1 }}. {{ pregunta.title }}</h3>
+						<p ng-style="correccionStyle[$index]">{{ pregunta.answer }}</p>
+						<div class="alert alert-warning directivaEntrevista" ng-show="tieneDirectiva[$index]">
+							{{ pregunta.directive }}
+						</div>
 					</div>
 				</div>
 				
 				<div ng-if="pregunta.type === 'SINGLE_CHOICE'" class="contenedorRespuestas">
-					<div class="enLinea">
-						<p class="nota">{{ notaPregunta[$index] }}</p>
+					<div class="alert alert-warning enLinea notaTest">
+						{{ notaPregunta[$index] }}
 					</div>
-					<div class="enLinea">
+					<div class="enLinea notaRespuesta">
 						<h3>{{ $index  + 1 }}. {{ pregunta.title }} </h3>
 						<p>
 							<md-radio-group ng-model="correccionTest[$index]">
@@ -92,10 +94,10 @@
 				</div>
 				
 				<div ng-if="pregunta.type === 'MULTI_CHOICE'" class="contenedorRespuestas">
-					<div class="enLinea">
-						<p class="nota">{{ notaPregunta[$index] }}</p>
+					<div class="alert alert-warning enLinea notaTest">
+						{{ notaPregunta[$index] }}
 					</div>
-					<div class="enLinea">
+					<div class="enLinea notaRespuesta">
 						<h3>{{ $index  + 1}}. {{ pregunta.title }} </h3>
 						<p class="respuestas correccionRespuestas displayInline" ng-repeat="answer in pregunta.answers">
 							<md-checkbox ng-model="correccionTest[$parent.$index][$index]" 
