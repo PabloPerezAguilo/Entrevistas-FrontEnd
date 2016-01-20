@@ -693,9 +693,14 @@ rzslider .rz-bar-wrapper {
 }
 
 /* ------------------- ENTREVISTA ---------------------------*/
-.nota {
-    color: red;
-    padding-right: 15px;
+.notaTest {
+	position: absolute;
+    margin-top: 40px;
+	padding: 10px 15px;
+}
+
+.notaRespuesta {
+	margin-left: 80px;
 }
 
 .letraPequenia {
