@@ -1,4 +1,4 @@
-<div>
+<div id="seccionTec">
     <md-button mfb-button class="md-fab md-mini btnPosDerecha tec" ng-click="crear($event)" aria-label="crearPregunta">
         <md-icon md-svg-src="img/crear.svg" class="btnIconoCentrado"></md-icon>
     </md-button>
@@ -46,7 +46,7 @@
 						{{ item.type }}
 					</p>
 				</div>
-				<md-button ng-click="ver($event,$index)" aria-label="ver pegrunta" 
+				<md-button id="ver" ng-click="ver($event,$index)" aria-label="ver pegrunta" 
 						   class="md-button icon centrarIconoLista explosionIcono">
 					<md-icon md-svg-src="img/ojo.svg"></md-icon>
 					<md-tooltip md-direction="bottom">
@@ -54,7 +54,7 @@
 					</md-tooltip>
 				 </md-button>
 
-				<md-button aria-label="eliminar" ng-click="eliminar($index)" class="md-button icon centrarIconoLista explosionIcono">
+				<md-button id="eliminar"aria-label="eliminar" ng-click="eliminar($index)" class="md-button icon centrarIconoLista explosionIcono">
 					<md-icon md-svg-src="img/delete.svg"></md-icon>
 					<md-tooltip md-direction="bottom">
 					  Eliminar
