@@ -14,6 +14,7 @@
 		<link rel="stylesheet" href="https://cdn.gitcdn.xyz/cdn/angular/bower-material/v1.0.0-rc4/angular-material.css">
 		<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
         <link rel="stylesheet" type="text/css" href="css/rzslider.css"/>
+		<link rel="stylesheet" type="text/css" href="css/introjs.css"/>
 		<!-- endbuild -->
        
 		<!-- AQUI IRAN LOS CSS NUESTROS QUE NO TENGAN CDN-->
@@ -26,7 +27,7 @@
             <img id="logoLogeado" src="logo.png" ng-show="logueado" ng-cloak>
             <p id="iconoUsuario" ng-model="rolUsuario" ng-show="logueado" ng-cloak>
                 {{usuario}} / {{rol}}
-				<md-button aria-label="ayuda" 
+				<md-button aria-label="ayuda" ng-click="lanzarAyuda()"
 						   class="md-button icon centrarIconoLista explosionIcono iconosHeader">
 					<md-icon class="iconoBlanco" md-svg-src="img/ayuda.svg"></md-icon>
 				 </md-button>
@@ -39,7 +40,7 @@
             <md-progress-linear id="progressBar" md-mode="indeterminate" ng-show="cargando"></md-progress-linear>
 		</header>
         
-		<div ng-view>
+		<div ng-view ng-intro-options="introOptions" ng-intro-method="lanzarAyuda">
 		</div>
              
 		<footer>
@@ -59,6 +60,7 @@
 		<script src="js/angular-material.js"></script>
 		<script src="js/assets-cache.js"></script>
 		<script src="js/angular-material-icons.min.js"></script>
+		<script src="js/intro.min.js"></script>
 		<!-- endbuild -->
 		<!-- build:JS -->
 		<script src="services.js"></script>
