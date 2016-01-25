@@ -113,7 +113,7 @@ app.controller('controladorAdmin', function (servicioRest, config, $scope, $loca
 		}
 		
 		$scope.paginacion[$scope.paginacion.length] = paginaActual;
-		
+		$scope.stylePaginacion[$scope.paginacion.length - 1] = {"background-color": "#E4E4E4", "color": "#EF6C00"};
 		//relleno la paginacion por la derecha
 		if(paginaActual + 1 < $scope.ultimaPagina) {
 			$scope.paginacion[$scope.paginacion.length] = paginaActual + 1;
@@ -122,11 +122,6 @@ app.controller('controladorAdmin', function (servicioRest, config, $scope, $loca
 		else if (paginaActual === $scope.ultimaPagina - 1) {
 			$scope.paginacion[$scope.paginacion.length] = $scope.ultimaPagina;
 		}
-		
-		$scope.stylePaginacion[paginaActual - 1] = {"background-color": "#E4E4E4", "color": "#EF6C00"}; 
-		
-		/*    background-color: #E4E4E4;
-    color: #EF6C00;*/
 	}
 	
 	function getEntrevistas(nombre, pagina) {
@@ -150,6 +145,11 @@ app.controller('controladorAdmin', function (servicioRest, config, $scope, $loca
 			.then(function (data) {
 				$scope.entrevistas = data.results;
 				$scope.ultimaPagina = data.total;
+				if (data.total < 2) {
+					$scope.mostrarPaginacion = false;
+				} else {
+					$scope.mostrarPaginacion = true;
+				}
 				escribirHora();
 				if (data.length === 0) {
 					$scope.hayEntrevistas = true;

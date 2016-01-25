@@ -75,11 +75,11 @@
 			</md-list-item>
 		</div>
     </md-list>
-	<ul class="pagination">
-		<li><a href="">&laquo;</a></li>
+	<ul class="pagination" ng-show="mostrarPaginacion">
+		<li><a href="" ng-click="calcularPaginas(1)">&laquo;</a></li>
 		<li ng-repeat="pagina in paginacion">
-			<a href="" ng-click="calcularPaginas(pagina)"ng-style="stylePaginacion[$index]">{{ pagina }}</a>
+			<a href="" ng-click="calcularPaginas(pagina)" ng-style="stylePaginacion[$index]">{{ pagina }}</a>
 		</li>
-		<li><a href="">&raquo;</a></li>
+		<li><a href="" ng-click="calcularPaginas(ultimaPagina)">&raquo;</a></li>
 	</ul>
 </div>
