@@ -1,4 +1,13 @@
 app.controller('controladorCrear', function (servicioRest, $scope, $mdDialog, $mdToast, $rootScope, $log) {
+	
+	$scope.ayuda = function() {
+		$scope.crear = !$scope.crear;
+		if(!$scope.crear) {
+			$scope.cabeceraCrear = " - Ayuda";
+		} else {
+			$scope.cabeceraCrear = "";
+		}
+	}
     
 	$scope.entendido = true;
 	$scope.entendidoAbierta = true;

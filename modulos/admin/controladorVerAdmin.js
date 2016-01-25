@@ -1,4 +1,13 @@
-app.controller('controladorVerAdmin', function ($scope, $mdDialog, indice) {
+app.controller('controladorVerAdmin', function ($scope, $rootScope, $mdDialog, indice) {
+	
+	$scope.ayuda = function() {
+		$scope.ver = !$scope.ver;
+		if(!$scope.ver) {
+			$scope.cabeceraVer = '- Ayuda';
+		} else {
+			$scope.cabeceraVer = '';
+		}
+	}
     
 	$scope.tieneDNI = false;
 	

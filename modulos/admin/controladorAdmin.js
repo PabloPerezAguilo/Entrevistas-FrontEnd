@@ -181,6 +181,7 @@ app.controller('controladorAdmin', function (servicioRest, config, $scope, $loca
             targetEvent: ev,
             onComplete: function () {
                 $rootScope.aniadirSliderTemas();
+				$rootScope.aniadirIntervalo();
                 
             },
             clickOutsideToClose: false

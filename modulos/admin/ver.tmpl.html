@@ -1,17 +1,24 @@
-<md-dialog class="redimensionar" aria-label="Mango (Fruit)"  ng-cloak>
+<md-dialog class="redimensionar" aria-label="Mango (Fruit)" ng-init="ver=true" ng-cloak>
 	<form>
 		<md-toolbar>
       		<div class="md-toolbar-tools">
-        		<h2 ng-model="cabeceraVer">Entrevista</h2>
+        		<h2 ng-model="cabeceraVer">Entrevista {{cabeceraVer}}</h2>
                 <span flex></span>
+				<md-button aria-label="ayuda" ng-click="ayuda()" 
+						   class="md-button icon centrarIconoLista explosionIcono iconosHeader">
+					<md-icon class="iconoBlanco" md-svg-src="img/ayuda.svg"></md-icon>
+					<md-tooltip md-direction="bottom">
+						Ayuda
+					</md-tooltip>
+				</md-button>
 				<md-button class="md-icon-button" ng-click="cancel()">
 					<md-icon md-svg-src="img/cerrar.svg" aria-label="Close dialog"></md-icon>
                 </md-button>
 			</div>
 		</md-toolbar>
-		<md-dialog-content>
+		<md-dialog-content ng-show="ver">
 			<div class="md-dialog-content">
-				<span class="letraNegrita"> Nombre y apellidos: </span><span ng-bind="nombre"></span>
+				<span id="nombre" class="letraNegrita"> Nombre y apellidos: </span><span ng-bind="nombre"></span>
 				<p ng-show="tieneDNI">
 					<span class="letraNegrita"> DNI: </span>
 					<span ng-bind="DNI"></span>
@@ -30,5 +37,16 @@
 				</md-chips>
       		</div>
     	</md-dialog-content>
+		<md-dialog-content ng-show="!ver" class="ayuda">
+			<div class="alert alert-info alertAyuda">
+				<p>El campo <b>"Nombre y apellidos:"</b> indica el nombre y los apellidos del entrevistado</p>
+			</div>
+			<div class="alert alert-info alertAyuda">
+				<p>El campo <b>"DNI:"</b> indica el DNI del entrevistado</p>
+			</div>
+			<div class="alert alert-info alertAyuda">
+				<p>El campo <b>"Estdo:"</b> indica el estadi de la entrevista. Este podrá ser "Pendiente" o "Realizada"</p>
+			</div>
+		</md-dialog-content>
   	</form>
 </md-dialog>
