@@ -1,7 +1,4 @@
 app.controller('controladorRespuestasEntrevista', function (servicioRest, $scope, $rootScope, $log, $mdDialog, $location) {
- 
-	$rootScope.indiceEntrevistaSeleccionada = "56962a9d8c5d19002284d4e4"; //entrevista con 6 preguntas
-	//$rootScope.indiceEntrevistaSeleccionada = "568fb061ccef6ff8108d0858"; //entrevista con 2 preguntas multiples
 	
 	$rootScope.cargando = false;
     $rootScope.logueado = true;
@@ -66,7 +63,7 @@ app.controller('controladorRespuestasEntrevista', function (servicioRest, $scope
 						$scope.notaPregunta[i] = 1;
 					}
 
-				} else {
+				} else if (preguntas[i].type === "MULTI_CHOICE"){
 					notaMax++;
 					$scope.correccion[i] = {
 						type: preguntas[i].type,
@@ -94,10 +91,11 @@ app.controller('controladorRespuestasEntrevista', function (servicioRest, $scope
 							respuestaAux[key] = true;
 						}
 						
+						//calculo la puntuacion asociada a esa pregunta
 						for (var j = 0; j < preguntas[i].answers.length; j++) {
 							if(respuestaAux[j] === true && preguntas[i].answers[j].valid === false) {
 								notaAux--;
-							} else if (preguntas[i].answers[j].valid === true && respuestaAux[j] === false) {
+							} else if (preguntas[i].answers[j].valid === true && respuestaAux[j] === undefined) {
 								notaAux--;
 							}
 						}
@@ -132,6 +130,7 @@ app.controller('controladorRespuestasEntrevista', function (servicioRest, $scope
 		servicioRest.getEntrevistas($rootScope.indiceEntrevistaSeleccionada)
 			.then(function (data) {
 				respuestas = data.answers;
+				$scope.observaciones = data.feedback;
 				getPreguntas();
 			})
 			.catch(function (err) {

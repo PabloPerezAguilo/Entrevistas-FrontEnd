@@ -1,6 +1,8 @@
 app.controller('controladorEntrevista', function (servicioRest, $scope, $rootScope, $log, $mdDialog, $location) {
  
 	$rootScope.indiceEntrevistaSeleccionada = "56962a9d8c5d19002284d4e4"; //entrevista con 6 preguntas
+	//$rootScope.indiceEntrevistaSeleccionada = "5694e974f371495c2291c5c2"; //entrevista con 2 preguntas abiertas
+	//$rootScope.indiceEntrevistaSeleccionada = "568fb06fccef6ff8108d0859"; //entrevista con 2 preguntas test
 	//$rootScope.indiceEntrevistaSeleccionada = "568fb061ccef6ff8108d0858"; //entrevista con 2 preguntas multiples
 	
 	$rootScope.cargando = false;
@@ -41,7 +43,6 @@ app.controller('controladorEntrevista', function (servicioRest, $scope, $rootSco
 			var answers = {
 				answers: $scope.respuestas,
 			}
-			console.log(answers);
 			servicioRest.postRespuestasEntrevista($rootScope.indiceEntrevistaSeleccionada, answers)
 				.then(function(data) {
 					$scope.hacerPreguntas = false;
