@@ -608,7 +608,10 @@ md-list md-list-item.md-3-line .md-list-item-text h3 {
     max-height: 690px;
 }
 .pagination {
-    padding-left: 40%;
+    position: absolute;
+    left: 47%;
+	top: 89.5%;
+    transform: translate(-50%, -50%);
 	margin: 0px;
 }
 
@@ -1042,20 +1045,41 @@ input.horas {
 		height: 140px;
 	}
 	
-	.pagination {
-    	margin: 5px 0;
+}
+
+@media screen and (min-height: 820px) and (max-height: 900px) {
+    .pagination {
+		top: 88.5%;
 	}
 }
 
-@media screen and (min-width: 550px) and (min-height: 920px){
+@media screen and (min-height: 720px) and (max-height: 819px) {
     .pagination {
-    	margin: 18px 0;
+		top: 87%;
 	}
 }
 
-@media screen and (min-height: 960px){
+@media screen and (min-height: 620px) and (max-height: 719px) {
     .pagination {
-		padding-top: 30px;
+		top: 85%;
+	}
+}
+
+@media screen and (min-height: 580px) and (max-height: 619px) {
+    .pagination {
+		top: 84%;
+	}
+}
+
+@media screen and (min-height: 570px) and (max-height: 579px) {
+    .pagination {
+		top: 81.5%;
+	}
+}
+
+@media screen and (max-height: 569px) {
+    .pagination {
+		top: 83%;
 	}
 }
 
