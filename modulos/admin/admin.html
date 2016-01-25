@@ -5,7 +5,7 @@
     
     <p></p>
 
-    <md-list>
+    <md-list class="paginacion">
         <md-subheader class="md-no-sticky">
 			Entrevistas
 		</md-subheader>
@@ -75,5 +75,11 @@
 			</md-list-item>
 		</div>
     </md-list>
-
+	<ul class="pagination">
+		<li><a href="">&laquo;</a></li>
+		<li ng-repeat="pagina in paginacion">
+			<a href="" ng-click="calcularPaginas(pagina)"ng-style="stylePaginacion[$index]">{{ pagina }}</a>
+		</li>
+		<li><a href="">&raquo;</a></li>
+	</ul>
 </div>

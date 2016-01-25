@@ -60,6 +60,7 @@ app.controller('controladorAdmin', function (servicioRest, config, $scope, $loca
     $scope.entrevistas = [];
 	$scope.hayEntrevistas = false;
 	$rootScope.pulsaBoton = false;
+	var paginaActual = 1;
 	
 	if (localStorage.getItem("usuario") !== null) {
 		$rootScope.usuario = localStorage.getItem("usuario");
@@ -100,30 +101,62 @@ app.controller('controladorAdmin', function (servicioRest, config, $scope, $loca
 		}
 	}
 	
-	function getEntrevistas(nombre) {
-		var query = "";
+	function calcular () {
+		$scope.paginacion = [];
+		$scope.stylePaginacion = [];
+		//relleno la paginacion por la izquierda
+		if(paginaActual > 2) {
+			$scope.paginacion[$scope.paginacion.length] = paginaActual - 2;
+			$scope.paginacion[$scope.paginacion.length] = paginaActual - 1
+		} else if (paginaActual === 2) {
+			$scope.paginacion[$scope.paginacion.length] = paginaActual - 1;
+		}
+		
+		$scope.paginacion[$scope.paginacion.length] = paginaActual;
+		
+		//relleno la paginacion por la derecha
+		if(paginaActual + 1 < $scope.ultimaPagina) {
+			$scope.paginacion[$scope.paginacion.length] = paginaActual + 1;
+			$scope.paginacion[$scope.paginacion.length] = paginaActual + 2;
+		}
+		else if (paginaActual === $scope.ultimaPagina - 1) {
+			$scope.paginacion[$scope.paginacion.length] = $scope.ultimaPagina;
+		}
+		
+		$scope.stylePaginacion[paginaActual - 1] = {"background-color": "#E4E4E4", "color": "#EF6C00"}; 
+		
+		/*    background-color: #E4E4E4;
+    color: #EF6C00;*/
+	}
+	
+	function getEntrevistas(nombre, pagina) {
+		paginaActual = pagina;
+		var query = "?pagina=" + paginaActual;
 		
 		if(!$scope.mostrarTodasEntrevistas) {
 			escribirDiaMes();
 		
 			if (nombre === null) {
-				query = "?fecha=" + $scope.fecha.getFullYear() + "-" + mes + "-" + dia;
+				query = "?pagina=" + paginaActual + "&fecha=" + $scope.fecha.getFullYear() + "-" + mes + "-" + dia;
 			} else {
-				query = "?fecha=" + $scope.fecha.getFullYear() + "-" + mes + "-" + dia + "&nombre=" + nombre;
+				query = "?pagina=" + paginaActual + "&fecha=" + 
+					$scope.fecha.getFullYear() + "-" + mes + "-" + dia + "&nombre=" + nombre;
 			}
 		} else if (nombre != null) {
-			query = nombre;
+			query = "?pagina=" + paginaActual + "&" + nombre;
 		}
 		
 		servicioRest.getEntrevistas(query)
 			.then(function (data) {
-				$scope.entrevistas = data;
+				$scope.entrevistas = data.results;
+				$scope.ultimaPagina = data.total;
 				escribirHora();
 				if (data.length === 0) {
 					$scope.hayEntrevistas = true;
 				} else {
 					$scope.hayEntrevistas = false;
 				}
+				calcular();
 			})
 			.catch(function (err) {
 				$log.error("Error al cargar las entrevistas: " + err);
@@ -134,6 +167,10 @@ app.controller('controladorAdmin', function (servicioRest, config, $scope, $loca
 					$location.path('/');
 				}
 			});
+	}
+	
+	$scope.calcularPaginas = function(pagina) {
+		getEntrevistas(nombreSeleccionado, pagina)
 	}
 	
     $scope.crear = function (ev) {
@@ -149,7 +186,7 @@ app.controller('controladorAdmin', function (servicioRest, config, $scope, $loca
             clickOutsideToClose: false
         })
 			.then(function (data) {
-				getEntrevistas(nombreSeleccionado);
+				getEntrevistas(nombreSeleccionado, paginaActual);
 			})
 			.catch(function (err) {
 				$log.error("Error al crear la entrevista: " + err);
@@ -200,7 +237,7 @@ app.controller('controladorAdmin', function (servicioRest, config, $scope, $loca
 
 			if (index !== -1) {
 				nombreSeleccionado = nombresCargados[index].name;
-				getEntrevistas(nombreSeleccionado);
+				getEntrevistas(nombreSeleccionado, paginaActual);
 			}
 			
 		}
@@ -209,7 +246,7 @@ app.controller('controladorAdmin', function (servicioRest, config, $scope, $loca
     $scope.searchTextChange = function searchTextChange(text) {
 		if (text === "") {
 			nombreSeleccionado = null;
-			getEntrevistas(nombreSeleccionado);
+			getEntrevistas(nombreSeleccionado, paginaActual);
 		}
     };
 	
@@ -237,7 +274,7 @@ app.controller('controladorAdmin', function (servicioRest, config, $scope, $loca
 	};
 	
 	/* -------------------- LISTAR ENTREVISTAS ---------------------------- */
-	getEntrevistas(nombreSeleccionado);
+	getEntrevistas(nombreSeleccionado, paginaActual);
 	
 	//si no se filtra por fecha ni por nombre se desactivan dichos elementos y se hace un get entrevistas
 	$scope.mostrarTodasEntrevistas = false;
@@ -245,13 +282,13 @@ app.controller('controladorAdmin', function (servicioRest, config, $scope, $loca
 	
 	$scope.getTodasEntervistas = function () {
 		$scope.disableCalendario = !$scope.disableCalendario;
-		getEntrevistas(nombreSeleccionado);
+		getEntrevistas(nombreSeleccionado, paginaActual);
 		$rootScope.obtenerNombres();
 	}
 	
 	
 	$scope.cambioFecha = function() {
-		getEntrevistas(nombreSeleccionado);
+		getEntrevistas(nombreSeleccionado, paginaActual);
 		$rootScope.obtenerNombres();
 	};
 	
