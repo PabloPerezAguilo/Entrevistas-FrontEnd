@@ -6,7 +6,7 @@ app.controller('controladorEntrevista', function (servicioRest, $scope, $rootSco
 	//$rootScope.indiceEntrevistaSeleccionada = "568fb061ccef6ff8108d0858"; //entrevista con 2 preguntas multiples
 	
 	$rootScope.cargando = false;
-    $rootScope.logueado = true;
+    $rootScope.logueado = false;
 	
 	if ($rootScope.pulsaBoton === undefined || !$rootScope.pulsaBoton) {
 		$location.path('/admin');

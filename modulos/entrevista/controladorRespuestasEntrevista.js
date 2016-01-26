@@ -1,7 +1,7 @@
 app.controller('controladorRespuestasEntrevista', function (servicioRest, $scope, $rootScope, $log, $mdDialog, $location) {
 	
 	$rootScope.cargando = false;
-    $rootScope.logueado = true;
+    $rootScope.logueado = false;
 	$scope.correccion = [];
 	$scope.correccionStyle = {};
 	$scope.correccionTest = [];
