@@ -10,13 +10,19 @@ app.controller('controladorVerAdmin', function ($scope, $rootScope, $mdDialog, $
 	}
 	
 	$scope.tieneDNI = false;
-	
 	if ($scope.entrevistas[indice].DNI != undefined) {
 		$scope.DNI = $scope.entrevistas[indice].DNI;
 		$scope.tieneDNI = true;
 	}
 	
+	if($scope.entrevistas[indice].status === "Realizada") {
+		$scope.entrevistaHecha = true;
+	} else {
+		$scope.entrevistaHecha = false;
+	}
+	
 	$scope.nombre = $scope.entrevistas[indice].name;
+	$scope.fecha = $scope.entrevistas[indice].date;
 	$scope.status = $scope.entrevistas[indice].status;
 	$scope.preguntas = $scope.entrevistas[indice].nquestions;
 	
@@ -30,8 +36,8 @@ app.controller('controladorVerAdmin', function ($scope, $rootScope, $mdDialog, $
 		$mdDialog.hide(answer);
 	};
 	
-	$scope.ver = function () {
-		$rootScope.indiceEntrevistaSeleccionada = indice;
+	$scope.verRespuestas = function () {
+		$rootScope.indiceEntrevistaSeleccionada = $scope.entrevistas[indice]._id;
 		$location.path("/respuestasEntrevista");
 	}
 });

@@ -60,6 +60,9 @@ app.controller('controladorAdmin', function (servicioRest, config, $scope, $loca
     $scope.entrevistas = [];
 	$scope.hayEntrevistas = false;
 	$rootScope.pulsaBoton = false;
+	//si no se filtra por fecha ni por nombre se desactivan dichos elementos y se hace un get entrevistas
+	$scope.mostrarTodasEntrevistas = true;
+	$scope.disableCalendario = true;
 	var paginaActual = 1;
 	
 	if (localStorage.getItem("usuario") !== null) {
@@ -97,7 +100,12 @@ app.controller('controladorAdmin', function (servicioRest, config, $scope, $loca
 
 	function escribirHora() {
 		for (var i = 0; i < $scope.entrevistas.length; i++) {
-			$scope.entrevistas[i].date = $scope.entrevistas[i].date.slice(11, 16);
+			if($scope.mostrarTodasEntrevistas) {
+				$scope.entrevistas[i].date = $scope.entrevistas[i].date.slice(0, 10) + " / " + 
+					$scope.entrevistas[i].date.slice(11, 16);
+			} else {
+				$scope.entrevistas[i].date = $scope.entrevistas[i].date.slice(11, 16);
+			}
 		}
 	}
 	
@@ -276,10 +284,6 @@ app.controller('controladorAdmin', function (servicioRest, config, $scope, $loca
 	
 	/* -------------------- LISTAR ENTREVISTAS ---------------------------- */
 	getEntrevistas(nombreSeleccionado, paginaActual);
-	
-	//si no se filtra por fecha ni por nombre se desactivan dichos elementos y se hace un get entrevistas
-	$scope.mostrarTodasEntrevistas = false;
-	$scope.disableCalendario = false;
 	
 	$scope.getTodasEntervistas = function () {
 		$scope.disableCalendario = !$scope.disableCalendario;

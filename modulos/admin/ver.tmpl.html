@@ -18,8 +18,8 @@
 		</md-toolbar>
 		<md-dialog-content ng-show="ver">
 			<div class="md-dialog-content">
-				<md-button ng-click="ver()" aria-label="ver pegrunta" 
-						   class="md-button icon explosionIcono verRespuestas">
+				<md-button ng-click="verRespuestas()" aria-label="ver pegrunta" 
+						   class="md-button icon explosionIcono verRespuestas" ng-show="entrevistaHecha">
 					<md-icon class="redimensionarIcono" md-svg-src="img/ojo.svg"></md-icon>
 					<md-tooltip md-direction="bottom">
 					  Ver resultado de las respuestas
@@ -32,6 +32,10 @@
 				<p ng-show="tieneDNI">
 					<span class="letraNegrita"> DNI: </span>
 					<span ng-bind="DNI"></span>
+				</p>
+				<p>
+					<span class="letraNegrita"> Programada para: </span>
+					<span ng-bind="fecha"></span>
 				</p>
 				<p>
 					<span class="letraNegrita"> Estado: </span>
