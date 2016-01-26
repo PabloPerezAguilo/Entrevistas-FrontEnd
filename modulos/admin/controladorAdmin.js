@@ -138,7 +138,7 @@ app.controller('controladorAdmin', function (servicioRest, config, $scope, $loca
 					$scope.fecha.getFullYear() + "-" + mes + "-" + dia + "&nombre=" + nombre;
 			}
 		} else if (nombre != null) {
-			query = "?pagina=" + paginaActual + "&" + nombre;
+			query = "?pagina=" + paginaActual + "&nombre=" + nombre;
 		}
 		
 		servicioRest.getEntrevistas(query)
@@ -173,36 +173,7 @@ app.controller('controladorAdmin', function (servicioRest, config, $scope, $loca
 		getEntrevistas(nombreSeleccionado, pagina)
 	}
 	
-    $scope.crear = function (ev) {
-        $mdDialog.show({
-            controller: 'controladorAdminCrear',
-            templateUrl: 'modulos/admin/adminCrear.tmpl.html',
-            parent: angular.element(document.body),
-            targetEvent: ev,
-            onComplete: function () {
-                $rootScope.aniadirSliderTemas();
-                
-            },
-            clickOutsideToClose: false
-        })
-			.then(function (data) {
-				getEntrevistas(nombreSeleccionado, paginaActual);
-			})
-			.catch(function (err) {
-				$log.error("Error al crear la entrevista: " + err);
-            });
-			
-	};
-	
-	/* ----------------- AUTOCOMPLETE ---------------- */
-	function cargarNombres(nombres) {
-		return nombres.map(function (nombre) {
-			nombre.valor = nombre.name.toLowerCase();
-			return nombre;
-		});
-	}
-	
-	$rootScope.obtenerNombres = function () {
+	function obtenerNombres() {
 		var query = "";
 		if(!$scope.mostrarTodasEntrevistas) {
 			escribirDiaMes();
@@ -219,7 +190,37 @@ app.controller('controladorAdmin', function (servicioRest, config, $scope, $loca
 			});
 	};
 	
-	$rootScope.obtenerNombres();
+    $scope.crear = function (ev) {
+        $mdDialog.show({
+            controller: 'controladorAdminCrear',
+            templateUrl: 'modulos/admin/adminCrear.tmpl.html',
+            parent: angular.element(document.body),
+            targetEvent: ev,
+            onComplete: function () {
+                $rootScope.aniadirSliderTemas();
+                
+            },
+            clickOutsideToClose: false
+        })
+			.then(function (data) {
+				getEntrevistas(nombreSeleccionado, paginaActual);
+				obtenerNombres();
+			})
+			.catch(function (err) {
+				$log.error("Error al crear la entrevista: " + err);
+            });
+			
+	};
+	
+	/* ----------------- AUTOCOMPLETE ---------------- */
+	function cargarNombres(nombres) {
+		return nombres.map(function (nombre) {
+			nombre.valor = nombre.name.toLowerCase();
+			return nombre;
+		});
+	}
+	
+	obtenerNombres();
 	
 	function buscarNombre(nombre) {
 		var i;
@@ -237,7 +238,7 @@ app.controller('controladorAdmin', function (servicioRest, config, $scope, $loca
 
 			if (index !== -1) {
 				nombreSeleccionado = nombresCargados[index].name;
-				getEntrevistas(nombreSeleccionado, paginaActual);
+				getEntrevistas(nombreSeleccionado, 1);
 			}
 			
 		}
@@ -283,13 +284,13 @@ app.controller('controladorAdmin', function (servicioRest, config, $scope, $loca
 	$scope.getTodasEntervistas = function () {
 		$scope.disableCalendario = !$scope.disableCalendario;
 		getEntrevistas(nombreSeleccionado, paginaActual);
-		$rootScope.obtenerNombres();
+		obtenerNombres();
 	}
 	
 	
 	$scope.cambioFecha = function() {
-		getEntrevistas(nombreSeleccionado, paginaActual);
-		$rootScope.obtenerNombres();
+		getEntrevistas(nombreSeleccionado, 1);
+		obtenerNombres();
 	};
 	
 	/* ------------------------------- Borrar, ver y hacer entrevista ------------------------------- */
@@ -299,7 +300,7 @@ app.controller('controladorAdmin', function (servicioRest, config, $scope, $loca
         servicioRest.deleteEntrevista(idEntrevista)
 			.then(function (data) {
 				$scope.entrevistas.splice(indice, 1);
-				$rootScope.obtenerNombres();
+				obtenerNombres();
 			})
 			.catch(function (err) {
 				$log.error("Error al eliminar la entrevista: " + err);

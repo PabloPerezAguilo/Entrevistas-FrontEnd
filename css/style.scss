@@ -714,6 +714,22 @@ rzslider .rz-bar-wrapper {
     margin-left: 0px;
 }
 
+.verRespuestas {
+	float: right;
+	margin-top: 2%;
+    margin-right: 6%;
+}
+
+.verRespuestas.md-button.icon.md-ink-ripple {
+	width: 83px;
+	height: 83px;
+}
+
+.redimensionarIcono {
+	width: 50px;
+	height: 50px;
+}
+
 /* ------------------- ENTREVISTA ---------------------------*/
 .mensaje {
 	margin-top: 14%;

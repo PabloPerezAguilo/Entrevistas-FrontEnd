@@ -1,5 +1,5 @@
-app.controller('controladorVerAdmin', function ($scope, $rootScope, $mdDialog, indice) {
-	
+app.controller('controladorVerAdmin', function ($scope, $rootScope, $mdDialog, $location, indice) {
+
 	$scope.ayuda = function() {
 		$scope.ver = !$scope.ver;
 		if(!$scope.ver) {
@@ -8,7 +8,7 @@ app.controller('controladorVerAdmin', function ($scope, $rootScope, $mdDialog, i
 			$scope.cabeceraVer = '';
 		}
 	}
-    
+	
 	$scope.tieneDNI = false;
 	
 	if ($scope.entrevistas[indice].DNI != undefined) {
@@ -29,4 +29,9 @@ app.controller('controladorVerAdmin', function ($scope, $rootScope, $mdDialog, i
 	$scope.answer = function (answer) {
 		$mdDialog.hide(answer);
 	};
+	
+	$scope.ver = function () {
+		$rootScope.indiceEntrevistaSeleccionada = indice;
+		$location.path("/respuestasEntrevista");
+	}
 });
