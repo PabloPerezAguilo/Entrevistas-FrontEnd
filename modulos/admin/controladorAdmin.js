@@ -107,7 +107,7 @@ app.controller('controladorAdmin', function (servicioRest, config, $scope, $loca
 		//relleno la paginacion por la izquierda
 		if(paginaActual > 2) {
 			$scope.paginacion[$scope.paginacion.length] = paginaActual - 2;
-			$scope.paginacion[$scope.paginacion.length] = paginaActual - 1
+			$scope.paginacion[$scope.paginacion.length] = paginaActual - 1;
 		} else if (paginaActual === 2) {
 			$scope.paginacion[$scope.paginacion.length] = paginaActual - 1;
 		}
@@ -181,7 +181,6 @@ app.controller('controladorAdmin', function (servicioRest, config, $scope, $loca
             targetEvent: ev,
             onComplete: function () {
                 $rootScope.aniadirSliderTemas();
-				$rootScope.aniadirIntervalo();
                 
             },
             clickOutsideToClose: false
