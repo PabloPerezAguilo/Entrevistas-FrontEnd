@@ -890,7 +890,7 @@ md-dialog-content.ayuda {
 
 .alertAyuda {
 	width: 70%;
-    margin-left: 17%;
+    margin-left: 14%;
     text-align: center;
     padding-bottom: 3%;
     padding-top: 3%;
@@ -932,7 +932,7 @@ rzslider.ayudaRango .rz-bar-wrapper {
 }
 
 md-input-container.horasAyuda {
-	margin-left: -10%;
+	margin-left: 0%;
 }
 
 .md-button.md-fab.btnAyuda {
@@ -1197,6 +1197,14 @@ md-input-container.horasAyuda {
 	
 	#iconoUsuario {
 		margin-top:6.5%;
+	}
+	
+	.md-button.md-fab.btnAyuda {
+		margin-right: 44%;
+	}
+	
+	.alertAyuda.btnMas {
+		padding-bottom: 15%;
 	}
 }
 
@@ -1467,4 +1475,10 @@ md-input-container.horasAyuda {
 		margin-left: -24%;
 	}
 	
+}
+
+@media screen and (max-width: 650px) {
+	#rango {
+		width: 90%;
+	}
 }
