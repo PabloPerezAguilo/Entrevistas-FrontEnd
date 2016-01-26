@@ -95,12 +95,6 @@ header {
     margin-left: 5%;
 }
 
-.iconoRole {
-	color: $letra;
-	width: 40px;
-	height: 40px;
-}
-
 #iconoUsuario {
     position: relative;
     display: inline-block;
@@ -142,7 +136,7 @@ footer {
 }
 
 #doneLoading {
-    height: 5px;
+    height: 6px;
     position: relative;
     background-color: $colorPrincipal;
     top: 8%;
