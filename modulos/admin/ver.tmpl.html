@@ -11,7 +11,16 @@
 		</md-toolbar>
 		<md-dialog-content>
 			<div class="md-dialog-content">
+				<md-button ng-click="ver()" aria-label="ver pegrunta" 
+						   class="md-button icon explosionIcono verRespuestas">
+					<md-icon class="redimensionarIcono" md-svg-src="img/ojo.svg"></md-icon>
+					<md-tooltip md-direction="bottom">
+					  Ver resultado de las respuestas
+					</md-tooltip>
+				 </md-button>
+				
 				<span class="letraNegrita"> Nombre y apellidos: </span><span ng-bind="nombre"></span>
+				<p></p>
 				<p ng-show="tieneDNI">
 					<span class="letraNegrita"> DNI: </span>
 					<span ng-bind="DNI"></span>

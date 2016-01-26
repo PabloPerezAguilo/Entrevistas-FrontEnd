@@ -1,4 +1,4 @@
-app.controller('controladorVerAdmin', function ($scope, $mdDialog, indice) {
+app.controller('controladorVerAdmin', function ($scope, $rootScope, $mdDialog, $location, indice) {
     
 	$scope.tieneDNI = false;
 	
@@ -20,4 +20,9 @@ app.controller('controladorVerAdmin', function ($scope, $mdDialog, indice) {
 	$scope.answer = function (answer) {
 		$mdDialog.hide(answer);
 	};
+	
+	$scope.ver = function () {
+		$rootScope.indiceEntrevistaSeleccionada = indice;
+		$location.path("/respuestasEntrevista");
+	}
 });
