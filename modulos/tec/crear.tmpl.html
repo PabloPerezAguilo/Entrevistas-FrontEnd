@@ -1,12 +1,20 @@
 <md-dialog class="redimensionar" fullscreen="true" ng-init="confirmacionAbierta=false;confirmacionTest=false;confirmacionTestAbierto=false;
-									  deshabilitadoAbierta=false;deshabilitadoTest=false;deshabilitadoTestAbierto=false">
+									  deshabilitadoAbierta=false;deshabilitadoTest=false;deshabilitadoTestAbierto=false;
+															crear=true">
     <form>
         <md-toolbar>
             <div class="md-toolbar-tools">
                 <h2>
-                    Crear pregunta
+                    Crear pregunta {{cabeceraCrear}}
                 </h2>
                 <span flex></span>
+				<md-button aria-label="ayuda" ng-click="ayuda()" 
+						   class="md-button icon centrarIconoLista explosionIcono iconosHeader">
+					<md-icon class="iconoBlanco" md-svg-src="img/ayuda.svg"></md-icon>
+					<md-tooltip md-direction="bottom">
+						Ayuda
+					</md-tooltip>
+				</md-button>
                 <md-button class="md-icon-button" aria-label="cerrarCrearPregunta" ng-click="cancel()">
                     <md-icon md-svg-src="img/cerrar.svg"></md-icon>
                 </md-button>
@@ -14,7 +22,7 @@
             </div>
         </md-toolbar>
 
-        <md-dialog-content ng-model="conte">
+        <md-dialog-content ng-model="conte" ng-show="crear">
             <md-tabs class="md-accent" md-dynamic-height md-border-bottom>
                 <md-tab label="pregunta abierta">
                     <md-content>
@@ -235,12 +243,72 @@
                 </md-tab>
             </md-tabs>
         </md-dialog-content>
+		<md-dialog-content ng-model="conte" ng-show="!crear" class="ayudaTec">
+            <md-tabs class="md-accent" md-dynamic-height md-border-bottom>
+				<md-tab label="general">
+                    <md-content>
+						<div class="alert alert-info alertAyuda">
+							<p>Hay 3 pestañas: <b>"PREGUNTA ABIERTA"</b>, <b>"PREGUNTA TIPO TEST"</b> y <b>"PREGUNTA DE SELECCIÓN MÚLTIPLE"</b>.</p>
+							<p>En la pestaña <b>"PREGUNTA ABIERTA"</b> se rellenarán los datos necesarios para crear una pregunta de tipo abierta.</p>
+							<p>En la pestaña <b>"PREGUNTA TIPO TEST"</b> se rellenarán los datos necesarios para crear una pregunta de tipo test.</p>
+							<p>En la pestaña <b>"PREGUNTA DE SELECCIÓN MÚLTIPLE"</b> se rellenarán los datos necesarios para crear una pregunta de tipo selección múltiple.</p>
+						</div>
+						<div class="alert alert-info alertAyuda">
+							<p>La siguiente barra será para que pueda seleccionar el nivel de la pregunta. Por defecto es 5.</p>
+							<md-slider flex="" md-discrete="" ng-model="nivelAbierta" aria-label="nivel abierta"
+									   step="1" min="1" max="10">
+							</md-slider>
+						</div>
+						<div class="alert alert-info alertAyuda">
+							<p>En el campo <b>"Aptitudes"</b> podrá seleccionar una o varias que tenga la pregunta.</p>
+						</div>
+						<div class="alert alert-info alertAyuda">
+							<p>En el campo <b>"Enunciado de la pregunta"</b> deberá introducir el enunciado. Este campo es obligatorio</p>
+						</div>
+						<div class="alert alert-info alertAyuda">
+							<p>El siguiente botón es para guardar la entrevista con los datos introducidos:</p>
+							<md-button class="md-raised">Guardar</md-button>
+						</div>
+                    </md-content>
+                </md-tab>
+                <md-tab label="pregunta abierta">
+                    <md-content>
+						<label class="titulo">Ayuda</label>
+						<div class="alert alert-info alertAyuda">
+							<p>En el campo <b>"Directivas de la pregunta"</b> podrá introducir las directrices que usted considere necesarias. Este campo no es obligatorio.</p>
+						</div>
+                    </md-content>
+                </md-tab>
+                <md-tab label="pregunta tipo test">
+                    <md-content>
+						<div class="alert alert-info alertAyuda">
+							<p>En esta sección deberá rellenar los campos de las respuestas y marcar una de las respuestas como correcta. Todas las respuestas deben estar rellenas.</p>
+						</div>
+						<div class="alert alert-info alertAyuda btnMas">
+							<p>El siguiente botón sirve para añadir otro campo de respuesta.</p>
+							<md-button class="md-fab md-mini btnAyuda" 
+                                       aria-label="crearPregunta abierta">
+                                <md-icon md-svg-src="img/mas.svg"></md-icon>
+                            </md-button>
+						</div>
+                    </md-content>
+                </md-tab>                    
+
+                <md-tab label="pregunta de selección múltiple">
+                    <md-content>
+                        <div class="alert alert-info alertAyuda">
+							<p>En esta sección deberá rellenar los campos de las respuestas. Puede marcar como respuesta correcta una, varias o ninguna. Todas las respuestas deben estar rellenas.</p>
+						</div>
+						<div class="alert alert-info alertAyuda btnMas">
+							<p>El siguiente botón sirve para añadir otro campo de respuesta.</p>
+							<md-button class="md-fab md-mini btnAyuda" 
+                                       aria-label="crearPregunta abierta">
+                                <md-icon md-svg-src="img/mas.svg"></md-icon>
+                            </md-button>
+						</div>
+                    </md-content>
+                </md-tab>
+            </md-tabs>
+        </md-dialog-content>
     </form>
 </md-dialog>
-
-
-
-
-
-
-    

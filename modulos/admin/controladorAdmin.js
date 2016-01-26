@@ -1,4 +1,59 @@
 app.controller('controladorAdmin', function (servicioRest, config, $scope, $location, $rootScope, $mdDialog, $timeout, $q, $log, $http) {
+	
+	$scope.introOptions = {
+        steps: [
+			{
+				element: '#seccionAdmin',
+				intro: 'Esta es la sección del administrador, aquí podrá ver el listado de las entrevistas, ver en detalle ' +
+					'una entrevista, eliminar entrevistas, abrir una pantalla para crear nuevas entrevistas y abrir otra ' +
+					'pantalla para hacer la entrevista.',
+				position: 'top left'
+			},
+            {
+                element: '.adminBtn',
+                intro: "Si pulsa este botón se abrirá una ventana para crear una entrevista"
+            },
+			{
+				element: '.listaPreguntas',
+				intro: 'Esta es la lista con las entrevistas'
+			},
+			{
+                element: 'md-autocomplete',
+                intro: "En esta lista podrá buscar las entrevistas por el nombre"
+            },
+			{
+				element: 'md-datepicker',
+				intro: 'En este calendario podrá seleccionar el día del que desee ver las entrevistas'
+			},
+			{
+				element: '.adminCheck',
+				intro: 'Marcando este checkbox se mostrarán todas las entrevistas, sin filtro por fecha'
+			},
+			{
+				element: '#ver',
+				intro: 'Si pulsa este botón se abrirá una ventana con la información más detallada de la entrevista'
+			},
+			{
+				element: '#eliminar',
+				intro: 'Si pulsa este botón se eliminará la entrevista'
+			},
+			{
+				element: '#hacerEntrevista',
+				intro: 'Si pulsa este botón se abrirá una ventana para hacer la entrevitsa'
+			}
+        ],
+        showStepNumbers: false,
+        exitOnOverlayClick: true,
+        exitOnEsc: true,
+        nextLabel: '<strong>Siguiente</strong>',
+        prevLabel: '<span>Anterior</span>',
+        skipLabel: 'Cerrar',
+        doneLabel: 'Fin'
+    };
+	setTimeout(function () {
+		$rootScope.lanzarAyuda = $scope.lanzarAyuda;
+	}, 1000);
+	
 	$scope.mensajeEntrevistaCreada = true;
     $rootScope.cargando = false;
     $rootScope.logueado = true;
@@ -108,9 +163,9 @@ app.controller('controladorAdmin', function (servicioRest, config, $scope, $loca
 				if (err === 403 && token !== null) {
 					//cuando entra a admin desde tec
 					$location.path('/tec');
-				} /*else {
+				} else if(err === 403) {
 					$location.path('/');
-				}*/
+				}
 			});
 	}
 	
@@ -143,6 +198,7 @@ app.controller('controladorAdmin', function (servicioRest, config, $scope, $loca
             targetEvent: ev,
             onComplete: function () {
                 $rootScope.aniadirSliderTemas();
+				$rootScope.aniadirIntervalo();
                 
             },
             clickOutsideToClose: false

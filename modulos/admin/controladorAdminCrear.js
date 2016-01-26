@@ -1,5 +1,35 @@
 app.controller('controladorAdminCrear', function (servicioRest, $scope, $mdDialog, $mdToast, $rootScope, $log) {
-    
+	$scope.intervalo = {
+			minSliderG: 1,
+			maxSliderG: 10,
+			options: {
+				floor: 1,
+				ceil: 10,
+				step: 1
+			}
+		};
+	$scope.ayuda = function() {
+		$scope.crear = !$scope.crear;
+		if(!$scope.crear) {
+			$scope.cabeceraCrear = '- Ayuda';
+			$scope.aniadirIntervalo();
+		} else {
+			$scope.cabeceraCrear = '';
+		}
+	}
+	
+	$scope.aniadirIntervalo = function() {
+		$scope.intervalo = {
+			minSliderG: 1,
+			maxSliderG: 10,
+			options: {
+				floor: 1,
+				ceil: 10,
+				step: 1
+			}
+		};
+	}
+	
     $scope.minSliderValue = [];
     $scope.temasEntrevista = [];
 	$scope.errorTema = [];

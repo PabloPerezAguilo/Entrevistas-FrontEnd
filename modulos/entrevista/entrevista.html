@@ -43,11 +43,11 @@
 </div>
 
 <div ng-hide="hacerPreguntas">
-	<p>
-		Ha completado el cuestionario correctamente.
-		En breve llegara el entrevistador tecnico.
-		Por favor, espere y no pulse continuar hasta su llegada
-	</p>
+	<div class="alert alert-info mensaje">
+		<p>Ha completado el cuestionario correctamente.</p> 
+		<p>En breve llegara el entrevistador tecnico.</p>
+		<p>Por favor, espere y no pulse continuar hasta su llegada.</p>
+	</div>
 	<md-button class="md-raised btnEntrevistadoGuardar" ng-click="aceptarBtn()">
 		Aceptar
 	</md-button>	

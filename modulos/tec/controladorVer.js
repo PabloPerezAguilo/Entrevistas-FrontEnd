@@ -1,4 +1,5 @@
 app.controller('controladorVer', function ($scope, $mdDialog, indice) {
+	
     if ($scope.preguntas[indice].type === "Pregunta abierta") {
         $scope.cabeceraVer = "- Abierta";
         $scope.temas_nivel = $scope.preguntas[indice].tags[0];
@@ -32,6 +33,18 @@ app.controller('controladorVer', function ($scope, $mdDialog, indice) {
             });
         }
     }
+	var aux;
+	if($scope.ver) {
+		aux = $scope.cabeceraVer;
+	}
+	$scope.ayuda = function() {		
+		$scope.ver = !$scope.ver;
+		if(!$scope.ver) {
+			$scope.cabeceraVer = '- Ayuda';
+		} else {
+			$scope.cabeceraVer = aux;
+		}
+	}
 	
 	$scope.hide = function () {
 		$mdDialog.hide();

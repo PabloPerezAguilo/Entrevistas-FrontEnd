@@ -1,5 +1,14 @@
 app.controller('controladorVerAdmin', function ($scope, $rootScope, $mdDialog, $location, indice) {
-    
+
+	$scope.ayuda = function() {
+		$scope.ver = !$scope.ver;
+		if(!$scope.ver) {
+			$scope.cabeceraVer = '- Ayuda';
+		} else {
+			$scope.cabeceraVer = '';
+		}
+	}
+	
 	$scope.tieneDNI = false;
 	
 	if ($scope.entrevistas[indice].DNI != undefined) {

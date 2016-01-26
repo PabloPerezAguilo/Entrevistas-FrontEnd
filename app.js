@@ -1,6 +1,6 @@
 'use strict';
 
-var app = angular.module('magni', ['ngRoute','ngMaterial', 'ngMdIcons', 'rzModule']);
+var app = angular.module('magni', ['ngRoute','ngMaterial', 'ngMdIcons', 'rzModule', 'angular-intro']);
 app.run(function(servicioRest, $rootScope, $http, $location) {
 
 	// Establecemos las cabeceras por defecto. Las cabecera Authorization se modificara cuando el usuario se loge

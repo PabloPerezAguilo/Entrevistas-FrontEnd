@@ -1,5 +1,46 @@
 app.controller('controladorTec', function (servicioRest, $scope, $rootScope, $mdDialog, $timeout, $q, $log, $mdToast, $location, $http) {
 	
+	$scope.introOptions = {
+        steps:[
+			{
+				element: '#seccionTec',
+				intro: 'Esta es la sección del técnico, aquí podrá ver el listado de las preguntas creadas, ver en detalle una' +
+					'pregunta, eliminar preguntas y abrir una pantalla para crear nuevas preguntas'
+			}, 
+			{
+				element: '.listaPreguntas',
+				intro: 'Este es el listado de todas las preguntas creadas'
+			},
+			{
+				element: '.buscarTemas',
+				intro: 'Aquí podrá filtrar las preguntas en función de las aptitudes deseadas'
+			},
+			{
+				element: '#ver',
+				intro: 'Pulsando en este botón se abrirá una pantalla con la información detallada de la pregunta'
+			},
+			{
+				element: '#eliminar',
+				intro: 'Pulsando aquí podrá eliminar la pregunta'
+			},
+			{
+				element: '.tec',
+				intro: 'Pulsando en este botón se abrirá una pantalla con los campos necesarios para crear una pregunta'
+			}
+			
+        ],
+        showStepNumbers: false,
+        exitOnOverlayClick: true,
+        exitOnEsc:true,
+        nextLabel: '<strong>Siguiente</strong>',
+        prevLabel: '<span>Anterior</span>',
+        skipLabel: 'Cerrar',
+        doneLabel: 'Fin'
+    };
+	setTimeout(function() {
+		$rootScope.lanzarAyuda = $scope.lanzarAyuda;
+	}, 1000);
+	
 	if (localStorage.getItem("usuario") !== null) {
 		$rootScope.usuario = localStorage.getItem("usuario");
 	} else {

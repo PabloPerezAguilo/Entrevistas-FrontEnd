@@ -1,11 +1,19 @@
-<md-dialog class="redimensionar" ng-init="error=false;req=false;mini=false;maxi=false">
+<md-dialog class="redimensionar" ng-init="error=false;req=false;mini=false;maxi=false;crear=true">
         <form>
             <md-toolbar>
                 <div class="md-toolbar-tools">
                     <h2>
-                        Crear entrevista
+                        Crear entrevista {{cabeceraCrear}}
                     </h2>
                     <span flex></span>
+					<md-button aria-label="ayuda" ng-click="ayuda()" 
+						   class="md-button icon centrarIconoLista explosionIcono iconosHeader">
+						<md-icon class="iconoBlanco" md-svg-src="img/ayuda.svg"></md-icon>
+						<md-tooltip md-direction="bottom">
+							Ayuda
+						</md-tooltip>
+					</md-button>
+					
                     <md-button class="md-icon-button" aria-label="cerrarCrearPregunta" ng-click="cancel()" 
 							   ng-show="haciendoEntrevista">
                         <md-icon md-svg-src="img/cerrar.svg"></md-icon>
@@ -13,8 +21,7 @@
 
                 </div>
             </md-toolbar>
-            
-            <md-dialog-content ng-model="conte">
+            <md-dialog-content ng-model="conte" ng-show="crear">
                 <md-content>
                     <div class="contenidoTablaCrear" ng-show="haciendoEntrevista">
                         <md-input-container class="md-block">
@@ -66,7 +73,7 @@
 												  rz-slider-options="minSliderValue[$index].options"></rzslider>
 									<md-chips ng-model="temasEntrevista[$index]" md-autocomplete-snap="" 
 										  md-transform-chip="transformChip($chip, $index)" md-require-match="false">
-										<md-autocomplete md-selected-item="selectedItem" md-search-text="searchText"
+										<md-autocomplete id="aptitudes" md-selected-item="selectedItem" md-search-text="searchText"
 													 md-items="item in queryBuscarTema(searchText)"
 													 md-item-text="item.valor"
 													 placeholder="Aptitudes">
@@ -116,11 +123,42 @@
                     
                 </md-content>
 			</md-dialog-content>
+			<md-dialog-content ng-show="!crear" class="ayuda">
+				<div class="alert alert-info alertAyuda">
+					<p>Con el siguiente calendario usted podrá seleccionar la fecha en la que se realizará la entrevista:</p>
+					<md-datepicker ng-model="fechaAyuda" md-placeholder="Introducir fecha" class="ayudaFecha"></md-datepicker>
+				</div>
+				<div class="alert alert-info alertAyuda">
+					<p>En los siguientes campos deberá usted introducir la hora:</p>
+					<md-input-container class="horasAyuda">
+						<input type="number" step="any" ng-model="horas" min="08" max="20" 
+							   placeholder="Hora *">
+					</md-input-container>
+					<md-input-container class="md-inline">
+						<input type="number" step="any" ng-model="minutos" min="00" max="59" 
+							   placeholder="Minutos *">
+					</md-input-container>
+				</div>
+				<div class="alert alert-info alertAyuda">
+					<p>La barra siguiente es para que usted pueda seleccionar qué rango de nivel debe tener el entrevistada en cierta aptitud:</p>
+					<img id="rango" src="rango.png">
+				</div>
+				<div class="alert alert-info alertAyuda">
+					<p>En el campo <b>"Aptitudes"</b> podrá seleccionar una o varias aptitudes que desea que tenga el entrevistado.</p> 
+					<p>El rango de nivel de estas aptitudes es el seleccionado en la barra anterior.</p>
+				</div>
+				<div class="alert alert-info alertAyuda btnMas">
+					<p>El siguiente botón es para añadir otra barra para seleccionar el rango y otro campo de aptitudes:</p>
+					<md-button class="md-fab md-mini btnAyuda" aria-label="crearPregunta">
+						<md-icon md-svg-src="img/mas.svg"></md-icon>
+					</md-button>
+				</div>
+				<div class="alert alert-info alertAyuda">
+					<p>El siguiente botón es para guardar la entrevista con los datos introducidos:</p>
+					<md-button class="md-raised btnMensajeEntrevistaAyuda">
+						Cerrar
+					</md-button>
+				</div>
+			</md-dialog-content>
 	</form>
 </md-dialog>
-
-
-
-
-
-    

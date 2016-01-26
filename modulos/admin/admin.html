@@ -1,4 +1,4 @@
-<div>
+<div id="seccionAdmin">
     <md-button mfb-button class="md-fab md-mini btnPosDerecha adminBtn" ng-click="crear($event)" aria-label="crear entrevista">
         <md-icon md-svg-src="img/crear.svg" class="btnIconoCentrado"></md-icon>
     </md-button>
@@ -48,7 +48,7 @@
 						
 					</p>
 				</div>
-				<md-button ng-click="ver($event,$index)" aria-label="ver pegrunta" 
+				<md-button id="ver" ng-click="ver($event,$index)" aria-label="ver pegrunta" 
 						   class="md-button icon centrarIconoLista explosionIcono">
 					<md-icon md-svg-src="img/ojo.svg"></md-icon>
 					<md-tooltip md-direction="bottom">
@@ -56,14 +56,15 @@
 					</md-tooltip>
 				 </md-button>
 
-				<md-button aria-label="eliminar" ng-click="eliminar($index)" class="md-button icon centrarIconoLista explosionIcono">
+				<md-button id="eliminar" aria-label="eliminar" ng-click="eliminar($index)" 
+						   class="md-button icon centrarIconoLista explosionIcono">
 					<md-icon md-svg-src="img/delete.svg"></md-icon>
 					<md-tooltip md-direction="bottom">
 						Eliminar
 					</md-tooltip>
 				</md-button>
 				
-				<md-button aria-label="hacer entrevista" ng-click="hacerEntrevista($index)" 
+				<md-button id="hacerEntrevista" aria-label="hacer entrevista" ng-click="hacerEntrevista($index)" 
 						   class="md-button icon centrarIconoLista explosionIcono">
 					<md-icon md-svg-src="img/hacerEntrevista.svg"></md-icon>
 					<md-tooltip md-direction="bottom">
