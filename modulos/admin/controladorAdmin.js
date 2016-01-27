@@ -136,17 +136,22 @@ app.controller('controladorAdmin', function (servicioRest, config, $scope, $loca
 		paginaActual = pagina;
 		var query = "?pagina=" + paginaActual;
 		
+		if ($scope.entrevistasRealizadas) {
+			query += "&estado=Realizada";
+		} else {
+			query += "&estado=Pendiente"
+		}
+		
 		if(!$scope.mostrarTodasEntrevistas) {
 			escribirDiaMes();
 		
 			if (nombre === null) {
-				query = "?pagina=" + paginaActual + "&fecha=" + $scope.fecha.getFullYear() + "-" + mes + "-" + dia;
+				query += "&fecha=" + $scope.fecha.getFullYear() + "-" + mes + "-" + dia;
 			} else {
-				query = "?pagina=" + paginaActual + "&fecha=" + 
-					$scope.fecha.getFullYear() + "-" + mes + "-" + dia + "&nombre=" + nombre;
+				query +=  "&fecha=" + $scope.fecha.getFullYear() + "-" + mes + "-" + dia + "&nombre=" + nombre;
 			}
 		} else if (nombre != null) {
-			query = "?pagina=" + paginaActual + "&nombre=" + nombre;
+			query += "&nombre=" + nombre;
 		}
 		
 		servicioRest.getEntrevistas(query)
@@ -181,11 +186,23 @@ app.controller('controladorAdmin', function (servicioRest, config, $scope, $loca
 		getEntrevistas(nombreSeleccionado, pagina)
 	}
 	
+	function cargarNombres(nombres) {
+		return nombres.map(function (nombre) {
+			nombre.valor = nombre.name.toLowerCase();
+			return nombre;
+		});
+	}
+	
 	function obtenerNombres() {
 		var query = "";
+		if ($scope.entrevistasRealizadas) {
+			query = "?estado=Realizada";
+		} else {
+			query = "?estado=Pendiente"
+		}
 		if(!$scope.mostrarTodasEntrevistas) {
 			escribirDiaMes();
-			query = "?fecha=" + $scope.fecha.getFullYear() + "-" + mes + "-" + dia;
+			query += "&fecha=" + $scope.fecha.getFullYear() + "-" + mes + "-" + dia;
 		}
 		
 			
@@ -221,13 +238,6 @@ app.controller('controladorAdmin', function (servicioRest, config, $scope, $loca
 	};
 	
 	/* ----------------- AUTOCOMPLETE ---------------- */
-	function cargarNombres(nombres) {
-		return nombres.map(function (nombre) {
-			nombre.valor = nombre.name.toLowerCase();
-			return nombre;
-		});
-	}
-	
 	obtenerNombres();
 	
 	function buscarNombre(nombre) {
@@ -291,8 +301,7 @@ app.controller('controladorAdmin', function (servicioRest, config, $scope, $loca
 		obtenerNombres();
 	}
 	
-	
-	$scope.cambioFecha = function() {
+	$scope.cambioFechaSwitch = function() {
 		getEntrevistas(nombreSeleccionado, 1);
 		obtenerNombres();
 	};
@@ -325,10 +334,20 @@ app.controller('controladorAdmin', function (servicioRest, config, $scope, $loca
 		);
 	};
 	
-	$scope.hacerEntrevista = function (ind) {
-		$rootScope.pulsaBoton = true;
-		$rootScope.indiceEntrevistaSeleccionada = $scope.entrevistas[ind]._id;
-		$location.path("/entrevista");
+	$scope.hacerEntrevista = function (ev, ind) {
+		var confirm = $mdDialog.confirm()
+        	.title('Procederás a realizar la entrevista')
+			.textContent('¿Estás seguro?')
+			.ariaLabel('Confirmacion guardar respuestas')
+			.targetEvent(ev)
+			.ok('Sí')
+			.cancel('No');
+
+    	$mdDialog.show(confirm).then(function() {
+			$rootScope.pulsaBoton = true;
+			$rootScope.indiceEntrevistaSeleccionada = $scope.entrevistas[ind]._id;
+			$location.path("/entrevista");
+    	});
 	};
 
 });

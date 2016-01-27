@@ -598,9 +598,38 @@ md-list md-list-item.md-3-line .md-list-item-text h3 {
 }
 
 /*------------------------------ADMIN----------------------*/
+.letraMediana {
+	font-size: 13px;
+}
+
+//switch para elegir entrevistas realizadas o pendientes
+md-switch .md-bar {
+	background-color: #D8D8D8;
+}
+
+md-switch.md-checked .md-bar {
+	background-color: #D8D8D8;
+}
+
+md-switch.md-default-theme.md-checked .md-ink-ripple, md-switch.md-checked .md-ink-ripple, md-switch .md-thumb {
+	background-color: $colorPrincipal;
+}
+
+.divSwitchEntrevista {
+	position: absolute;
+    left: 60%;
+	top: 87%;
+}
+
+.switchEntrevista {
+	margin: 0px;
+	padding-top: 10px;
+}
+
 .paginacion {
     max-height: 690px;
 }
+
 .pagination {
     position: absolute;
     left: 47%;
@@ -1131,11 +1160,19 @@ md-input-container.horasAyuda {
     .pagination {
 		top: 88.5%;
 	}
+	
+	.divSwitchEntrevista {
+		top: 86%;
+	}
 }
 
 @media screen and (min-height: 720px) and (max-height: 819px) {
     .pagination {
 		top: 87%;
+	}
+	
+	.divSwitchEntrevista {
+		top: 84%;
 	}
 }
 
@@ -1143,11 +1180,19 @@ md-input-container.horasAyuda {
     .pagination {
 		top: 85%;
 	}
+	
+	.divSwitchEntrevista {
+		top: 81%;
+	}
 }
 
 @media screen and (min-height: 580px) and (max-height: 619px) {
     .pagination {
 		top: 84%;
+	}
+	
+	.divSwitchEntrevista {
+		top: 80%;
 	}
 }
 
@@ -1155,11 +1200,19 @@ md-input-container.horasAyuda {
     .pagination {
 		top: 81.5%;
 	}
+	
+	.divSwitchEntrevista {
+		top: 78%;
+	}
 }
 
 @media screen and (max-height: 569px) {
     .pagination {
 		top: 83%;
+	}
+	
+	.divSwitchEntrevista {
+		top: 79%;
 	}
 }
 
