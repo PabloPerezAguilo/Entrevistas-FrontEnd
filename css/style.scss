@@ -1216,6 +1216,16 @@ md-input-container.horasAyuda {
 	}
 }
 
+@media screen and (min-width: 796px) and (max-width: 920px) {
+    .pagination {
+		left: 35%;
+	}
+	
+	.divSwitchEntrevista {
+		left: 50%;
+	}
+}
+
 @media screen and (max-width: 784px) {
     .listaPreguntas {
 		margin-left: 0%;
@@ -1240,10 +1250,6 @@ md-input-container.horasAyuda {
 		float: right;
 		margin-top: 1%;
 		margin-right: 1%;
-	}
-	
-	#iconoUsuario {
-		margin-top:6.5%;
 	}
 	
 	.md-button.md-fab.btnAyuda {
@@ -1301,6 +1307,13 @@ md-input-container.horasAyuda {
 		left: 1203px;
 	}
 }
+
+@media screen and (max-width: 1167px) and (min-width: 795px){
+	.md-button.md-fab.md-mini.adminBtn {
+		margin-right: 11%;
+	}
+}
+
 @media screen and (max-width: 750px) {
    md-dialog.md-transition-in.redimensionar {
        float: inherit;
@@ -1350,14 +1363,6 @@ md-input-container.horasAyuda {
 
 @media screen and (min-width: 650px) and (max-width: 1000px) {
 	
-	#iconoUsuario {
-		margin-top: 6%;
-	}
-	
-	.md-button.md-fab.md-mini.adminBtn {
-		margin-right: -18%;
-	}
-	
 	.md-button.md-fab.md-mini.tec {
 		margin-right: 12%;
 	}
@@ -1384,17 +1389,6 @@ md-input-container.horasAyuda {
 	.md-button.md-fab.md-mini.tec {
 		margin-right: 12%;
 	}
-	
-	.md-button.md-fab.md-mini.adminBtn {
-		margin-right: 11%;
-	}
-}
-
-@media screen and (min-width: 1040px) and (max-width: 1079px) {
-	
-	.md-button.md-fab.md-mini.adminBtn {
-		margin-right: 14%;
-	}
 }
 
 @media screen and (min-width: 1040px){
@@ -1404,18 +1398,7 @@ md-input-container.horasAyuda {
 	}
 }
 
-@media screen and (min-width: 1080px) and (max-width: 1100px) {
-	
-	.md-button.md-fab.md-mini.adminBtn {
-		margin-right: -15%;
-	}
-}
-
 @media screen and (max-width: 645px) {
-	
-	.md-button.md-fab.md-mini.adminBtn {
-		margin-right: 6%;
-	}
 	
 	md-datepicker {
 		float: none;
@@ -1442,14 +1425,10 @@ md-input-container.horasAyuda {
 	}
 }
 
-@media screen and (min-width: 650px) and (max-width: 795px) {
+@media screen and (min-width: 650px) and (max-width: 794px) {
 	
 	.listaPreguntas {
 		width: 99%;
-	}
-	
-	.md-button.md-fab.md-mini.adminBtn {
-    	margin-right: -36%;
 	}
 	
 	.admin {
@@ -1468,13 +1447,11 @@ md-input-container.horasAyuda {
 		width: 60%;
 	}
 	
-	#iconoUsuario {
-		margin-top:	6%;
+	.md-button.md-fab.md-mini.adminBtn {
+		margin-right: 5%;
 	}
 	
-	.md-button.md-fab.md-mini.adminBtn {
-		margin-right: -34%;
-	}
+	
 }
 
 @media screen and (min-width: 800px) and (max-width: 1000px) {
@@ -1490,30 +1467,12 @@ md-input-container.horasAyuda {
 
 @media screen and (min-width: 1041px) and (max-width: 1225px) {
 	
-	#iconoUsuario {
-		margin-top: 5%;
-	}
-	
-	
-	.md-button.md-fab.md-mini.adminBtn {
-		margin-right: -14%;
-	}
-	
 	md-autocomplete {
 		width: 68%;
 	}
 }
 
 @media screen and (min-width: 900px) and (max-width: 1000px) {
-	
-	#iconoUsuario {
-		margin-top: 5%;
-	}
-	
-	.md-button.md-fab.md-mini.adminBtn {
-		margin-right: -17%;
-	}
-	
 	md-autocomplete {
 		width: 62%;
 	}
