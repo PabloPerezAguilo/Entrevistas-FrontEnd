@@ -176,7 +176,7 @@ function ServicioREST($http, $q, $rootScope, config) {
 		var promise = defered.promise;
 		$http({
 			method: 'GET',
-			url: url + '/interview/' + atributos //?fecha=VARIABLEFECHA&nombre=VARIABLENOMBRE || idEntrevista
+			url: url + '/interview/' + atributos
 		})
 		.success(function(data, status, headers, config) {
 			defered.resolve(data);

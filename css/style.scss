@@ -45,7 +45,6 @@ table {
 	border-spacing: 0;
 }
 
-
 /* ---------------------------------------------------------------------*/
 
 $negro: #1E1E1E;
@@ -280,6 +279,11 @@ md-tabs:not(.md-no-tab-content):not(.md-dynamic-height) {
 }
 
 /*------------------------------TECNICO*------------------------------*/
+//para cuadrar el calendario
+.md-calendar-day-header th, td {
+	vertical-align: middle;
+}
+
 /*md-chips*/
 md-chips .md-chip.md-focused {
 	background-color: $colorPrincipal;
@@ -1450,8 +1454,6 @@ md-input-container.horasAyuda {
 	.md-button.md-fab.md-mini.adminBtn {
 		margin-right: 5%;
 	}
-	
-	
 }
 
 @media screen and (min-width: 800px) and (max-width: 1000px) {

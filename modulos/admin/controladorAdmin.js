@@ -61,8 +61,8 @@ app.controller('controladorAdmin', function (servicioRest, config, $scope, $loca
 	$scope.hayEntrevistas = false;
 	$rootScope.pulsaBoton = false;
 	//si no se filtra por fecha ni por nombre se desactivan dichos elementos y se hace un get entrevistas
-	$scope.mostrarTodasEntrevistas = true;
-	$scope.disableCalendario = true;
+	$scope.mostrarTodasEntrevistas = false;
+	$scope.disableCalendario = false;
 	var paginaActual = 1;
 	
 	if (localStorage.getItem("usuario") !== null) {

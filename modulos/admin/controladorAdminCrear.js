@@ -1,4 +1,15 @@
 app.controller('controladorAdminCrear', function (servicioRest, $scope, $mdDialog, $mdToast, $rootScope, $log) {
+	$scope.minutos = 14;
+	$scope.horas = 14;
+	$scope.nombreEntrevista = "Juan";
+	
+	
+	
+	
+	
+	
+	
+	
 	$scope.ayuda = function() {
 		$scope.crear = !$scope.crear;
 		if(!$scope.crear) {
@@ -128,15 +139,15 @@ app.controller('controladorAdminCrear', function (servicioRest, $scope, $mdDialo
 							}
 						}
 					}
-				$scope.haciendoEntrevista = false;
-			})
-				.catch(function(err) {
+					$scope.haciendoEntrevista = false;
+				}).catch(function(err) {
 					$log.error("Error al crear la entrevista");
+					console.log(err);
 					if (err.status === 500) {
 						$scope.error = true;
 						$scope.temas = err.data.leveledTags;
 					}
-				});
+			});
         }
     };
 	
