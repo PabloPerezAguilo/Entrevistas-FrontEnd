@@ -758,6 +758,18 @@ rzslider .rz-bar-wrapper {
 }
 
 /* ------------------- ENTREVISTA ---------------------------*/
+.mensajeAlert {
+	display: inherit;
+}
+
+.alertWarningEntrevista {
+	padding: 20px;
+    padding-top: 0;
+}
+
+.mensajeAlertRepeat {
+	padding-top: 5px;
+}
 .mensaje {
 	margin-top: 14%;
     width: 35%;

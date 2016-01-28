@@ -125,30 +125,13 @@ app.controller('controladorTec', function (servicioRest, $scope, $rootScope, $md
     
 	getPreguntas();
     
-    /*--------------------------Funciones--------------------------*/	
-	function cargarTemas(temas) {
-		return temas.map(function (tema) {
-			tema.valor = tema.tag.toLowerCase();
-			return tema;
-		});
-	}
-	
-	function getTemas () {
-		servicioRest.getTemas()
-			.then(function (data) {
-				temasCargados = cargarTemas(data);
-			})
-			.catch(function (err) {
-				$log.error("Error cargar las aptitudes: " + err);
-			});
-	}
-	
+    /*--------------------------Funciones--------------------------*/		
     $scope.eliminar = function (indice) {
         var idPregunta = $scope.preguntas[indice]._id;
         servicioRest.deletePregunta(idPregunta)
 			.then(function (data) {
 				$scope.preguntas.splice(indice, 1);
-				getTemas();
+				$rootScope.obtenerTemas();
 			})
 			.catch(function (err) {
 				$log.error("Error al eliminar la pregunta: " + err);
@@ -234,7 +217,22 @@ app.controller('controladorTec', function (servicioRest, $scope, $rootScope, $md
 	/* ----------------- AUTOCOMPLETE ---------------- */
 	$scope.listaTemas = [];
 	
-	$rootScope.obtenerTemas = getTemas();
+	function cargarTemas(temas) {
+		return temas.map(function (tema) {
+			tema.valor = tema.tag.toLowerCase();
+			return tema;
+		});
+	}
+	
+	$rootScope.obtenerTemas = function () {
+		servicioRest.getTemas()
+			.then(function (data) {
+				temasCargados = cargarTemas(data);
+			})
+			.catch(function (err) {
+				$log.error("Error al cargar los temas: " + err);
+			});
+	};
 	
 	function buscarTema(tema) {
 		var i;

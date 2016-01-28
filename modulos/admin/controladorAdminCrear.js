@@ -119,7 +119,6 @@ app.controller('controladorAdminCrear', function (servicioRest, $scope, $mdDialo
 											 min: $scope.minSliderValue[i].minSliderG});
 				}
             }
-			
 			servicioRest.postInterview(entrevista)
 				.then(function(data) {
 					$scope.mensaje = [];
@@ -141,8 +140,14 @@ app.controller('controladorAdminCrear', function (servicioRest, $scope, $mdDialo
 					}
 					$scope.haciendoEntrevista = false;
 				}).catch(function(err) {
+				$scope.hayRangoEntrevista = false;
 					$log.error("Error al crear la entrevista");
-					console.log(err);
+					$scope.mensajeError = err.data.message;
+					if (err.data.recuento != undefined) {
+						$scope.hayRangoEntrevista = true;
+						$scope.temaError = err.data.recuento;
+					}
+					console.log(err.data.recuento)
 					if (err.status === 500) {
 						$scope.error = true;
 						$scope.temas = err.data.leveledTags;

@@ -94,15 +94,18 @@
 							</md-button>
 						</div>
 						
-						<div class="alert alert-warning cortarAlertWarning" ng-if="error">
-							No hay suficientes preguntas para esta(s) aptitud(es): 
-							<span ng-repeat="tema in temas" ng-if="$first">{{tema.tag}}</span>
-							<span ng-repeat="tema in temas" ng-if="!$first">, {{tema.tag}}</span>
-							
-							<md-button aria-label="eliminar" ng-click="cerrarError()" 
+						<div class="alert alert-warning cortarAlertWarning alertWarningEntrevista" ng-if="error">
+							<span>
+								<p class="mensajeAlert">No hay suficientes preguntas para esta(s) aptitud(es).</p>
+								<md-button aria-label="eliminar" ng-click="cerrarError()" 
 									   class="md-button icon explosionIcono entendidoCrearEntrevista">
-								<md-icon md-svg-src="img/ok.svg"></md-icon>
-							</md-button>
+									<md-icon md-svg-src="img/ok.svg"></md-icon>
+								</md-button>
+							</span>
+							<p class="mensajeAlert">{{ mensajeError }}</p>
+							<p ng-repeat="tema in temaError" class="mensajeAlertRepeat" ng-show="hayRangoEntrevista">
+								{{ tema.tag }} con rango {{ tema.min }} - {{ tema.max }}
+							</p>
 						</div>
                         
                         <md-button class="md-raised" ng-click="crearEntrevista()" ng-disabled="deshabilitar()">
