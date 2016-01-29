@@ -1,15 +1,4 @@
 app.controller('controladorAdminCrear', function (servicioRest, $scope, $mdDialog, $mdToast, $rootScope, $log) {
-	$scope.minutos = 14;
-	$scope.horas = 14;
-	$scope.nombreEntrevista = "Juan";
-	
-	
-	
-	
-	
-	
-	
-	
 	$scope.ayuda = function() {
 		$scope.crear = !$scope.crear;
 		if(!$scope.crear) {
@@ -119,6 +108,7 @@ app.controller('controladorAdminCrear', function (servicioRest, $scope, $mdDialo
 											 min: $scope.minSliderValue[i].minSliderG});
 				}
             }
+			console.log(entrevista)
 			servicioRest.postInterview(entrevista)
 				.then(function(data) {
 					$scope.mensaje = [];
@@ -147,7 +137,6 @@ app.controller('controladorAdminCrear', function (servicioRest, $scope, $mdDialo
 						$scope.hayRangoEntrevista = true;
 						$scope.temaError = err.data.recuento;
 					}
-					console.log(err.data.recuento)
 					if (err.status === 500) {
 						$scope.error = true;
 						$scope.temas = err.data.leveledTags;

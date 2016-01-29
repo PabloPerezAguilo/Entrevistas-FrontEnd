@@ -33,6 +33,7 @@
 			</md-chips>
 		</div>
       	<div class="listaPreguntas">
+			<p ng-show="hayPreguntas" class="mensajeEntrevista">No hay preguntas para esta(s) aptitud(es)</p>
 			<md-list-item class="md-3-line hoverLista" ng-repeat="item in preguntas">
 				<div class="md-list-item-text" layout="column">
 					<h3>

@@ -19,287 +19,135 @@ function ServicioREST($http, $q, $rootScope, config) {
 			defered.reject(data.message);
 		}
 	}
-
-	/* ---------- SERVICIOS ENTIDAD ---------- */
-	function postPregunta(objetoAEnviar) {
+	
+	function llamadaHTTP(conf){
 		var defered = $q.defer();
 		var promise = defered.promise;
-		$http({
+		$http(conf)
+		.success(function(data, status, headers, config) {
+			defered.resolve(data);
+		})
+		.error(function(data, status, headers, config) {
+			tratarError(data, status, defered);
+		});
+
+		return promise;
+	}
+
+	/* ---------- SERVICIOS ENTIDAD ---------- */
+	
+	function postPregunta(objetoAEnviar) {
+		return llamadaHTTP({
 			method: 'POST',
 			url: url + '/question',
 			data: objetoAEnviar
-		})
-		.success(function(data, status, headers, config) {
-			defered.resolve(data);
-		})
-		.error(function(data, status, headers, config) {
-			tratarError(data, status, defered);
 		});
-
-		return promise;
 	}
-
+	
 	function getPreguntas() {
-		var defered = $q.defer();
-		var promise = defered.promise;
-		$http({
+		return llamadaHTTP({
 			method: 'GET',
-			url: url + '/question/'
-		})
-		.success(function(data, status, headers, config) {
-			defered.resolve(data);
-		})
-		.error(function(data, status, headers, config) {
-			tratarError(data, status,defered);
+			url: url + '/question'
 		});
-
-		return promise;
 	}
-    
+	
     function deletePregunta(idPregunta) {
-		var defered = $q.defer();
-		var promise = defered.promise;
-		$http({
+		return llamadaHTTP({
 			method: 'DELETE',
-			url: url + '/question/'+idPregunta
-		})
-		.success(function(data, status, headers, config) {
-			defered.resolve(data);
-		})
-		.error(function(data, status, headers, config) {
-			tratarError(data, status,defered);
+			url: url + '/question/' + idPregunta
 		});
-
-		return promise;
-	}
-
-	function getEntidad(parametroA, parametroB, parametroC) {
-		var defered = $q.defer();
-		var promise = defered.promise;
-		$http({
-			method: 'GET',
-			url: url + '/resource/' + parametroA + "?desde=" + parametroB + "&hasta=" + parametroC
-		})
-		.success(function(data, status, headers, config) {
-			defered.resolve(data);
-		})
-		.error(function(data, status, headers, config) {
-			tratarError(data, status,defered);
-		});
-
-		return promise;
 	}
 	
 	/* --------------- GET TEMAS --------------- */
-	
 	function getTemas() {
-		var defered = $q.defer();
-		var promise = defered.promise;
-		$http({
+		return llamadaHTTP({
 			method: 'GET',
 			url: url + '/tag/'
-		})
-		.success(function(data, status, headers, config) {
-			defered.resolve(data);
-		})
-		.error(function(data, status, headers, config) {
-			tratarError(data, status,defered);
 		});
-
-		return promise;
 	}
 	
 	/* ------------- GET PREGUNTAS BY TAG ------------- */
-	
 	function postPreguntasByTag(tag) {
-		var defered = $q.defer();
-		var promise = defered.promise;
-		$http({
+		return llamadaHTTP({
 			method: 'POST',
 			url: url + '/questionByTags/',
 			data: tag
-		})
-		.success(function(data, status, headers, config) {
-			defered.resolve(data);
-		})
-		.error(function(data, status, headers, config) {
-			tratarError(data, status, defered);
 		});
-
-		return promise;
 	}
 	
 	function postTema(tema) {
-		var defered = $q.defer();
-		var promise = defered.promise;
-		$http({
+		return llamadaHTTP({
 			method: 'POST',
 			url: url + '/tag/',
 			data: { tag: tema }
-		})
-		.success(function(data, status, headers, config) {
-			defered.resolve(data);
-		})
-		.error(function(data, status, headers, config) {
-			tratarError(data, status, defered);
 		});
-
-		return promise;
 	}
 
 	/* ---------- POST AUTHENTICATE ------------- */
-
 	function postAuthenticate(user) {
-
-		var defered = $q.defer();
-		var promise = defered.promise;
-		$http({
+		return llamadaHTTP({
 			method: 'POST',
 			url: url + '/authenticate',
 			data: user
-		})
-		.success(function(data, status, headers, config) {
-			defered.resolve(data);
-		})
-		.error(function(data, status, headers, config) {
-			tratarError(data, status, defered);
 		});
-
-		return promise;
-
 	}
-    
+	
     /* ------------- INTERVIEW -------------- */
-    
-    function getEntrevistas(atributos) {
-        var defered = $q.defer();
-		var promise = defered.promise;
-		$http({
+	function getEntrevistas(atributos) {
+		return llamadaHTTP({
 			method: 'GET',
 			url: url + '/interview/' + atributos
-		})
-		.success(function(data, status, headers, config) {
-			defered.resolve(data);
-		})
-		.error(function(data, status, headers, config) {
-			tratarError(data, status,defered);
 		});
-
-		return promise;
 	}
     
-    function postInterview(entrevista) {
-		var defered = $q.defer();
-		var promise = defered.promise;
-		$http({
+	function postInterview(entrevista) {
+		return llamadaHTTP({
 			method: 'POST',
 			url: url + '/interview/',
             data: entrevista
-		})
-		.success(function(data, status, headers, config) {
-			defered.resolve(data);
-		})
-		.error(function(data, status, headers, config) {
-			tratarError(data, status,defered);
 		});
-
-		return promise;
 	}
 	
 	function getNombresEntrevistas(fecha) {
-		var defered = $q.defer();
-		var promise = defered.promise;
-		$http({
+		return llamadaHTTP({
 			method: 'GET',
-			url: url + '/interviewNames/' + fecha //?fecha=VARIABLEFECHA
-		})
-		.success(function(data, status, headers, config) {
-			defered.resolve(data);
-		})
-		.error(function(data, status, headers, config) {
-			tratarError(data, status,defered);
+			url: url + '/interviewNames/' + fecha
 		});
-
-		return promise;
 	}
 	
 	function deleteEntrevista(idEntrevista) {
-		var defered = $q.defer();
-		var promise = defered.promise;
-		$http({
+		return llamadaHTTP({
 			method: 'DELETE',
 			url: url + '/interview/' + idEntrevista
-		})
-		.success(function(data, status, headers, config) {
-			defered.resolve(data);
-		})
-		.error(function(data, status, headers, config) {
-			tratarError(data, status,defered);
 		});
-
-		return promise;
 	}
 	
 	/* ---------- ENTREVISTADO ------------- */
 	function getPreguntasEntrevistaById(idEntrevista) {
-		var defered = $q.defer();
-		var promise = defered.promise;
-		$http({
+		return llamadaHTTP({
 			method: 'GET',
 			url: url + '/interviewQuestions/' + idEntrevista
-		})
-		.success(function(data, status, headers, config) {
-			defered.resolve(data);
-		})
-		.error(function(data, status, headers, config) {
-			tratarError(data, status,defered);
 		});
-
-		return promise;
 	}
-
+	
 	function postRespuestasEntrevista(idEntrevista, respuestas) {
-
-		var defered = $q.defer();
-		var promise = defered.promise;
-		$http({
+		return llamadaHTTP({
 			method: 'POST',
 			url: url + '/answers/' + idEntrevista,
 			data: respuestas
-		})
-		.success(function(data, status, headers, config) {
-			defered.resolve(data);
-		})
-		.error(function(data, status, headers, config) {
-			tratarError(data, status, defered);
 		});
-
-		return promise;
-
 	}
 	
 	function postFeedback(idEntrevista, feedback) {
-
-		var defered = $q.defer();
-		var promise = defered.promise;
-		$http({
+		return llamadaHTTP({
 			method: 'POST',
 			url: url + '/interviewFeedback/' + idEntrevista,
 			data: feedback
-		})
-		.success(function(data, status, headers, config) {
-			defered.resolve(data);
-		})
-		.error(function(data, status, headers, config) {
-			tratarError(data, status, defered);
 		});
-		return promise;
-	}
-	
+	}	
 	
 	return {
 		getPreguntas: getPreguntas,
-		getEntidad: getEntidad,
 		postPregunta: postPregunta,
         deletePregunta: deletePregunta,
 		postAuthenticate: postAuthenticate,

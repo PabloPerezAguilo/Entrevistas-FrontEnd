@@ -67,6 +67,8 @@ app.controller('controladorTec', function (servicioRest, $scope, $rootScope, $md
 		$location.path("/");
 	}
 	
+	$scope.hayPreguntas = false;
+	
 	function escribirTipo() {
 		var i;
 		for (i = 0; i < $scope.preguntas.length; i++) {
@@ -234,6 +236,8 @@ app.controller('controladorTec', function (servicioRest, $scope, $rootScope, $md
 			});
 	};
 	
+	$rootScope.obtenerTemas();
+	
 	function buscarTema(tema) {
 		var i;
 		for (i = 0; i < temasCargados.length; i++) {
@@ -263,10 +267,12 @@ app.controller('controladorTec', function (servicioRest, $scope, $rootScope, $md
 				.then(function (data) {
 					$scope.preguntas = data;
 					escribirTipo();
+					$scope.hayPreguntas = false;
 				})
 				.catch(function (err) {
+					$scope.hayPreguntas = true;
 					$scope.preguntas = null;
-					$log.error("Error al filtrar el tema: " + err);
+					$log.error("Error al filtrar el tema: " + err.data.message);
 				});
 			}
 			
@@ -302,6 +308,7 @@ app.controller('controladorTec', function (servicioRest, $scope, $rootScope, $md
 		filtroTemas.tags = [];
 		if ($scope.listaTemas.length === 0) {
 			getPreguntas();
+			$scope.hayPreguntas = false;
 		} else {
 			for (var i = 0; i < $scope.listaTemas.length; i++) {
 				filtroTemas.tags[i] = $scope.listaTemas[i].tag;
