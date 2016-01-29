@@ -108,7 +108,6 @@ app.controller('controladorAdminCrear', function (servicioRest, $scope, $mdDialo
 											 min: $scope.minSliderValue[i].minSliderG});
 				}
             }
-			console.log(entrevista)
 			servicioRest.postInterview(entrevista)
 				.then(function(data) {
 					$scope.mensaje = [];

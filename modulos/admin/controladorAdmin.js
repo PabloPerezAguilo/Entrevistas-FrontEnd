@@ -40,6 +40,10 @@ app.controller('controladorAdmin', function (servicioRest, config, $scope, $loca
 			{
 				element: '#hacerEntrevista',
 				intro: 'Si pulsa este botón se abrirá una ventana para hacer la entrevitsa'
+			},
+			{
+				element: '.divSwitchEntrevista',
+				intro: 'Con este botón podrá cambiar entre las entrevistas realizadas y pendientes'
 			}
         ],
         showStepNumbers: false,

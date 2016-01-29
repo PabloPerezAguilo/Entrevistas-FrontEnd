@@ -13,12 +13,11 @@ app.controller('controladorRespuestasEntrevista', function (servicioRest, $scope
 		var nota = 0, notaMax = 0;
 		var auxCorreccion = {};
 		for (var i = 0; i < preguntas.length; i++) {
-			
 			if(preguntas[i] != null) {
 				if (preguntas[i].type === "FREE") {
 					auxCorreccion.type = "FREE";
 					auxCorreccion.title = preguntas[i].title;
-					if (respuestas[i] === undefined) {
+					if (respuestas[i] === null || respuestas[i] === undefined) {
 						auxCorreccion.answer = "No ha contestado a la pregunta";
 						$scope.correccionStyle[i] = {"color":"red"};
 					} else {

@@ -15,7 +15,6 @@ app.controller('controladorLogIn', function (servicioRest, config, $scope, $loca
 			username: localStorage.getItem("usuario"),
 			password: Aes.Ctr.decrypt(localStorage.getItem("password"), localStorage.getItem("usuario"), 256)
 		};
-		$rootScope.user = user.username;
 		servicioRest.postAuthenticate(user)
 			.then(function (data) {
 				$http.defaults.headers.common['x-access-token'] = data.token;
