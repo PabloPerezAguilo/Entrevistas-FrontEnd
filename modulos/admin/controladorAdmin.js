@@ -1,4 +1,4 @@
-app.controller('controladorAdmin', function (servicioRest, config, $scope, $location, $rootScope, $mdDialog, $timeout, $q, $log, $http) {
+app.controller('controladorAdmin', function (servicioRest, config, $scope, $location, $rootScope, $mdDialog, $timeout, $q, $log, $http, $mdToast) {
 	
 	var permiso = sessionStorage.getItem("permiso");
 	var ver = sessionStorage.getItem("ver");
@@ -7,6 +7,19 @@ app.controller('controladorAdmin', function (servicioRest, config, $scope, $loca
 		$location.path('/entrevista');
 	} else if(ver) {
 		$location.path('/respuestasEntrevista');
+	}
+	
+	var rol;
+	if (sessionStorage.getItem("rol") !== null) {
+		rol = sessionStorage.getItem("rol");
+	} else if (localStorage.getItem("rol") !== null) {
+		rol = localStorage.getItem("rol");
+	}
+	
+	function toast(texto) {
+		$mdToast.show(
+			$mdToast.simple().content(texto).position('top right').hideDelay(1500)
+		);
 	}
 	
 	$scope.introOptions = {
@@ -186,11 +199,17 @@ app.controller('controladorAdmin', function (servicioRest, config, $scope, $loca
 			})
 			.catch(function (err) {
 				$log.error("Error al cargar las entrevistas: " + err);
-				if (err === 403 && token !== null) {
+				if (err === 403 && token !== null && rol === "ROLE_TECH") {
 					//cuando entra a admin desde tec
 					$location.path('/tec');
-				} else if(err === 403) {
+				} else if (err === 403 || err === 'Servicio no disponible') {
+					if (err === 403) {
+						toast("Su sesión ha expirado");
+					} else {
+						toast("Error de conexión");
+					}
 					$location.path('/');
+					$rootScope.limpiarCredenciales();
 				}
 			});
 	}

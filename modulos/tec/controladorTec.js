@@ -9,6 +9,13 @@ app.controller('controladorTec', function (servicioRest, $scope, $rootScope, $md
 		$location.path('/respuestasEntrevista');
 	}
 	
+	var rol;
+	if (sessionStorage.getItem("rol") !== null) {
+		rol = sessionStorage.getItem("rol");
+	} else if (localStorage.getItem("rol") !== null) {
+		rol = localStorage.getItem("rol");
+	}
+	
 	$scope.introOptions = {
         steps:[
 			{
@@ -99,11 +106,17 @@ app.controller('controladorTec', function (servicioRest, $scope, $rootScope, $md
 			})
 			.catch(function (err) {
 				$log.error("Error al cargar las preguntas: " + err);
-				if (err === 403 && token !== null) {
+				if (err === 403 && token !== null && rol === "ROLE_ADMIN") {
 					//cuando entra a tec desde admin
 					$location.path('/admin');
-				} else {
+				} else if (err === 403 || err === 'Servicio no disponible') {
+					if (err === 403) {
+						toast("Su sesión ha expirado");
+					} else {
+						toast("Error de conexión");
+					}
 					$location.path('/');
+					$rootScope.limpiarCredenciales();
 				}
 			});
 	}
