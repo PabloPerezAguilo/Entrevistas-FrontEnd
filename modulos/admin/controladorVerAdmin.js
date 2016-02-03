@@ -38,6 +38,7 @@ app.controller('controladorVerAdmin', function ($scope, $rootScope, $mdDialog, $
 	
 	$scope.verRespuestas = function () {
 		$rootScope.indiceEntrevistaSeleccionada = $scope.entrevistas[indice]._id;
+		sessionStorage.setItem("ver", true);
 		$location.path("/respuestasEntrevista");
 	}
 });

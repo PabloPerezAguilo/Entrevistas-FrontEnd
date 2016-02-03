@@ -1,5 +1,14 @@
 app.controller('controladorAdmin', function (servicioRest, config, $scope, $location, $rootScope, $mdDialog, $timeout, $q, $log, $http) {
 	
+	var permiso = sessionStorage.getItem("permiso");
+	var ver = sessionStorage.getItem("ver");
+	
+	if (permiso) {
+		$location.path('/entrevista');
+	} else if(ver) {
+		$location.path('/respuestasEntrevista');
+	}
+	
 	$scope.introOptions = {
         steps: [
 			{
@@ -348,7 +357,7 @@ app.controller('controladorAdmin', function (servicioRest, config, $scope, $loca
 			.cancel('No');
 
     	$mdDialog.show(confirm).then(function() {
-			$rootScope.pulsaBoton = true;
+			sessionStorage.setItem("permiso", true);
 			$rootScope.indiceEntrevistaSeleccionada = $scope.entrevistas[ind]._id;
 			$location.path("/entrevista");
     	});

@@ -5,6 +5,17 @@ app.controller('controladorLogIn', function (servicioRest, config, $scope, $loca
 	$rootScope.rolUsuario = "";
 	var checkeado;
 	
+	var permiso = sessionStorage.getItem("permiso");
+	if (permiso) {
+		$location.path('/entrevista');
+	}
+	
+	var ver = sessionStorage.getItem("ver");
+	
+	if(ver) {
+		$location.path('/respuestasEntrevista');
+	}
+	
 	$scope.cambioCheck = function () {
 		checkeado = $scope.checkRecordar;
 	};	
@@ -18,7 +29,6 @@ app.controller('controladorLogIn', function (servicioRest, config, $scope, $loca
 		servicioRest.postAuthenticate(user)
 			.then(function (data) {
 				$http.defaults.headers.common['x-access-token'] = data.token;
-				$rootScope.token = data.token;
 				$rootScope.rol = data.role;
 				if (data.role === "ROLE_ADMIN") {
 					$location.path("/admin");
@@ -46,7 +56,6 @@ app.controller('controladorLogIn', function (servicioRest, config, $scope, $loca
 		servicioRest.postAuthenticate(user)
 			.then(function (data) {
 				$http.defaults.headers.common['x-access-token'] = data.token;
-				$rootScope.token = data.token;
 				$rootScope.rol = data.role;
 				if(checkeado) {
 					localStorage.setItem("usuario", user.username);

@@ -1,5 +1,14 @@
 app.controller('controladorTec', function (servicioRest, $scope, $rootScope, $mdDialog, $timeout, $q, $log, $mdToast, $location, $http) {
 	
+	var permiso = sessionStorage.getItem("permiso");
+	var ver = sessionStorage.getItem("ver");
+	
+	if (permiso) {
+		$location.path('/entrevista');
+	} else if(ver) {
+		$location.path('/respuestasEntrevista');
+	}
+	
 	$scope.introOptions = {
         steps:[
 			{
@@ -90,7 +99,6 @@ app.controller('controladorTec', function (servicioRest, $scope, $rootScope, $md
 			})
 			.catch(function (err) {
 				$log.error("Error al cargar las preguntas: " + err);
-				console.log($rootScope.rol);
 				if (err === 403 && token !== null) {
 					//cuando entra a tec desde admin
 					$location.path('/admin');

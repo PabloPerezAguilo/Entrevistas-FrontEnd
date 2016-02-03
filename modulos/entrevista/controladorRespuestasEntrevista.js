@@ -1,4 +1,4 @@
-app.controller('controladorRespuestasEntrevista', function (servicioRest, $scope, $rootScope, $log, $mdDialog, $location) {
+app.controller('controladorRespuestasEntrevista', function (servicioRest, $scope, $rootScope, $log, $mdDialog, $location, $http) {
 	
 	$rootScope.cargando = false;
     $rootScope.logueado = false;
@@ -8,6 +8,32 @@ app.controller('controladorRespuestasEntrevista', function (servicioRest, $scope
 	$scope.tieneDirectiva = [];
 	$scope.notaPregunta = [];
 	var preguntas = [], respuestas = [];
+	
+	if ($rootScope.indiceEntrevistaSeleccionada !== undefined) {
+		sessionStorage.setItem('id', $rootScope.indiceEntrevistaSeleccionada);
+	}
+	
+	var id = sessionStorage.getItem('id');
+	
+	var token = sessionStorage.getItem("token");
+	$http.defaults.headers.common['x-access-token'] = token;
+	
+	var rol;
+	if (sessionStorage.getItem("rol") !== null) {
+		rol = sessionStorage.getItem("rol");
+	} else if (localStorage.getItem("rol") !== null) {
+		rol = localStorage.getItem("rol");
+	}
+	
+	var ver = sessionStorage.getItem("ver");
+	
+	if (rol === undefined) {
+		$location.path("/");
+	} else if (rol === "ROLE_TECH") {
+		$location.path("/tec");
+	} else if (rol === "ROLE_ADMIN" && ver === null) {
+		$location.path("/admin");
+	}
 	
 	function calcularResultados () {
 		var nota = 0, notaMax = 0;
@@ -110,11 +136,15 @@ app.controller('controladorRespuestasEntrevista', function (servicioRest, $scope
 				$scope.correccion[i] = null;
 			}
 		}
-		$scope.nota = (nota / notaMax * 10).toFixed(2);
+		if (notaMax === 0) {
+			$scope.nota = '-';
+		} else {
+			$scope.nota = (nota / notaMax * 10).toFixed(2);
+		}		
 	}
 	
 	function getPreguntas() {
-		servicioRest.getPreguntasEntrevistaById($rootScope.indiceEntrevistaSeleccionada)
+		servicioRest.getPreguntasEntrevistaById(id)
 				.then(function (data) {
 					preguntas = data;
 					calcularResultados();
@@ -126,7 +156,7 @@ app.controller('controladorRespuestasEntrevista', function (servicioRest, $scope
 	}
 	
 	function getRespuestas() {
-		servicioRest.getEntrevistas($rootScope.indiceEntrevistaSeleccionada)
+		servicioRest.getEntrevistas(id)
 			.then(function (data) {
 				respuestas = data.answers;
 				$scope.observaciones = data.feedback;
@@ -145,9 +175,10 @@ app.controller('controladorRespuestasEntrevista', function (servicioRest, $scope
 			feedback: $scope.observaciones
 		};
 		
-		servicioRest.postFeedback($rootScope.indiceEntrevistaSeleccionada, enviarPost)
+		servicioRest.postFeedback(id, enviarPost)
 			.then(function(data) {
 				$location.path("/admin");
+				sessionStorage.removeItem("ver");
 			}).catch(function(err) {
 				$log.error("Error al guardar las observaciones de la entrevista: " + err);
 			});
