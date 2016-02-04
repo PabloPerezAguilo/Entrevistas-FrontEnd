@@ -55,3 +55,13 @@ app.config(function($routeProvider) {
 });
 
 app.service('servicioRest', ServicioREST);
+
+app.filter("rol",function () {
+  return function (valor) {
+    if (valor === "ROLE_ADMIN") {
+      return "administrador";
+    } else if (valor === "ROLE_TECH") {
+      return "técnico";
+    }
+  };
+});

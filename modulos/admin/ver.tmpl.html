@@ -51,15 +51,25 @@
 				</md-chips>
       		</div>
     	</md-dialog-content>
-		<md-dialog-content ng-show="!ver" class="ayuda">
+		<md-dialog-content ng-if="!ver" class="ayuda">
 			<div class="alert alert-info alertAyuda">
 				<p>El campo <b>"Nombre y apellidos:"</b> indica el nombre y los apellidos del entrevistado</p>
 			</div>
 			<div class="alert alert-info alertAyuda">
+				<p>El campo <b>"Programada para:"</b> indica la fecha y la hora en la que se realizará la entrevista</p>
+			</div>
+			<div class="alert alert-info alertAyuda" ng-show="tieneDNI">
 				<p>El campo <b>"DNI:"</b> indica el DNI del entrevistado</p>
 			</div>
 			<div class="alert alert-info alertAyuda">
-				<p>El campo <b>"Estdo:"</b> indica el estadi de la entrevista. Este podrá ser "Pendiente" o "Realizada"</p>
+				<p>El campo <b>"Estado:"</b> indica el estado de la entrevista. Este podrá ser "Pendiente" o "Realizada"</p>
+			</div>
+			<div class="alert alert-info alertAyuda">
+				<p>A continuación aparecerá la lista de temas de los que se compone la entrevista</p>
+			</div>
+			<div class="alert alert-info alertAyuda" ng-if="entrevistaHecha">
+				<p>El siguiente botón es para ver los resultados de la entrevista, una vez realizada:</p>
+				<md-icon class="redimensionarIcono" md-svg-src="img/ojo.svg"></md-icon>
 			</div>
 		</md-dialog-content>
   	</form>

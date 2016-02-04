@@ -97,8 +97,10 @@ app.controller('controladorAdmin', function (servicioRest, config, $scope, $loca
 		$rootScope.usuario = sessionStorage.getItem("usuario");
 	}
 	
-	if (localStorage.getItem("rol") === "ROLE_ADMIN" || sessionStorage.getItem("rol") === "ROLE_ADMIN") {
-		$rootScope.rol = "administrador";
+	if (sessionStorage.getItem("rol") !== null) {
+		$rootScope.rol = sessionStorage.getItem("rol");
+	} else if (localStorage.getItem("rol")) {
+		$rootScope.rol = localStorage.getItem("rol");
 	}
 	
 	var token = sessionStorage.getItem("token");

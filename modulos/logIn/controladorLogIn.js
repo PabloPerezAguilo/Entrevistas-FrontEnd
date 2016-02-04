@@ -39,6 +39,8 @@ app.controller('controladorLogIn', function (servicioRest, config, $scope, $loca
 			.catch(function (err) {
 				$log.error("Error al recordar sesión: " + err);
 			})
+	} else {
+		$rootScope.limpiarCredenciales();
 	}
 
 	function toast(texto) {

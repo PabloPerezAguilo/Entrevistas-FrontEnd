@@ -63,8 +63,10 @@ app.controller('controladorTec', function (servicioRest, $scope, $rootScope, $md
 		$rootScope.usuario = sessionStorage.getItem("usuario");
 	}
 	
-	if (localStorage.getItem("rol") === "ROLE_TECH" || sessionStorage.getItem("rol") === "ROLE_TECH") {
-		$rootScope.rol = "técnico";
+	if (sessionStorage.getItem("rol") !== null) {
+		$rootScope.rol = sessionStorage.getItem("rol");
+	} else if (localStorage.getItem("rol")) {
+		$rootScope.rol = localStorage.getItem("rol");
 	}
 	
 	var token = sessionStorage.getItem("token");

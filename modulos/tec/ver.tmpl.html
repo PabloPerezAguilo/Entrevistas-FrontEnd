@@ -1,15 +1,22 @@
-<md-dialog class="redimensionar" aria-label="Mango (Fruit)"  ng-cloak>
+<md-dialog class="redimensionar" aria-label="Mango (Fruit)" ng-init="ver=true" ng-cloak>
 	<form>
     	<md-toolbar>
       		<div class="md-toolbar-tools">
         		<h2 ng-model="cabeceraVer">Ver pregunta {{cabeceraVer}}</h2>
                 <span flex></span>
+				<md-button aria-label="ayuda" ng-click="ayuda()" 
+						   class="md-button icon centrarIconoLista explosionIcono iconosHeader">
+					<md-icon class="iconoBlanco" md-svg-src="img/ayuda.svg"></md-icon>
+					<md-tooltip md-direction="bottom">
+						Ayuda
+					</md-tooltip>
+				</md-button>
 				<md-button class="md-icon-button" ng-click="cancel()">
 					<md-icon md-svg-src="img/cerrar.svg" aria-label="Close dialog"></md-icon>
                 </md-button>
       </div>
     </md-toolbar>
-    <md-dialog-content>
+    <md-dialog-content ng-show="ver">
       
 		<div class="md-dialog-content">
             
@@ -23,6 +30,25 @@
             </div>
       </div>
 		
+    </md-dialog-content>
+	<md-dialog-content ng-show="!ver" class="ayuda">
+		<div class="alert alert-info alertAyuda">
+			<p>Al principio le aparecerá el tema de la pregunta y el nivel con el siguiente formato:</p>
+			<p>Tema/Nivel</p>
+			<p>Ejemplo: HTML/5</p>
+		</div>
+		<div class="alert alert-info alertAyuda">
+			<p>A continuación se mostrará el enunciado de la pregunta.</p>
+		</div>
+		<div class="alert alert-info alertAyuda" ng-if="preguntas[index].type==='Pregunta tipo Test'">
+			<p>Por último aparecerán las posibles respuestas de esa pregunta y marcada la correcta.</p>
+		</div>
+		<div class="alert alert-info alertAyuda" ng-if="preguntas[index].type==='Pregunta de selección múltiple'">
+			<p>Por último aparecerán las posibles respuestas de esa pregunta y marcadas las que sean correctas.</p>
+		</div>
+		<div class="alert alert-info alertAyuda" ng-if="preguntas[index].type==='Pregunta abierta'">
+			<p>Por último aparecerán las directivas de esa pregunta.</p>
+		</div>
     </md-dialog-content>
   </form>
 </md-dialog>
