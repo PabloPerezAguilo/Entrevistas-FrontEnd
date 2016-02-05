@@ -2,6 +2,7 @@ app.controller('controladorLogIn', function (servicioRest, config, $scope, $loca
 
 
 	$rootScope.logueado = false;
+	$rootScope.sinLoguear = true;
 	$rootScope.rolUsuario = "";
 	var checkeado;
 	
@@ -40,7 +41,7 @@ app.controller('controladorLogIn', function (servicioRest, config, $scope, $loca
 	$scope.login = function () {
 		$rootScope.cargando = true;
 		var user = {};
-		user.username = $scope.user;
+		user.username = $scope.user.toLowerCase();
 		user.password = $scope.pass;
 		$rootScope.usuario = $scope.user;
 		servicioRest.postAuthenticate(user)

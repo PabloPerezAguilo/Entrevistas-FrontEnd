@@ -853,7 +853,6 @@ md-input-container.horas {
 
 md-autocomplete {
 	width: 75%;
-	width: 75%;
 }
 
 .md-button.md-raised.error {
@@ -981,6 +980,27 @@ md-input-container.horasAyuda {
 	margin-left: 45%;
 }
 
+/*--------------------- EQUIPO ------------------------*/
+
+.imgEquipo {
+	width: 25%;
+	border-radius: 50%;
+	border: #EF6C00 2px solid;
+}
+
+.amayor {
+	height: 1417px;
+  	width: 1416px;
+	background-image: url(img/equipo/amayorBN.png);
+}
+.amayor:hover {
+	background-image: url(img/equipo/amayor.png);
+	height: 1417px;
+  	width: 1416px;
+}
+
+
+
 /*--------------------- media queries ------------------------*/
 
 @media screen and (min-height: 1024px) {
@@ -1078,7 +1098,11 @@ md-input-container.horasAyuda {
 
 @media screen and (min-height: 781px) and (max-height: 800px) {
     .listaPreguntas {
-		height: 440px;
+		height: 520px;
+	}
+	
+	.footerOpacidad {
+		opacity: 0;
 	}
 }
 
@@ -1185,11 +1209,11 @@ md-input-container.horasAyuda {
 
 @media screen and (min-height: 720px) and (max-height: 819px) {
     .pagination {
-		top: 87%;
+		top: 96%;
 	}
 	
 	.divSwitchEntrevista {
-		top: 84%;
+		top: 93%;
 	}
 }
 
@@ -1472,7 +1496,7 @@ md-input-container.horasAyuda {
 @media screen and (min-width: 800px) and (max-width: 1000px) {
 	
 	md-autocomplete {
-		width: 60%;
+		width: 53%;
 	}
 	
 	md-datepicker.adminFecha {

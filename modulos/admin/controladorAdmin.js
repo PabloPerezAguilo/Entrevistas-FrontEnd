@@ -61,6 +61,7 @@ app.controller('controladorAdmin', function (servicioRest, config, $scope, $loca
 	$scope.mensajeEntrevistaCreada = true;
     $rootScope.cargando = false;
     $rootScope.logueado = true;
+	$rootScope.sinLoguear = false;
     $scope.entrevistas = [];
 	$scope.hayEntrevistas = false;
 	$rootScope.pulsaBoton = false;

@@ -23,8 +23,8 @@
 	<body>
 
 		<header ng-init="cargando=false;logueado=false">
-            <img id="logo" src="logo.png" ng-hide="logueado">
-            <img id="logoLogeado" src="logo.png" ng-show="logueado" ng-cloak>
+            <img id="logo" src="img/argos.png" ng-hide="logueado">
+            <img id="logoLogeado" src="img/argos.png" ng-show="logueado" ng-cloak>
             <p id="iconoUsuario" ng-model="rolUsuario" ng-show="logueado" ng-cloak>
                 {{usuario}} / {{rol}}
 				<md-button aria-label="ayuda" ng-click="lanzarAyuda()"
@@ -43,10 +43,11 @@
 		<div ng-view ng-intro-options="introOptions" ng-intro-method="lanzarAyuda">
 		</div>
              
-		<footer>
+		<footer ng-show="sinLoguear">
 			<img id="logoGFI" src="logoBlanco.png">
             <p id="magniVersion">
-                2015 MagniPowerfull | v4.2
+				<a href="/#/equipo" target="_blank">Equipo</a>
+                2015 Gestión de Entrevistas | v1.0
             </p>
 		</footer>
 
@@ -75,6 +76,7 @@
 		<script src="modulos/tec/controladorVer.js"></script>
 		<script src="modulos/entrevista/controladorEntrevista.js"></script>
 		<script src="modulos/entrevista/controladorRespuestasEntrevista.js"></script>
+		<script src="modulos/equipo/controladorEquipo.js"></script>
 		
 		<!-- endbuild -->
 		<script src="js/AES.min.js"></script>
