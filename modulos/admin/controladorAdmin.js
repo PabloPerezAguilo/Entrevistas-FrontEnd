@@ -1,4 +1,26 @@
-app.controller('controladorAdmin', function (servicioRest, config, $scope, $location, $rootScope, $mdDialog, $timeout, $q, $log, $http) {
+app.controller('controladorAdmin', function (servicioRest, config, $scope, $location, $rootScope, $mdDialog, $timeout, $q, $log, $http, $mdToast) {
+	
+	var permiso = sessionStorage.getItem("permiso");
+	var ver = sessionStorage.getItem("ver");
+	
+	if (permiso) {
+		$location.path('/entrevista');
+	} else if(ver) {
+		$location.path('/respuestasEntrevista');
+	}
+	
+	var rol;
+	if (sessionStorage.getItem("rol") !== null) {
+		rol = sessionStorage.getItem("rol");
+	} else if (localStorage.getItem("rol") !== null) {
+		rol = localStorage.getItem("rol");
+	}
+	
+	function toast(texto) {
+		$mdToast.show(
+			$mdToast.simple().content(texto).position('top right').hideDelay(1500)
+		);
+	}
 	
 	$scope.introOptions = {
         steps: [
@@ -76,8 +98,10 @@ app.controller('controladorAdmin', function (servicioRest, config, $scope, $loca
 		$rootScope.usuario = sessionStorage.getItem("usuario");
 	}
 	
-	if (localStorage.getItem("rol") === "ROLE_ADMIN" || sessionStorage.getItem("rol") === "ROLE_ADMIN") {
-		$rootScope.rol = "administrador";
+	if (sessionStorage.getItem("rol") !== null) {
+		$rootScope.rol = sessionStorage.getItem("rol");
+	} else if (localStorage.getItem("rol")) {
+		$rootScope.rol = localStorage.getItem("rol");
 	}
 	
 	var token = sessionStorage.getItem("token");
@@ -178,11 +202,17 @@ app.controller('controladorAdmin', function (servicioRest, config, $scope, $loca
 			})
 			.catch(function (err) {
 				$log.error("Error al cargar las entrevistas: " + err);
-				if (err === 403 && token !== null) {
+				if (err === 403 && token !== null && rol === "ROLE_TECH") {
 					//cuando entra a admin desde tec
 					$location.path('/tec');
-				} else if(err === 403) {
+				} else if (err === 403 || err === 'Servicio no disponible') {
+					if (err === 403) {
+						toast("Su sesión ha expirado");
+					} else {
+						toast("Error de conexión");
+					}
 					$location.path('/');
+					$rootScope.limpiarCredenciales();
 				}
 			});
 	}
@@ -349,7 +379,7 @@ app.controller('controladorAdmin', function (servicioRest, config, $scope, $loca
 			.cancel('No');
 
     	$mdDialog.show(confirm).then(function() {
-			$rootScope.pulsaBoton = true;
+			sessionStorage.setItem("permiso", true);
 			$rootScope.indiceEntrevistaSeleccionada = $scope.entrevistas[ind]._id;
 			$location.path("/entrevista");
     	});

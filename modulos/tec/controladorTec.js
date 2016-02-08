@@ -1,5 +1,21 @@
 app.controller('controladorTec', function (servicioRest, $scope, $rootScope, $mdDialog, $timeout, $q, $log, $mdToast, $location, $http) {
 	
+	var permiso = sessionStorage.getItem("permiso");
+	var ver = sessionStorage.getItem("ver");
+	
+	if (permiso) {
+		$location.path('/entrevista');
+	} else if(ver) {
+		$location.path('/respuestasEntrevista');
+	}
+	
+	var rol;
+	if (sessionStorage.getItem("rol") !== null) {
+		rol = sessionStorage.getItem("rol");
+	} else if (localStorage.getItem("rol") !== null) {
+		rol = localStorage.getItem("rol");
+	}
+	
 	$scope.introOptions = {
         steps:[
 			{
@@ -47,8 +63,10 @@ app.controller('controladorTec', function (servicioRest, $scope, $rootScope, $md
 		$rootScope.usuario = sessionStorage.getItem("usuario");
 	}
 	
-	if (localStorage.getItem("rol") === "ROLE_TECH" || sessionStorage.getItem("rol") === "ROLE_TECH") {
-		$rootScope.rol = "técnico";
+	if (sessionStorage.getItem("rol") !== null) {
+		$rootScope.rol = sessionStorage.getItem("rol");
+	} else if (localStorage.getItem("rol")) {
+		$rootScope.rol = localStorage.getItem("rol");
 	}
 	
 	var token = sessionStorage.getItem("token");
@@ -90,12 +108,17 @@ app.controller('controladorTec', function (servicioRest, $scope, $rootScope, $md
 			})
 			.catch(function (err) {
 				$log.error("Error al cargar las preguntas: " + err);
-				console.log($rootScope.rol);
-				if (err === 403 && token !== null) {
+				if (err === 403 && token !== null && rol === "ROLE_ADMIN") {
 					//cuando entra a tec desde admin
 					$location.path('/admin');
-				} else {
+				} else if (err === 403 || err === 'Servicio no disponible') {
+					if (err === 403) {
+						toast("Su sesión ha expirado");
+					} else {
+						toast("Error de conexión");
+					}
 					$location.path('/');
+					$rootScope.limpiarCredenciales();
 				}
 			});
 	}

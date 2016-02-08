@@ -1,5 +1,6 @@
 app.controller('controladorVer', function ($scope, $mdDialog, indice) {
 	
+	$scope.index = indice;
     if ($scope.preguntas[indice].type === "Pregunta abierta") {
         $scope.cabeceraVer = "- Abierta";
         $scope.temas_nivel = $scope.preguntas[indice].tags[0];
