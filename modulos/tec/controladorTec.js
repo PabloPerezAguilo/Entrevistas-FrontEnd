@@ -121,6 +121,7 @@ app.controller('controladorTec', function (servicioRest, $scope, $rootScope, $md
 	
 	$rootScope.cargando = false;
     $rootScope.logueado = true;
+	$rootScope.conFooter = true;
     $rootScope.rolUsuario = "img/tecnico.svg";
     
     /*---------------------------Inicializar lista------------------------------*/

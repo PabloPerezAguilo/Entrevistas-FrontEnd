@@ -1,7 +1,7 @@
 app.controller('controladorEntrevista', function (servicioRest, $scope, $rootScope, $log, $mdDialog, $location) {
 	
 	$rootScope.cargando = false;
-	$rootScope.sinLoguear = false;
+	$rootScope.conFooter = false;
     $rootScope.logueado = false;
 	
 	if ($rootScope.pulsaBoton === undefined || !$rootScope.pulsaBoton) {

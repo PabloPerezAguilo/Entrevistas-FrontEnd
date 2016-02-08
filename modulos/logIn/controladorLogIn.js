@@ -2,7 +2,7 @@ app.controller('controladorLogIn', function (servicioRest, config, $scope, $loca
 
 
 	$rootScope.logueado = false;
-	$rootScope.sinLoguear = true;
+	$rootScope.conFooter = true;
 	$rootScope.rolUsuario = "";
 	var checkeado;
 	
