@@ -11,11 +11,24 @@ app.controller('controladorLogIn', function (servicioRest, config, $scope, $loca
 		$location.path('/entrevista');
 	}
 	
+	var rol;
+	if (sessionStorage.getItem("rol") !== null) {
+		rol = sessionStorage.getItem("rol");
+	} else if (localStorage.getItem("rol") !== null) {
+		rol = localStorage.getItem("rol");
+	}
+	
+	if (rol === "ROLE_TECH") {
+		$location.path('/tec');
+	} else if (rol === "ROLE_ADMIN") {
+		$location.path('/admin');
+	}
+	
 	var ver = sessionStorage.getItem("ver");
 	
-	if(ver) {
+	if (ver) {
 		$location.path('/respuestasEntrevista');
-	}
+	} 
 	
 	$scope.cambioCheck = function () {
 		checkeado = $scope.checkRecordar;
@@ -40,8 +53,6 @@ app.controller('controladorLogIn', function (servicioRest, config, $scope, $loca
 			.catch(function (err) {
 				$log.error("Error al recordar sesión: " + err);
 			})
-	} else {
-		$rootScope.limpiarCredenciales();
 	}
 
 	function toast(texto) {
