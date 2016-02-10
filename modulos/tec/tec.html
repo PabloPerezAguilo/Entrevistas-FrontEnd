@@ -1,20 +1,20 @@
 <div id="seccionTec">
-    <md-button mfb-button class="md-fab md-mini btnPosDerecha tec" ng-click="crear($event)" aria-label="crearPregunta">
-        <md-icon md-svg-src="img/crear.svg" class="btnIconoCentrado"></md-icon>
-    </md-button>
-    
-    <p></p>
-
     <md-list>
-        <md-subheader class="md-no-sticky">Preguntas</md-subheader>
-        <md-divider class="dividerPrincipal"></md-divider>
-        <md-icon md-svg-src="img/lupa.svg" class="iconoBuscar"></md-icon>
-		<div class="buscarTemas">
-			<md-chips ng-model="listaTemas" 
+		<div class="cabeceraTec">
+			<md-button mfb-button class="md-fab md-mini btnPosDerecha tec" ng-click="crear($event)" aria-label="crearPregunta">
+				<md-icon md-svg-src="img/crear.svg" class="btnIconoCentrado"></md-icon>
+			</md-button>
+			
+			<md-subheader class="md-no-sticky">Preguntas</md-subheader>
+			
+			<md-divider class="dividerPrincipal"></md-divider>
+			
+			<md-chips class="chipsTec" ng-model="listaTemas" 
 					  md-autocomplete-snap=""
 					  md-transform-chip="transformChip($chip)" 
 					  md-require-match="false"
 					  md-on-remove="deleteChip()">
+				
 				<md-autocomplete md-selected-item="selectedItem" 
 								 md-search-text-change="searchTextChange(searchText)" 
 								 md-search-text="searchText" 
@@ -27,12 +27,14 @@
 						{{item.tag}}
 					</span>
 				</md-autocomplete>
+				
 				<md-chip-template>
 					<span> {{$chip.tag}} </span>
 				</md-chip-template>
 			</md-chips>
+			<md-icon md-svg-src="img/lupa.svg" class="iconoBuscar"></md-icon>
 		</div>
-      	<div class="listaPreguntas">
+      	<div class="listaPreguntasTec">
 			<p ng-show="hayPreguntas" class="mensajeEntrevista">No hay preguntas para esta(s) aptitud(es)</p>
 			<md-list-item class="md-3-line hoverLista" ng-repeat="item in preguntas">
 				<div class="md-list-item-text" layout="column">

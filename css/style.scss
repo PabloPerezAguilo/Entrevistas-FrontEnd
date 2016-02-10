@@ -72,9 +72,12 @@ $colorPrincipalClaro: rgba(239,108,0,0.17);
 
 /* ------------------------- HEADER & FOOTER --------------------------------------- */
 header {
+	position: fixed;
+	top: 0;
+	width: 100%;
+	height: 90px;
     background-color: $negro;
     color: $letra;
-    height: 90px;
     box-shadow: 2px 2px 30px grey;
 }
 
@@ -279,12 +282,22 @@ md-tabs:not(.md-no-tab-content):not(.md-dynamic-height) {
 }
 
 /*------------------------------TECNICO*------------------------------*/
+.cabeceraTec {
+	position: fixed;
+	width: 100%;
+	margin-top: 8%;
+}
 //para cuadrar el calendario
 .md-calendar-day-header th, td {
 	vertical-align: middle;
 }
 
 /*md-chips*/
+
+.chipsTec md-chips-wrap {
+	margin: 0 10%
+}
+
 md-chips .md-chip.md-focused {
 	background-color: $colorPrincipal;
 }
@@ -495,26 +508,18 @@ md-checkbox[disabled] .md-label {
 }
 
 /*div del md-chips para buscar por temas*/
-.buscarTemas {
-    margin-top: 1%;
-	margin-left: 10%;
-	margin-right: 10%;
-}
-
 .md-button.md-fab.md-mini {
     float: right;
 }
 
 .md-button.md-fab.md-mini.adminBtn {
-    float: right;
-	margin-top: 1.8%;
-	margin-right: -9%
+	bottom: 5px;
+	margin-right: 11.7%;
 }
 
 .md-button.md-fab.md-mini.tec {
-    float: right;
-	margin-top: 1.8%;
-	margin-right: -5%;
+    bottom: 7px;
+	margin-right: 11.5%;
 }
 
 .explosionIcono.md-button .md-ripple-container {
@@ -552,17 +557,13 @@ md-list md-list-item.md-3-line .md-list-item-text h3, md-list.md-default-theme m
 .iconoBuscar{
     float: right;
     margin-top: 1.5%;
-	margin-right: 13%;
+	margin-right: -3%;
     z-index: auto;
 }
 
-.listaPreguntas {
+.listaPreguntasTec {
 	margin: 0 10%;
-	margin-top: 7px;
-}
-
-.buscarTemas .md-chips .md-chip-input-container md-autocomplete input {
-    padding-left: 8%;
+	margin-top: 16%;
 }
 
 .md-subheader .md-subheader-content {
@@ -600,11 +601,22 @@ md-list md-list-item.md-3-line .md-list-item-text h3 {
 }
 
 /*------------------------------ADMIN----------------------*/
+.cabeceraAdmin {
+	position: fixed;
+	width: 100%;
+	margin-top: 8%;
+}
+
+.listaPreguntasAdmin {
+	margin: 0 10%;
+	margin-top: 16%;
+}
+
 .paginacion {
 	bottom: 5px;
     position: fixed;
     width: 100%;
-	padding: 5px 0
+	padding: 10px 0
 }
 
 .pagination {
@@ -616,6 +628,10 @@ md-list md-list-item.md-3-line .md-list-item-text h3 {
 	font-size: 13px;
 	float: right;
     padding-right: 12%;
+}
+
+.md-subheader .md-subheader-inner {
+    padding-top: 0;
 }
 
 //switch para elegir entrevistas realizadas o pendientes
@@ -649,7 +665,9 @@ md-switch.md-default-theme.md-checked .md-ink-ripple, md-switch.md-checked .md-i
 }
 
 md-datepicker.adminFecha {
-	margin-left: -15%;
+	position: fixed;
+    margin-left: 69%;
+    margin-top: 0.5%;
 }
 
 .md-datepicker-open .md-datepicker-calendar-icon {
@@ -804,16 +822,10 @@ rzslider .rz-bar-wrapper {
 	width: 90%;
 }
 
-.admin {
-    padding-right: 0px;
-    margin-right: 10%;
-	margin-top: 4px;
-	float: right;
-}
-
 .adminCheck {
-	padding-top: 1.9%;
-	margin-left: 11%;
+    position: fixed;
+    margin-left: 86%;
+    margin-top: 1.2%;
 }
 
 .puntos {
@@ -846,8 +858,11 @@ md-input-container.horas {
 	width: 22%;
 }
 
-md-autocomplete {
-	width: 75%;
+md-autocomplete.autocompleteAdmin {
+    position: fixed;
+	width: 58.9%;
+    margin-left: 10%;
+    margin-top: 1%;
 }
 
 .md-button.md-raised.error {
@@ -998,55 +1013,223 @@ md-input-container.horasAyuda {
 
 
 /*--------------------- media queries ------------------------*/
-@media screen and (max-width: 1168px) {
-    .md-button.md-fab.md-mini.adminBtn {
-		margin-right: 12%;
+@media screen and (max-width: 1200px)  and (min-width: 1001px) {	
+	.cabeceraAdmin {
+		margin-top: 10%;
 	}
 	
-	md-autocomplete {
-		width: 70%;
+	.listaPreguntasAdmin {
+		margin-top: 19.5%;
+	}
+	
+	.cabeceraTec {
+		margin-top: 10%;
+	}
+	
+	.listaPreguntasTec {
+		margin-top: 19.3%;
 	}
 }
 
-@media screen and (max-width: 1229px) {
-    .md-button.md-fab.md-mini.tec {
-		margin-right: 12%;
+@media screen and (max-width: 1000px) and (min-width: 851px) {	
+	.cabeceraAdmin {
+		margin-top: 12%;
+	}
+	
+	.listaPreguntasAdmin {
+		margin-top: 22.9%;
+	}
+	
+	.cabeceraTec {
+		margin-top: 12%;
+	}
+	
+	.listaPreguntasTec {
+		margin-top: 22.7%;
 	}
 }
 
-@media screen and (max-width: 1075px) {	
-	.pagination {
-    	padding-left: 30%;
+@media screen and (max-width: 850px) and (min-width: 701px) {	
+	.cabeceraAdmin {
+		margin-top: 14%;
+	}
+	
+	.listaPreguntasAdmin {
+		margin-top: 26.9%;
+	}
+	
+	.cabeceraTec {
+		margin-top: 14%;
+	}
+	
+	.listaPreguntasTec {
+		margin-top: 27%;
 	}
 }
 
-@media screen and (max-width: 785px) {	
-	.pagination {
-    	padding-left: 10%;
+@media screen and (max-width: 700px) and (min-width: 651px){	
+	.cabeceraAdmin {
+		margin-top: 16%;
+	}
+	
+	.listaPreguntasAdmin {
+		margin-top: 29.7%;
+	}
+	
+	.cabeceraTec {
+		margin-top: 16%;
+	}
+	
+	.listaPreguntasTec {
+		margin-top: 31%;
 	}
 }
 
-@media screen and (max-width: 970px) and (min-width: 851px) {	
-	md-autocomplete {
-		width: 65%;
+@media screen and (max-width: 650px) and (min-width: 561px) {	
+	.cabeceraAdmin {
+		margin-top: 18%;
+	}
+	
+	.listaPreguntasAdmin {
+		margin-top: 33.7%;
+	}
+	
+	.cabeceraTec {
+		margin-top: 18%;
+	}
+	
+	.listaPreguntasTec {
+		margin-top: 34%;
 	}
 }
 
-@media screen and (max-width: 850px) and (min-width: 751px) {	
-	md-autocomplete {
-		width: 60%;
+@media screen and (max-width: 560px) {	
+	.cabeceraAdmin {
+		margin-top: 20%;
+	}
+	
+	.listaPreguntasAdmin {
+		margin-top: 36%;
+	}
+	
+	.cabeceraTec {
+		margin-top: 20%;
+	}
+	
+	.listaPreguntasTec {
+		margin-top: 38%;
 	}
 }
 
-@media screen and (max-width: 750px) and (min-width: 651px) {	
-	md-autocomplete {
-		width: 55%;
+@media screen and (max-width: 1150px) and (min-width: 1021px) {	
+	md-autocomplete.autocompleteAdmin {
+		width: 56.9%;
+	}
+	
+	md-datepicker.adminFecha {
+		margin-left: 67%;
 	}
 }
 
-@media screen and (max-width: 650px) {	
-	md-autocomplete {
-		width: 50%;
+@media screen and (max-width: 1020px) and (min-width: 951px) {	
+	md-autocomplete.autocompleteAdmin {
+		width: 54.9%;
+	}
+	
+	md-datepicker.adminFecha {
+		margin-left: 65%;
+	}
+}
+
+@media screen and (max-width: 950px) and (min-width: 851px) {	
+	md-autocomplete.autocompleteAdmin {
+		width: 52.9%;
+	}
+	
+	md-datepicker.adminFecha {
+		margin-left: 63%;
+	}
+}
+
+@media screen and (max-width: 850px) and (min-width: 741px) {	
+	md-autocomplete.autocompleteAdmin {
+		width: 49.9%;
+	}
+	
+	md-datepicker.adminFecha {
+		margin-left: 60%;
+	}
+}
+
+@media screen and (max-width: 740px) and (min-width: 651px) {	
+	md-autocomplete.autocompleteAdmin {
+		width: 45.9%;
+	}
+	
+	md-datepicker.adminFecha {
+		margin-left: 56%;
+	}
+}
+
+@media screen and (max-width: 650px) and (min-width: 571px) {	
+	md-autocomplete.autocompleteAdmin {
+		width: 41.9%;
+	}
+	
+	md-datepicker.adminFecha {
+		margin-left: 52%;
+	}
+}
+
+@media screen and (max-width: 570px) {	
+	md-autocomplete.autocompleteAdmin {
+		width: 38.9%;
+	}
+	
+	md-datepicker.adminFecha {
+		margin-left: 49%;
+	}
+}
+
+@media screen and (max-width: 1150px) and (min-width: 951px) {	
+	.adminCheck {
+		margin-top: 1.3%;
+	}
+}
+
+@media screen and (max-width: 950px) and (min-width: 801px) {	
+	.adminCheck {
+		margin-top: 1.8%;
+	}
+}
+
+@media screen and (max-width: 800px) and (min-width: 651px) {	
+	.adminCheck {
+		margin-top: 2%;
+	}
+}
+
+@media screen and (max-width: 650px) and (min-width: 500px) {	
+	.adminCheck {
+		margin-top: 2.2%;
+	}
+}
+
+@media screen and (max-width: 1150px) and (min-width: 951px) {	
+	.md-button.md-fab.md-mini.adminBtn, .md-button.md-fab.md-mini.tec{
+		bottom: 8px;
+	}
+}
+
+@media screen and (max-width: 950px) and (min-width: 751px) {	
+	.md-button.md-fab.md-mini.adminBtn, .md-button.md-fab.md-mini.tec {
+		bottom: 10px;
+	}
+}
+
+@media screen and (max-width: 750px) and (min-width: 500px) {	
+	.md-button.md-fab.md-mini.adminBtn, .md-button.md-fab.md-mini.tec {
+		bottom: 12px;
 	}
 }
 

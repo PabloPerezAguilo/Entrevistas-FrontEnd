@@ -1,40 +1,39 @@
 <div id="seccionAdmin">
-    <md-button mfb-button class="md-fab md-mini btnPosDerecha adminBtn" ng-click="crear($event)" aria-label="crear entrevista">
-        <md-icon md-svg-src="img/crear.svg" class="btnIconoCentrado"></md-icon>
-    </md-button>
-    
-    <p></p>
-
-    <md-list>
-		<md-subheader class="md-no-sticky">
-			Entrevistas
-		</md-subheader>
-		
-		<md-divider class="dividerPrincipal"></md-divider>
+	<md-list>
+		<div class="cabeceraAdmin">
 			
-		<div class="admin">
-			<md-datepicker ng-model="fecha" ng-change="cambioFechaSwitch()" md-placeholder="Enter date"
-						   ng-disabled="disableCalendario" class="adminFecha"></md-datepicker>
-			<md-checkbox ng-model="mostrarTodasEntrevistas" ng-change="getTodasEntervistas()" 
-						 class="adminCheck" aria-label="mostrar todas las entrevistas"></md-checkbox> 
-		</div>
-
-		<div class="buscarTemas">
-			<md-autocomplete ng-disabled="false" md-no-cache="noCache" 
+			 <md-button mfb-button class="md-fab md-mini btnPosDerecha adminBtn" ng-click="crear($event)" 
+						aria-label="crear entrevista">
+				 <md-icon md-svg-src="img/crear.svg" class="btnIconoCentrado"></md-icon>
+			</md-button>
+			
+			<md-subheader class="md-no-sticky">
+				Entrevistas
+			</md-subheader>
+			
+			<md-divider class="dividerPrincipal"></md-divider>
+			
+			<md-autocomplete class="autocompleteAdmin" ng-disabled="false" md-no-cache="noCache" 
 							 md-selected-item="selectedItem" md-search-text-change="searchTextChange(searchText)" 
 							 md-search-text="searchText" md-selected-item-change="selectedItemChange(item)" 
 							 md-items="item in queryBuscarNombre(searchText)" md-item-text="item.valor" 
 							 md-min-length="0" placeholder="Buscar por nombre del entrevistado">
-			<md-item-template>
-				<span md-highlight-text="searchText" md-highlight-flags="^i">{{item.name}}</span>
+				<md-item-template>
+					<span md-highlight-text="searchText" md-highlight-flags="^i">{{item.name}}</span>
 				</md-item-template>
 				<md-not-found>
 					El nombre "{{searchText}}" no tiene ninguna entrevista asociada
 				</md-not-found>
 			</md-autocomplete>
+			
+			<md-datepicker ng-model="fecha" ng-change="cambioFechaSwitch()" md-placeholder="Enter date"
+							   ng-disabled="disableCalendario" class="adminFecha"></md-datepicker>
+			<md-checkbox ng-model="mostrarTodasEntrevistas" ng-change="getTodasEntervistas()"
+						 class="adminCheck" aria-label="mostrar todas las entrevistas"></md-checkbox> 
+		
 		</div>
 		
-      	<div class="listaPreguntas">
+      	<div class="listaPreguntasAdmin">
 			<p ng-show="hayEntrevistas" class="mensajeEntrevista">No hay entrevistas para el día seleccionado</p>
 			<md-list-item class="md-3-line hoverLista" ng-repeat="item in entrevistas">
 				<div class="md-list-item-text" layout="column">
