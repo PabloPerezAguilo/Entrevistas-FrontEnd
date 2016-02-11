@@ -6,7 +6,7 @@
 					{{ $index + 1 }}. La pregunta ha sido borrada
 				</div>
 				<div ng-if="pregunta.type === 'FREE'" class="contenedorRespuestas">
-					<h3>{{ $index  + 1}}. {{ pregunta.title }} </h3>
+					<h3>{{ $index  + 1}}. <span ng-repeat="linea in pregunta.title">{{ linea }}<p></p></span> </h3>
 					<md-input-container class="respuestas">
 						<label>Respuesta a la pregunta</label>
 						<textarea  ng-model="respuestas[$index]"></textarea>
@@ -14,7 +14,7 @@
 				</div>
 				
 				<div ng-if="pregunta.type === 'SINGLE_CHOICE'" class="contenedorRespuestas">
-					<h3>{{ $index  + 1}}. {{ pregunta.title }} </h3>
+					<h3>{{ $index  + 1}}. <span ng-repeat="linea in pregunta.title">{{ linea }}<p></p></span> </h3>
 					<md-radio-group ng-model="respuestas[$index]">
 						<p class="respuestas displayInline" ng-repeat="answer in pregunta.answers"> 
 							<md-radio-button value="{{$index}}" aria-label="respuestas test">
@@ -25,7 +25,7 @@
 				</div>
 				
 				<div ng-if="pregunta.type === 'MULTI_CHOICE'" class="contenedorRespuestas">
-					<h3>{{ $index  + 1}}. {{ pregunta.title }} </h3>
+					<h3>{{ $index  + 1}}. <span ng-repeat="linea in pregunta.title">{{ linea }}<p></p></span> </h3>
 					<p class="respuestas displayInline" ng-repeat="answer in pregunta.answers">
 						<md-checkbox ng-model="respuestas[$parent.$index][$index]" aria-label="respuestas test abierto">
 							{{ answer.title }}
@@ -37,10 +37,10 @@
 			</md-list-item>
 		</md-list>
 	</md-content>
+	<md-button class="md-raised btnEntrevistadoGuardar" ng-click="guardarRespuestas($event)">
+		Finalizar cuestionario
+	</md-button>
 </div>
-<md-button class="md-raised btnEntrevistadoGuardar" ng-click="guardarRespuestas($event)">
-	Finalizar cuestionario
-</md-button>
 
 <div ng-hide="hacerPreguntas">
 	<div class="alert alert-info mensaje">

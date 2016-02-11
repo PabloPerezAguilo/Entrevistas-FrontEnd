@@ -1,5 +1,26 @@
 app.controller('controladorVer', function ($scope, $mdDialog, indice) {
 	
+	function escribirSaltosDeLinea() {
+		var titulo = $scope.preguntas[indice].title;
+		var pos = [];
+		var cont = 0;
+		for (var i = 0; i < titulo.length; i++) {
+			if(titulo.charAt(i) === '\n') {
+				pos[cont] = i;
+				cont++;
+			}
+		}
+		$scope.titulo = [];
+		for (var i = 0; i < pos.length; i++) {
+			if (i === 0) {
+				$scope.titulo[0] = titulo.substring(0, pos[0]);
+			} else {
+				$scope.titulo[i] = titulo.substring(pos[i - 1] + 1, pos[i]);
+			}
+		}
+		$scope.titulo[$scope.titulo.length] = titulo.substring(pos[pos.length - 1] + 1, titulo.lastIndex);
+	}
+	
 	$scope.index = indice;
     if ($scope.preguntas[indice].type === "Pregunta abierta") {
         $scope.cabeceraVer = "- Abierta";
@@ -9,7 +30,7 @@ app.controller('controladorVer', function ($scope, $mdDialog, indice) {
         }
         
         $scope.temas_nivel += " / " + $scope.preguntas[indice].level;
-        $scope.titulo = $scope.preguntas[indice].title;
+		escribirSaltosDeLinea();
         $scope.directiva = $scope.preguntas[indice].directive;
     } else {
         if ($scope.preguntas[indice].type === "Pregunta tipo Test") {
@@ -24,7 +45,8 @@ app.controller('controladorVer', function ($scope, $mdDialog, indice) {
         }
         
         $scope.temas_nivel += " / " + $scope.preguntas[indice].level;
-        $scope.titulo = $scope.preguntas[indice].title;
+        //$scope.titulo = $scope.preguntas[indice].title;
+		escribirSaltosDeLinea();
         
         $scope.items = [];
         for (var i = 0; i < $scope.preguntas[indice].answers.length; i++) {
