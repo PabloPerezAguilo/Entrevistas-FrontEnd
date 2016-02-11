@@ -20,8 +20,8 @@
       
 		<div class="md-dialog-content">
             
-            <p id="textoTemaNivel" ng-bind="temas_nivel"></p>  
-            <p id="textoTitulo" ng-bind="titulo"></p>       
+            <p id="textoTemaNivel" ng-bind="temas_nivel"></p>
+            <p id="textoTitulo" ng-repeat="linea in titulo">{{linea}}</p>       
             <p id="textoDirectiva" ng-bind="directiva"></p>
             <div ng-repeat="item in items">
                 <md-checkbox class="displayInline" ng-disabled="true" ng-model="item.esCorrecta" aria-label="checkbox ver">
