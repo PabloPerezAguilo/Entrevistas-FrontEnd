@@ -9,6 +9,7 @@
 			
 			<md-divider class="dividerPrincipal"></md-divider>
 			
+			<md-icon md-svg-src="img/lupa.svg" class="iconoBuscar"></md-icon>
 			<md-chips class="chipsTec" ng-model="listaTemas" 
 					  md-autocomplete-snap=""
 					  md-transform-chip="transformChip($chip)" 
@@ -32,7 +33,6 @@
 					<span> {{$chip.tag}} </span>
 				</md-chip-template>
 			</md-chips>
-			<md-icon md-svg-src="img/lupa.svg" class="iconoBuscar"></md-icon>
 		</div>
       	<div class="listaPreguntasTec">
 			<p ng-show="hayPreguntas" class="mensajeEntrevista">No hay preguntas para esta(s) aptitud(es)</p>

@@ -508,7 +508,7 @@ md-checkbox[disabled] .md-label {
 }
 
 /*div del md-chips para buscar por temas*/
-.md-button.md-fab.md-mini {
+.md-button.md-fab.md-mini, .posDer {
     float: right;
 }
 
@@ -992,6 +992,15 @@ md-input-container.horasAyuda {
 }
 
 /*--------------------- EQUIPO ------------------------*/
+.equipo {
+	margin-top: 10%;
+	margin-left: 3%;
+	margin-right: 3%;
+}
+
+.divEquipo {
+	margin-bottom: 50%
+}
 
 .imgEquipo {
 	width: 25%;
@@ -999,18 +1008,81 @@ md-input-container.horasAyuda {
 	border: #EF6C00 2px solid;
 }
 
-.amayor {
-	height: 1417px;
-  	width: 1416px;
-	background-image: url(img/equipo/amayorBN.png);
-}
-.amayor:hover {
-	background-image: url(img/equipo/amayor.png);
-	height: 1417px;
-  	width: 1416px;
+.posIzq {
+	float: left;
 }
 
+.imgPperez {
+	background: url(../img/equipo/pperez.png) no-repeat left;
+	width: 500px;
+	height: 501px;
+}
+ 
+.imgPperez:hover {
+	background-position: right;
+	width: 500px;
+	height: 501px;
+}
 
+.imgFgmontoro {
+	background: url(../img/equipo/fgmontoro.png) no-repeat left;
+	width: 1417px;
+	height: 1416px;
+ }
+ 
+.imgFgmontoro:hover {
+	background-position: right;
+	width: 1417px;
+	height: 1416px;
+}
+
+.imgEfernandez {
+	background: url(../img/equipo/efernandez.png) no-repeat left;
+	width: 1417px;
+	height: 1416px;
+ }
+ 
+.imgEfernandez:hover {
+	background-position: right;
+	width: 1417px;
+	height: 1416px;
+}
+
+.imgAbarrero {
+	background: url(../img/equipo/abarrero.png) no-repeat left;
+	width: 1417px;
+	height: 1416px;
+ }
+ 
+.imgAbarrero:hover {
+	background-position: right;
+	width: 1417px;
+	height: 1416px;
+}
+
+.imgAgonzalez {
+	background: url(../img/equipo/agonzalez.png) no-repeat left;
+	width: 1417px;
+	height: 1416px;
+ }
+ 
+.imgAgonzalez:hover {
+	background-position: right;
+	width: 1417px;
+	height: 1416px;
+}
+
+.imgAmayor {
+	background: url(../img/equipo/amayor.png) no-repeat left;
+	width: 1417px;
+	height: 1416px;
+ }
+ 
+.imgAmayor:hover {
+	background-position: right;
+	width: 1417px;
+	height: 1416px;
+}
 
 /*--------------------- media queries ------------------------*/
 @media screen and (max-width: 1200px)  and (min-width: 1001px) {	
