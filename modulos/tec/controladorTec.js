@@ -1,5 +1,16 @@
 app.controller('controladorTec', function (servicioRest, $scope, $rootScope, $mdDialog, $timeout, $q, $log, $mdToast, $location, $http) {
 	
+	$scope.quitarFoco = function() {
+		if (navigator.userAgent.match(/Android/i)) {
+			//alert("Hola Android!");
+			document.getElementById("botonid").focus();
+		} else if (navigator.platform === 'iPad') {
+			alert("Hola iPad");
+		} /*else {
+			alert("hola");
+		}*/
+	}
+	
 	var permiso = sessionStorage.getItem("permiso");
 	var ver = sessionStorage.getItem("ver");
 	

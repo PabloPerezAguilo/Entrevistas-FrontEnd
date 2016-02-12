@@ -1,6 +1,5 @@
 app.controller('controladorLogIn', function (servicioRest, config, $scope, $location, $rootScope, $mdToast, $log, $http) {
-
-
+	
 	$rootScope.logueado = false;
 	$rootScope.conFooter = true;
 	$rootScope.rolUsuario = "";
@@ -28,17 +27,17 @@ app.controller('controladorLogIn', function (servicioRest, config, $scope, $loca
 	
 	if (ver) {
 		$location.path('/respuestasEntrevista');
-	} 
+	}
 	
 	$scope.cambioCheck = function () {
 		checkeado = $scope.checkRecordar;
-	};	
+	};
 	
 	//RECORDAR SESION
-	if (localStorage.getItem("usuario") !== undefined && localStorage.getItem("usuario") !== null) {
+	if (localStorage.getItem("usuario") !== null) {
 		var user = {
 			username: localStorage.getItem("usuario"),
-			password: Aes.Ctr.decrypt(localStorage.getItem("password"), localStorage.getItem("usuario"), 256)
+			password: localStorage.getItem("password")
 		};
 		servicioRest.postAuthenticate(user)
 			.then(function (data) {
@@ -52,6 +51,7 @@ app.controller('controladorLogIn', function (servicioRest, config, $scope, $loca
 			})
 			.catch(function (err) {
 				$log.error("Error al recordar sesión: " + err);
+				//$location.path('/');
 			})
 	}
 
@@ -65,6 +65,7 @@ app.controller('controladorLogIn', function (servicioRest, config, $scope, $loca
 		$rootScope.cargando = true;
 		var user = {};
 		user.username = $scope.user.toLowerCase();
+		//user.password = window.btoa($scope.pass);
 		user.password = $scope.pass;
 		$rootScope.usuario = $scope.user;
 		servicioRest.postAuthenticate(user)
@@ -73,7 +74,7 @@ app.controller('controladorLogIn', function (servicioRest, config, $scope, $loca
 				$rootScope.rol = data.role;
 				if(checkeado) {
 					localStorage.setItem("usuario", user.username);
-					localStorage.setItem("password", Aes.Ctr.encrypt(user.username, $scope.pass, 256));
+					localStorage.setItem("password", user.password);
 					localStorage.setItem("rol", data.role);
 				} else {
 					sessionStorage.setItem("usuario", user.username);
@@ -104,8 +105,8 @@ app.controller('controladorLogIn', function (servicioRest, config, $scope, $loca
 	};
 	
 	$scope.enter = function (pressEvent) {
-		if (pressEvent.charCode === 13) {
+		if (pressEvent.keyCode === 13 || pressEvent.which === 13) {
 			$scope.login();
-		}
+		}            
 	}
 });
