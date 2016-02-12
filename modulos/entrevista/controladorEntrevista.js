@@ -1,5 +1,30 @@
 app.controller('controladorEntrevista', function (servicioRest, $scope, $rootScope, $log, $mdDialog, $location, $http) {
 	
+	function escribirSaltosDeLinea(pregunta) {
+		if (pregunta !== null) {
+			var titulo = pregunta.title;
+			var pos = [];
+			var cont = 0;
+			for (var i = 0; i < titulo.length; i++) {
+				if(titulo.charAt(i) === '\n') {
+					pos[cont] = i;
+					cont++;
+				}
+			}
+			pregunta.title = [];
+			if(pos.length > 0) {
+				pregunta.title[0] = titulo.substring(0, pos[0]);
+				for (var i = 0; i < pos.length; i++) {
+					pregunta.title[i] = titulo.substring(pos[i - 1] + 1, pos[i]);
+				}
+				pregunta.title[pregunta.title.length] = titulo.substring(pos[pos.length - 1] + 1, titulo.lastIndex);
+			} else {
+				pregunta.title[0] = titulo;
+			}
+		}
+	}
+	
+	
 	$rootScope.cargando = false;
 	$rootScope.conFooter = false;
     $rootScope.logueado = false;
@@ -44,6 +69,9 @@ app.controller('controladorEntrevista', function (servicioRest, $scope, $rootSco
 		servicioRest.getPreguntasEntrevistaById(id)
 				.then(function (data) {
 					$scope.preguntas = data;
+					for (var i = 0; i < $scope.preguntas.length; i++) {
+						escribirSaltosDeLinea($scope.preguntas[i]);
+					}
 				})
 				.catch(function (err) {
 					$scope.preguntas = null;

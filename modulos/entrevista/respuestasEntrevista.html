@@ -11,7 +11,7 @@
 				</div>
 				<div ng-if="pregunta.type === 'FREE'" class="contenedorRespuestas">
 					<div class="notaRespuesta">
-							<h3>{{ $index  + 1 }}. {{ pregunta.title }}</h3>
+						<h3>{{ $index  + 1 }}. <span ng-repeat="linea in pregunta.title"> {{linea}}<p></p></span></h3>
 						<p ng-style="correccionStyle[$index]">{{ pregunta.answer }}</p>
 						<div class="alert alert-warning directivaEntrevista" ng-show="tieneDirectiva[$index]">
 							{{ pregunta.directive }}
@@ -24,7 +24,7 @@
 						{{ notaPregunta[$index] }}
 					</div>
 					<div class="enLinea notaRespuesta">
-						<h3>{{ $index  + 1 }}. {{ pregunta.title }} </h3>
+						<h3>{{ $index  + 1 }}. <span ng-repeat="linea in pregunta.title"> {{linea}}<p></p></span> </h3>
 						<p>
 							<md-radio-group ng-model="correccionTest[$index]">
 								<span class="respuestas displayInline" ng-repeat="answer in pregunta.answers"> 
@@ -43,7 +43,7 @@
 						{{ notaPregunta[$index] }}
 					</div>
 					<div class="enLinea notaRespuesta">
-						<h3>{{ $index  + 1}}. {{ pregunta.title }} </h3>
+						<h3>{{ $index  + 1}}. <span ng-repeat="linea in pregunta.title"> {{linea}}<p></p></span> </h3>
 						<p class="respuestas correccionRespuestas displayInline" ng-repeat="answer in pregunta.answers">
 							<md-checkbox ng-model="correccionTest[$parent.$index][$index]" 
 										 ng-disabled="true" aria-label="respuestas test abierto">
