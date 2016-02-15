@@ -1,0 +1,54 @@
+<div class="entrevistado" data-ng-show="hacerPreguntas">
+	<md-content>
+		<md-list>
+			<md-list-item data-ng-repeat="pregunta in preguntas">
+				<div data-ng-if="pregunta === null">
+					{{ $index + 1 }}. La pregunta ha sido borrada
+				</div>
+				<div class="contenedorRespuestas" data-ng-if="pregunta.type === 'FREE'">
+					<h3>{{ $index  + 1}}. <span data-ng-repeat="linea in pregunta.title">{{ linea }}<p></p></span> </h3>
+					<md-input-container class="respuestas">
+						<label>Respuesta a la pregunta</label>
+						<textarea data-ng-model="respuestas[$index]"></textarea>
+					</md-input-container>
+				</div>
+				
+				<div class="contenedorRespuestas" data-ng-if="pregunta.type === 'SINGLE_CHOICE'">
+					<h3>{{ $index  + 1}}. <span data-ng-repeat="linea in pregunta.title">{{ linea }}<p></p></span> </h3>
+					<md-radio-group data-ng-model="respuestas[$index]">
+						<p class="respuestas displayInline" data-ng-repeat="answer in pregunta.answers"> 
+							<md-radio-button value="{{$index}}" aria-label="respuestas test">
+								{{ answer.title }}
+							</md-radio-button>
+						</p>
+					</md-radio-group>
+				</div>
+				
+				<div class="contenedorRespuestas" data-ng-if="pregunta.type === 'MULTI_CHOICE'">
+					<h3>{{ $index  + 1}}. <span data-ng-repeat="linea in pregunta.title">{{ linea }}<p></p></span> </h3>
+					<p class="respuestas displayInline" data-ng-repeat="answer in pregunta.answers">
+						<md-checkbox aria-label="respuestas test abierto" data-ng-model="respuestas[$parent.$index][$index]">
+							{{ answer.title }}
+						</md-checkbox> 
+					</p>
+				</div>
+				
+				<md-divider class="dividerCorto"></md-divider>
+			</md-list-item>
+		</md-list>
+	</md-content>
+	<md-button class="md-raised btnEntrevistadoGuardar" data-ng-click="guardarRespuestas($event)">
+		Finalizar cuestionario
+	</md-button>
+</div>
+
+<div data-ng-hide="hacerPreguntas">
+	<div class="alert alert-info mensaje">
+		<p>Ha completado el cuestionario correctamente.</p> 
+		<p>En breve llegara el entrevistador tecnico.</p>
+		<p>Por favor, espere y no pulse continuar hasta su llegada.</p>
+	</div>
+	<md-button class="md-raised btnEntrevistadoGuardar" data-ng-click="aceptarBtn()">
+		Aceptar
+	</md-button>	
+</div>

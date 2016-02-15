@@ -66,15 +66,15 @@ $colorPrincipalClaro: rgba(239,108,0,0.17);
 }
 
 @font-face { 
-	font-family: 'principal';
-	src: url('fonts/Roboto-Thin.ttf');
+	font-family: fontPrincipal;
+	src: url(../fonts/roboto.woff);
 }
 
 /* ------------------------- HEADER & FOOTER --------------------------------------- */
 header {
 	position: fixed;
 	top: 0;
-	width: 100%;
+	width: 100%; 
 	height: 90px;
     background-color: $negro;
     color: $letra;
@@ -160,7 +160,7 @@ md-progress-linear .md-container {
 
 /* ------------------------- LOG IN --------------------------------------- */
 .logIn {
-    font-family: 'Roboto', sans-serif;
+    font-family: fontPrincipal;
     background-color: #F5F5F5;
     @include sombra(1px,2px,40px,1px, grey);
     

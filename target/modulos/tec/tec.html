@@ -1,0 +1,60 @@
+<div id="seccionTec">
+    <md-list>
+		<div class="cabeceraTec">
+			<md-button mfb-button="" class="md-fab md-mini btnPosDerecha tec" aria-label="crearPregunta" data-ng-click="crear($event)">
+				<md-icon md-svg-src="img/crear.svg" class="btnIconoCentrado"></md-icon>
+			</md-button>
+			
+			<md-subheader class="md-no-sticky">Preguntas</md-subheader>
+			
+			<md-divider class="dividerPrincipal"></md-divider>
+
+			<md-icon md-svg-src="img/lupa.svg" class="iconoBuscar"></md-icon>
+			<md-chips class="chipsTec" md-autocomplete-snap="" md-transform-chip="transformChip($chip)" md-require-match="false" md-on-remove="deleteChip()" data-ng-model="listaTemas">
+				
+				<md-autocomplete md-selected-item="selectedItem" md-search-text-change="searchTextChange(searchText)" md-search-text="searchText" md-selected-item-change="selectedItemChange(item)" md-items="item in queryBuscarTema(searchText)" md-item-text="item.valor" md-min-length="0" placeholder="Buscar por aptitudes">
+					<span md-highlight-text="searchText">
+						{{item.tag}}
+					</span>
+				</md-autocomplete>
+				
+				<md-chip-template>
+					<span> {{$chip.tag}} </span>
+				</md-chip-template>
+			</md-chips>
+
+		</div>
+      	<div class="listaPreguntasTec">
+			<p class="mensajeEntrevista" data-ng-show="hayPreguntas">No hay preguntas para esta(s) aptitud(es)</p>
+			<md-list-item class="md-3-line hoverLista" data-ng-repeat="item in preguntas">
+				<div class="md-list-item-text" layout="column">
+					<h3>
+						{{ item.title }}
+					</h3>
+					<h4>
+						<span data-ng-repeat="tag in item.tags" data-ng-if="$first">{{ tag }} </span>
+						<span data-ng-repeat="tag in item.tags" data-ng-if="!$first">, {{ tag }} </span>/ {{ item.level }}
+					</h4>
+					<p>
+						{{ item.type }}
+					</p>
+				</div>
+				<md-button id="ver" aria-label="ver pegrunta" class="md-button icon centrarIconoLista explosionIcono" data-ng-click="ver($event,$index)">
+					<md-icon md-svg-src="img/ojo.svg"></md-icon>
+					<md-tooltip md-direction="bottom">
+					  Ver
+					</md-tooltip>
+				 </md-button>
+
+				<md-button id="eliminar" aria-label="eliminar" class="md-button icon centrarIconoLista explosionIcono" data-ng-click="eliminar($index)">
+					<md-icon md-svg-src="img/delete.svg"></md-icon>
+					<md-tooltip md-direction="bottom">
+					  Eliminar
+					</md-tooltip>
+				 </md-button>
+				<md-divider></md-divider>
+			</md-list-item>
+		</div>
+    </md-list>
+
+</div>

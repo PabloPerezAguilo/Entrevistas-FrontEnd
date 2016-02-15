@@ -1,0 +1,74 @@
+<md-dialog class="redimensionar" aria-label="Mango (Fruit)" data-ng-init="ver=true" data-ng-cloak="">
+	<form>
+		<md-toolbar>
+      		<div class="md-toolbar-tools">
+        		<h2 data-ng-model="cabeceraVer">Entrevista {{cabeceraVer}}</h2>
+                <span flex=""></span>
+				<md-button aria-label="ayuda" class="md-button icon centrarIconoLista explosionIcono iconosHeader" data-ng-click="ayuda()">
+					<md-icon class="iconoBlanco" md-svg-src="img/ayuda.svg"></md-icon>
+					<md-tooltip md-direction="bottom">
+						Ayuda
+					</md-tooltip>
+				</md-button>
+				<md-button class="md-icon-button" data-ng-click="cancel()">
+					<md-icon md-svg-src="img/cerrar.svg" aria-label="Close dialog"></md-icon>
+                </md-button>
+			</div>
+		</md-toolbar>
+		<md-dialog-content data-ng-show="ver">
+			<div class="md-dialog-content">
+				<md-button aria-label="ver pegrunta" class="md-button icon explosionIcono verRespuestas" data-ng-click="verRespuestas()" data-ng-show="entrevistaHecha">
+					<md-icon class="redimensionarIcono" md-svg-src="img/ojo.svg"></md-icon>
+					<md-tooltip md-direction="bottom">
+					  Ver resultado de las respuestas
+					</md-tooltip>
+				 </md-button>
+				
+				<span class="letraNegrita"> Nombre y apellidos: </span><span data-ng-bind="nombre"></span>
+				<p></p>
+
+				<p data-ng-show="tieneDNI">
+					<span class="letraNegrita"> DNI: </span>
+					<span data-ng-bind="DNI"></span>
+				</p>
+				<p>
+					<span class="letraNegrita"> Programada para: </span>
+					<span data-ng-bind="fecha"></span>
+				</p>
+				<p>
+					<span class="letraNegrita"> Estado: </span>
+					<span data-ng-bind="status"></span>
+				</p>
+				<md-chips class="custom-chips" readonly="true" data-ng-model="preguntas">
+					<md-chip-template>
+						<span>
+							<strong>{{$chip.tag}}</strong>
+							({{$chip.count}})
+						</span>
+					</md-chip-template>
+				</md-chips>
+      		</div>
+    	</md-dialog-content>
+		<md-dialog-content class="ayuda" data-ng-if="!ver">
+			<div class="alert alert-info alertAyuda">
+				<p>El campo <b>"Nombre y apellidos:"</b> indica el nombre y los apellidos del entrevistado</p>
+			</div>
+			<div class="alert alert-info alertAyuda">
+				<p>El campo <b>"Programada para:"</b> indica la fecha y la hora en la que se realizará la entrevista</p>
+			</div>
+			<div class="alert alert-info alertAyuda" data-ng-show="tieneDNI">
+				<p>El campo <b>"DNI:"</b> indica el DNI del entrevistado</p>
+			</div>
+			<div class="alert alert-info alertAyuda">
+				<p>El campo <b>"Estado:"</b> indica el estado de la entrevista. Este podrá ser "Pendiente" o "Realizada"</p>
+			</div>
+			<div class="alert alert-info alertAyuda">
+				<p>A continuación aparecerá la lista de temas de los que se compone la entrevista</p>
+			</div>
+			<div class="alert alert-info alertAyuda" data-ng-if="entrevistaHecha">
+				<p>El siguiente botón es para ver los resultados de la entrevista, una vez realizada:</p>
+				<md-icon class="redimensionarIcono" md-svg-src="img/ojo.svg"></md-icon>
+			</div>
+		</md-dialog-content>
+  	</form>
+</md-dialog>

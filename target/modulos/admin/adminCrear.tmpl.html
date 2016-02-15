@@ -1,0 +1,153 @@
+<md-dialog class="redimensionar" data-ng-init="error=false;req=false;mini=false;maxi=false;crear=true">
+        <form>
+            <md-toolbar>
+                <div class="md-toolbar-tools">
+                    <h2>
+                        Crear entrevista {{cabeceraCrear}}
+                    </h2>
+                    <span flex=""></span>
+					<md-button aria-label="ayuda" class="md-button icon centrarIconoLista explosionIcono iconosHeader" data-ng-click="ayuda()">
+						<md-icon class="iconoBlanco" md-svg-src="img/ayuda.svg"></md-icon>
+						<md-tooltip md-direction="bottom">
+							Ayuda
+						</md-tooltip>
+					</md-button>
+					
+                    <md-button class="md-icon-button" aria-label="cerrarCrearPregunta" data-ng-click="cancel()" data-ng-show="haciendoEntrevista">
+                        <md-icon md-svg-src="img/cerrar.svg"></md-icon>
+                    </md-button>
+
+                </div>
+            </md-toolbar>
+            <md-dialog-content data-ng-model="conte" data-ng-show="crear">
+                <md-content>
+                    <div class="contenidoTablaCrear" data-ng-show="haciendoEntrevista">
+                        <md-input-container class="md-block">
+                            <label>Nombre y apellidos *</label>
+                            <textarea required data-ng-model="nombreEntrevista"></textarea>
+							<div data-ng-messages="nombreEntrevista.$error">
+								<div data-ng-message="required">Este campo es obligatorio</div>								
+							</div>
+                        </md-input-container>
+                        <md-input-container class="md-block">
+                            <label>DNI</label>
+                            <textarea data-ng-model="dniEntrevista"></textarea>
+                        </md-input-container>
+      
+                        <md-datepicker required md-placeholder="Introducir fecha" class="crear" data-ng-model="fecha">
+							<div data-ng-messages="fecha.$error">
+								<div data-ng-message="required">
+									Debe introducir una fecha.
+								</div>
+							</div>
+						</md-datepicker>
+                        <div>
+							<md-input-container class="md-inline horas">
+								<input required type="number" step="any" min="08" max="20" placeholder="Hora *" class="horas" data-ng-model="horas">
+								<div data-ng-messages="horas.$error">
+									<div data-ng-message-exp="['required', 'min', 'max']">
+										La jornada comprende entre las 8 y 20 h.
+									</div>
+								</div>
+							</md-input-container>
+							<span class="puntos">:</span>
+							<md-input-container class="md-inline minutos">
+								<input required type="number" step="any" min="00" max="59" placeholder="Minutos *" class="minutos" data-ng-model="minutos">
+								<div data-ng-messages="horas.$error">
+									<div data-ng-message-exp="['required', 'min', 'max']">
+										Los valores deben estar entre 0 y 59.
+									</div>
+								</div>
+							</md-input-container>
+						</div>
+
+                        <div>
+							<div data-ng-repeat="respuestas in temasChip">
+								<span>	
+									<rzslider rz-slider-model="minSliderValue[$index].minSliderG" rz-slider-high="minSliderValue[$index].maxSliderG" rz-slider-options="minSliderValue[$index].options"></rzslider>
+									<md-chips md-autocomplete-snap="" md-transform-chip="transformChip($chip, $index)" md-require-match="false" data-ng-model="temasEntrevista[$index]">
+										<md-autocomplete id="aptitudes" md-selected-item="selectedItem" md-search-text="searchText" md-items="item in queryBuscarTema(searchText)" md-item-text="item.valor" placeholder="Aptitudes">
+											<span md-highlight-text="searchText">
+												{{item.tag}}
+											</span>
+										</md-autocomplete>
+										<md-chip-template>
+											<span> {{$chip.tag}} </span>
+										</md-chip-template>
+									</md-chips>
+								</span>
+							</div>
+							
+							<md-button class="md-fab md-mini" aria-label="crearPregunta" data-ng-click="$root.aniadirSliderTemas()">
+								<md-icon md-svg-src="img/mas.svg"></md-icon>
+							</md-button>
+						</div>
+						
+						<div class="alert alert-warning cortarAlertWarning alertWarningEntrevista" data-ng-if="error">
+							<span>
+								<p class="mensajeAlert">No hay suficientes preguntas para esta(s) aptitud(es).</p>
+								<md-button aria-label="eliminar" class="md-button icon explosionIcono entendidoCrearEntrevista" data-ng-click="cerrarError()">
+									<md-icon md-svg-src="img/ok.svg"></md-icon>
+								</md-button>
+							</span>
+							<p class="mensajeAlert">{{ mensajeError }}</p>
+							<p class="mensajeAlertRepeat" data-ng-repeat="tema in temaError" data-ng-show="hayRangoEntrevista">
+								{{ tema.tag }} con rango {{ tema.min }} - {{ tema.max }}
+							</p>
+						</div>
+                        
+                        <md-button class="md-raised" data-ng-click="crearEntrevista()" data-ng-disabled="deshabilitar()">
+							Guardar
+						</md-button>
+					</div>
+						<div class="mensajeEntrevistaCreada" data-ng-show="!haciendoEntrevista">
+							<p class="txtMensajeEntrevista" data-ng-repeat="linea in mensaje" data-ng-if="$first">
+								{{ linea }}
+							</p>
+							<p class="txtMensajeEntrevista" data-ng-repeat="linea in mensaje" data-ng-if="!$first">
+								- {{ linea }}
+							</p>
+							<md-button class="md-raised btnMensajeEntrevista" data-ng-click="hide()">
+								Cerrar
+							</md-button>
+						</div>
+                    
+                </md-content>
+			</md-dialog-content>
+			<md-dialog-content class="ayuda" data-ng-show="!crear">
+				<div class="alert alert-info alertAyuda">
+					<p>Con el siguiente calendario usted podrá seleccionar la fecha en la que se realizará la entrevista:</p>
+					<md-datepicker md-placeholder="Introducir fecha" class="ayudaFecha" data-ng-model="fechaAyuda"></md-datepicker>
+				</div>
+				<div class="alert alert-info alertAyuda">
+					<p>En los siguientes campos deberá usted introducir la hora:</p>
+					<md-input-container class="horasAyuda">
+						<input type="number" step="any" min="08" max="20" placeholder="Hora *" data-ng-model="horas">
+					</md-input-container>
+					<md-input-container class="md-inline">
+						<input type="number" step="any" min="00" max="59" placeholder="Minutos *" data-ng-model="minutos">
+					</md-input-container>
+				</div>
+				<div class="alert alert-info alertAyuda">
+					<p>La barra siguiente es para que usted pueda seleccionar qué rango de nivel debe tener el entrevistada en cierta aptitud:</p>
+					<img id="rango" src="rango.png">
+				</div>
+				<div class="alert alert-info alertAyuda">
+					<p>En el campo <b>"Aptitudes"</b> podrá seleccionar una o varias aptitudes que desea que tenga el entrevistado.</p> 
+					<p>El rango de nivel de estas aptitudes es el seleccionado en la barra anterior.</p>
+				</div>
+				<div class="alert alert-info alertAyuda btnMas">
+					<p>El siguiente botón es para añadir otra barra para seleccionar el rango y otro campo de aptitudes:</p>
+					<md-button class="md-fab md-mini btnAyuda" aria-label="crearPregunta">
+						<md-icon md-svg-src="img/mas.svg"></md-icon>
+					</md-button>
+				</div>
+				<div class="alert alert-info alertAyuda">
+					<p>El siguiente botón es para guardar la entrevista con los datos introducidos:</p>
+					<md-button class="md-raised btnMensajeEntrevistaAyuda">
+						Cerrar
+					</md-button>
+				</div>
+			</md-dialog-content>
+	</form>
+</md-dialog>

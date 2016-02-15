@@ -1,16 +1,19 @@
 var gulp = require('gulp'),
-lr = require('gulp-livereload');
-//sass = require('gulp-sass'),
-//jshint = require('gulp-jshint');
-
-var pathHTML=['./modulos/**/*.html','./index.html'];
-
+	lr = require('gulp-livereload'),
+	concat = require('gulp-concat'),
+	uglify = require('gulp-uglify'),
+	ngAnnotate = require('gulp-ng-annotate'),
+	htmlreplace = require('gulp-html-replace'),
+	htmlify = require('gulp-angular-htmlify'),
+	//sass = require('gulp-sass'),
+	jshint = require('gulp-jshint'),
+	minifyCss = require('gulp-minify-css');
 
 var paths = {
 	app : "app",
 	lib : "app/lib",
-	scss : "css",
-	css : "css",
+	scss : "sass",
+	css : "app/css",
 	target : "target"
 };
 
@@ -25,16 +28,21 @@ var names = {
 }
 
 
-function startExpress() {
+function startExpress(enviroment) {
 	var express = require('express');
 	var app = express();
-
-	app.use(require('connect-livereload')());
-	app.use(express.static(__dirname + "/"));
+	// DEV: Con librerias sin minificar, con mocks y con livereload
+	// TEST: Librerias minificadas, con mocks y sin livereload
+	// ELSE: Librerias minificadas, sin mocks y sin livereload
+	if(enviroment === "dev") {
+		app.use(require('connect-livereload')());
+		app.use(express.static(__dirname + "/"+paths.app));
 
 		// Start livereload
-	lr.listen(35729);
-	
+		lr.listen(35729);
+	} else {
+		app.use(express.static(__dirname + "/"+paths.target));
+	}
 	app.listen(80);
 }
 
@@ -42,41 +50,75 @@ function notifyLivereload(file) {
 	lr.reload(file);
 }
 
-gulp.task('cdnReplace', function() {
-	console.log("Reemplazamos las librerias por los CDNs de index");
-	return gulp.src('target/files/index.html')
-	.pipe(htmlreplace({
-		
-		'JSCDNs': [
-		'https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.js',
-		'https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-route.min.js',
-		'https://ajax.googleapis.com/ajax/libs/angularjs/1.4.7/angular-mocks.js',
-		'https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-messages.min.js',
-		'https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-animate.min.js',
-		'https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-aria.min.js',
-		'https://cdn.gitcdn.xyz/cdn/angular/bower-material/v1.0.1-master-a687bfc/angular-material.js',
-		'https://cdn.gitcdn.xyz/cdn/angular/bower-material/v1.0.0-rc4/angular-material.css',
-		'http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css',
-		'https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js',
-		'https://cdnjs.cloudflare.com/ajax/libs/ng-tags-input/2.3.0/ng-tags-input.min.js',
-		'https://s3-us-west-2.amazonaws.com/s.cdpn.io/t-114/assets-cache.js',
-		'https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.6/d3.min.js',
-		'https://cdnjs.cloudflare.com/ajax/libs/c3/0.4.10/c3.min.js'],
+// gulp.task('compileCSS', function () {
+// 	console.log("Actualizando CSSs");
+// 	return gulp.src([paths.scss+names.anySCSS])
+// 	.pipe(sass().on('error', sass.logError))
+// 	.pipe(gulp.dest(paths.css));
+// });
 
-		'CSSCDNs': [
-		'https://cdn.gitcdn.xyz/cdn/angular/bower-material/v1.0.0-rc4/angular-material.css',
-		'https://mbenford.github.io/ngTagsInput/css/ng-tags-input.min.css',
-		'https://cdnjs.cloudflare.com/ajax/libs/c3/0.4.10/c3.min.css']
-
-	},{'keepUnassigned':true,'keepBlockTags':true}))
-	.pipe(gulp.dest('target/files/'));
+gulp.task('validate', function () {
+	return gulp.src([paths.app+names.anyJS])
+	.pipe(jshint())
+	.pipe(jshint.reporter('default'))
 });
 
+gulp.task('copy', function () {
+	return gulp.src([paths.app+names.anyFile,'!'+paths.app+names.anyJS,'!'+paths.css,'!'+paths.app+names.anyHTML])
+	.pipe(gulp.dest(paths.target));
+});
+
+gulp.task('minifyJS_fuentes', function () {
+	// Minificamos todos los JS de la aplicacion
+	// ToDo: si se desea especificar un orden de empaquetado de JS ira aqui, sino sera alfabetico
+	return gulp.src([paths.lib+'/angular.js',paths.lib+names.anyJS,paths.app+'/app.js',paths.app+'/config.js',paths.app+'/service.js',paths.app+'/**/*.js'])
+	.pipe(concat(names.minJS))
+	.pipe(ngAnnotate())
+	.pipe(uglify())
+	.pipe(gulp.dest(paths.target));
+});
+
+gulp.task('minifyJS', ['minifyJS_fuentes'] , function () {
+	// Reemplazamos en el index la referencia de todos los JS al minificado
+	return gulp.src(paths.target+'/index.html')
+	.pipe(htmlreplace({
+		'JS': [names.minJS]
+	},{'keepUnassigned':true,'keepBlockTags':true}))
+	.pipe(gulp.dest(paths.target));
+});
+
+gulp.task('minifyCSS_fuentes', function () {
+	// Minificamos todos los CSS de la aplicacion
+	// ToDo: si se desea especificar un orden de empaquetado de CSS ira aqui, sino sera alfabetico
+	return gulp.src([paths.lib+names.anyCSS,paths.css+names.anyCSS])
+	.pipe(concat(names.minCSS))
+	.pipe(minifyCss({compatibility: 'ie8'}))
+	.pipe(gulp.dest(paths.target));
+});
+
+gulp.task('minifyCSS', ['minifyCSS_fuentes'], function () {
+	// Reemplazamos en el index la referencia de todos los CSS al minificado
+	return gulp.src(paths.target+'/index.html')
+	.pipe(htmlreplace({
+		'CSS': [names.minCSS]
+	},{'keepUnassigned':true,'keepBlockTags':true}))
+	.pipe(gulp.dest(paths.target));
+});
+
+// Debe lanzarse antes que las tareas de minificados
+gulp.task('htmlify', function() {
+    return gulp.src([paths.app+names.anyHTML])
+        .pipe(htmlify())
+        .pipe(gulp.dest(paths.target));
+});
+
+// Levanta el servidor en modo test
+gulp.task('startProductionServer', ['copy','htmlify','minifyJS','minifyCSS'], function () {
+	startExpress("test");
+});
 
 gulp.task('default', function () {
-	startExpress();
+	startExpress("dev");
 	//gulp.watch(paths.scss+names.anyFile, ["compileCSS"]);
-	gulp.watch("./**/*.css", notifyLivereload);
-	gulp.watch("./**/*.js", notifyLivereload);
-	gulp.watch("./**/*.html", notifyLivereload);
+	gulp.watch([paths.app+names.anyFile, '!'+paths.css+'/style.css.map'], notifyLivereload);
 });

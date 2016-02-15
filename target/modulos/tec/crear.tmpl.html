@@ -1,0 +1,277 @@
+<md-dialog class="redimensionar" fullscreen="true" data-ng-init="confirmacionAbierta=false;confirmacionTest=false;confirmacionTestAbierto=false;
+									  deshabilitadoAbierta=false;deshabilitadoTest=false;deshabilitadoTestAbierto=false;
+															crear=true">
+    <form>
+        <md-toolbar>
+            <div class="md-toolbar-tools">
+                <h2>
+                    Crear pregunta {{cabeceraCrear}}
+                </h2>
+                <span flex=""></span>
+				<md-button aria-label="ayuda" class="md-button icon centrarIconoLista explosionIcono iconosHeader" data-ng-click="ayuda()">
+					<md-icon class="iconoBlanco" md-svg-src="img/ayuda.svg"></md-icon>
+					<md-tooltip md-direction="bottom">
+						Ayuda
+					</md-tooltip>
+				</md-button>
+                <md-button class="md-icon-button" aria-label="cerrarCrearPregunta" data-ng-click="cancel()">
+                    <md-icon md-svg-src="img/cerrar.svg"></md-icon>
+                </md-button>
+
+            </div>
+        </md-toolbar>
+
+        <md-dialog-content data-ng-model="conte" data-ng-show="crear">
+            <md-tabs class="md-accent" md-dynamic-height="" md-border-bottom="">
+                <md-tab label="pregunta abierta">
+                    <md-content>
+                        <div class="contenidoTablaCrear">
+                            <md-slider flex="" md-discrete="" aria-label="nivel abierta" step="1" min="1" max="10" data-ng-model="nivelAbierta">
+                            </md-slider>
+
+                            <md-chips md-autocomplete-snap="" md-transform-chip="transformChip($chip, 'ABIERTA')" md-require-match="false" md-on-remove="deleteChip()" data-ng-model="temasAbierta">
+                                <md-autocomplete md-selected-item="selectedItem" md-search-text="searchText" md-items="item in queryBuscarTema(searchText)" md-item-text="item.valor" placeholder="Aptitudes">
+
+                                    <span md-highlight-text="searchText">
+                                        {{item.tag}}
+                                    </span>
+                                </md-autocomplete>
+                                <md-chip-template>
+                                    <span> {{$chip.tag}} </span>
+                                </md-chip-template>
+                            </md-chips>
+							
+							<div class="alert alert-info" data-ng-show="!confirmacionAbierta && entendidoAbierta">
+  								Las aptitudes seleccionadas deberán tener alguna <span class="letraNegrita">relación entre si</span>
+								<md-button class="md-icon-button" aria-label="cerrarCrearPregunta" data-ng-click="entendidoAbierta = false">
+									<md-icon md-svg-src="img/cerrar.svg"></md-icon>
+								</md-button>
+							</div>
+							<div class="alert alert-warning" data-ng-show="confirmacionAbierta">
+  								¿Está seguro de que quiere crear esta aptitud?
+									<md-button aria-label="eliminar" class="md-button icon explosionIcono okCrearTema" data-ng-click="crearTema()">
+										<md-icon md-svg-src="img/ok.svg"></md-icon>
+									</md-button>
+									<md-button aria-label="eliminar" class="md-button icon explosionIcono cancelCrearTema" data-ng-click="cerrarConfirm()">
+										<md-icon md-svg-src="img/cerrar.svg"></md-icon>
+									</md-button>
+							</div>
+
+                            <md-input-container class="md-block">
+                                <label>Enunciado de la pregunta *</label>
+                                <textarea required data-ng-model="tituloAbierta"></textarea>
+								<div data-ng-messages="tituloAbierta.$error">
+									<div data-ng-message="required">Este campo es obligatorio</div>								
+								</div>
+                            </md-input-container>
+
+                            <md-input-container class="md-block">
+                                <label>Directivas de la pregunta</label>
+                                <textarea data-ng-model="directivasAbierta"></textarea>
+                            </md-input-container>
+
+                            <md-button class="md-raised" data-ng-click="crearPAbierta()" data-ng-disabled="deshabilitadoAbierta">Guardar</md-button>
+                        </div>                    
+                    </md-content>
+                </md-tab>
+
+
+                <md-tab label="pregunta tipo test">
+                    <md-content>
+                        <div class="contenidoTablaCrear">
+                            <md-slider flex="" md-discrete="" aria-label="nivel test" step="1" min="1" max="10" data-ng-model="nivelTest">
+                            </md-slider>
+
+                            <md-chips md-autocomplete-snap="" md-transform-chip="transformChip($chip, 'TEST')" md-require-match="false" data-ng-model="temasTest">
+                                <md-autocomplete md-selected-item="selectedItem" md-search-text="searchText" md-items="item in queryBuscarTema(searchText)" md-item-text="item.valor" placeholder="Aptitudes">
+
+                                    <span md-highlight-text="searchText">
+                                        {{item.tag}}
+                                    </span>
+                                </md-autocomplete>
+                                <md-chip-template>
+                                    <span> {{$chip.tag}} </span>
+                                </md-chip-template>
+                            </md-chips>
+							<div class="alert alert-info" data-ng-show="!confirmacionTest && entendidoTest">
+  								Las aptitudes seleccionadas deberán tener alguna <span class="letraNegrita">relación entre si</span>
+								<md-button class="md-icon-button" aria-label="cerrarCrearPregunta" data-ng-click="entendidoTest = false">
+									<md-icon md-svg-src="img/cerrar.svg"></md-icon>
+								</md-button>
+							</div>
+							
+							<div class="alert alert-warning" data-ng-show="confirmacionTest">
+  								¿Está seguro de que quiere crear esta aptitud?								
+									<md-button aria-label="eliminar" class="md-button icon explosionIcono okCrearTema" data-ng-click="crearTema()">
+										<md-icon md-svg-src="img/ok.svg"></md-icon>
+									</md-button>
+									<md-button aria-label="eliminar" class="md-button icon explosionIcono cancelCrearTema" data-ng-click="cerrarConfirm()">
+										<md-icon md-svg-src="img/cerrar.svg"></md-icon>
+									</md-button>
+							</div>
+
+                            <md-input-container class="md-block">
+                                <label>Enunciado de la pregunta *</label>
+                                <textarea required data-ng-model="tituloTest"></textarea>
+								<div data-ng-messages="tituloTest.$error">
+									<div data-ng-message="required">Este campo es obligatorio</div>								
+								</div>
+                            </md-input-container>
+                            <md-radio-group data-ng-model="radioTest">
+                                <div data-ng-repeat="respuestas in test">
+                                    <span>
+                                        <md-radio-button value="{{respuestas}}" aria-label="respuestas test">
+                                    </md-radio-button>
+
+                                    <md-input-container class="md-block respuesta">
+                                        <label>Respuesta {{respuestas}} *</label>
+                                        <textarea required data-ng-model="respuestasTest[$index]"></textarea>
+										<div data-ng-messages="respuestasTest[$index].$error">
+											<div data-ng-message="required">Debe introucir una respuesta</div>					
+										</div>
+                                    </md-input-container>
+                                    </span>
+                                </div>
+                            </md-radio-group>
+
+                            <md-button class="md-fab md-mini" aria-label="crearPregunta" data-ng-click="aniadirRespuestaTest()">
+                                <md-icon md-svg-src="img/mas.svg"></md-icon>
+                            </md-button>
+
+                            <md-button class="md-raised" data-ng-click="crearPTest()" data-ng-disabled="deshabilitadoTest">Guardar</md-button>
+
+                        </div>      
+                    </md-content>
+                </md-tab>                    
+
+                <md-tab label="pregunta de selección múltiple">
+                    <md-content>
+                        <div class="contenidoTablaCrear">
+                            <md-slider flex="" md-discrete="" aria-label="nivel test abierto" step="1" min="1" max="10" data-ng-model="nivelTestAbierto">
+                            </md-slider>
+
+                            <md-chips md-autocomplete-snap="" md-transform-chip="transformChip($chip, 'TEST_ABIERTO')" md-require-match="false" data-ng-model="temasTestAbierto">
+                                <md-autocomplete md-selected-item="selectedItem" md-search-text="searchText" md-items="item in queryBuscarTema(searchText)" md-item-text="item.valor" placeholder="Aptitudes">
+
+                                    <span md-highlight-text="searchText">
+                                        {{item.tag}}
+                                    </span>
+                                </md-autocomplete>
+                                <md-chip-template>
+                                    <span> {{$chip.tag}} </span>
+                                </md-chip-template>
+                            </md-chips>
+							<div class="alert alert-info" data-ng-show="!confirmacionTestAbierto && entendidoTestAbierto">
+  								Las aptitudes seleccionadas deberán tener alguna <span class="letraNegrita">relación entre si</span>
+								<md-button class="md-icon-button" aria-label="cerrarCrearPregunta" data-ng-click="entendidoTestAbierto = false">
+									<md-icon md-svg-src="img/cerrar.svg"></md-icon>
+								</md-button>
+							</div>
+							
+							<div class="alert alert-warning" data-ng-show="confirmacionTestAbierto">
+  								¿Está seguro de que quiere crear esta aptitud?
+								
+									<md-button aria-label="eliminar" class="md-button icon explosionIcono okCrearTema" data-ng-click="crearTema()">
+										<md-icon md-svg-src="img/ok.svg"></md-icon>
+									</md-button>
+									<md-button aria-label="eliminar" class="md-button icon explosionIcono cancelCrearTema" data-ng-click="cerrarConfirm()">
+										<md-icon md-svg-src="img/cerrar.svg"></md-icon>
+									</md-button>
+							</div>
+
+                            <md-input-container class="md-block">
+                                <label>Enunciado de la pregunta *</label>
+                                <textarea required data-ng-model="tituloTestAbierto"></textarea>
+								<div data-ng-messages="tituloTestAbierto.$error">
+									<div data-ng-message="required">Este campo es obligatorio</div>
+								</div>
+                            </md-input-container>
+
+                            <div data-ng-repeat="respuestasAbierto in testAbierto">
+                                <md-checkbox class="respuesta" aria-label="respuestas test abierto" data-ng-model="checkTestAbierto[$index]">
+                                </md-checkbox>
+                                <md-input-container class="md-block respuesta">
+                                    <label>Respuesta {{respuestasAbierto}} *</label>
+                                    <textarea data-ng-model="respuestasTestAbierto[$index]"></textarea>
+									<div required data-ng-messages="respuestasTestAbierto[$index].$error">
+										<div data-ng-message="required">Debe introucir una respuesta</div>			
+									</div>
+                                </md-input-container>
+                            </div>
+
+                            <md-button class="md-fab md-mini" aria-label="crearPregunta abierta" data-ng-click="aniadirRespuestaTestAbierto()">
+                                <md-icon md-svg-src="img/mas.svg"></md-icon>
+                            </md-button>
+
+                            <md-button class="md-raised" data-ng-click="crearPTestAbierta()" data-ng-disabled="deshabilitadoTestAbierto">Guardar</md-button>
+
+                        </div>
+                    </md-content>
+                </md-tab>
+            </md-tabs>
+        </md-dialog-content>
+		<md-dialog-content class="ayudaTec" data-ng-model="conte" data-ng-show="!crear">
+            <md-tabs class="md-accent" md-dynamic-height="" md-border-bottom="">
+				<md-tab label="general">
+                    <md-content>
+						<div class="alert alert-info alertAyuda">
+							<p>Hay 3 pestañas: <b>"PREGUNTA ABIERTA"</b>, <b>"PREGUNTA TIPO TEST"</b> y <b>"PREGUNTA DE SELECCIÓN MÚLTIPLE"</b>.</p>
+							<p>En la pestaña <b>"PREGUNTA ABIERTA"</b> se rellenarán los datos necesarios para crear una pregunta de tipo abierta.</p>
+							<p>En la pestaña <b>"PREGUNTA TIPO TEST"</b> se rellenarán los datos necesarios para crear una pregunta de tipo test.</p>
+							<p>En la pestaña <b>"PREGUNTA DE SELECCIÓN MÚLTIPLE"</b> se rellenarán los datos necesarios para crear una pregunta de tipo selección múltiple.</p>
+						</div>
+						<div class="alert alert-info alertAyuda">
+							<p>La siguiente barra será para que pueda seleccionar el nivel de la pregunta. Por defecto es 5.</p>
+							<md-slider flex="" md-discrete="" aria-label="nivel abierta" step="1" min="1" max="10" data-ng-model="nivelAbierta">
+							</md-slider>
+						</div>
+						<div class="alert alert-info alertAyuda">
+							<p>En el campo <b>"Aptitudes"</b> podrá seleccionar una o varias que tenga la pregunta.</p>
+						</div>
+						<div class="alert alert-info alertAyuda">
+							<p>En el campo <b>"Enunciado de la pregunta"</b> deberá introducir el enunciado. Este campo es obligatorio</p>
+						</div>
+						<div class="alert alert-info alertAyuda">
+							<p>El siguiente botón es para guardar la entrevista con los datos introducidos:</p>
+							<md-button class="md-raised">Guardar</md-button>
+						</div>
+                    </md-content>
+                </md-tab>
+                <md-tab label="pregunta abierta">
+                    <md-content>
+						<div class="alert alert-info alertAyuda">
+							<p>En el campo <b>"Directivas de la pregunta"</b> podrá introducir las directrices que usted considere necesarias. Este campo no es obligatorio.</p>
+						</div>
+                    </md-content>
+                </md-tab>
+                <md-tab label="pregunta tipo test">
+                    <md-content>
+						<div class="alert alert-info alertAyuda">
+							<p>En esta sección deberá rellenar los campos de las respuestas y marcar una de las respuestas como correcta. Todas las respuestas deben estar rellenas.</p>
+						</div>
+						<div class="alert alert-info alertAyuda btnMas">
+							<p>El siguiente botón sirve para añadir otro campo de respuesta.</p>
+							<md-button class="md-fab md-mini btnAyuda" aria-label="crearPregunta abierta">
+                                <md-icon md-svg-src="img/mas.svg"></md-icon>
+                            </md-button>
+						</div>
+                    </md-content>
+                </md-tab>                    
+
+                <md-tab label="pregunta de selección múltiple">
+                    <md-content>
+                        <div class="alert alert-info alertAyuda">
+							<p>En esta sección deberá rellenar los campos de las respuestas. Puede marcar como respuesta correcta una, varias o ninguna. Todas las respuestas deben estar rellenas.</p>
+						</div>
+						<div class="alert alert-info alertAyuda btnMas">
+							<p>El siguiente botón sirve para añadir otro campo de respuesta.</p>
+							<md-button class="md-fab md-mini btnAyuda" aria-label="crearPregunta abierta">
+                                <md-icon md-svg-src="img/mas.svg"></md-icon>
+                            </md-button>
+						</div>
+                    </md-content>
+                </md-tab>
+            </md-tabs>
+        </md-dialog-content>
+    </form>
+</md-dialog>

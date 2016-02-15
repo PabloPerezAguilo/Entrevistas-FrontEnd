@@ -8,17 +8,15 @@
         
 		<title>Argos</title>
 
-		<!-- build:CSSCDNs -->
-		
-		<!-- AQUI IRAN LOS CSS QUE TENGAN CDN-->
-		<link rel="stylesheet" type="text/css" href="css/angular-material.css">
-		<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
-        <link rel="stylesheet" type="text/css" href="css/rzslider.css"/>
-		<link rel="stylesheet" type="text/css" href="css/introjs.css"/>
-		<!-- endbuild -->
-       
-		<!-- AQUI IRAN LOS CSS NUESTROS QUE NO TENGAN CDN-->
+		<!-- build:CSS -->
+		<link rel="stylesheet" type="text/css" href="lib/angular-material.css">
+		<link rel="stylesheet" type="text/css" href="lib/bootstrap.css">
+        <link rel="stylesheet" type="text/css" href="lib/rzslider.css"/>
+		<link rel="stylesheet" type="text/css" href="lib/introjs.css"/>	
 		<link rel="stylesheet" href="css/style.css" />
+
+		<!-- endbuild -->
+
 	</head>
 	<body>
 
@@ -44,26 +42,27 @@
 		</div>
              
 		<footer ng-show="conFooter">
-			<img id="logoGFI" src="logoBlanco.png">
+			<img id="logoGFI" src="img/logoBlanco.png">
             <p id="magniVersion">
 				<a href="/#/equipo" target="_blank">Equipo</a>
                 2015 Gestión de Entrevistas | v1.0
             </p>
 		</footer>
 
-		<!-- build:JSCDNs -->
-		<script src="js/angular.js"></script>
-        <script src="js/rzslider.min.js"></script>
-		<script src="js/angular-animate.min.js"></script>
-		<script src="js/angular-route.min.js"></script>
-		<script src="js/angular-messages.min.js"></script>
-		<script src="js/angular-aria.min.js"></script>
-		<script src="js/angular-material.js"></script>
-		<script src="js/assets-cache.js"></script>
-		<script src="js/angular-material-icons.min.js"></script>
-		<script src="js/intro.min.js"></script>
-		<!-- endbuild -->
 		<!-- build:JS -->
+		<script src="lib/angular.js"></script>
+        <script src="lib/rzslider.js"></script>
+		<script src="lib/angular-animate.js"></script>
+		<script src="lib/angular-route.js"></script>
+		<script src="lib/angular-messages.js"></script>
+		<script src="lib/angular-aria.js"></script>
+		<script src="lib/angular-material.js"></script>
+		<script src="lib/assets-cache.js"></script>
+		<script src="lib/angular-material-icons.min.js"></script>
+		<script src="lib/intro.min.js"></script>
+		<script src="lib/AES.min.js"></script>
+
+
 		<script src="services.js"></script>
 		<script src="app.js"></script>
 		<script src="config.js"></script>
@@ -79,7 +78,5 @@
 		<script src="modulos/equipo/controladorEquipo.js"></script>
 		
 		<!-- endbuild -->
-		<script src="js/AES.min.js"></script>
-
 	</body>
 </html>
