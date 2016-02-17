@@ -74,11 +74,12 @@ $colorPrincipalClaro: rgba(239,108,0,0.17);
 header {
 	position: fixed;
 	top: 0;
-	width: 100%; 
+	width: 100%;
 	height: 90px;
     background-color: $negro;
     color: $letra;
     box-shadow: 2px 2px 30px grey;
+	z-index: 950;
 }
 
 .iconoBlanco {
@@ -285,7 +286,11 @@ md-tabs:not(.md-no-tab-content):not(.md-dynamic-height) {
 .cabeceraTec {
 	position: fixed;
 	width: 100%;
-	margin-top: 8%;
+	margin-top: 7%;
+    padding-top: 15px;
+    background: white;
+    z-index: 900;
+
 }
 //para cuadrar el calendario
 .md-calendar-day-header th, td {
@@ -293,7 +298,6 @@ md-tabs:not(.md-no-tab-content):not(.md-dynamic-height) {
 }
 
 /*md-chips*/
-
 .chipsTec md-chips-wrap {
 	margin: 0 10%
 }
@@ -467,6 +471,10 @@ md-radio-group.md-default-theme.md-focused:not(:empty) .md-checked .md-container
 	background-color: rgba(189, 136, 74, 0.1);
 }
 
+md-list-item.md-3-line .md-list-item-text {
+	width: 0;
+}
+
 /* ------------- Ver pregunta --------------------- */
 
 //alert al poner un tema que no existe
@@ -562,8 +570,8 @@ md-list md-list-item.md-3-line .md-list-item-text h3, md-list.md-default-theme m
 }
 
 .listaPreguntasTec {
-	margin: 0 10%;
-	margin-top: 16%;
+	margin: 16% 10%;
+    margin-bottom: 75px;
 }
 
 .md-subheader .md-subheader-content {
@@ -604,19 +612,25 @@ md-list md-list-item.md-3-line .md-list-item-text h3 {
 .cabeceraAdmin {
 	position: fixed;
 	width: 100%;
-	margin-top: 8%;
+	height: 120px;
+	margin-top: 88px;
+	padding-top: 15px;
+	background: white;
+    z-index: 900;
 }
 
 .listaPreguntasAdmin {
 	margin: 0 10%;
 	margin-top: 16%;
+	margin-bottom: 50px;
 }
 
 .paginacion {
-	bottom: 5px;
+	bottom: 0;
     position: fixed;
     width: 100%;
-	padding: 10px 0
+    padding: 10px 0;
+    background: white;
 }
 
 .pagination {
@@ -889,12 +903,7 @@ input.horas {
 }
 
 .entrevistado {
-	height: 725px;
-    margin-bottom: 10px;
-    overflow: auto;
-	margin-left: 10%;
-	margin-right: 10%;
-	margin-top: 3%;
+    padding: 100px 10% 10px 10%;
 }
 
 .dividerCorto {
@@ -992,99 +1001,123 @@ md-input-container.horasAyuda {
 }
 
 /*--------------------- EQUIPO ------------------------*/
+.enBloqueEquipo {
+	display: block;
+}
+
+.noMostrar {
+	display: none;
+}
+
 .equipo {
-	margin-top: 10%;
-	margin-left: 3%;
-	margin-right: 3%;
+	margin: 120px 8% 5% 8%;
 }
 
 .divEquipo {
-	margin-bottom: 50%
+	padding: 3%;
+    padding-top: 0;
 }
 
 .imgEquipo {
-	width: 25%;
 	border-radius: 50%;
 	border: #EF6C00 2px solid;
+}
+
+.txtEquipo {
+	margin: 3% 5%;
+    margin-bottom: 0;
+}
+
+.nombreEquipo {
+	display: block;
+    font-size: 25px;
+    margin-bottom: 10px;
+	color: rgba(70, 70, 70, 0.76);
 }
 
 .posIzq {
 	float: left;
 }
 
-.imgPperez {
-	background: url(../img/equipo/pperez.png) no-repeat left;
-	width: 500px;
-	height: 501px;
-}
- 
-.imgPperez:hover {
-	background-position: right;
-	width: 500px;
-	height: 501px;
+.posDer {
+	float: right;
 }
 
+.imgPperez {
+  	background: url(../img/equipo/pperezBN.png) round;
+  	width: 250px;
+	height: 249px;
+}
+
+.imgPperez:hover {
+	background: url(../img/equipo/pperez.png) round;
+  	width: 250px;
+	height: 249px;
+}
+
+
 .imgFgmontoro {
-	background: url(../img/equipo/fgmontoro.png) no-repeat left;
-	width: 1417px;
-	height: 1416px;
+	background: url(../img/equipo/fgmontoroBN.png) round;
+	width: 250px;
+	height: 249px;
  }
  
 .imgFgmontoro:hover {
-	background-position: right;
-	width: 1417px;
-	height: 1416px;
+	background: url(../img/equipo/fgmontoro.png) round;
+	width: 250px;
+	height: 249px;
 }
 
 .imgEfernandez {
-	background: url(../img/equipo/efernandez.png) no-repeat left;
-	width: 1417px;
-	height: 1416px;
+	background: url(../img/equipo/efernandezBN.png) round;
+	width: 250px; 
+	height: 249px;
  }
  
 .imgEfernandez:hover {
-	background-position: right;
-	width: 1417px;
-	height: 1416px;
+	background: url(../img/equipo/efernandez.png) round;
+	width: 250px; 
+	height: 249px;
 }
 
 .imgAbarrero {
-	background: url(../img/equipo/abarrero.png) no-repeat left;
-	width: 1417px;
-	height: 1416px;
+	background: url(../img/equipo/abarreroBN.png) round;
+	width: 250px; 
+	height: 249px;
  }
  
 .imgAbarrero:hover {
-	background-position: right;
-	width: 1417px;
-	height: 1416px;
-}
-
-.imgAgonzalez {
-	background: url(../img/equipo/agonzalez.png) no-repeat left;
-	width: 1417px;
-	height: 1416px;
- }
- 
-.imgAgonzalez:hover {
-	background-position: right;
-	width: 1417px;
-	height: 1416px;
+	background: url(../img/equipo/abarrero.png) round;
+	width: 250px; 
+	height: 249px;
 }
 
 .imgAmayor {
-	background: url(../img/equipo/amayor.png) no-repeat left;
-	width: 1417px;
-	height: 1416px;
+	background: url(../img/equipo/amayorBN.png) round;
+	width: 250px; 
+	height: 249px;
  }
  
 .imgAmayor:hover {
-	background-position: right;
-	width: 1417px;
-	height: 1416px;
+	background: url(../img/equipo/amayor.png) round;
+	width: 250px; 
+	height: 249px;
+}
+
+.imgAgonzalez {
+	background: url(../img/equipo/agonzalezBN.png) round;
+	width: 250px; 
+	height: 249px;
+ }
+ 
+.imgAgonzalez:hover {
+	background: url(../img/equipo/agonzalez.png) round;
+	width: 250px; 
+	height: 249px;
 }
 
 /*--------------------- media queries ------------------------*/
+/*
 @media screen and (max-width: 1200px)  and (min-width: 1001px) {	
 	.cabeceraAdmin {
 		margin-top: 10%;
@@ -1377,4 +1410,4 @@ md-input-container.horasAyuda {
 	#rango {
 		width: 90%;
 	}
-}
+}*/
