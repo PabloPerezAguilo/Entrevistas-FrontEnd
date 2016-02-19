@@ -1,0 +1,143 @@
+<md-dialog class="redimensionar" ng-init="creado=false">
+	<form>
+		<md-toolbar>
+            <div class="md-toolbar-tools">
+                <h2>
+                    Gestión de usuarios
+                </h2>
+                <span flex></span>
+				<md-button aria-label="ayuda" ng-click="ayuda()" 
+						   class="md-button icon centrarIconoLista explosionIcono iconosHeader">
+					<md-icon class="iconoBlanco" md-svg-src="img/ayuda.svg"></md-icon>
+					<md-tooltip md-direction="bottom">
+						Ayuda
+					</md-tooltip>
+				</md-button>
+                <md-button class="md-icon-button" aria-label="cerrarCrearPregunta" ng-click="cancel()">
+                    <md-icon md-svg-src="img/cerrar.svg"></md-icon>
+                </md-button>
+
+            </div>
+        </md-toolbar>
+
+        <md-dialog-content>
+            <md-tabs class="md-accent" md-dynamic-height md-border-bottom>
+                <md-tab label="nuevo usuario">
+                    <md-content ng-show="!creado">
+						<div class="altaUsuario">
+							<md-input-container class="md-block">
+								<label>Escriba el nick del usuario</label>
+								<input ng-model="nick" ng-keypress="enter($event)" ng-blur="validacion()">
+								<!--<div ng-messages="user.$error">
+									<div ng-message="required">Debe introducir un usuario</div>
+								</div>-->
+							</md-input-container>
+						</div>
+
+						<div class="altaUsuarioRol">
+							<md-radio-group ng-model="radioRol">
+							  <md-radio-button value="tec" >Técnico</md-radio-button>
+							  <md-radio-button value="admin"> Admininstrador </md-radio-button>
+							</md-radio-group>
+						</div>
+						<div class="btnAltaUsuario">
+							<md-button class="md-raised" ng-click="altaUsuario()">Guardar</md-button>
+						</div>
+                    </md-content>
+					<md-content class="mensajeEntrevistaCreada" ng-show="creado">
+						<p>Se ha dado de alta al usuario "{{nick}}"</p>
+						<md-button class="md-raised" ng-click="cerrarMensaje()">Continuar</md-button>
+					</md-content>
+                </md-tab>
+
+
+                <md-tab label="técnicos">
+                    <md-content>
+                        <md-list>
+							<md-subheader class="md-no-sticky">
+								Técnicos
+							</md-subheader>			
+							<md-autocomplete class="autocompleteUsuarios"
+											 md-no-cache="noCache"
+											 md-selected-item="selectedItemTec" 
+											 md-search-text-change="searchTextChange(searchTextTec, 'tecnico')" 
+											 md-search-text="searchTextTec" 
+											 md-selected-item-change="selectedItemChangeTec(item)"
+											 md-items="item in queryBuscarNombreTec(searchText)" md-item-text="item.username" 
+											 md-min-length="0" placeholder="Buscar por nombre del técnico">
+								<md-item-template>
+									<span md-highlight-text="searchText" md-highlight-flags="^i">{{item.username}}</span>
+								</md-item-template>
+								<md-not-found>
+									No hay ningún técnico/a con el nombre "{{searchText}}"
+								</md-not-found>
+							</md-autocomplete>
+							<md-list-item class="md-3-line hoverLista itemListaUsuarios" ng-repeat="item in tecnicos">
+								<div class="md-list-item-text" layout="column">
+									<h3>
+										{{ item.cn }}
+									</h3>
+									<h4>
+										{{ item.username }}
+									</h4>
+								</div>
+								<md-button id="eliminar" aria-label="eliminar" ng-click="eliminar($index, 'tecnico')" 
+										   class="md-button icon centrarIconoLista explosionIcono">
+									<md-icon md-svg-src="img/delete.svg"></md-icon>
+									<md-tooltip md-direction="bottom">
+										Eliminar
+									</md-tooltip>
+								</md-button>
+								<md-divider></md-divider>
+							</md-list-item>
+						</md-list>
+                    </md-content>
+                </md-tab>                    
+
+                <md-tab label="administradores">
+                    <md-content>
+                        <md-list >
+							<md-subheader class="md-no-sticky">
+								Administradores
+							</md-subheader>			
+							<md-autocomplete class="autocompleteUsuarios"
+											 md-no-cache="noCache"
+											 md-selected-item="selectedItemAdmin" 
+											 md-search-text-change="searchTextChange(searchTextAdmin, 'admin')" 
+											 md-search-text="searchTextAdmin" 
+											 md-selected-item-change="selectedItemChangeAdmin(item)"
+											 md-items="item in queryBuscarNombreAdmin(searchText)" md-item-text="item.username" 
+											 md-min-length="0" placeholder="Buscar por nombre del técnico">
+								<md-item-template>
+									<span md-highlight-text="searchText" md-highlight-flags="^i">{{item.username}}</span>
+								</md-item-template>
+								<md-not-found>
+									No hay ningún administrador/a con el nombre "{{searchText}}"
+								</md-not-found>
+							</md-autocomplete>
+							<md-list-item class="md-3-line hoverLista itemListaUsuarios" ng-repeat="item in administradores">
+								<div class="md-list-item-text" layout="column">
+									<h3>
+										{{ item.cn }}
+									</h3>
+									<h4>
+										{{ item.username }}
+									</h4>
+								</div>
+								<md-button id="eliminar" aria-label="eliminar" ng-click="eliminar($index)" 
+										   class="md-button icon centrarIconoLista explosionIcono">
+									<md-icon md-svg-src="img/delete.svg"></md-icon>
+									<md-tooltip md-direction="bottom">
+										Eliminar
+									</md-tooltip>
+								</md-button>
+								<md-divider></md-divider>
+							</md-list-item>
+						</md-list>
+                    </md-content>
+                </md-tab>
+            </md-tabs>
+        </md-dialog-content>
+            
+	</form>
+</md-dialog>

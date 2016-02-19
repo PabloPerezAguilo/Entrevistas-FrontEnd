@@ -144,7 +144,38 @@ function ServicioREST($http, $q, $rootScope, config) {
 			url: url + '/interviewFeedback/' + idEntrevista,
 			data: feedback
 		});
-	}	
+	}
+	
+	/*---------------USUARIO---------------*/
+	function postUsuario(usuario) {
+		return llamadaHTTP({
+			method: 'POST',
+			url: url + '/user',
+			data: usuario
+		});
+	}
+	
+	function getUsuarios(rol) {
+		return llamadaHTTP({
+			method: 'GET',
+			url: url + '/user?role=' + rol
+		});
+	}
+	
+	function getUsuario(rol, nick) {
+		return llamadaHTTP({
+			method: 'GET',
+			url: url + '/user?role=' + rol + "&nick=" + nick
+		});
+	}
+	
+	function deleteUsuario(nick) {
+		return llamadaHTTP({
+			method: 'DELETE',
+			url: url + '/user',
+			data: {username: nick}
+		});
+	}
 	
 	return {
 		getPreguntas: getPreguntas,
@@ -160,6 +191,10 @@ function ServicioREST($http, $q, $rootScope, config) {
 		deleteEntrevista: deleteEntrevista,
 		getPreguntasEntrevistaById: getPreguntasEntrevistaById,
 		postRespuestasEntrevista: postRespuestasEntrevista,
-		postFeedback: postFeedback
+		postFeedback: postFeedback,
+		postUsuario: postUsuario,
+		getUsuarios: getUsuarios,
+		getUsuario: getUsuario,
+		deleteUsuario: deleteUsuario
 	}
 }

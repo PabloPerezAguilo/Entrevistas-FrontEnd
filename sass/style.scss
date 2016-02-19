@@ -387,6 +387,7 @@ md-dialog.md-transition-in.redimensionar {
     min-width: 700px;
     min-height: 300px;
 	max-height: 700px;
+	z-index: 950;
 }
 
 md-tabs .md-tab.md-active {
@@ -660,6 +661,18 @@ md-switch.md-checked .md-bar {
 md-switch.md-default-theme.md-checked .md-ink-ripple, md-switch.md-checked .md-ink-ripple, md-switch .md-thumb {
 	background-color: $colorPrincipal;
 }
+
+md-switch.md-checked.md-focused .md-thumb:before {
+	background-color: $colorPrincipalClaro;
+}
+
+md-switch.md-focused {
+	background-color: $colorPrincipalClaro;
+}
+
+/*md-switch.switchEntrevista.ng-valid.ng-dirty.ng-valid-parse.ng-touched {
+	background-color: $colorPrincipalClaro;
+}*/
 
 .switchEntrevista {
 	margin: 0px;
@@ -1114,6 +1127,39 @@ md-input-container.horasAyuda {
 	background: url(../img/equipo/agonzalez.png) round;
 	width: 250px; 
 	height: 249px;
+}
+
+/*-------------------------USUARIO---------------------------*/
+
+.altaUsuario {
+	padding-top: 10px;
+    width: 325px;
+    height: 60px;
+	margin-left: 29%;
+}
+
+.altaUsuarioRol {
+	padding-top: 10px;
+    width: 325px;
+    height: 60px;
+	margin-left: 33%;
+}
+
+.btnAltaUsuario {
+	padding-top: 1%;
+    width: 40%;
+    height: 50%;
+    margin-left: 30%;
+}
+
+.autocompleteUsuarios {
+	margin-left: 10%;
+    margin-right: 10%;
+}
+
+.itemListaUsuarios {
+	margin-left: 9%;
+    margin-right: 5%;
 }
 
 /*--------------------- media queries ------------------------*/

@@ -1,5 +1,15 @@
 app.controller('controladorAdmin', function (servicioRest, config, $scope, $location, $rootScope, $mdDialog, $timeout, $q, $log, $http, $mdToast) {
 	
+	$scope.abrirUsuarios = function(ev) {
+		$mdDialog.show({
+            controller: 'controladorUsuarios',
+            templateUrl: 'modulos/usuario/usuario.tmpl.html',
+            parent: angular.element(document.body),
+            targetEvent: ev,
+            clickOutsideToClose: false
+        })
+	}
+	
 	var permiso = sessionStorage.getItem("permiso");
 	var ver = sessionStorage.getItem("ver");
 	
