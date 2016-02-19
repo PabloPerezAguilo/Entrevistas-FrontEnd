@@ -70,6 +70,10 @@ $colorPrincipalClaro: rgba(239,108,0,0.17);
 	src: url(../fonts/roboto.woff);
 }
 
+[ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
+  display: none !important;
+}
+
 /* ------------------------- HEADER & FOOTER --------------------------------------- */
 header {
 	position: fixed;
@@ -79,7 +83,7 @@ header {
     background-color: $negro;
     color: $letra;
     box-shadow: 2px 2px 30px grey;
-	z-index: 950;
+	z-index: 2;
 }
 
 .iconoBlanco {
@@ -616,7 +620,7 @@ md-list md-list-item.md-3-line .md-list-item-text h3 {
 	margin-top: 88px;
 	padding-top: 15px;
 	background: white;
-    z-index: 900;
+    z-index: 1;
 }
 
 .listaPreguntasAdmin {
@@ -1029,7 +1033,6 @@ md-input-container.horasAyuda {
 }
 
 .nombreEquipo {
-	display: block;
     font-size: 25px;
     margin-bottom: 10px;
 	color: rgba(70, 70, 70, 0.76);
@@ -1114,6 +1117,15 @@ md-input-container.horasAyuda {
 	background: url(../img/equipo/agonzalez.png) round;
 	width: 250px; 
 	height: 249px;
+}
+
+.linkedin.md-button.icon.md-ink-ripple:hover {
+    background-color: rgba(159, 187, 255, 0.32);
+}
+
+.linkedin.md-button.icon.md-ink-ripple {
+    width: 50px;
+    height: 50px;
 }
 
 /*--------------------- media queries ------------------------*/
