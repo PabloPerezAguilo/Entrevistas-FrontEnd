@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="es" ng-app="magni" class="no-js" > 
+<html lang="es" ng-app="argos" class="no-js" > 
 	<head>
 		<meta charset="utf-8">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -18,12 +18,12 @@
 		<!-- endbuild -->
 
 	</head>
-	<body>
+	<body ng-cloack>
 
 		<header ng-init="cargando=false;logueado=false">
             <img id="logo" src="img/argos.png" ng-hide="logueado">
-            <img id="logoLogeado" src="img/argos.png" ng-show="logueado" ng-cloak>
-            <p id="iconoUsuario" ng-model="rolUsuario" ng-show="logueado" ng-cloak>
+            <img id="logoLogeado" src="img/argos.png" ng-show="logueado">
+            <p id="iconoUsuario" ng-model="rolUsuario" ng-show="logueado">
                 {{usuario}} / {{rol | rol}}
 				<md-button aria-label="ayuda" ng-click="lanzarAyuda()"
 						   class="md-button icon centrarIconoLista explosionIcono iconosHeader">
@@ -76,6 +76,7 @@
 		<script src="modulos/entrevista/controladorEntrevista.js"></script>
 		<script src="modulos/entrevista/controladorRespuestasEntrevista.js"></script>
 		<script src="modulos/equipo/controladorEquipo.js"></script>
+		<script src="modulos/usuario/controladorUsuarios.js"></script>
 		
 		<!-- endbuild -->
 	</body>

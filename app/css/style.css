@@ -45,6 +45,9 @@ table {
   font-family: fontPrincipal;
   src: url(../fonts/roboto.woff); }
 
+[ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
+  display: none !important; }
+
 /* ------------------------- HEADER & FOOTER --------------------------------------- */
 header {
   position: fixed;
@@ -53,7 +56,8 @@ header {
   height: 90px;
   background-color: #1E1E1E;
   color: #EFEFEF;
-  box-shadow: 2px 2px 30px grey; }
+  box-shadow: 2px 2px 30px grey;
+  z-index: 2; }
 
 .iconoBlanco {
   color: white; }
@@ -224,7 +228,10 @@ md-tabs:not(.md-no-tab-content):not(.md-dynamic-height) {
 .cabeceraTec {
   position: fixed;
   width: 100%;
-  margin-top: 8%; }
+  margin-top: 7%;
+  padding-top: 15px;
+  background: white;
+  z-index: 900; }
 
 .md-calendar-day-header th, td {
   vertical-align: middle; }
@@ -364,6 +371,9 @@ md-radio-group.md-default-theme.md-focused:not(:empty) .md-checked .md-container
 .hoverLista:hover {
   background-color: rgba(189, 136, 74, 0.1); }
 
+md-list-item.md-3-line .md-list-item-text {
+  width: 0; }
+
 /* ------------- Ver pregunta --------------------- */
 md-dialog.md-transition-in {
   width: 350px; }
@@ -441,8 +451,8 @@ md-list md-list-item.md-3-line .md-list-item-text h3, md-list.md-default-theme m
   z-index: auto; }
 
 .listaPreguntasTec {
-  margin: 0 10%;
-  margin-top: 16%; }
+  margin: 16% 10%;
+  margin-bottom: 75px; }
 
 .md-subheader .md-subheader-content {
   margin-top: 1%;
@@ -475,17 +485,23 @@ md-list md-list-item.md-3-line .md-list-item-text h3 {
 .cabeceraAdmin {
   position: fixed;
   width: 100%;
-  margin-top: 8%; }
+  height: 120px;
+  margin-top: 88px;
+  padding-top: 15px;
+  background: white;
+  z-index: 1; }
 
 .listaPreguntasAdmin {
   margin: 0 10%;
-  margin-top: 16%; }
+  margin-top: 16%;
+  margin-bottom: 50px; }
 
 .paginacion {
-  bottom: 5px;
+  bottom: 0;
   position: fixed;
   width: 100%;
-  padding: 10px 0; }
+  padding: 10px 0;
+  background: white; }
 
 .pagination {
   margin: 0px;
@@ -704,12 +720,7 @@ input.horas {
   padding-bottom: 20px; }
 
 .entrevistado {
-  height: 725px;
-  margin-bottom: 10px;
-  overflow: auto;
-  margin-left: 10%;
-  margin-right: 10%;
-  margin-top: 3%; }
+  padding: 100px 10% 10px 10%; }
 
 .dividerCorto {
   width: 95%;
@@ -788,259 +799,399 @@ md-input-container.horasAyuda {
   margin-left: 45%; }
 
 /*--------------------- EQUIPO ------------------------*/
+.enBloqueEquipo {
+  display: block; }
+
+.noMostrar {
+  display: none; }
+
 .equipo {
-  margin-top: 10%;
-  margin-left: 3%;
-  margin-right: 3%; }
+  margin: 120px 8% 5% 8%; }
 
 .divEquipo {
-  margin-bottom: 50%; }
+  padding: 3%;
+  padding-top: 0; }
 
 .imgEquipo {
-  width: 25%;
   border-radius: 50%;
   border: #EF6C00 2px solid; }
+
+.txtEquipo {
+  margin: 3% 5%;
+  margin-bottom: 0; }
+
+.nombreEquipo {
+  font-size: 25px;
+  margin-bottom: 10px;
+  color: rgba(70, 70, 70, 0.76); }
 
 .posIzq {
   float: left; }
 
+.posDer {
+  float: right; }
+
 .imgPperez {
-  background: url(../img/equipo/pperez.png) no-repeat left;
-  width: 500px;
-  height: 501px; }
+  background: url(../img/equipo/pperezBN.png) round;
+  width: 250px;
+  height: 249px; }
 
 .imgPperez:hover {
-  background-position: right;
-  width: 500px;
-  height: 501px; }
+  background: url(../img/equipo/pperez.png) round;
+  width: 250px;
+  height: 249px; }
 
 .imgFgmontoro {
-  background: url(../img/equipo/fgmontoro.png) no-repeat left;
-  width: 1417px;
-  height: 1416px; }
+  background: url(../img/equipo/fgmontoroBN.png) round;
+  width: 250px;
+  height: 249px; }
 
 .imgFgmontoro:hover {
-  background-position: right;
-  width: 1417px;
-  height: 1416px; }
+  background: url(../img/equipo/fgmontoro.png) round;
+  width: 250px;
+  height: 249px; }
 
 .imgEfernandez {
-  background: url(../img/equipo/efernandez.png) no-repeat left;
-  width: 1417px;
-  height: 1416px; }
+  background: url(../img/equipo/efernandezBN.png) round;
+  width: 250px;
+  height: 249px; }
 
 .imgEfernandez:hover {
-  background-position: right;
-  width: 1417px;
-  height: 1416px; }
+  background: url(../img/equipo/efernandez.png) round;
+  width: 250px;
+  height: 249px; }
 
 .imgAbarrero {
-  background: url(../img/equipo/abarrero.png) no-repeat left;
-  width: 1417px;
-  height: 1416px; }
+  background: url(../img/equipo/abarreroBN.png) round;
+  width: 250px;
+  height: 249px; }
 
 .imgAbarrero:hover {
-  background-position: right;
-  width: 1417px;
-  height: 1416px; }
-
-.imgAgonzalez {
-  background: url(../img/equipo/agonzalez.png) no-repeat left;
-  width: 1417px;
-  height: 1416px; }
-
-.imgAgonzalez:hover {
-  background-position: right;
-  width: 1417px;
-  height: 1416px; }
+  background: url(../img/equipo/abarrero.png) round;
+  width: 250px;
+  height: 249px; }
 
 .imgAmayor {
-  background: url(../img/equipo/amayor.png) no-repeat left;
-  width: 1417px;
-  height: 1416px; }
+  background: url(../img/equipo/amayorBN.png) round;
+  width: 250px;
+  height: 249px; }
 
 .imgAmayor:hover {
-  background-position: right;
-  width: 1417px;
-  height: 1416px; }
+  background: url(../img/equipo/amayor.png) round;
+  width: 250px;
+  height: 249px; }
+
+.imgAgonzalez {
+  background: url(../img/equipo/agonzalezBN.png) round;
+  width: 250px;
+  height: 249px; }
+
+.imgAgonzalez:hover {
+  background: url(../img/equipo/agonzalez.png) round;
+  width: 250px;
+  height: 249px; }
+
+.linkedin.md-button.icon.md-ink-ripple:hover {
+  background-color: rgba(159, 187, 255, 0.32); }
+
+.linkedin.md-button.icon.md-ink-ripple {
+  width: 50px;
+  height: 50px; }
 
 /*--------------------- media queries ------------------------*/
-@media screen and (max-width: 1200px) and (min-width: 1001px) {
-  .cabeceraAdmin {
-    margin-top: 10%; }
-  .listaPreguntasAdmin {
-    margin-top: 19.5%; }
-  .cabeceraTec {
-    margin-top: 10%; }
-  .listaPreguntasTec {
-    margin-top: 19.3%; } }
+/*
+@media screen and (max-width: 1200px)  and (min-width: 1001px) {	
+	.cabeceraAdmin {
+		margin-top: 10%;
+	}
+	
+	.listaPreguntasAdmin {
+		margin-top: 19.5%;
+	}
+	
+	.cabeceraTec {
+		margin-top: 10%;
+	}
+	
+	.listaPreguntasTec {
+		margin-top: 19.3%;
+	}
+}
 
-@media screen and (max-width: 1000px) and (min-width: 851px) {
-  .cabeceraAdmin {
-    margin-top: 12%; }
-  .listaPreguntasAdmin {
-    margin-top: 22.9%; }
-  .cabeceraTec {
-    margin-top: 12%; }
-  .listaPreguntasTec {
-    margin-top: 22.7%; } }
+@media screen and (max-width: 1000px) and (min-width: 851px) {	
+	.cabeceraAdmin {
+		margin-top: 12%;
+	}
+	
+	.listaPreguntasAdmin {
+		margin-top: 22.9%;
+	}
+	
+	.cabeceraTec {
+		margin-top: 12%;
+	}
+	
+	.listaPreguntasTec {
+		margin-top: 22.7%;
+	}
+}
 
-@media screen and (max-width: 850px) and (min-width: 701px) {
-  .cabeceraAdmin {
-    margin-top: 14%; }
-  .listaPreguntasAdmin {
-    margin-top: 26.9%; }
-  .cabeceraTec {
-    margin-top: 14%; }
-  .listaPreguntasTec {
-    margin-top: 27%; } }
+@media screen and (max-width: 850px) and (min-width: 701px) {	
+	.cabeceraAdmin {
+		margin-top: 14%;
+	}
+	
+	.listaPreguntasAdmin {
+		margin-top: 26.9%;
+	}
+	
+	.cabeceraTec {
+		margin-top: 14%;
+	}
+	
+	.listaPreguntasTec {
+		margin-top: 27%;
+	}
+}
 
-@media screen and (max-width: 700px) and (min-width: 651px) {
-  .cabeceraAdmin {
-    margin-top: 16%; }
-  .listaPreguntasAdmin {
-    margin-top: 29.7%; }
-  .cabeceraTec {
-    margin-top: 16%; }
-  .listaPreguntasTec {
-    margin-top: 31%; } }
+@media screen and (max-width: 700px) and (min-width: 651px){	
+	.cabeceraAdmin {
+		margin-top: 16%;
+	}
+	
+	.listaPreguntasAdmin {
+		margin-top: 29.7%;
+	}
+	
+	.cabeceraTec {
+		margin-top: 16%;
+	}
+	
+	.listaPreguntasTec {
+		margin-top: 31%;
+	}
+}
 
-@media screen and (max-width: 650px) and (min-width: 561px) {
-  .cabeceraAdmin {
-    margin-top: 18%; }
-  .listaPreguntasAdmin {
-    margin-top: 33.7%; }
-  .cabeceraTec {
-    margin-top: 18%; }
-  .listaPreguntasTec {
-    margin-top: 34%; } }
+@media screen and (max-width: 650px) and (min-width: 561px) {	
+	.cabeceraAdmin {
+		margin-top: 18%;
+	}
+	
+	.listaPreguntasAdmin {
+		margin-top: 33.7%;
+	}
+	
+	.cabeceraTec {
+		margin-top: 18%;
+	}
+	
+	.listaPreguntasTec {
+		margin-top: 34%;
+	}
+}
 
-@media screen and (max-width: 560px) {
-  .cabeceraAdmin {
-    margin-top: 20%; }
-  .listaPreguntasAdmin {
-    margin-top: 36%; }
-  .cabeceraTec {
-    margin-top: 20%; }
-  .listaPreguntasTec {
-    margin-top: 38%; } }
+@media screen and (max-width: 560px) {	
+	.cabeceraAdmin {
+		margin-top: 20%;
+	}
+	
+	.listaPreguntasAdmin {
+		margin-top: 36%;
+	}
+	
+	.cabeceraTec {
+		margin-top: 20%;
+	}
+	
+	.listaPreguntasTec {
+		margin-top: 38%;
+	}
+}
 
-@media screen and (max-width: 1150px) and (min-width: 1021px) {
-  md-autocomplete.autocompleteAdmin {
-    width: 56.9%; }
-  md-datepicker.adminFecha {
-    margin-left: 67%; } }
+@media screen and (max-width: 1150px) and (min-width: 1021px) {	
+	md-autocomplete.autocompleteAdmin {
+		width: 56.9%;
+	}
+	
+	md-datepicker.adminFecha {
+		margin-left: 67%;
+	}
+}
 
-@media screen and (max-width: 1020px) and (min-width: 951px) {
-  md-autocomplete.autocompleteAdmin {
-    width: 54.9%; }
-  md-datepicker.adminFecha {
-    margin-left: 65%; } }
+@media screen and (max-width: 1020px) and (min-width: 951px) {	
+	md-autocomplete.autocompleteAdmin {
+		width: 54.9%;
+	}
+	
+	md-datepicker.adminFecha {
+		margin-left: 65%;
+	}
+}
 
-@media screen and (max-width: 950px) and (min-width: 851px) {
-  md-autocomplete.autocompleteAdmin {
-    width: 52.9%; }
-  md-datepicker.adminFecha {
-    margin-left: 63%; } }
+@media screen and (max-width: 950px) and (min-width: 851px) {	
+	md-autocomplete.autocompleteAdmin {
+		width: 52.9%;
+	}
+	
+	md-datepicker.adminFecha {
+		margin-left: 63%;
+	}
+}
 
-@media screen and (max-width: 850px) and (min-width: 741px) {
-  md-autocomplete.autocompleteAdmin {
-    width: 49.9%; }
-  md-datepicker.adminFecha {
-    margin-left: 60%; } }
+@media screen and (max-width: 850px) and (min-width: 741px) {	
+	md-autocomplete.autocompleteAdmin {
+		width: 49.9%;
+	}
+	
+	md-datepicker.adminFecha {
+		margin-left: 60%;
+	}
+}
 
-@media screen and (max-width: 740px) and (min-width: 651px) {
-  md-autocomplete.autocompleteAdmin {
-    width: 45.9%; }
-  md-datepicker.adminFecha {
-    margin-left: 56%; } }
+@media screen and (max-width: 740px) and (min-width: 651px) {	
+	md-autocomplete.autocompleteAdmin {
+		width: 45.9%;
+	}
+	
+	md-datepicker.adminFecha {
+		margin-left: 56%;
+	}
+}
 
-@media screen and (max-width: 650px) and (min-width: 571px) {
-  md-autocomplete.autocompleteAdmin {
-    width: 41.9%; }
-  md-datepicker.adminFecha {
-    margin-left: 52%; } }
+@media screen and (max-width: 650px) and (min-width: 571px) {	
+	md-autocomplete.autocompleteAdmin {
+		width: 41.9%;
+	}
+	
+	md-datepicker.adminFecha {
+		margin-left: 52%;
+	}
+}
 
-@media screen and (max-width: 570px) {
-  md-autocomplete.autocompleteAdmin {
-    width: 38.9%; }
-  md-datepicker.adminFecha {
-    margin-left: 49%; } }
+@media screen and (max-width: 570px) {	
+	md-autocomplete.autocompleteAdmin {
+		width: 38.9%;
+	}
+	
+	md-datepicker.adminFecha {
+		margin-left: 49%;
+	}
+}
 
-@media screen and (max-width: 1150px) and (min-width: 951px) {
-  .adminCheck {
-    margin-top: 1.3%; } }
+@media screen and (max-width: 1150px) and (min-width: 951px) {	
+	.adminCheck {
+		margin-top: 1.3%;
+	}
+}
 
-@media screen and (max-width: 950px) and (min-width: 801px) {
-  .adminCheck {
-    margin-top: 1.8%; } }
+@media screen and (max-width: 950px) and (min-width: 801px) {	
+	.adminCheck {
+		margin-top: 1.8%;
+	}
+}
 
-@media screen and (max-width: 800px) and (min-width: 651px) {
-  .adminCheck {
-    margin-top: 2%; } }
+@media screen and (max-width: 800px) and (min-width: 651px) {	
+	.adminCheck {
+		margin-top: 2%;
+	}
+}
 
-@media screen and (max-width: 650px) and (min-width: 500px) {
-  .adminCheck {
-    margin-top: 2.2%; } }
+@media screen and (max-width: 650px) and (min-width: 500px) {	
+	.adminCheck {
+		margin-top: 2.2%;
+	}
+}
 
-@media screen and (max-width: 1150px) and (min-width: 951px) {
-  .md-button.md-fab.md-mini.adminBtn, .md-button.md-fab.md-mini.tec {
-    bottom: 8px; } }
+@media screen and (max-width: 1150px) and (min-width: 951px) {	
+	.md-button.md-fab.md-mini.adminBtn, .md-button.md-fab.md-mini.tec{
+		bottom: 8px;
+	}
+}
 
-@media screen and (max-width: 950px) and (min-width: 751px) {
-  .md-button.md-fab.md-mini.adminBtn, .md-button.md-fab.md-mini.tec {
-    bottom: 10px; } }
+@media screen and (max-width: 950px) and (min-width: 751px) {	
+	.md-button.md-fab.md-mini.adminBtn, .md-button.md-fab.md-mini.tec {
+		bottom: 10px;
+	}
+}
 
-@media screen and (max-width: 750px) and (min-width: 500px) {
-  .md-button.md-fab.md-mini.adminBtn, .md-button.md-fab.md-mini.tec {
-    bottom: 12px; } }
+@media screen and (max-width: 750px) and (min-width: 500px) {	
+	.md-button.md-fab.md-mini.adminBtn, .md-button.md-fab.md-mini.tec {
+		bottom: 12px;
+	}
+}
 
 @media screen and (max-height: 620px) {
-  md-dialog.md-transition-in.redimensionar {
-    float: inherit;
-    min-height: 100%;
-    max-height: 100%;
-    min-width: 100%;
-    max-width: 100%;
-    overflow-y: hidden; }
-  md-datepicker {
-    float: left; }
-  .md-datepicker-input-container.crear {
-    margin-left: 0px;
-    width: 70%; }
-  md-input-container.minutos {
-    margin-left: 2%; }
-  .puntos {
-    margin-left: 0%;
-    margin-top: 1.5%; }
-  input.minutos {
-    width: 100%; }
-  input.horas {
-    width: 100%; }
-  rzslider .rz-bar-wrapper {
-    opacity: 1;
-    width: 1196px;
-    left: 8px; }
-  span.rz-pointer {
-    left: 1203px; } }
+   md-dialog.md-transition-in.redimensionar {
+       float: inherit;
+       min-height: 100%;
+       max-height: 100%;
+       min-width: 100%;
+       max-width: 100%;
+       overflow-y: hidden;  
+    }
+	
+	md-datepicker {
+		float: left;
+	}
+	
+	.md-datepicker-input-container.crear {
+		margin-left: 0px;
+		width: 70%;
+	}
+	
+	md-input-container.minutos {
+		margin-left: 2%;
+	}
+	
+	.puntos {
+		margin-left: 0%;
+		margin-top: 1.5%
+	}
+	
+	input.minutos {
+		width: 100%;
+	}
+
+	input.horas {
+		width: 100%;
+	}
+	
+	rzslider .rz-bar-wrapper {
+		opacity: 1;
+		width: 1196px;
+		left: 8px;
+	}
+	
+	span.rz-pointer {
+		left: 1203px;
+	}
+}
 
 @media screen and (max-width: 750px) {
-  md-dialog.md-transition-in.redimensionar {
-    float: inherit;
-    min-height: 100%;
-    max-height: 100%;
-    min-width: 100%;
-    max-width: 100%;
-    overflow-y: hidden; } }
+   md-dialog.md-transition-in.redimensionar {
+       float: inherit;
+       min-height: 100%;
+       max-height: 100%;
+       min-width: 100%;
+       max-width: 100%;
+       overflow-y: hidden;    
+    }
+}
 
 @media screen and (max-width: 645px) {
-  span.rz-pointer {
-    left: 95%; }
-  rzslider .rz-bar-wrapper {
-    width: 95%; } }
+	span.rz-pointer {
+		left: 95%;
+	}
+	
+	rzslider .rz-bar-wrapper {
+		width: 95%;
+	}
+}
 
 @media screen and (max-width: 650px) {
-  #rango {
-    width: 90%; } }
+	#rango {
+		width: 90%;
+	}
+}*/
 
 /*# sourceMappingURL=style.css.map */
