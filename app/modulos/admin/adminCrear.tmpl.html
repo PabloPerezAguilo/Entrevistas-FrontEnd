@@ -23,76 +23,81 @@
             </md-toolbar>
             <md-dialog-content ng-model="conte" ng-show="crear">
                 <md-content>
-                    <div class="contenidoTablaCrear" ng-show="haciendoEntrevista">
-                        <md-input-container class="md-block">
+                    <div class="contenidoTablaCrear" ng-show="haciendoEntrevista" layout="column">
+                        <md-input-container class="md-block inputCrearEntrevista" flex>
                             <label>Nombre y apellidos *</label>
                             <textarea required ng-model="nombreEntrevista"></textarea>
 							<div ng-messages="nombreEntrevista.$error">
 								<div ng-message="required">Este campo es obligatorio</div>								
 							</div>
                         </md-input-container>
-                        <md-input-container class="md-block">
+                        <md-input-container class="md-block inputCrearEntrevista" flex>
                             <label>DNI</label>
                             <textarea ng-model="dniEntrevista"></textarea>
                         </md-input-container>
       
-                        <md-datepicker required ng-model="fecha" md-placeholder="Introducir fecha" class="crear">
-							<div ng-messages="fecha.$error">
-								<div ng-message="required">
-									Debe introducir una fecha.
+						<span layout="row" flex>
+							<md-datepicker required ng-model="fecha" md-placeholder="Introducir fecha" 
+										   class="divFechaAdmin calendario" flex="30">
+								<div ng-messages="fecha.$error">
+									<div ng-message="required">
+										Debe introducir una fecha.
+									</div>
 								</div>
-							</div>
-						</md-datepicker>
-                        <div>
-							<md-input-container class="md-inline horas">
+							</md-datepicker>
+							
+							<md-input-container class="md-inline horas" flex="20">
 								<input required type="number" step="any" ng-model="horas" min="08" max="20" 
-									   placeholder="Hora *" class="horas">
+									   placeholder="Hora *">
 								<div ng-messages="horas.$error">
 									<div ng-message-exp="['required', 'min', 'max']">
 										La jornada comprende entre las 8 y 20 h.
 									</div>
 								</div>
 							</md-input-container>
-							<span class="puntos">:</span>
-							<md-input-container class="md-inline minutos">
+
+							<span class="dosPuntos" flex="5">:</span>
+							<md-input-container class="md-inline horas" flex="20">
 								<input required type="number" step="any" ng-model="minutos" min="00" max="59" 
-									   placeholder="Minutos *" class="minutos">
+									   placeholder="Minutos *">
 								<div ng-messages="horas.$error">
 									<div ng-message-exp="['required', 'min', 'max']">
 										Los valores deben estar entre 0 y 59.
 									</div>
 								</div>
 							</md-input-container>
+						</span>
+						
+						
+						
+						<div ng-repeat="respuestas in temasChip" flex>
+							<span>	
+								<rzslider rz-slider-model="minSliderValue[$index].minSliderG"
+											  rz-slider-high="minSliderValue[$index].maxSliderG" 
+											  rz-slider-options="minSliderValue[$index].options"></rzslider>
+								<md-chips ng-model="temasEntrevista[$index]" md-autocomplete-snap="" 
+									  md-transform-chip="transformChip($chip, $index)" md-require-match="false">
+									<md-autocomplete id="aptitudes" md-selected-item="selectedItem" md-search-text="searchText"
+												 md-items="item in queryBuscarTema(searchText)"
+												 md-item-text="item.valor"
+												 placeholder="Aptitudes">
+										<span md-highlight-text="searchText">
+											{{item.tag}}
+										</span>
+									</md-autocomplete>
+									<md-chip-template>
+										<span> {{$chip.tag}} </span>
+									</md-chip-template>
+								</md-chips>
+							</span>
 						</div>
-
-                        <div>
-							<div ng-repeat="respuestas in temasChip">
-								<span>	
-									<rzslider rz-slider-model="minSliderValue[$index].minSliderG"
-												  rz-slider-high="minSliderValue[$index].maxSliderG" 
-												  rz-slider-options="minSliderValue[$index].options"></rzslider>
-									<md-chips ng-model="temasEntrevista[$index]" md-autocomplete-snap="" 
-										  md-transform-chip="transformChip($chip, $index)" md-require-match="false">
-										<md-autocomplete id="aptitudes" md-selected-item="selectedItem" md-search-text="searchText"
-													 md-items="item in queryBuscarTema(searchText)"
-													 md-item-text="item.valor"
-													 placeholder="Aptitudes">
-											<span md-highlight-text="searchText">
-												{{item.tag}}
-											</span>
-										</md-autocomplete>
-										<md-chip-template>
-											<span> {{$chip.tag}} </span>
-										</md-chip-template>
-									</md-chips>
-								</span>
-							</div>
 							
-							<md-button class="md-fab md-mini" ng-click="$root.aniadirSliderTemas()" 
-									   aria-label="crearPregunta">
-								<md-icon md-svg-src="img/mas.svg"></md-icon>
-							</md-button>
-						</div>
+						<md-button class="md-fab md-mini" ng-click="$root.aniadirSliderTemas()" 
+								   aria-label="crearPregunta">
+							<md-icon md-svg-src="img/mas.svg"></md-icon>
+						</md-button>
+						
+						
 						
 						<div class="alert alert-warning cortarAlertWarning alertWarningEntrevista" ng-if="error">
 							<span>
@@ -144,7 +149,7 @@
 				</div>
 				<div class="alert alert-info alertAyuda">
 					<p>La barra siguiente es para que usted pueda seleccionar qué rango de nivel debe tener el entrevistada en cierta aptitud:</p>
-					<img id="rango" src="rango.png">
+					<img id="rango" src="img/rango.png">
 				</div>
 				<div class="alert alert-info alertAyuda">
 					<p>En el campo <b>"Aptitudes"</b> podrá seleccionar una o varias aptitudes que desea que tenga el entrevistado.</p> 

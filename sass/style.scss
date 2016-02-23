@@ -385,10 +385,9 @@ md-toolbar:not(.md-menu-toolbar) {
 
 md-dialog.md-transition-in.redimensionar {
     margin: auto;
-    min-width: 700px;
+    min-width: 720px;
     min-height: 300px;
 	max-height: 700px;
-	z-index: 950;
 }
 
 md-tabs .md-tab.md-active {
@@ -619,7 +618,7 @@ md-list md-list-item.md-3-line .md-list-item-text h3 {
 }
 
 .divFechaAdmin {
-	min-width: 184px;
+	min-width: 185px;
 	min-height: 40px;
 	margin-right: 0;
 }
@@ -797,6 +796,28 @@ rzslider .rz-bar-wrapper {
 	height: 50px;
 }
 
+
+.contenidoTablaCrear md-input-container {
+	margin: 0;
+}
+
+md-datepicker.calendario {
+	margin-top: 5px;
+}
+
+md-input-container.horas {
+	margin-top: 8px;
+}
+
+.dosPuntos {
+	padding-top: 15px;
+    padding-left: 15px;
+}
+
+.md-datepicker-input-mask {
+	display:none;
+}
+
 /* ------------------- ENTREVISTA ---------------------------*/
 .mensajeAlert {
 	display: inherit;
@@ -856,12 +877,6 @@ rzslider .rz-bar-wrapper {
     margin-top: 1.2%;
 }
 
-.puntos {
-	margin-left: -4%;
-    position: absolute;
-    margin-top: 2%;
-}
-
 md-datepicker {
 	float: left;
 	padding-right: 0;
@@ -874,17 +889,23 @@ md-input-container.minutos {
 	margin-right: 2%;
 }
 
+/*
+AQUI
 md-input-container.horas {
 	width: 33%;
 	margin-top: 0.44%;
 	margin-right: 2%;
 	margin-left: 2%;
 }
+*/
 
+/*
+AQUI
 .md-datepicker-input-container.crear {
 	margin-left: 0px;
 	width: 22%;
 }
+*/
 
 md-autocomplete.autocompleteAdmin {
     position: fixed;
@@ -898,6 +919,8 @@ md-autocomplete.autocompleteAdmin {
     margin: 0;
 }
 
+/*
+AQUI
 input.minutos {
 	width: 82%;
 }
@@ -905,6 +928,7 @@ input.minutos {
 input.horas {
 	width: 83%;
 }
+*/
 
 .respuestas {
 	font-size: 13px;
@@ -1160,228 +1184,7 @@ md-input-container.horasAyuda {
 }
 
 /*--------------------- media queries ------------------------*/
-/*
-@media screen and (max-width: 1200px)  and (min-width: 1001px) {	
-	.cabeceraAdmin {
-		margin-top: 10%;
-	}
-	
-	.listaPreguntasAdmin {
-		margin-top: 19.5%;
-	}
-	
-	.cabeceraTec {
-		margin-top: 10%;
-	}
-	
-	.listaPreguntasTec {
-		margin-top: 19.3%;
-	}
-}
-
-@media screen and (max-width: 1000px) and (min-width: 851px) {	
-	.cabeceraAdmin {
-		margin-top: 12%;
-	}
-	
-	.listaPreguntasAdmin {
-		margin-top: 22.9%;
-	}
-	
-	.cabeceraTec {
-		margin-top: 12%;
-	}
-	
-	.listaPreguntasTec {
-		margin-top: 22.7%;
-	}
-}
-
-@media screen and (max-width: 850px) and (min-width: 701px) {	
-	.cabeceraAdmin {
-		margin-top: 14%;
-	}
-	
-	.listaPreguntasAdmin {
-		margin-top: 26.9%;
-	}
-	
-	.cabeceraTec {
-		margin-top: 14%;
-	}
-	
-	.listaPreguntasTec {
-		margin-top: 27%;
-	}
-}
-
-@media screen and (max-width: 700px) and (min-width: 651px){	
-	.cabeceraAdmin {
-		margin-top: 16%;
-	}
-	
-	.listaPreguntasAdmin {
-		margin-top: 29.7%;
-	}
-	
-	.cabeceraTec {
-		margin-top: 16%;
-	}
-	
-	.listaPreguntasTec {
-		margin-top: 31%;
-	}
-}
-
-@media screen and (max-width: 650px) and (min-width: 561px) {	
-	.cabeceraAdmin {
-		margin-top: 18%;
-	}
-	
-	.listaPreguntasAdmin {
-		margin-top: 33.7%;
-	}
-	
-	.cabeceraTec {
-		margin-top: 18%;
-	}
-	
-	.listaPreguntasTec {
-		margin-top: 34%;
-	}
-}
-
-@media screen and (max-width: 560px) {	
-	.cabeceraAdmin {
-		margin-top: 20%;
-	}
-	
-	.listaPreguntasAdmin {
-		margin-top: 36%;
-	}
-	
-	.cabeceraTec {
-		margin-top: 20%;
-	}
-	
-	.listaPreguntasTec {
-		margin-top: 38%;
-	}
-}
-
-@media screen and (max-width: 1150px) and (min-width: 1021px) {	
-	md-autocomplete.autocompleteAdmin {
-		width: 56.9%;
-	}
-	
-	md-datepicker.adminFecha {
-		margin-left: 67%;
-	}
-}
-
-@media screen and (max-width: 1020px) and (min-width: 951px) {	
-	md-autocomplete.autocompleteAdmin {
-		width: 54.9%;
-	}
-	
-	md-datepicker.adminFecha {
-		margin-left: 65%;
-	}
-}
-
-@media screen and (max-width: 950px) and (min-width: 851px) {	
-	md-autocomplete.autocompleteAdmin {
-		width: 52.9%;
-	}
-	
-	md-datepicker.adminFecha {
-		margin-left: 63%;
-	}
-}
-
-@media screen and (max-width: 850px) and (min-width: 741px) {	
-	md-autocomplete.autocompleteAdmin {
-		width: 49.9%;
-	}
-	
-	md-datepicker.adminFecha {
-		margin-left: 60%;
-	}
-}
-
-@media screen and (max-width: 740px) and (min-width: 651px) {	
-	md-autocomplete.autocompleteAdmin {
-		width: 45.9%;
-	}
-	
-	md-datepicker.adminFecha {
-		margin-left: 56%;
-	}
-}
-
-@media screen and (max-width: 650px) and (min-width: 571px) {	
-	md-autocomplete.autocompleteAdmin {
-		width: 41.9%;
-	}
-	
-	md-datepicker.adminFecha {
-		margin-left: 52%;
-	}
-}
-
-@media screen and (max-width: 570px) {	
-	md-autocomplete.autocompleteAdmin {
-		width: 38.9%;
-	}
-	
-	md-datepicker.adminFecha {
-		margin-left: 49%;
-	}
-}
-
-@media screen and (max-width: 1150px) and (min-width: 951px) {	
-	.adminCheck {
-		margin-top: 1.3%;
-	}
-}
-
-@media screen and (max-width: 950px) and (min-width: 801px) {	
-	.adminCheck {
-		margin-top: 1.8%;
-	}
-}
-
-@media screen and (max-width: 800px) and (min-width: 651px) {	
-	.adminCheck {
-		margin-top: 2%;
-	}
-}
-
-@media screen and (max-width: 650px) and (min-width: 500px) {	
-	.adminCheck {
-		margin-top: 2.2%;
-	}
-}
-
-@media screen and (max-width: 1150px) and (min-width: 951px) {	
-	.md-button.md-fab.md-mini.adminBtn, .md-button.md-fab.md-mini.tec{
-		bottom: 8px;
-	}
-}
-
-@media screen and (max-width: 950px) and (min-width: 751px) {	
-	.md-button.md-fab.md-mini.adminBtn, .md-button.md-fab.md-mini.tec {
-		bottom: 10px;
-	}
-}
-
-@media screen and (max-width: 750px) and (min-width: 500px) {	
-	.md-button.md-fab.md-mini.adminBtn, .md-button.md-fab.md-mini.tec {
-		bottom: 12px;
-	}
-}
-
-@media screen and (max-height: 620px) {
+@media screen and (max-height: 600px) {
    md-dialog.md-transition-in.redimensionar {
        float: inherit;
        min-height: 100%;
@@ -1390,32 +1193,6 @@ md-input-container.horasAyuda {
        max-width: 100%;
        overflow-y: hidden;  
     }
-	
-	md-datepicker {
-		float: left;
-	}
-	
-	.md-datepicker-input-container.crear {
-		margin-left: 0px;
-		width: 70%;
-	}
-	
-	md-input-container.minutos {
-		margin-left: 2%;
-	}
-	
-	.puntos {
-		margin-left: 0%;
-		margin-top: 1.5%
-	}
-	
-	input.minutos {
-		width: 100%;
-	}
-
-	input.horas {
-		width: 100%;
-	}
 	
 	rzslider .rz-bar-wrapper {
 		opacity: 1;
@@ -1454,4 +1231,3 @@ md-input-container.horasAyuda {
 		width: 90%;
 	}
 }
-*/
