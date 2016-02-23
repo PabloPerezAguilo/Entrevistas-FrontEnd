@@ -68,8 +68,6 @@
 							</md-input-container>
 						</span>
 						
-						
-						
 						<div ng-repeat="respuestas in temasChip" flex>
 							<span>	
 								<rzslider rz-slider-model="minSliderValue[$index].minSliderG"
@@ -99,10 +97,10 @@
 						
 						
 						
-						<div class="alert alert-warning cortarAlertWarning alertWarningEntrevista" ng-if="error">
+						<div class="alert alert-warning cortarAlertWarning alertWarningEntrevista" ng-show="error">
 							<span>
 								<p class="mensajeAlert">No hay suficientes preguntas para esta(s) aptitud(es).</p>
-								<md-button aria-label="eliminar" ng-click="cerrarError()" 
+								<md-button aria-label="eliminar" ng-click="error = false" 
 									   class="md-button icon explosionIcono entendidoCrearEntrevista">
 									<md-icon md-svg-src="img/ok.svg"></md-icon>
 								</md-button>
@@ -113,7 +111,7 @@
 							</p>
 						</div>
                         
-                        <md-button class="md-raised" ng-click="crearEntrevista()" ng-disabled="deshabilitar()">
+                        <md-button class="md-raised" ng-click="crearEntrevista()">
 							Guardar
 						</md-button>
 					</div>

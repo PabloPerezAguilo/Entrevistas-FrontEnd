@@ -25,7 +25,8 @@
 			
 			<span layout="row">
 				<span flex="10"></span>
-				<md-autocomplete class="marginTop10" ng-disabled="false" md-no-cache="noCache" 
+			
+				<md-autocomplete class="marginTop10" ng-disabled="false" md-no-cache="false" 
 								 md-selected-item="selectedItem" md-search-text-change="searchTextChange(searchText)" 
 								 md-search-text="searchText" md-selected-item-change="selectedItemChange(item)" 
 								 md-items="item in queryBuscarNombre(searchText)" md-item-text="item.valor" 
@@ -73,7 +74,7 @@
 					</md-tooltip>
 				 </md-button>
 
-				<md-button id="eliminar" aria-label="eliminar" ng-click="eliminar($index)" 
+				<md-button id="eliminar" aria-label="eliminar" ng-click="eliminar($event, $index)" 
 						   class="md-button icon centrarIconoLista explosionIcono">
 					<md-icon md-svg-src="img/delete.svg"></md-icon>
 					<md-tooltip md-direction="bottom">

@@ -129,7 +129,7 @@ app.controller('controladorAdminCrear', function (servicioRest, $scope, $mdDialo
 					}
 					$scope.haciendoEntrevista = false;
 				}).catch(function(err) {
-				$scope.hayRangoEntrevista = false;
+					$scope.hayRangoEntrevista = false;
 					$log.error("Error al crear la entrevista");
 					$scope.mensajeError = err.data.message;
 					if (err.data.recuento != undefined) {
@@ -143,16 +143,6 @@ app.controller('controladorAdminCrear', function (servicioRest, $scope, $mdDialo
 			});
         }
     };
-	
-	$scope.cerrarError = function (indice) {
-		if ($scope.error) {
-			$scope.error = false;
-		}
-		
-		if ($scope.errorTema[indice]) {
-			$scope.errorTema[indice] = false;
-		}
-	}
     
     $scope.hide = function () {
         $mdDialog.hide();

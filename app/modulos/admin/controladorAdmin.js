@@ -1,15 +1,5 @@
 app.controller('controladorAdmin', function (servicioRest, config, $scope, $location, $rootScope, $mdDialog, $timeout, $q, $log, $http, $mdToast) {
 	
-	$scope.abrirUsuarios = function(ev) {
-		$mdDialog.show({
-            controller: 'controladorUsuarios',
-            templateUrl: 'modulos/usuario/usuario.tmpl.html',
-            parent: angular.element(document.body),
-            targetEvent: ev,
-            clickOutsideToClose: false
-        })
-	}
-	
 	var permiso = sessionStorage.getItem("permiso");
 	var ver = sessionStorage.getItem("ver");
 	
@@ -260,6 +250,16 @@ app.controller('controladorAdmin', function (servicioRest, config, $scope, $loca
 			});
 	};
 	
+	$scope.abrirUsuarios = function(ev) {
+		$mdDialog.show({
+            controller: 'controladorUsuarios',
+            templateUrl: 'modulos/usuario/usuario.tmpl.html',
+            parent: angular.element(document.body),
+            targetEvent: ev,
+            clickOutsideToClose: false
+        })
+	}
+	
     $scope.crear = function (ev) {
         $mdDialog.show({
             controller: 'controladorAdminCrear',
@@ -273,10 +273,12 @@ app.controller('controladorAdmin', function (servicioRest, config, $scope, $loca
             clickOutsideToClose: false
         })
 			.then(function (data) {
+			console.log("entra")
 				getEntrevistas(nombreSeleccionado, paginaActual);
 				obtenerNombres();
 			})
 			.catch(function (err) {
+			console.log("blablablaaa")
 				$log.error("Error al crear la entrevista: " + err);
             });
 			
@@ -326,15 +328,7 @@ app.controller('controladorAdmin', function (servicioRest, config, $scope, $loca
 	$scope.queryBuscarNombre = function (query) {
 		var results = query ? nombresCargados.filter(filtrar(query)) : nombresCargados,
 			deferred;
-		if (simulateQuery) {
-			deferred = $q.defer();
-			$timeout(function () {
-				deferred.resolve(results);
-			}, Math.random() * 1000, false);
-			return deferred.promise;
-		} else {
-			return results;
-		}
+		return results;
 	};
 	
 	/* -------------------- LISTAR ENTREVISTAS ---------------------------- */
@@ -353,16 +347,26 @@ app.controller('controladorAdmin', function (servicioRest, config, $scope, $loca
 	
 	/* ------------------------------- Borrar, ver y hacer entrevista ------------------------------- */
 	
-	$scope.eliminar = function (indice) {
+	$scope.eliminar = function (ev, indice) {
         var idEntrevista = $scope.entrevistas[indice]._id;
-        servicioRest.deleteEntrevista(idEntrevista)
-			.then(function (data) {
-				$scope.entrevistas.splice(indice, 1);
-				obtenerNombres();
-			})
-			.catch(function (err) {
-				$log.error("Error al eliminar la entrevista: " + err);
-			});
+		var confirm = $mdDialog.confirm()
+        	.title('Procederás a borrar la entrevista')
+			.textContent('¿Estás seguro?')
+			.ariaLabel('Confirmacion guardar respuestas')
+			.targetEvent(ev)
+			.ok('Sí')
+			.cancel('No');
+
+    	$mdDialog.show(confirm).then(function() {
+			servicioRest.deleteEntrevista(idEntrevista)
+				.then(function (data) {
+					$scope.entrevistas.splice(indice, 1);
+					obtenerNombres();
+				})
+				.catch(function (err) {
+					$log.error("Error al eliminar la entrevista: " + err);
+				});
+    	});
 	};
 	
 	$scope.ver = function (ev, ind) {
