@@ -27,7 +27,6 @@ var names = {
 	minCSS : "app.min.css"
 }
 
-
 function startExpress(enviroment) {
 	var express = require('express');
 	var app = express();

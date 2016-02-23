@@ -1,41 +1,52 @@
 <div id="seccionAdmin">
 	<md-list>
-		<div class="cabeceraAdmin">
-			
-			 <md-button mfb-button class="md-fab md-mini btnPosDerecha adminBtn" ng-click="crear($event)" 
-						aria-label="crear entrevista">
-				 <md-icon md-svg-src="img/crear.svg" class="btnIconoCentrado"></md-icon>
-			</md-button>
-			
-			<md-button mfb-button class="md-fab md-mini btnPosDerecha adminBtn" ng-click="abrirUsuarios($event)" 
-						aria-label="crear entrevista">
-				 <md-icon md-svg-src="img/usuario.svg"></md-icon>
-			</md-button>
-			
-			<md-subheader class="md-no-sticky">
-				Entrevistas
-			</md-subheader>
+		<div class="cabecera" layout="column">
+			<span layout="row">
+				<span flex="10"></span>
+				<md-subheader class="md-no-sticky" flex="70">
+					Entrevistas
+				</md-subheader>
+				<span class="divBtnCrear" flex="5">
+					<md-button mfb-button class="md-fab md-mini" ng-click="abrirUsuarios($event)" 
+							   aria-label="crear entrevista">
+						<md-icon md-svg-src="img/usuario.svg"></md-icon>
+					</md-button>
+				</span>
+				<span class="divBtnCrear" flex="5">
+					<md-button mfb-button class="md-fab md-mini" ng-click="crear($event)" 
+							   aria-label="crear entrevista">
+						 <md-icon md-svg-src="img/crear.svg" class="btnIconoCentrado"></md-icon>
+					</md-button>
+				</span>
+				<span flex="10"></span>
+			</span>
 			
 			<md-divider class="dividerPrincipal"></md-divider>
 			
-			<md-autocomplete class="autocompleteAdmin" ng-disabled="false" md-no-cache="noCache" 
-							 md-selected-item="selectedItem" md-search-text-change="searchTextChange(searchText)" 
-							 md-search-text="searchText" md-selected-item-change="selectedItemChange(item)" 
-							 md-items="item in queryBuscarNombre(searchText)" md-item-text="item.valor" 
-							 md-min-length="0" placeholder="Buscar por nombre del entrevistado">
-				<md-item-template>
-					<span md-highlight-text="searchText" md-highlight-flags="^i">{{item.name}}</span>
-				</md-item-template>
-				<md-not-found>
-					El nombre "{{searchText}}" no tiene ninguna entrevista asociada
-				</md-not-found>
-			</md-autocomplete>
-			
-			<md-datepicker ng-model="fecha" ng-change="cambioFechaSwitch()" md-placeholder="Enter date"
-							   ng-disabled="disableCalendario" class="adminFecha"></md-datepicker>
-			<md-checkbox ng-model="mostrarTodasEntrevistas" ng-change="getTodasEntervistas()"
-						 class="adminCheck" aria-label="mostrar todas las entrevistas"></md-checkbox> 
-		
+			<span layout="row">
+				<span flex="10"></span>
+				<md-autocomplete class="marginTop10" ng-disabled="false" md-no-cache="noCache" 
+								 md-selected-item="selectedItem" md-search-text-change="searchTextChange(searchText)" 
+								 md-search-text="searchText" md-selected-item-change="selectedItemChange(item)" 
+								 md-items="item in queryBuscarNombre(searchText)" md-item-text="item.valor" 
+								 md-min-length="0" placeholder="Buscar por nombre del entrevistado" flex="60">
+					<md-item-template>
+						<span md-highlight-text="searchText" md-highlight-flags="^i">{{item.name}}</span>
+					</md-item-template>
+					<md-not-found>
+						El nombre "{{searchText}}" no tiene ninguna entrevista asociada
+					</md-not-found>
+				</md-autocomplete>
+				<span class="divFechaAdmin marginTop10" flex="15">
+					<md-datepicker ng-model="fecha" ng-change="cambioFechaSwitch()" md-placeholder="Enter date"
+								   ng-disabled="disableCalendario"></md-datepicker>
+				</span>
+				<span class="divCheckboxAdmin marginTop10" flex="5">
+					<md-checkbox ng-model="mostrarTodasEntrevistas" ng-change="getTodasEntervistas()"
+								 aria-label="mostrar todas las entrevistas"></md-checkbox>
+				</span>
+				<span flex="10"></span>
+			</span>
 		</div>
 		
       	<div class="listaPreguntasAdmin">
@@ -81,19 +92,25 @@
 			</md-list-item>
 		</div>
     </md-list>
-	<div class="paginacion">
-		<ul class="pagination" ng-show="mostrarPaginacion">
-			<li><a href="" ng-click="calcularPaginas(1)">&laquo;</a></li>
-			<li ng-repeat="pagina in paginacion">
-				<a href="" ng-click="calcularPaginas(pagina)" ng-style="stylePaginacion[$index]">{{ pagina }}</a>
-			</li>
-			<li><a href="" ng-click="calcularPaginas(ultimaPagina)">&raquo;</a></li>
-		</ul>
-		<div class="divSwitchAdmin">
-			Entrevistas: Pendientes
+	<div class="paginacion" layout="row">
+		<span flex="40"></span>
+		<span ng-show="mostrarPaginacion" flex>
+			<ul class="pagination">
+				<li><a href="" ng-click="calcularPaginas(1)">&laquo;</a></li>
+				<li ng-repeat="pagina in paginacion">
+					<a href="" ng-click="calcularPaginas(pagina)" ng-style="stylePaginacion[$index]">{{ pagina }}</a>
+				</li>
+				<li><a href="" ng-click="calcularPaginas(ultimaPagina)">&raquo;</a></li>
+			</ul>
+		</span>
+		
+		<span class="letraMediana" layout="row" flex>
+			<span class="txtSwicth">Entrevistas: Pendientes</span>
 			<md-switch ng-model="entrevistasRealizadas" class="switchEntrevista" aria-label="Switch entrevistas" 
 					   ng-change="cambioFechaSwitch()"></md-switch>
-			Realizadas
-		</div>
+			<span class="txtSwicth">Realizadas</span>
+		</span>
+		
+		<span flex="10"></span>
 	</div>
 </div>

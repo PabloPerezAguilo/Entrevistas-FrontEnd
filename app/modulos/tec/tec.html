@@ -1,38 +1,49 @@
 <div id="seccionTec">
     <md-list>
-		<div class="cabeceraTec">
-			<md-button mfb-button class="md-fab md-mini btnPosDerecha tec" ng-click="crear($event)" aria-label="crearPregunta">
-				<md-icon md-svg-src="img/crear.svg" class="btnIconoCentrado"></md-icon>
-			</md-button>
-			
-			<md-subheader class="md-no-sticky">Preguntas</md-subheader>
+		<div class="cabecera" layout="column">
+			<span layout="row">
+				<span flex="10"></span>
+				<md-subheader class="md-no-sticky" flex="75">Preguntas</md-subheader>
+				<span class="divBtnCrear" flex="5">
+					<md-button mfb-button class="md-fab md-mini" ng-click="crear($event)" aria-label="crearPregunta">
+						<md-icon md-svg-src="img/crear.svg" class="btnIconoCentrado"></md-icon>
+					</md-button>
+				</span>
+				<span flex="10"></span>
+			</span>
 			
 			<md-divider class="dividerPrincipal"></md-divider>
 
-			<md-icon md-svg-src="img/lupa.svg" class="iconoBuscar"></md-icon>
-			<md-chips class="chipsTec" ng-model="listaTemas" 
-					  md-autocomplete-snap=""
-					  md-transform-chip="transformChip($chip)" 
-					  md-require-match="false"
-					  md-on-remove="deleteChip()">
+			<span layout="row">
+				<span  flex="10"></span>
+				<span flex="80">
+					<md-chips ng-model="listaTemas" 
+							  md-autocomplete-snap=""
+							  md-transform-chip="transformChip($chip)" 
+							  md-require-match="false"
+							  md-on-remove="deleteChip()">
+
+						<md-autocomplete md-selected-item="selectedItem" 
+										 md-search-text-change="searchTextChange(searchText)" 
+										 md-search-text="searchText" 
+										 md-selected-item-change="selectedItemChange(item)" 
+										 md-items="item in queryBuscarTema(searchText)" 
+										 md-item-text="item.valor" 
+										 md-min-length="0"
+										 placeholder="Buscar por aptitudes">
+							<span md-highlight-text="searchText">
+								{{item.tag}}
+							</span>
+						</md-autocomplete>
+						<md-chip-template>
+							<span> {{$chip.tag}} </span>
+						</md-chip-template>
+					</md-chips>
+				</span>
 				
-				<md-autocomplete md-selected-item="selectedItem" 
-								 md-search-text-change="searchTextChange(searchText)" 
-								 md-search-text="searchText" 
-								 md-selected-item-change="selectedItemChange(item)" 
-								 md-items="item in queryBuscarTema(searchText)" 
-								 md-item-text="item.valor" 
-								 md-min-length="0"
-								 placeholder="Buscar por aptitudes">
-					<span md-highlight-text="searchText">
-						{{item.tag}}
-					</span>
-				</md-autocomplete>
-				
-				<md-chip-template>
-					<span> {{$chip.tag}} </span>
-				</md-chip-template>
-			</md-chips>
+				<span class="iconoLupa" flex="5"><md-icon md-svg-src="img/lupa.svg"></md-icon></span>
+				<span flex="5"></span>
+			</span>
 
 		</div>
       	<div class="listaPreguntasTec">
@@ -58,7 +69,8 @@
 					</md-tooltip>
 				 </md-button>
 
-				<md-button id="eliminar"aria-label="eliminar" ng-click="eliminar($index)" class="md-button icon centrarIconoLista explosionIcono">
+				<md-button id="eliminar"aria-label="eliminar" ng-click="eliminar($index)" 
+						   class="md-button icon centrarIconoLista explosionIcono">
 					<md-icon md-svg-src="img/delete.svg"></md-icon>
 					<md-tooltip md-direction="bottom">
 					  Eliminar
