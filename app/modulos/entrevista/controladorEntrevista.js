@@ -29,9 +29,30 @@ app.controller('controladorEntrevista', function (servicioRest, $scope, $rootSco
 	$rootScope.conFooter = false;
     $rootScope.logueado = false;
 	
+	if (sessionStorage.getItem("mostrar") === null) {
+		sessionStorage.setItem("mostrar", 'bienvenida');
+	}
+	$scope.mostrar = sessionStorage.getItem("mostrar");
+	
+	$scope.bienvenida = function() {
+		sessionStorage.setItem("mostrar", 'evaluacion');
+		$scope.mostrar = sessionStorage.getItem("mostrar");
+	}
+	
+	$scope.evaluacion = function() {
+		sessionStorage.setItem("mostrar", 'entrevista');
+		$scope.mostrar = sessionStorage.getItem("mostrar");
+	}
+	
 	if ($rootScope.indiceEntrevistaSeleccionada !== undefined) {
 		sessionStorage.setItem("id", $rootScope.indiceEntrevistaSeleccionada);
 	}
+	
+	if($rootScope.nombre !== undefined) {
+		sessionStorage.setItem("nombreEntrevistado", $rootScope.nombre);
+	}
+	
+	$scope.nombreEntrevistado = sessionStorage.getItem("nombreEntrevistado");
 	
 	var id = sessionStorage.getItem("id");
 	
@@ -59,8 +80,6 @@ app.controller('controladorEntrevista', function (servicioRest, $scope, $rootSco
 	}
 	
 	$http.defaults.headers.common['x-access-token'] = token;
-
-	$scope.hacerPreguntas = true;
 	$scope.respuestas = [];
 	
 	var respondidas = [], notaMax = 0, nota = 0;
@@ -96,7 +115,8 @@ app.controller('controladorEntrevista', function (servicioRest, $scope, $rootSco
 			}
 			servicioRest.postRespuestasEntrevista(id, answers)
 				.then(function(data) {
-					$scope.hacerPreguntas = false;
+					sessionStorage.setItem("mostrar", 'mensajeFinal');
+					$scope.mostrar = sessionStorage.getItem("mostrar");
 				}).catch(function(err) {
 					$log.error("Error al guardar las respuestas: " + err);
 				});

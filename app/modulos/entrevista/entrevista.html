@@ -1,4 +1,20 @@
-<div class="entrevistado" ng-show="hacerPreguntas">
+<div ng-show="mostrar === 'bienvenida'">
+	<div class="alert alert-info mensaje">
+		<p>Bienvenido {{nombreEntrevistado}}, a continuacion realizará un test sobre diversos temas relacionados con el puesto al que opta. Conteste con tranquilidad y puede dejar en blanco aquellas que no conozca.</p>
+	</div>
+	<md-button class="md-raised btnEntrevistado" ng-click="bienvenida()">
+		Continuar
+	</md-button>	
+</div>
+<div ng-show="mostrar === 'evaluacion'">
+	<div class="alert alert-info mensaje">
+		<p>evaluacion inicial.</p>
+	</div>
+	<md-button class="md-raised btnEntrevistado" ng-click="evaluacion()">
+		Continuar
+	</md-button>	
+</div>
+<div class="entrevistado" ng-show="mostrar === 'entrevista'">
 	<md-content>
 		<md-list>
 			<md-list-item  ng-repeat="pregunta in preguntas">
@@ -42,13 +58,13 @@
 	</md-button>
 </div>
 
-<div ng-hide="hacerPreguntas">
+<div ng-show="mostrar === 'mensajeFinal'">
 	<div class="alert alert-info mensaje">
 		<p>Ha completado el cuestionario correctamente.</p> 
 		<p>En breve llegara el entrevistador tecnico.</p>
 		<p>Por favor, espere y no pulse continuar hasta su llegada.</p>
 	</div>
-	<md-button class="md-raised btnEntrevistadoGuardar" ng-click="aceptarBtn()">
+	<md-button class="md-raised btnEntrevistado" ng-click="aceptarBtn()">
 		Aceptar
 	</md-button>	
 </div>
