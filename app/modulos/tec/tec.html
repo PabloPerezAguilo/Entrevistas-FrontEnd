@@ -5,7 +5,8 @@
 				<span flex="10"></span>
 				<md-subheader class="md-no-sticky" flex="75">Preguntas</md-subheader>
 				<span class="divBtnCrear" flex="5">
-					<md-button mfb-button class="md-fab md-mini" ng-click="crear($event)" aria-label="crearPregunta">
+					<md-button mfb-button class="md-fab md-mini" ng-click="crear($event)" aria-label="crearPregunta"
+							   id="idBtnCrearTec">
 						<md-icon md-svg-src="img/crear.svg" class="btnIconoCentrado"></md-icon>
 					</md-button>
 				</span>
@@ -14,7 +15,7 @@
 			
 			<md-divider class="dividerPrincipal"></md-divider>
 
-			<span layout="row">
+			<span layout="row" id="idBuscadorTec">
 				<span  flex="10"></span>
 				<span flex="80">
 					<md-chips ng-model="listaTemas" 
@@ -46,7 +47,7 @@
 			</span>
 
 		</div>
-      	<div class="listaPreguntasTec">
+      	<div class="listaPreguntasTec" id="idListaTec">
 			<p ng-show="hayPreguntas" class="mensajeEntrevista">No hay preguntas para esta(s) aptitud(es)</p>
 			<md-list-item class="md-3-line hoverLista" ng-repeat="item in preguntas">
 				<div class="md-list-item-text" layout="column">

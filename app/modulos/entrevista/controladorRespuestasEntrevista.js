@@ -207,6 +207,7 @@ app.controller('controladorRespuestasEntrevista', function (servicioRest, $scope
 			.then(function(data) {
 				$location.path("/admin");
 				sessionStorage.removeItem("ver");
+				sessionStorage.removeItem("mostrar");
 			}).catch(function(err) {
 				$log.error("Error al guardar las observaciones de la entrevista: " + err);
 			});

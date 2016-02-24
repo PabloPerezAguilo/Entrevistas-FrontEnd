@@ -31,15 +31,15 @@ app.controller('controladorTec', function (servicioRest, $scope, $rootScope, $md
         steps:[
 			{
 				element: '#seccionTec',
-				intro: 'Esta es la sección del técnico, aquí podrá ver el listado de las preguntas creadas, ver en detalle una' +
-					'pregunta, eliminar preguntas y abrir una pantalla para crear nuevas preguntas'
+				intro: 'Esta es la sección del técnico, aquí podrá ver el listado de las preguntas creadas, ' +
+					'ver en detalle una pregunta, eliminar preguntas y abrir una pantalla para crear nuevas preguntas'
 			}, 
 			{
-				element: '.listaPreguntas',
+				element: '#idListaTec',
 				intro: 'Este es el listado de todas las preguntas creadas'
 			},
 			{
-				element: '.buscarTemas',
+				element: '#idBuscadorTec',
 				intro: 'Aquí podrá filtrar las preguntas en función de las aptitudes deseadas'
 			},
 			{
@@ -51,7 +51,7 @@ app.controller('controladorTec', function (servicioRest, $scope, $rootScope, $md
 				intro: 'Pulsando aquí podrá eliminar la pregunta'
 			},
 			{
-				element: '.tec',
+				element: '#idBtnCrearTec',
 				intro: 'Pulsando en este botón se abrirá una pantalla con los campos necesarios para crear una pregunta'
 			}
 			
