@@ -163,16 +163,27 @@ app.controller('controladorTec', function (servicioRest, $scope, $rootScope, $md
 	getPreguntas();
     
     /*--------------------------Funciones--------------------------*/		
-    $scope.eliminar = function (indice) {
+    $scope.eliminar = function (ev, indice) {
         var idPregunta = $scope.preguntas[indice]._id;
-        servicioRest.deletePregunta(idPregunta)
-			.then(function (data) {
-				$scope.preguntas.splice(indice, 1);
-				$rootScope.obtenerTemas();
-			})
-			.catch(function (err) {
-				$log.error("Error al eliminar la pregunta: " + err);
-			});
+		
+		var confirm = $mdDialog.confirm()
+        	.title('Procederás a borrar la pregunta')
+			.textContent('¿Estás seguro?')
+			.ariaLabel('Confirmacion borrar pregunta')
+			.targetEvent(ev)
+			.ok('Sí')
+			.cancel('No');
+
+    	$mdDialog.show(confirm).then(function() {
+			servicioRest.deletePregunta(idPregunta)
+				.then(function (data) {
+					$scope.preguntas.splice(indice, 1);
+					$rootScope.obtenerTemas();
+				})
+				.catch(function (err) {
+					$log.error("Error al eliminar la pregunta: " + err);
+				});
+    	});
 	};
     
     $scope.crear = function (ev) {
