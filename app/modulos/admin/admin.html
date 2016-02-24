@@ -8,13 +8,13 @@
 				</md-subheader>
 				<span class="divBtnCrear" flex="5">
 					<md-button mfb-button class="md-fab md-mini" ng-click="abrirUsuarios($event)" 
-							   aria-label="crear entrevista">
+							   aria-label="crear entrevista" id="idBtnUsuarios">
 						<md-icon md-svg-src="img/usuario.svg"></md-icon>
 					</md-button>
 				</span>
 				<span class="divBtnCrear" flex="5">
 					<md-button mfb-button class="md-fab md-mini" ng-click="crear($event)" 
-							   aria-label="crear entrevista">
+							   aria-label="crear entrevista" id="idAdminBtnCrear">
 						 <md-icon md-svg-src="img/crear.svg" class="btnIconoCentrado"></md-icon>
 					</md-button>
 				</span>
@@ -29,7 +29,8 @@
 								 md-selected-item="selectedItem" md-search-text-change="searchTextChange(searchText)" 
 								 md-search-text="searchText" md-selected-item-change="selectedItemChange(item)" 
 								 md-items="item in queryBuscarNombre(searchText)" md-item-text="item.valor" 
-								 md-min-length="0" placeholder="Buscar por nombre del entrevistado" flex="60">
+								 md-min-length="0" placeholder="Buscar por nombre del entrevistado" flex="60"
+								 id="idAutocompleteAdmin">
 					<md-item-template>
 						<span md-highlight-text="searchText" md-highlight-flags="^i">{{item.name}}</span>
 					</md-item-template>
@@ -39,17 +40,17 @@
 				</md-autocomplete>
 				<span class="divFechaAdmin marginTop10" flex="15">
 					<md-datepicker ng-model="fecha" ng-change="cambioFechaSwitch()" md-placeholder="Enter date"
-								   ng-disabled="disableCalendario"></md-datepicker>
+								   ng-disabled="disableCalendario" id="idCalendarAdmin"></md-datepicker>
 				</span>
 				<span class="divCheckboxAdmin marginTop10" flex="5">
 					<md-checkbox ng-model="mostrarTodasEntrevistas" ng-change="getTodasEntervistas()"
-								 aria-label="mostrar todas las entrevistas"></md-checkbox>
+								 aria-label="mostrar todas las entrevistas" id="idAdminCheck"></md-checkbox>
 				</span>
 				<span flex="10"></span>
 			</span>
 		</div>
 		
-      	<div class="listaPreguntasAdmin">
+      	<div class="listaPreguntasAdmin" id="idListaAdmin">
 			<p ng-show="hayEntrevistas" class="mensajeEntrevista">No hay entrevistas para el día seleccionado</p>
 			<md-list-item class="md-3-line hoverLista" ng-repeat="item in entrevistas">
 				<div class="md-list-item-text" layout="column">
@@ -107,7 +108,7 @@
 		<span class="letraMediana" layout="row" flex>
 			<span class="txtSwicth">Entrevistas: Pendientes</span>
 			<md-switch ng-model="entrevistasRealizadas" class="switchEntrevista" aria-label="Switch entrevistas" 
-					   ng-change="cambioFechaSwitch()"></md-switch>
+					   ng-change="cambioFechaSwitch()" id="idSwitchAdmin"></md-switch>
 			<span class="txtSwicth">Realizadas</span>
 		</span>
 		

@@ -7,8 +7,8 @@ app.controller('controladorAdmin', function (servicioRest, config, $scope, $loca
             parent: angular.element(document.body),
             targetEvent: ev,
             clickOutsideToClose: false
-        })
-	}
+        });
+	};
 	
 	var permiso = sessionStorage.getItem("permiso");
 	var ver = sessionStorage.getItem("ver");
@@ -36,46 +36,49 @@ app.controller('controladorAdmin', function (servicioRest, config, $scope, $loca
         steps: [
 			{
 				element: '#seccionAdmin',
-				intro: 'Esta es la sección del administrador, aquí podrá ver el listado de las entrevistas, ver en detalle ' +
-					'una entrevista, eliminar entrevistas, abrir una pantalla para crear nuevas entrevistas y abrir otra ' +
-					'pantalla para hacer la entrevista.',
-				position: 'top left'
+				intro: 'Esta es la sección del administrador, aquí podrá ver el listado de las entrevistas, ' +
+					'ver en detalle una entrevista, eliminar entrevistas, abrir una pantalla para crear nuevas ' +
+					'entrevistas y abrir otra pantalla para hacer la entrevista.'
+			},
+			{
+				element: '#idBtnUsuarios',
+				intro: 'Si pulsa este botón se abrirá una ventana para dar de alta usuarios y listarlos según su rol.'
 			},
             {
-                element: '.adminBtn',
-                intro: "Si pulsa este botón se abrirá una ventana para crear una entrevista"
+                element: '#idAdminBtnCrear',
+                intro: "Si pulsa este botón se abrirá una ventana para crear una entrevista."
             },
 			{
-				element: '.listaPreguntas',
-				intro: 'Esta es la lista con las entrevistas'
+				element: '#idListaAdmin',
+				intro: 'Esta es la lista con las entrevistas.'
 			},
 			{
-                element: 'md-autocomplete',
-                intro: "En esta lista podrá buscar las entrevistas por el nombre"
+                element: '#idAutocompleteAdmin',
+                intro: 'Con este campo podrá filtrar las entrevistas por el nombre del entrevistado.'
             },
 			{
-				element: 'md-datepicker',
-				intro: 'En este calendario podrá seleccionar el día del que desee ver las entrevistas'
+				element: '#idCalendarAdmin',
+				intro: 'En este calendario podrá seleccionar el día del que desee ver las entrevistas.'
 			},
 			{
-				element: '.adminCheck',
-				intro: 'Marcando este checkbox se mostrarán todas las entrevistas, sin filtro por fecha'
+				element: '#idAdminCheck',
+				intro: 'Marcando este checkbox se mostrarán todas las entrevistas, sin filtro por fecha.'
 			},
 			{
 				element: '#ver',
-				intro: 'Si pulsa este botón se abrirá una ventana con la información más detallada de la entrevista'
+				intro: 'Si pulsa este botón se abrirá una ventana con la información más detallada de la entrevista.'
 			},
 			{
 				element: '#eliminar',
-				intro: 'Si pulsa este botón se eliminará la entrevista'
+				intro: 'Si pulsa este botón se eliminará la entrevista.'
 			},
-			{
+			/*{
 				element: '#hacerEntrevista',
-				intro: 'Si pulsa este botón se abrirá una ventana para hacer la entrevitsa'
-			},
+				intro: 'Si pulsa este botón se abrirá una ventana para hacer la entrevista.'
+			},*/
 			{
-				element: '.divSwitchEntrevista',
-				intro: 'Con este botón podrá cambiar entre las entrevistas realizadas y pendientes'
+				element: '#idSwitchAdmin',
+				intro: 'Con este botón podrá cambiar entre las entrevistas realizadas y pendientes.'
 			}
         ],
         showStepNumbers: false,
@@ -87,6 +90,12 @@ app.controller('controladorAdmin', function (servicioRest, config, $scope, $loca
         doneLabel: 'Fin'
     };
 	setTimeout(function () {
+		if (!$scope.entrevistasRealizadas) {
+			$scope.introOptions.steps.splice($scope.introOptions.steps.length - 1, 0, {
+				element: '#hacerEntrevista',
+				intro: 'Si pulsa este botón se abrirá una ventana para hacer la entrevista.'
+			});
+		}
 		$rootScope.lanzarAyuda = $scope.lanzarAyuda;
 	}, 1000);
 	
@@ -391,6 +400,7 @@ app.controller('controladorAdmin', function (servicioRest, config, $scope, $loca
     	$mdDialog.show(confirm).then(function() {
 			sessionStorage.setItem("permiso", true);
 			$rootScope.indiceEntrevistaSeleccionada = $scope.entrevistas[ind]._id;
+			$rootScope.nombre = $scope.entrevistas[ind].name;
 			$location.path("/entrevista");
     	});
 	};
