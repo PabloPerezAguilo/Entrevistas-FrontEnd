@@ -977,6 +977,33 @@ input.horas {
 	padding-top: 0px;
 }
 
+md-slider.md-default-theme[disabled]:not(.md-min) .md-thumb:after, md-slider[disabled]:not(.md-min) .md-thumb:after {
+	background-color: $colorPrincipal;
+}
+
+.tituloValoracion {
+	font-weight: bold;
+    font-family: sans-serif;
+	color: $colorPrincipal;
+}
+
+.chipValoracion {
+	display: inline-block;
+}
+
+md-slider.valoracionSlider {
+    //position: relative;
+    //display: inline-block;
+    margin-left: 0;
+    margin-right: 0;
+    padding: 0;
+	width: 20%;
+}
+
+.valoracion {
+	margin-left: 2%;
+}
+
 /*---------------------AYUDA-------------------------*/
 
 md-dialog-content.ayuda {

@@ -1,4 +1,25 @@
-app.controller('controladorEntrevista', function (servicioRest, $scope, $rootScope, $log, $mdDialog, $location, $http) {
+app.controller('controladorEntrevista', function (servicioRest, $scope, $rootScope, $log, $mdDialog, $location, $http, $mdToast) {
+	
+	$scope.nivelUsuario = [];
+	
+	Storage.prototype.setObj = function (key, obj) {
+		return this.setItem(key, JSON.stringify(obj));
+	};
+	Storage.prototype.getObj = function (key) {
+		return JSON.parse(this.getItem(key));
+	};
+	
+	function toast(texto) {
+		$mdToast.show(
+			$mdToast.simple().content(texto).position('top right').hideDelay(1500)
+		);
+	}
+	
+	if ($rootScope.temas !== undefined) {
+		sessionStorage.setObj("temas", $rootScope.temas);
+	} else {
+		$rootScope.temas = sessionStorage.getObj("temas");
+	}
 	
 	function escribirSaltosDeLinea(pregunta) {
 		if (pregunta !== null) {
@@ -39,13 +60,41 @@ app.controller('controladorEntrevista', function (servicioRest, $scope, $rootSco
 		$scope.mostrar = sessionStorage.getItem("mostrar");
 	}
 	
-	$scope.evaluacion = function() {
-		sessionStorage.setItem("mostrar", 'entrevista');
-		$scope.mostrar = sessionStorage.getItem("mostrar");
-	}
-	
 	if ($rootScope.indiceEntrevistaSeleccionada !== undefined) {
 		sessionStorage.setItem("id", $rootScope.indiceEntrevistaSeleccionada);
+	}
+	var id = sessionStorage.getItem("id");
+	
+	function nivelesValidos () {
+		for (var i = 0; i < $rootScope.temas.length; i++) {
+			if ($scope.nivelUsuario[i] === undefined) {
+				return false;
+			}
+		}
+		return true;
+	}
+	
+	$scope.evaluacion = function() {
+		if (nivelesValidos()) {
+			var evaluacion = [];
+			for (var i = 0; i < $rootScope.temas.length; i++) {
+				evaluacion.push({
+					tag: $rootScope.temas[i].tag,
+					nota: $scope.nivelUsuario[i]
+				});
+			}
+			servicioRest.postEvaluacion(id, evaluacion)
+				.then(function (data) {
+					console.log(data);
+					sessionStorage.setItem("mostrar", 'entrevista');
+					$scope.mostrar = sessionStorage.getItem("mostrar");
+				})
+				.catch(function (err) {
+					$log.error("Error al guardar la valoración: " + err);
+				})
+		} else {
+			toast("Debe indicar un nivel para cada tema")
+		}
 	}
 	
 	if($rootScope.nombre !== undefined) {
@@ -54,9 +103,8 @@ app.controller('controladorEntrevista', function (servicioRest, $scope, $rootSco
 	
 	$scope.nombreEntrevistado = sessionStorage.getItem("nombreEntrevistado");
 	
-	var id = sessionStorage.getItem("id");
-	
 	var token = sessionStorage.getItem("token");
+	$http.defaults.headers.common['x-access-token'] = token;
 	
 	var permiso = sessionStorage.getItem("permiso");
 	
@@ -79,7 +127,6 @@ app.controller('controladorEntrevista', function (servicioRest, $scope, $rootSco
 		$location.path('/respuestasEntrevista');
 	}
 	
-	$http.defaults.headers.common['x-access-token'] = token;
 	$scope.respuestas = [];
 	
 	var respondidas = [], notaMax = 0, nota = 0;
