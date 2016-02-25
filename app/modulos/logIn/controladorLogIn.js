@@ -65,9 +65,101 @@ app.controller('controladorLogIn', function (servicioRest, config, $scope, $loca
 		$rootScope.cargando = true;
 		var user = {};
 		user.username = $scope.user.toLowerCase();
-		//user.password = window.btoa($scope.pass);
-		user.password = $scope.pass;
+		user.password = window.btoa($scope.pass);
+		//user.password = $scope.pass;
 		$rootScope.usuario = $scope.user;
+		servicioRest.postAuthenticate(user)
+			.then(function (data) {
+				$http.defaults.headers.common['x-access-token'] = data.token;
+				$rootScope.rol = data.role;
+				if(checkeado) {
+					localStorage.setItem("usuario", user.username);
+					localStorage.setItem("password", user.password);
+					localStorage.setItem("rol", data.role);
+				} else {
+					sessionStorage.setItem("usuario", user.username);
+					sessionStorage.setItem("rol", data.role);
+				}
+				sessionStorage.setItem("token", data.token);
+				if (data.role === "ROLE_ADMIN") {
+					$location.path("/admin");
+				} else {
+					$location.path("/tec");
+				}
+			})
+			.catch(function (err) {
+			$rootScope.cargando = false;
+			if (err === "Servicio no disponible") {
+				toast("Error de conexión");
+				$log.error("Error al conectar con el servidor: " + err);
+			} else if ($scope.user === null && $scope.pass === null) {
+				toast("Debe introducir su usuario y contraseña");
+			} else if ($scope.user === null) {
+				toast("Debe introducir su usuario");
+			} else if ($scope.pass === null) {
+				toast("Debe introducir su contraseña");
+			} else {
+				toast("El usuario o la contraseña es incorrecta");
+			}
+		});
+	};
+	
+	
+	
+	
+	
+	$scope.admin = function () {
+		$rootScope.cargando = true;
+		var user = {};
+		user.username = "abarrero";
+		user.password = window.btoa("password");
+		//user.password = "password";
+		$rootScope.usuario = "abarrero";
+		servicioRest.postAuthenticate(user)
+			.then(function (data) {
+				$http.defaults.headers.common['x-access-token'] = data.token;
+				$rootScope.rol = data.role;
+				if(checkeado) {
+					localStorage.setItem("usuario", user.username);
+					localStorage.setItem("password", user.password);
+					localStorage.setItem("rol", data.role);
+				} else {
+					sessionStorage.setItem("usuario", user.username);
+					sessionStorage.setItem("rol", data.role);
+				}
+				sessionStorage.setItem("token", data.token);
+				if (data.role === "ROLE_ADMIN") {
+					$location.path("/admin");
+				} else {
+					$location.path("/tec");
+				}
+			})
+			.catch(function (err) {
+			$rootScope.cargando = false;
+			if (err === "Servicio no disponible") {
+				toast("Error de conexión");
+				$log.error("Error al conectar con el servidor: " + err);
+			} else if ($scope.user === null && $scope.pass === null) {
+				toast("Debe introducir su usuario y contraseña");
+			} else if ($scope.user === null) {
+				toast("Debe introducir su usuario");
+			} else if ($scope.pass === null) {
+				toast("Debe introducir su contraseña");
+			} else {
+				toast("El usuario o la contraseña es incorrecta");
+			}
+		});
+	};
+	
+	
+	
+	$scope.tec = function () {
+		$rootScope.cargando = true;
+		var user = {};
+		user.username = "agonzalez";
+		user.password = window.btoa("password");
+		//user.password = "password";
+		$rootScope.usuario = "agonzalez";
 		servicioRest.postAuthenticate(user)
 			.then(function (data) {
 				$http.defaults.headers.common['x-access-token'] = data.token;

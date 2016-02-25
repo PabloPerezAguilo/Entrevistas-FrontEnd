@@ -61,11 +61,9 @@ app.controller('controladorUsuarios', function (servicioRest, config, $scope, $r
 				.catch(function (err) {
 					$log.error(err);
 					toast('No existe el usuario "' + $scope.nick + '" en la base de datos');
-					console.log('No existe el usuario "' + $scope.nick + '" en la base de datos');
 				});
 		} else {
 			toast("Debe rellenar los campos");
-			console.log("Debe rellenar los campos");
 		}
 	};
 	
@@ -87,7 +85,7 @@ app.controller('controladorUsuarios', function (servicioRest, config, $scope, $r
 				.catch(function (err) {
 					$log.error("Error al eliminar la entrevista: " + err);
 				});
-		} else {
+		} else if("admin") {
 			nick = $scope.administradores[indice].username;
 			servicioRest.deleteUsuario(nick)
 				.then(function (data) {

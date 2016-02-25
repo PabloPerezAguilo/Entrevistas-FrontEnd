@@ -889,24 +889,6 @@ md-input-container.minutos {
 	margin-right: 2%;
 }
 
-/*
-AQUI
-md-input-container.horas {
-	width: 33%;
-	margin-top: 0.44%;
-	margin-right: 2%;
-	margin-left: 2%;
-}
-*/
-
-/*
-AQUI
-.md-datepicker-input-container.crear {
-	margin-left: 0px;
-	width: 22%;
-}
-*/
-
 md-autocomplete.autocompleteAdmin {
     position: fixed;
 	width: 58.9%;
@@ -918,18 +900,6 @@ md-autocomplete.autocompleteAdmin {
 	width: 0%;
     margin: 0;
 }
-
-/*
-AQUI
-input.minutos {
-	width: 82%;
-}
-
-input.horas {
-	width: 83%;
-}
-*/
-
 .respuestas {
 	font-size: 13px;
 	margin: 0px;
@@ -1178,26 +1148,53 @@ md-input-container.horasAyuda {
 }
 
 /*-------------------------USUARIO---------------------------*/
-
-.altaUsuario {
-	padding-top: 10px;
-    width: 325px;
-    height: 60px;
-	margin-left: 29%;
+md-dialog.md-transition-in.dialogoUsuario {
+	min-width: 580px;
 }
 
+md-input-container.altaUsuario { 
+	margin-bottom: 0;
+}
+
+.altaUsuario {
+	margin-top: 25px;
+	margin-left: 15%;
+}
+
+.radioAltaUsuario {
+	margin-left: 29%;
+	margin-bottom: 10px;
+}
+
+.md-button.md-raised.btnAltaUsuario {
+	margin-left: 25%;
+	width: 50%;
+}
+
+.verUsuarios {
+	margin: 0 10%;
+}
+
+.mensajeAltaUsuario {
+	text-align: center;
+    margin-top: 35px;
+    margin-bottom: 20px;
+}
+
+md-dialog md-dialog-content .md-subheader.tituloUsuarios {
+	margin-bottom: 10px;
+}
+
+md-divider.dividerUsuarios {
+	margin-bottom: 5px;
+}
+
+/*
 .altaUsuarioRol {
 	padding-top: 10px;
     width: 325px;
     height: 60px;
 	margin-left: 33%;
-}
-
-.btnAltaUsuario {
-	padding-top: 1%;
-    width: 40%;
-    height: 50%;
-    margin-left: 30%;
 }
 
 .autocompleteUsuarios {
@@ -1209,7 +1206,7 @@ md-input-container.horasAyuda {
 	margin-left: 9%;
     margin-right: 5%;
 }
-
+*/
 /*--------------------- media queries ------------------------*/
 @media screen and (max-height: 600px) {
    md-dialog.md-transition-in.redimensionar {
