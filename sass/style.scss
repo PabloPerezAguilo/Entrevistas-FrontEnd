@@ -922,7 +922,7 @@ md-autocomplete.autocompleteAdmin {
 .btnEntrevistado.md-button.md-raised {
     width: 25%;
     min-width: 200px;
-    margin-left: 39%;
+    margin-left: 41%;
 }
 
 .checkMostrarEntrevistas {
@@ -955,23 +955,47 @@ md-slider.md-default-theme[disabled]:not(.md-min) .md-thumb:after, md-slider[dis
 	font-weight: bold;
     font-family: sans-serif;
 	color: $colorPrincipal;
+	text-align: center;
 }
 
-.chipValoracion {
-	display: inline-block;
-}
-
-md-slider.valoracionSlider {
-    //position: relative;
-    //display: inline-block;
-    margin-left: 0;
-    margin-right: 0;
-    padding: 0;
-	width: 20%;
+md-slider[disabled] .md-track-fill {
+	background-color: $colorPrincipal;
+	display: inherit;
 }
 
 .valoracion {
 	margin-left: 2%;
+}
+
+.evaluacion {
+	margin-left: 30%;
+    margin-right: 24%;
+}
+
+.mensajeEvaluacion {
+	margin-top: 11%;
+    width: 35%;
+    margin-left: 34.7%;
+    padding-bottom: 1%;
+    padding-top: 1%;
+    text-align: center;
+}
+
+.temaEvaluado {
+	text-align: center;
+	margin-left: 6%;
+}
+
+.chipValoracion { 
+	margin-top: 8px;
+    margin-right: 8px;
+    margin-bottom: 0px;
+    margin-left: 27%; //45%
+}
+
+md-slider[disabled] {
+	width: 46%;
+    margin-left: 28%;
 }
 
 /*---------------------AYUDA-------------------------*/
