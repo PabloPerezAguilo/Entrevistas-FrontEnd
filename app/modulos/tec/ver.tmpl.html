@@ -19,11 +19,16 @@
     <md-dialog-content ng-show="ver">
       
 		<div class="md-dialog-content">
-            
-            <p id="textoTemaNivel" ng-bind="temas_nivel"></p>
+		
+			
+			<div layout="row">
+				<span id="textoTemaNivel" class="tagsPregunta">{{ temas_nivel }}</span>
+				<div class="nivelPregunta verNivelPregunta">{{ nivel }}</div>
+			</div>
+			
             <p id="textoTitulo" ng-repeat="linea in titulo">{{linea}}</p>       
             <p id="textoDirectiva" ng-bind="directiva"></p>
-            <div ng-repeat="item in items">
+            <div class="repeatPreguntaMultiple" ng-repeat="item in items">
                 <md-checkbox class="displayInline" ng-disabled="true" ng-model="item.esCorrecta" aria-label="checkbox ver">
 				</md-checkbox>
                 <p class="displayInline" ng-bind="item.respuesta"></p>

@@ -1,8 +1,8 @@
-<div class="logIn" ng-hide="verPantalla">
+<div class="logIn"  ng-show="verLogin">
 	<div class="enBloque">
 		<md-input-container class="md-block">
 			<label>Usuario</label>
-			<input required name="user" ng-model="user">
+			<input required name="user" ng-model="user" ng-keypress="enter($event)">
 			<div ng-messages="user.$error">
 				<div ng-message="required">Debe introducir un usuario</div>
 			</div>

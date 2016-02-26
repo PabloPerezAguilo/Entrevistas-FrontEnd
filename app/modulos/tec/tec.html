@@ -1,4 +1,4 @@
-<div id="seccionTec">
+<div id="seccionTec" ng-show="verTecnico">
     <md-list>
 		<div class="cabecera" layout="column">
 			<span layout="row">
@@ -54,10 +54,10 @@
 					<h3>
 						{{ item.title }}
 					</h3>
-					<h4>
-						<span ng-repeat="tag in item.tags" ng-if="$first">{{ tag }} </span>
-						<span ng-repeat="tag in item.tags" ng-if="!$first">, {{ tag }} </span> 
-						<span class="nivelPregunta">{{ item.level }}</span>
+					<h4 layout="row">
+						<span class="tagsPregunta" ng-repeat="tag in item.tags" ng-if="$first">{{ tag }}</span>
+						<span class="tagsPregunta" ng-repeat="tag in item.tags" ng-if="!$first">, {{ tag }}</span> 
+						<div class="nivelPregunta">{{ item.level }}</div>
 					</h4>
 					<p>
 						{{ item.type }}

@@ -1,30 +1,50 @@
 app.controller('controladorTec', function (servicioRest, $scope, $rootScope, $mdDialog, $timeout, $q, $log, $mdToast, $location, $http) {
 	
+	$scope.verTecnico = false;
+	$rootScope.verCabecera = false;
+	
+	if (sessionStorage.getItem("rol") !== null) {
+		$rootScope.rol = sessionStorage.getItem("rol");
+	} else if (localStorage.getItem("rol") !== null) {
+		$rootScope.rol = localStorage.getItem("rol");
+	}
+	
+	if (localStorage.getItem("usuario") !== null) {
+		$rootScope.usuario = localStorage.getItem("usuario");
+	} else {
+		$rootScope.usuario = sessionStorage.getItem("usuario");
+	}
+	
+	if (sessionStorage.getItem("permiso")) {
+		$location.path("/entrevista");
+		return null;
+	} else if(sessionStorage.getItem("ver")) {
+		$location.path("/respuestasEntrevista");
+		return null;
+	} else if ($rootScope.rol === "ROLE_ADMIN") {
+		//cuando entra a tec desde admin
+		$location.path("/admin");
+		return null;
+	} else if ($rootScope.rol === undefined) {
+		$rootScope.cerrarSesion();
+		return null;
+	} else {
+		//muestra la pagina cuando se comprueba que no ha entrado aqui incorrectamente
+		$scope.verTecnico = true;
+		$rootScope.verCabecera = true;
+	}
+	
+	var token = sessionStorage.getItem("token");
+	if(token !== null) {
+		$http.defaults.headers.common['x-access-token'] = token;
+	}
+	
+	//para quitar el foco de los txt en las tablets android que se queda ahi pillado sin esta sentencia 
+	//(se obliga poner el foco en un boton random de la app)
 	$scope.quitarFoco = function() {
 		if (navigator.userAgent.match(/Android/i)) {
-			//alert("Hola Android!");
 			document.getElementById("botonid").focus();
-		} else if (navigator.platform === 'iPad') {
-			alert("Hola iPad");
-		} /*else {
-			alert("hola");
-		}*/
-	}
-	
-	var permiso = sessionStorage.getItem("permiso");
-	var ver = sessionStorage.getItem("ver");
-	
-	if (permiso) {
-		$location.path('/entrevista');
-	} else if(ver) {
-		$location.path('/respuestasEntrevista');
-	}
-	
-	var rol;
-	if (sessionStorage.getItem("rol") !== null) {
-		rol = sessionStorage.getItem("rol");
-	} else if (localStorage.getItem("rol") !== null) {
-		rol = localStorage.getItem("rol");
+		}
 	}
 	
 	$scope.introOptions = {
@@ -63,36 +83,15 @@ app.controller('controladorTec', function (servicioRest, $scope, $rootScope, $md
         skipLabel: 'Cerrar',
         doneLabel: 'Fin'
     };
+	
 	setTimeout(function() {
 		$rootScope.lanzarAyuda = $scope.lanzarAyuda;
 	}, 1000);
-	
-	if (localStorage.getItem("usuario") !== null) {
-		$rootScope.usuario = localStorage.getItem("usuario");
-	} else {
-		$rootScope.usuario = sessionStorage.getItem("usuario");
-	}
-	
-	if (sessionStorage.getItem("rol") !== null) {
-		$rootScope.rol = sessionStorage.getItem("rol");
-	} else if (localStorage.getItem("rol")) {
-		$rootScope.rol = localStorage.getItem("rol");
-	}
-	
-	var token = sessionStorage.getItem("token");
-	if(token !== null) {
-		$http.defaults.headers.common['x-access-token'] = token;
-	}
 	
 	function toast(texto) {
 		$mdToast.show(
 			$mdToast.simple().content(texto).position('top right').hideDelay(1500)
 		);
-	}
-	
-	$scope.cerrarSesion = function () {
-		$rootScope.limpiarCredenciales();
-		$location.path("/");
 	}
 	
 	$scope.hayPreguntas = false;
@@ -118,17 +117,14 @@ app.controller('controladorTec', function (servicioRest, $scope, $rootScope, $md
 			})
 			.catch(function (err) {
 				$log.error("Error al cargar las preguntas: " + err);
-				if (err === 403 && token !== null && rol === "ROLE_ADMIN") {
-					//cuando entra a tec desde admin
-					$location.path('/admin');
-				} else if (err === 403 || err === 'Servicio no disponible') {
+				
+				if (err === 403 || err === 'Servicio no disponible') {
 					if (err === 403) {
 						toast("Su sesión ha expirado");
 					} else {
 						toast("Error de conexión");
 					}
-					$location.path('/');
-					$rootScope.limpiarCredenciales();
+					$rootScope.cerrarSesion();
 				}
 			});
 	}

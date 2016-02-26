@@ -325,7 +325,6 @@ md-chips .md-chip.md-focused {
 /*Crear pregunta*/
 .alert {
     padding: 0px 20px;
-    margin-top: 5px;
 }
 
 .alert-info {
@@ -387,7 +386,7 @@ md-toolbar:not(.md-menu-toolbar) {
 md-dialog.md-transition-in.redimensionar {
     margin: auto;
     min-width: 720px;
-    min-height: 3000px;
+    min-height: 300px;
 	max-height: 700px;
 }
 
@@ -477,10 +476,23 @@ md-list-item.md-3-line .md-list-item-text {
 	width: 0;
 }
 
+.tagsPregunta, md-datepicker.calendario, .alert {
+	margin-top: 5px;
+}
+
 .nivelPregunta {
 	background: $colorPrincipal;
 	border-radius: 50%;
 	color: white;
+	width: 24px;
+    height: 24px;
+	text-align: center;
+    padding-top: 3px;
+	margin-left: 7px;
+}
+
+.verNivelPregunta, .mensajeAlertRepeat {
+	padding-top: 5px;
 }
 
 /* ------------- Ver pregunta --------------------- */
@@ -514,7 +526,6 @@ md-checkbox[disabled] .md-label {
     font-weight: bold;
 }
 #textoTitulo {
-    margin-bottom: 3%;
     text-align: center;
     font-size: 150%;
 }
@@ -597,6 +608,11 @@ md-list md-list-item.md-3-line .md-list-item-text h3 {
 .iconoLupa {
 	margin-left: -50px;
     padding-top: 12px;
+}
+
+.repeatPreguntaMultiple {
+	margin: 15px;
+	margin-bottom: 5px;
 }
 
 /*------------------------------ADMIN----------------------*/
@@ -796,10 +812,6 @@ rzslider .rz-bar-wrapper {
 	margin: 0;
 }
 
-md-datepicker.calendario {
-	margin-top: 5px;
-}
-
 md-input-container.horas {
 	margin-top: 8px;
 }
@@ -821,10 +833,6 @@ md-input-container.horas {
 .alertWarningEntrevista {
 	padding: 20px;
     padding-top: 0;
-}
-
-.mensajeAlertRepeat {
-	padding-top: 5px;
 }
 
 .mensaje {
