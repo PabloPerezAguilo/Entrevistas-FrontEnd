@@ -1,29 +1,42 @@
 app.controller('controladorAdmin', function (servicioRest, config, $scope, $location, $rootScope, $mdDialog, $timeout, $q, $log, $http, $mdToast) {
 	
-	$scope.abrirUsuarios = function(ev) {
-		$mdDialog.show({
-            controller: 'controladorUsuarios',
-            templateUrl: 'modulos/usuario/usuario.tmpl.html',
-            parent: angular.element(document.body),
-            targetEvent: ev,
-            clickOutsideToClose: false
-        });
-	};
-	
-	var permiso = sessionStorage.getItem("permiso");
-	var ver = sessionStorage.getItem("ver");
-	
-	if (permiso) {
-		$location.path('/entrevista');
-	} else if(ver) {
-		$location.path('/respuestasEntrevista');
+	$scope.verAdmin = false;
+	$rootScope.verCabecera = false;
+
+	if (sessionStorage.getItem("rol") !== null) {
+		$rootScope.rol = sessionStorage.getItem("rol");
+	} else if (localStorage.getItem("rol")) {
+		$rootScope.rol = localStorage.getItem("rol");
 	}
 	
-	var rol;
-	if (sessionStorage.getItem("rol") !== null) {
-		rol = sessionStorage.getItem("rol");
-	} else if (localStorage.getItem("rol") !== null) {
-		rol = localStorage.getItem("rol");
+	if (localStorage.getItem("usuario") !== null) {
+		$rootScope.usuario = localStorage.getItem("usuario");
+	} else {
+		$rootScope.usuario = sessionStorage.getItem("usuario");
+	}
+	
+	if (sessionStorage.getItem("permiso")) {
+		$location.path('/entrevista');
+		return null;
+	} else if(sessionStorage.getItem("ver")) {
+		$location.path('/respuestasEntrevista');
+		return null;
+	} else if ($rootScope.rol === "ROLE_TECH") {
+		//cuando entra a admin desde tec
+		$location.path('/tec');
+		return null;
+	} else if ($rootScope.rol === undefined) {
+		$rootScope.cerrarSesion();
+		return null;
+	} else {
+		//muestra la pagina cuando se comprueba que no ha entrado aqui incorrectamente
+		$scope.verAdmin = true;
+		$rootScope.verCabecera = true;
+	}
+	
+	var token = sessionStorage.getItem("token");
+	if(token !== null) {
+		$http.defaults.headers.common['x-access-token'] = token;
 	}
 	
 	function toast(texto) {
@@ -72,10 +85,6 @@ app.controller('controladorAdmin', function (servicioRest, config, $scope, $loca
 				element: '#eliminar',
 				intro: 'Si pulsa este botón se eliminará la entrevista.'
 			},
-			/*{
-				element: '#hacerEntrevista',
-				intro: 'Si pulsa este botón se abrirá una ventana para hacer la entrevista.'
-			},*/
 			{
 				element: '#idSwitchAdmin',
 				intro: 'Con este botón podrá cambiar entre las entrevistas realizadas y pendientes.'
@@ -110,24 +119,6 @@ app.controller('controladorAdmin', function (servicioRest, config, $scope, $loca
 	$scope.mostrarTodasEntrevistas = false;
 	$scope.disableCalendario = false;
 	var paginaActual = 1;
-	
-	if (localStorage.getItem("usuario") !== null) {
-		$rootScope.usuario = localStorage.getItem("usuario");
-	} else {
-		$rootScope.usuario = sessionStorage.getItem("usuario");
-	}
-	
-	if (sessionStorage.getItem("rol") !== null) {
-		$rootScope.rol = sessionStorage.getItem("rol");
-	} else if (localStorage.getItem("rol")) {
-		$rootScope.rol = localStorage.getItem("rol");
-	}
-	
-	var token = sessionStorage.getItem("token");
-	if(token !== null) {
-		$http.defaults.headers.common['x-access-token'] = token;
-	}
-  
 	var nombresCargados, simulateQuery = false, nombreSeleccionado = null, dia, mes;
 	
 	$scope.fecha = new Date();
@@ -221,17 +212,14 @@ app.controller('controladorAdmin', function (servicioRest, config, $scope, $loca
 			})
 			.catch(function (err) {
 				$log.error("Error al cargar las entrevistas: " + err);
-				if (err === 403 && token !== null && rol === "ROLE_TECH") {
-					//cuando entra a admin desde tec
-					$location.path('/tec');
-				} else if (err === 403 || err === 'Servicio no disponible') {
+				if (err === 403 || err === 'Servicio no disponible') {
 					if (err === 403) {
 						toast("Su sesión ha expirado");
 					} else {
 						toast("Error de conexión");
 					}
-					$location.path('/');
-					$rootScope.limpiarCredenciales();
+					$rootScope.cerrarSesion();
+					return null;
 				}
 			});
 	}
@@ -296,11 +284,6 @@ app.controller('controladorAdmin', function (servicioRest, config, $scope, $loca
 				getEntrevistas(nombreSeleccionado, paginaActual);
 				obtenerNombres();
 			})
-			.catch(function (err) {
-			console.log("blablablaaa")
-				$log.error("Error al crear la entrevista: " + err);
-            });
-			
 	};
 	
 	/* ----------------- AUTOCOMPLETE ---------------- */

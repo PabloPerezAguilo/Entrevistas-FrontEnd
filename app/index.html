@@ -20,7 +20,7 @@
 	</head>
 	<body ng-cloack>
 
-		<header ng-init="cargando=false;logueado=false">
+		<header ng-init="cargando=false;logueado=false" ng-show="verCabecera">
             <img id="logo" src="img/argos.png" ng-hide="logueado">
             <img id="logoLogeado" src="img/argos.png" ng-show="logueado">
             <p id="iconoUsuario" ng-model="rolUsuario" ng-show="logueado">

@@ -1,5 +1,48 @@
 app.controller('controladorRespuestasEntrevista', function (servicioRest, $scope, $rootScope, $log, $mdDialog, $location, $http) {
+	$scope.verRespuestasEntrevista = false;
+	$rootScope.verCabecera = false;	
 	
+	if (sessionStorage.getItem("rol") !== null) {
+		$rootScope.rol = sessionStorage.getItem("rol");
+	} else if (localStorage.getItem("rol")) {
+		$rootScope.rol = localStorage.getItem("rol");
+	}
+
+	if ($rootScope.rol === undefined) {
+		$rootScope.cerrarSesion();
+		return null;
+	} else if ($rootScope.rol === "ROLE_TECH") {
+		$location.path("/tec");
+		return null;
+	} else if ($rootScope.rol === "ROLE_ADMIN" && sessionStorage.getItem("ver") === null) {
+		$location.path("/admin");
+		return null;
+	} else {
+		//muestra la pagina cuando se comprueba que no ha entrado aqui incorrectamente
+		$scope.verRespuestasEntrevista = true;
+		$rootScope.verCabecera = true;
+	}
+	
+	var token = sessionStorage.getItem("token");
+	$http.defaults.headers.common['x-access-token'] = token;
+	
+	if ($rootScope.indiceEntrevistaSeleccionada !== undefined) {
+		sessionStorage.setItem('id', $rootScope.indiceEntrevistaSeleccionada);
+	} else {
+		$rootScope.indiceEntrevistaSeleccionada = sessionStorage.getItem('id');
+	}
+	
+	
+	
+	
+	$rootScope.cargando = false;
+    $rootScope.logueado = false;
+	$scope.correccion = [];
+	$scope.correccionStyle = {};
+	$scope.correccionTest = [];
+	$scope.tieneDirectiva = [];
+	$scope.notaPregunta = [];
+	var preguntas = [], respuestas = [];
 	$scope.evaluacion = [];
 	
 	function escribirSaltosDeLinea(pregunta) {
@@ -26,40 +69,6 @@ app.controller('controladorRespuestasEntrevista', function (servicioRest, $scope
 		}
 	}
 	
-	$rootScope.cargando = false;
-    $rootScope.logueado = false;
-	$scope.correccion = [];
-	$scope.correccionStyle = {};
-	$scope.correccionTest = [];
-	$scope.tieneDirectiva = [];
-	$scope.notaPregunta = [];
-	var preguntas = [], respuestas = [];
-	
-	if ($rootScope.indiceEntrevistaSeleccionada !== undefined) {
-		sessionStorage.setItem('id', $rootScope.indiceEntrevistaSeleccionada);
-	}
-	
-	var id = sessionStorage.getItem('id');
-	
-	var token = sessionStorage.getItem("token");
-	$http.defaults.headers.common['x-access-token'] = token;
-	
-	var rol;
-	if (sessionStorage.getItem("rol") !== null) {
-		rol = sessionStorage.getItem("rol");
-	} else if (localStorage.getItem("rol") !== null) {
-		rol = localStorage.getItem("rol");
-	}
-	
-	var ver = sessionStorage.getItem("ver");
-	
-	if (rol === undefined) {
-		$location.path("/");
-	} else if (rol === "ROLE_TECH") {
-		$location.path("/tec");
-	} else if (rol === "ROLE_ADMIN" && ver === null) {
-		$location.path("/admin");
-	}
 	
 	function calcularResultados () {
 		var nota = 0, notaMax = 0;
@@ -170,7 +179,7 @@ app.controller('controladorRespuestasEntrevista', function (servicioRest, $scope
 	}
 	
 	function getPreguntas() {
-		servicioRest.getPreguntasEntrevistaById(id)
+		servicioRest.getPreguntasEntrevistaById($rootScope.indiceEntrevistaSeleccionada)
 				.then(function (data) {
 					preguntas = data;			
 					calcularResultados();
@@ -185,7 +194,7 @@ app.controller('controladorRespuestasEntrevista', function (servicioRest, $scope
 	}
 	
 	function getRespuestas() {
-		servicioRest.getEntrevistas(id)
+		servicioRest.getEntrevistas($rootScope.indiceEntrevistaSeleccionada)
 			.then(function (data) {
 				respuestas = data.answers;
 				$scope.observaciones = data.feedback;
@@ -205,7 +214,7 @@ app.controller('controladorRespuestasEntrevista', function (servicioRest, $scope
 			feedback: $scope.observaciones
 		};
 		
-		servicioRest.postFeedback(id, enviarPost)
+		servicioRest.postFeedback($rootScope.indiceEntrevistaSeleccionada, enviarPost)
 			.then(function(data) {
 				$location.path("/admin");
 				sessionStorage.removeItem("ver");

@@ -1,6 +1,40 @@
 app.controller('controladorEntrevista', function (servicioRest, $scope, $rootScope, $log, $mdDialog, $location, $http, $mdToast) {
+	$rootScope.verCabecera = false;
 	
-	$scope.nivelUsuario = [];
+	if (sessionStorage.getItem("mostrar") === null) {
+		sessionStorage.setItem("mostrar", 'bienvenida');
+	}
+	
+	if (sessionStorage.getItem("rol") !== null) {
+		$rootScope.rol = sessionStorage.getItem("rol");
+	} else if (localStorage.getItem("rol")) {
+		$rootScope.rol = localStorage.getItem("rol");
+	}
+	
+	if ($rootScope.rol === undefined) {
+		$rootScope.cerrarSesion();
+		return null;
+	} else if (sessionStorage.getItem("permiso") === null && $rootScope.rol === "ROLE_ADMIN") {
+		$location.path('/admin');
+		return null;
+	} else if ($rootScope.rol === "ROLE_TECH") {
+		$location.path('/tec');
+		return null;
+	} else if (sessionStorage.getItem("ver")) {
+		$location.path('/respuestasEntrevista');
+		return null;
+	} else {
+		//muestra la pagina cuando se comprueba que no ha entrado aqui incorrectamente
+		$scope.mostrar = sessionStorage.getItem("mostrar");
+		$rootScope.verCabecera = true;
+	}
+	
+	var token = sessionStorage.getItem("token");
+	$http.defaults.headers.common['x-access-token'] = token;
+	
+	
+	
+	
 	
 	Storage.prototype.setObj = function (key, obj) {
 		return this.setItem(key, JSON.stringify(obj));
@@ -20,6 +54,16 @@ app.controller('controladorEntrevista', function (servicioRest, $scope, $rootSco
 	} else {
 		$rootScope.temas = sessionStorage.getObj("temas");
 	}
+	
+	
+	
+	
+	$rootScope.cargando = false;
+	$rootScope.conFooter = false;
+    $rootScope.logueado = false;
+	
+	$scope.nivelUsuario = [];
+	$scope.respuestas = [];
 	
 	function escribirSaltosDeLinea(pregunta) {
 		if (pregunta !== null) {
@@ -44,16 +88,6 @@ app.controller('controladorEntrevista', function (servicioRest, $scope, $rootSco
 			}
 		}
 	}
-	
-	
-	$rootScope.cargando = false;
-	$rootScope.conFooter = false;
-    $rootScope.logueado = false;
-	
-	if (sessionStorage.getItem("mostrar") === null) {
-		sessionStorage.setItem("mostrar", 'bienvenida');
-	}
-	$scope.mostrar = sessionStorage.getItem("mostrar");
 	
 	$scope.bienvenida = function() {
 		sessionStorage.setItem("mostrar", 'evaluacion');
@@ -103,31 +137,9 @@ app.controller('controladorEntrevista', function (servicioRest, $scope, $rootSco
 	
 	$scope.nombreEntrevistado = sessionStorage.getItem("nombreEntrevistado");
 	
-	var token = sessionStorage.getItem("token");
-	$http.defaults.headers.common['x-access-token'] = token;
 	
-	var permiso = sessionStorage.getItem("permiso");
 	
-	var ver = sessionStorage.getItem("ver");
 	
-	var rol;
-	if (sessionStorage.getItem("rol") !== null) {
-		rol = sessionStorage.getItem("rol");
-	} else if (localStorage.getItem("rol") !== null) {
-		rol = localStorage.getItem("rol");
-	}
-	
-	if (rol === undefined) {
-		$location.path('/');
-	} else if (permiso === null && rol === "ROLE_ADMIN") {
-		$location.path('/admin');
-	} else if (rol === "ROLE_TECH") {
-		$location.path('/tec');
-	} else if (ver) {
-		$location.path('/respuestasEntrevista');
-	}
-	
-	$scope.respuestas = [];
 	
 	var respondidas = [], notaMax = 0, nota = 0;
 	

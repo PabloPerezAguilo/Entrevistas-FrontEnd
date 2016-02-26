@@ -2,6 +2,7 @@ app.controller('controladorUsuarios', function (servicioRest, config, $scope, $r
 	
 	$scope.administradores = [];
 	$scope.tecnicos = [];
+	$scope.verCarga = null;
 	
 	function obtenerUsuarios(rol, array) {
 		if (rol === "ROLE_ADMIN") {
@@ -40,6 +41,7 @@ app.controller('controladorUsuarios', function (servicioRest, config, $scope, $r
 	
 	$scope.altaUsuario = function () {
 		if (datosValidos()) {
+			$scope.verCarga = 'indeterminate';
 			var usuario = {
 				username: $scope.nick
 			};
@@ -57,9 +59,11 @@ app.controller('controladorUsuarios', function (servicioRest, config, $scope, $r
 						$scope.tecnicos.push(data.data);
 					}
 					$scope.creado = true;
+					$scope.verCarga = null;
 				})
 				.catch(function (err) {
 					$log.error(err);
+					$scope.verCarga = null;
 					toast('No existe el usuario "' + $scope.nick + '" en la base de datos');
 				});
 		} else {
