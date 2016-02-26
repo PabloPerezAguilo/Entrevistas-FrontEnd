@@ -157,8 +157,11 @@ app.controller('controladorLogIn', function (servicioRest, config, $scope, $loca
 		$rootScope.cargando = true;
 		var user = {};
 		user.username = "agonzalez";
-		user.password = window.btoa("password");
-		//user.password = "password";
+		if(config.ldap) {
+			user.password = window.btoa("password");
+		} else {
+			user.password = "password";
+		}
 		$rootScope.usuario = "agonzalez";
 		servicioRest.postAuthenticate(user)
 			.then(function (data) {
