@@ -1,9 +1,29 @@
 <div class="entrevistado">
 	<md-content>
 		<md-list>
-			<div class="alert alert-info infoNota">
-				La nota obtenida es: <span class="letraNegrita">{{ nota }} / 10</span>
-				<p class="letraPequenia">Las preguntas de libre respuesta no están incluidas en la nota</p>
+			<div layout="row">
+				<div class="alert alert-info infoNota" flex="75">
+					La nota obtenida es: <span class="letraNegrita">{{ nota }} / 10</span>
+					<p class="letraPequenia">Las preguntas de libre respuesta no están incluidas en la nota</p>
+				</div>
+				<div flex="25" class="valoracion">
+					<p class="tituloValoracion">Valoración del usuario:</p>		
+					<div ng-repeat="valoracion in evaluacion">
+						<span flex>
+							<md-chips class="chipValoracion">
+							  <md-chip>
+								  <strong>{{valoracion.tag}}</strong> ({{valoracion.nota}})
+								</md-chip>
+							</md-chips>
+						</span>
+							<span flex>
+								<md-slider class="valoracionSlider" md-discrete ng-model="valoracion.nota" 
+										   aria-label="nivel usuario" step="1" min="1" max="10" 
+										   ng-disabled="true">
+								</md-slider>
+							</span>
+					</div>
+				</div>
 			</div>
 			<md-list-item  ng-repeat="pregunta in correccion">
 				<div ng-if="pregunta === null" class="notaRespuesta">
@@ -28,7 +48,8 @@
 						<p>
 							<md-radio-group ng-model="correccionTest[$index]">
 								<span class="respuestas displayInline" ng-repeat="answer in pregunta.answers"> 
-									<md-radio-button value="{{$index}}" ng-style="correccionStyle[$parent.$index][$index]" 
+									<md-radio-button value="{{$index}}" 
+													 ng-style="correccionStyle[$parent.$index][$index]" 
 													 ng-disabled="true" aria-label="correccion test">
 										{{ answer.title }}
 									</md-radio-button>

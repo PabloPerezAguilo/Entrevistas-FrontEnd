@@ -8,7 +8,12 @@
 </div>
 <div ng-show="mostrar === 'evaluacion'">
 	<div class="alert alert-info mensaje">
-		<p>evaluacion inicial.</p>
+		<p>Evalue su nivel de conocimiento en cada uno de los siguientes ámbitos</p>
+	</div>
+	<div ng-repeat="tema in temas">
+		<p>Tema: {{tema.tag}}</p>
+		 <md-slider md-discrete="" ng-model="nivelUsuario[$index]" aria-label="nivel usuario" 
+					step="1" min="1" max="10"></md-slider>
 	</div>
 	<md-button class="md-raised btnEntrevistado" ng-click="evaluacion()">
 		Continuar

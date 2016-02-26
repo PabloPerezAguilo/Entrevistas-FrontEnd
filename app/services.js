@@ -13,7 +13,7 @@ function ServicioREST($http, $q, $rootScope, config) {
 			var error = {
 				data: data,
 				status: status
-			}; 
+			};
 			defered.reject(error);
 		} else {
 			defered.reject(data.message);
@@ -146,6 +146,14 @@ function ServicioREST($http, $q, $rootScope, config) {
 		});
 	}
 	
+	function postEvaluacion(idEntrevista, evaluacion) {
+		return llamadaHTTP({
+			method: 'POST',
+			url: url + '/valoracion?id=' + idEntrevista,
+			data: evaluacion
+		});
+	}
+	
 	/*---------------USUARIO---------------*/
 	function postUsuario(usuario) {
 		return llamadaHTTP({
@@ -195,6 +203,7 @@ function ServicioREST($http, $q, $rootScope, config) {
 		postUsuario: postUsuario,
 		getUsuarios: getUsuarios,
 		getUsuario: getUsuario,
-		deleteUsuario: deleteUsuario
+		deleteUsuario: deleteUsuario,
+		postEvaluacion: postEvaluacion
 	}
 }

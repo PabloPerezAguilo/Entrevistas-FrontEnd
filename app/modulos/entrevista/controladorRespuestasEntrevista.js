@@ -1,5 +1,7 @@
 app.controller('controladorRespuestasEntrevista', function (servicioRest, $scope, $rootScope, $log, $mdDialog, $location, $http) {
 	
+	$scope.evaluacion = [];
+	
 	function escribirSaltosDeLinea(pregunta) {
 		if (pregunta !== null) {
 			var titulo = pregunta.title;
@@ -175,7 +177,6 @@ app.controller('controladorRespuestasEntrevista', function (servicioRest, $scope
 					for(var i = 0; i < $scope.correccion.length; i++) {
 						escribirSaltosDeLinea($scope.correccion[i]);
 					}
-					console.log($scope.correccion);
 				})
 				.catch(function (err) {
 					preguntas = null;
@@ -188,6 +189,7 @@ app.controller('controladorRespuestasEntrevista', function (servicioRest, $scope
 			.then(function (data) {
 				respuestas = data.answers;
 				$scope.observaciones = data.feedback;
+				$scope.evaluacion = data.valoracion;
 				getPreguntas();
 			})
 			.catch(function (err) {

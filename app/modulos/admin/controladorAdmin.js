@@ -415,6 +415,7 @@ app.controller('controladorAdmin', function (servicioRest, config, $scope, $loca
 			sessionStorage.setItem("permiso", true);
 			$rootScope.indiceEntrevistaSeleccionada = $scope.entrevistas[ind]._id;
 			$rootScope.nombre = $scope.entrevistas[ind].name;
+			$rootScope.temas = $scope.entrevistas[ind].leveledTags;
 			$location.path("/entrevista");
     	});
 	};
