@@ -3,6 +3,7 @@ app.controller('controladorLogIn', function (servicioRest, config, $scope, $loca
 	$rootScope.logueado = false;
 	$rootScope.conFooter = true;
 	$rootScope.rolUsuario = "";
+	
 	var checkeado;
 	
 	var permiso = sessionStorage.getItem("permiso");
@@ -65,8 +66,8 @@ app.controller('controladorLogIn', function (servicioRest, config, $scope, $loca
 		$rootScope.cargando = true;
 		var user = {};
 		user.username = $scope.user.toLowerCase();
-		user.password = window.btoa($scope.pass);
-		//user.password = $scope.pass;
+		//user.password = window.btoa($scope.pass);
+		user.password = $scope.pass;
 		$rootScope.usuario = $scope.user;
 		servicioRest.postAuthenticate(user)
 			.then(function (data) {

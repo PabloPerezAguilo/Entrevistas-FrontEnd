@@ -49,11 +49,13 @@
                             </md-chips>
 							
 							<div class="alert alert-info" ng-show="!confirmacionAbierta && entendidoAbierta">
-  								Las aptitudes seleccionadas deberán tener alguna <span class="letraNegrita">relación entre si</span>
+  								Esta pregunta será usada para <span class="letraNegrita">cada una </span> 
+								de las aptitudes seleccionadas.
 								<md-button class="md-icon-button" aria-label="cerrarCrearPregunta" 
 										   ng-click="entendidoAbierta = false">
 									<md-icon md-svg-src="img/cerrar.svg"></md-icon>
 								</md-button>
+								<p>Para mas info pulsa ayuda.</p>
 							</div>
 							<div class="alert alert-warning" ng-show="confirmacionAbierta">
   								¿Está seguro de que quiere crear esta aptitud?
@@ -110,22 +112,13 @@
                                 </md-chip-template>
                             </md-chips>
 							<div class="alert alert-info" ng-show="!confirmacionTest && entendidoTest">
-  								Las aptitudes seleccionadas deberán tener alguna <span class="letraNegrita">relación entre si</span>
-								<md-button class="md-icon-button" aria-label="cerrarCrearPregunta" ng-click="entendidoTest = false">
+  								Esta pregunta será usada para <span class="letraNegrita">cada una </span> 
+								de las aptitudes seleccionadas.
+								<md-button class="md-icon-button" aria-label="cerrarCrearPregunta" 
+										   ng-click="entendidoTest = false">
 									<md-icon md-svg-src="img/cerrar.svg"></md-icon>
 								</md-button>
-							</div>
-							
-							<div class="alert alert-warning" ng-show="confirmacionTest">
-  								¿Está seguro de que quiere crear esta aptitud?								
-									<md-button aria-label="eliminar" ng-click="crearTema()" 
-											   class="md-button icon explosionIcono okCrearTema">
-										<md-icon md-svg-src="img/ok.svg"></md-icon>
-									</md-button>
-									<md-button aria-label="eliminar" ng-click="cerrarConfirm()" 
-											   class="md-button icon explosionIcono cancelCrearTema">
-										<md-icon md-svg-src="img/cerrar.svg"></md-icon>
-									</md-button>
+								<p>Para mas info pulsa ayuda.</p>
 							</div>
 
                             <md-input-container class="md-block">
@@ -186,11 +179,13 @@
                                 </md-chip-template>
                             </md-chips>
 							<div class="alert alert-info" ng-show="!confirmacionTestAbierto && entendidoTestAbierto">
-  								Las aptitudes seleccionadas deberán tener alguna <span class="letraNegrita">relación entre si</span>
+  								Esta pregunta será usada para <span class="letraNegrita">cada una </span> 
+								de las aptitudes seleccionadas.
 								<md-button class="md-icon-button" aria-label="cerrarCrearPregunta" 
 										   ng-click="entendidoTestAbierto = false">
 									<md-icon md-svg-src="img/cerrar.svg"></md-icon>
 								</md-button>
+								<p>Para mas info pulsa ayuda.</p>
 							</div>
 							
 							<div class="alert alert-warning" ng-show="confirmacionTestAbierto">
@@ -246,7 +241,7 @@
                     <md-content>
 						<div class="alert alert-info alertAyuda">
 							<p>Hay 3 pestañas: <b>"PREGUNTA ABIERTA"</b>, <b>"PREGUNTA TIPO TEST"</b> y <b>"PREGUNTA DE SELECCIÓN MÚLTIPLE"</b>.</p>
-							<p>En la pestaña <b>"PREGUNTA ABIERTA"</b> se rellenarán los datos necesarios para crear una pregunta de tipo abierta.</p>
+							<p>En la pestaña <b>"PREGUNTA ABIERTA"</b> se rellenarán los datos necesarios para crear una pregunta de tipo abierta teniendo en cuenta que su respuesta es libre.</p>
 							<p>En la pestaña <b>"PREGUNTA TIPO TEST"</b> se rellenarán los datos necesarios para crear una pregunta de tipo test.</p>
 							<p>En la pestaña <b>"PREGUNTA DE SELECCIÓN MÚLTIPLE"</b> se rellenarán los datos necesarios para crear una pregunta de tipo selección múltiple.</p>
 						</div>

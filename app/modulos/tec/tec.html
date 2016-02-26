@@ -56,7 +56,8 @@
 					</h3>
 					<h4>
 						<span ng-repeat="tag in item.tags" ng-if="$first">{{ tag }} </span>
-						<span ng-repeat="tag in item.tags" ng-if="!$first">, {{ tag }} </span>/ {{ item.level }}
+						<span ng-repeat="tag in item.tags" ng-if="!$first">, {{ tag }} </span> 
+						<span class="nivelPregunta">{{ item.level }}</span>
 					</h4>
 					<p>
 						{{ item.type }}

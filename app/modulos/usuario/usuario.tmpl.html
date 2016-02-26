@@ -24,19 +24,20 @@
             <md-tabs class="md-accent" md-dynamic-height md-border-bottom>
                 <md-tab label="nuevo usuario" layout="column">
                     <md-content ng-show="!creado">
-						
+						<span layout="row">
 						<md-input-container class="md-block altaUsuario" flex="70">
 							<label>Escriba el nick del usuario</label>
 							<input ng-model="nick" ng-keypress="enter($event)" ng-blur="validacion()">
 						</md-input-container>
-						
+						<md-progress-circular md-mode="{{verCarga}}" md-diameter="70">
+							</md-progress-circular>
+						</span>
 						<span class="radioAltaUsuario" layout="row">
 							<md-radio-group ng-model="radioRol" layout="row" flex>
 								<md-radio-button value="tec" >Técnico</md-radio-button>
 								<md-radio-button value="admin">Admininstrador</md-radio-button>
 							</md-radio-group>
 						</span>
-						
 						<md-button class="md-raised btnAltaUsuario" ng-click="altaUsuario()">Guardar</md-button>
 					
                     </md-content>

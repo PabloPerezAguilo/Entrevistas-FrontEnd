@@ -332,6 +332,7 @@ md-chips .md-chip.md-focused {
     color: #CC641D;
     background-color: #F5EAC6;
     border-color: #CC7206;
+	padding-bottom: 7px;
 }
 
 .okCrearTema md-icon {
@@ -386,7 +387,7 @@ md-toolbar:not(.md-menu-toolbar) {
 md-dialog.md-transition-in.redimensionar {
     margin: auto;
     min-width: 720px;
-    min-height: 300px;
+    min-height: 3000px;
 	max-height: 700px;
 }
 
@@ -474,6 +475,12 @@ md-radio-group.md-default-theme.md-focused:not(:empty) .md-checked .md-container
 
 md-list-item.md-3-line .md-list-item-text {
 	width: 0;
+}
+
+.nivelPregunta {
+	background: $colorPrincipal;
+	border-radius: 50%;
+	color: white;
 }
 
 /* ------------- Ver pregunta --------------------- */
@@ -593,18 +600,6 @@ md-list md-list-item.md-3-line .md-list-item-text h3 {
 }
 
 /*------------------------------ADMIN----------------------*/
-.rojo {
-	background: rgba(255, 0, 0, 0.23);
-}
-
-.verde {
-	background: rgba(0, 255, 0, 0.23);
-}
-
-.azul {
-	background: rgba(0, 0, 255, 0.23);
-}
-
 .divBtnCrear {
 	min-width: 48px;
 	min-height: 48px;
@@ -797,7 +792,7 @@ rzslider .rz-bar-wrapper {
 }
 
 
-.contenidoTablaCrear md-input-container {
+.tablaAdmin md-input-container {
 	margin: 0;
 }
 
@@ -1162,24 +1157,13 @@ md-divider.dividerUsuarios {
 	margin-bottom: 5px;
 }
 
-/*
-.altaUsuarioRol {
-	padding-top: 10px;
-    width: 325px;
-    height: 60px;
-	margin-left: 33%;
+md-progress-circular .md-inner .md-left .md-half-circle {
+	border-color: $colorPrincipal;
 }
 
-.autocompleteUsuarios {
-	margin-left: 10%;
-    margin-right: 10%;
+md-progress-circular .md-inner .md-right .md-half-circle {
+	border-color: $colorPrincipal;
 }
-
-.itemListaUsuarios {
-	margin-left: 9%;
-    margin-right: 5%;
-}
-*/
 /*--------------------- media queries ------------------------*/
 @media screen and (max-height: 600px) {
    md-dialog.md-transition-in.redimensionar {
