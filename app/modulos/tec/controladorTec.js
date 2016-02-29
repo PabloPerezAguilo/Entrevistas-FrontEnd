@@ -55,7 +55,7 @@ app.controller('controladorTec', function (servicioRest, $scope, $rootScope, $md
 					'ver en detalle una pregunta, eliminar preguntas y abrir una pantalla para crear nuevas preguntas'
 			},
 			{
-				element: '#idListaTec',
+				element: '#elementoListaPreguntas',
 				intro: 'Este es el listado de todas las preguntas creadas'
 			},
 			{

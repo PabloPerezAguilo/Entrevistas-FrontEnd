@@ -649,6 +649,9 @@ md-input-container.horas {
   display: none; }
 
 /* ------------------- ENTREVISTA ---------------------------*/
+.radioButtonEntrevista {
+  margin-right: 10px; }
+
 .mensajeAlert {
   display: inherit; }
 
@@ -717,6 +720,7 @@ md-autocomplete.autocompleteAdmin {
 .respuestas {
   font-size: 13px;
   margin: 0px;
+  margin-top: 10px;
   width: 500px; }
 
 .contenedorRespuestas {

@@ -62,7 +62,7 @@ app.controller('controladorAdmin', function (servicioRest, config, $scope, $loca
                 intro: "Si pulsa este botón se abrirá una ventana para crear una entrevista."
             },
 			{
-				element: '#idListaAdmin',
+				element: '#elementoListaAdmin',
 				intro: 'Esta es la lista con las entrevistas.'
 			},
 			{
