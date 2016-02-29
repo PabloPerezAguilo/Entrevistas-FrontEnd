@@ -98,15 +98,6 @@ app.controller('controladorAdmin', function (servicioRest, config, $scope, $loca
         skipLabel: 'Cerrar',
         doneLabel: 'Fin'
     };
-	setTimeout(function () {
-		if (!$scope.entrevistasRealizadas) {
-			$scope.introOptions.steps.splice($scope.introOptions.steps.length - 1, 0, {
-				element: '#hacerEntrevista',
-				intro: 'Si pulsa este botón se abrirá una ventana para hacer la entrevista.'
-			});
-		}
-		$rootScope.lanzarAyuda = $scope.lanzarAyuda;
-	}, 1000);
 	
 	$scope.mensajeEntrevistaCreada = true;
     $rootScope.cargando = false;
@@ -223,6 +214,17 @@ app.controller('controladorAdmin', function (servicioRest, config, $scope, $loca
 				}
 			});
 	}
+	
+	//Para lanzar la ayuda
+	setTimeout(function () {
+		if (!$scope.entrevistasRealizadas) {
+			$scope.introOptions.steps.splice($scope.introOptions.steps.length - 1, 0, {
+				element: '#hacerEntrevista',
+				intro: 'Si pulsa este botón se abrirá una ventana para hacer la entrevista.'
+			});
+		}
+		$rootScope.lanzarAyuda = $scope.lanzarAyuda();
+	}, 1000);
 	
 	$scope.calcularPaginas = function(pagina) {
 		getEntrevistas(nombreSeleccionado, pagina)

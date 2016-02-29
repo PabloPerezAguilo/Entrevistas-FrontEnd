@@ -29,7 +29,7 @@ app.controller('controladorVer', function ($scope, $mdDialog, indice) {
             $scope.temas_nivel += ", " + $scope.preguntas[indice].tags[i];
         }
         
-        $scope.temas_nivel += " / " + $scope.preguntas[indice].level;
+        $scope.nivel = $scope.preguntas[indice].level;
 		escribirSaltosDeLinea();
         $scope.directiva = $scope.preguntas[indice].directive;
     } else {
@@ -45,7 +45,6 @@ app.controller('controladorVer', function ($scope, $mdDialog, indice) {
         }
         
         $scope.nivel = $scope.preguntas[indice].level;
-        //$scope.titulo = $scope.preguntas[indice].title;
 		escribirSaltosDeLinea();
         
         $scope.items = [];

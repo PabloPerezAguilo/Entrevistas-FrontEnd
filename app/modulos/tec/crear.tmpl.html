@@ -240,22 +240,63 @@
 				<md-tab label="general">
                     <md-content>
 						<div class="alert alert-info alertAyuda">
-							<p>Hay 3 pestañas: <b>"PREGUNTA ABIERTA"</b>, <b>"PREGUNTA TIPO TEST"</b> y <b>"PREGUNTA DE SELECCIÓN MÚLTIPLE"</b>.</p>
-							<p>En la pestaña <b>"PREGUNTA ABIERTA"</b> se rellenarán los datos necesarios para crear una pregunta de tipo abierta teniendo en cuenta que su respuesta es libre.</p>
-							<p>En la pestaña <b>"PREGUNTA TIPO TEST"</b> se rellenarán los datos necesarios para crear una pregunta de tipo test.</p>
-							<p>En la pestaña <b>"PREGUNTA DE SELECCIÓN MÚLTIPLE"</b> se rellenarán los datos necesarios para crear una pregunta de tipo selección múltiple.</p>
+							<p>
+								En este apartado creará las preguntas que desee.
+							</p>
+							<p>
+								En <span class="letraNegrita">Pregunta abierta</span> 
+								tendrá que tener en cuenta que su respuesta será libre y la aplicación no podrá evaluarla.
+							</p>
+							<p>
+								<span class="letraNegrita">Pregunta tipo test</span> 
+								es de tipo test con una única respuesta correcta.
+							</p>
+							<p>
+								<span class="letraNegrita">Pregunta de selección múltiple</span>
+								es de tipo test con varias o ninguna respuesta correcta.
+							</p>
+							<p>
+								En todas ellas deberá rellenar los campos requeridos.
+							</p>
 						</div>
 						<div class="alert alert-info alertAyuda">
-							<p>La siguiente barra será para que pueda seleccionar el nivel de la pregunta. Por defecto es 5.</p>
+							<p>
+								Con este <span class="letraNegrita">slider</span>
+								seleccionará el nivel de dificultad de la pregunta. Por defecto es 5.
+							</p>
 							<md-slider flex="" md-discrete="" ng-model="nivelAbierta" aria-label="nivel abierta"
 									   step="1" min="1" max="10">
 							</md-slider>
 						</div>
 						<div class="alert alert-info alertAyuda">
-							<p>En el campo <b>"Aptitudes"</b> podrá seleccionar una o varias que tenga la pregunta.</p>
+							<p>
+								En el campo <span class="letraNegrita">Aptitudes</span> 
+								podrá seleccionar una o varias que tenga la pregunta.
+							</p>
+							<p>
+								Tendrá que tener en cuenta que una pregunta creada con varias aptitudes será candidata para ser 								seleccionada con cada una de ellas. Por ejemplo:
+							</p>
+							<p>
+								1. ¿Qué lenguajes son case sensitive? (Aptitudes: Java y Python)
+							</p>
+							<p>Java</p>
+							<p>Python</p>
+							<p>
+								Este no es un enfoque correcto ya que esta pregunta aparecerá tanto para Java como Python. 
+								Una persona que está siendo evaluada sobre Java no tiene porqué conocer nada de Python.
+							</p>
+							<p>2. ¿Es Javascript un lenguaje tipado? (Aptitudes: Javascript, jQuery y AngularJs)</p>
+							<p>Sí</p>
+							<p>No</p>
+							<p>
+								Este es un enfoque correcto ya que esta pregunta aparecerá tanto para Javascript como jQuery 
+								como AngularJs. Una persona que conoce jQuery o AngularJs deberá conocer también AngularJs.
+							</p>
+							
 						</div>
 						<div class="alert alert-info alertAyuda">
-							<p>En el campo <b>"Enunciado de la pregunta"</b> deberá introducir el enunciado. Este campo es obligatorio</p>
+							<p>En el campo <span class="letraNegrita">Enunciado de la pregunta</span> 
+							deberá introducir el enunciado. Este campo es obligatorio.</p>
 						</div>
 						<div class="alert alert-info alertAyuda">
 							<p>El siguiente botón es para guardar la entrevista con los datos introducidos:</p>
@@ -266,14 +307,20 @@
                 <md-tab label="pregunta abierta">
                     <md-content>
 						<div class="alert alert-info alertAyuda">
-							<p>En el campo <b>"Directivas de la pregunta"</b> podrá introducir las directrices que usted considere necesarias. Este campo no es obligatorio.</p>
+							<p>
+								En el campo <span class="letraNegrita">Directivas de la pregunta</span> 
+								podrá introducir las directrices que considere necesarias. Este campo no es obligatorio.
+							</p>
 						</div>
                     </md-content>
                 </md-tab>
                 <md-tab label="pregunta tipo test">
                     <md-content>
 						<div class="alert alert-info alertAyuda">
-							<p>En esta sección deberá rellenar los campos de las respuestas y marcar una de las respuestas como correcta. Todas las respuestas deben estar rellenas.</p>
+							<p>
+								En esta sección deberá rellenar los campos de las respuestas y marcar una de las 
+								respuestas como correcta. Todas las respuestas deben estar rellenas.
+							</p>
 						</div>
 						<div class="alert alert-info alertAyuda btnMas">
 							<p>El siguiente botón sirve para añadir otro campo de respuesta.</p>

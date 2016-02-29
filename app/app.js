@@ -19,8 +19,7 @@ app.run(function(servicioRest, $rootScope, $http, $location) {
 	$rootScope.cerrarSesion = function () {
 		$rootScope.limpiarCredenciales();
 		$location.path("/");
-	};
-	
+	};	
 });
 
 app.config(function($routeProvider) {
