@@ -78,7 +78,7 @@ app.controller('controladorLogIn', function (servicioRest, config, $scope, $loca
 				user.password = window.btoa($scope.pass);
 			} else {
 				user.password = $scope.pass;
-			}			
+			}
 			$rootScope.usuario = $scope.user;
 			servicioRest.postAuthenticate(user)
 				.then(function (data) {
@@ -107,6 +107,8 @@ app.controller('controladorLogIn', function (servicioRest, config, $scope, $loca
 					if (err === "Servicio no disponible") {
 						toast("Error de conexión");
 						$log.error("Error al conectar con el servidor: " + err);
+					} else if (err === "LDAP time out") {
+						toast("Error de conexión con LDAP")
 					} else {
 						toast("El usuario o la contraseña es incorrecta");
 					}

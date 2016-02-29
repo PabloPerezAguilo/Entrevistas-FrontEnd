@@ -32,31 +32,11 @@ app.controller('controladorEntrevista', function (servicioRest, $scope, $rootSco
 	var token = sessionStorage.getItem("token");
 	$http.defaults.headers.common['x-access-token'] = token;
 	
-	
-	
-	
-	
-	Storage.prototype.setObj = function (key, obj) {
-		return this.setItem(key, JSON.stringify(obj));
-	};
-	Storage.prototype.getObj = function (key) {
-		return JSON.parse(this.getItem(key));
-	};
-	
 	function toast(texto) {
 		$mdToast.show(
 			$mdToast.simple().content(texto).position('top right').hideDelay(1500)
 		);
 	}
-	
-	if ($rootScope.temas !== undefined) {
-		sessionStorage.setObj("temas", $rootScope.temas);
-	} else {
-		$rootScope.temas = sessionStorage.getObj("temas");
-	}
-	
-	
-	
 	
 	$rootScope.cargando = false;
 	$rootScope.conFooter = false;
@@ -99,8 +79,20 @@ app.controller('controladorEntrevista', function (servicioRest, $scope, $rootSco
 	}
 	var id = sessionStorage.getItem("id");
 	
+	$scope.temas = [];
+	
+	servicioRest.getEntrevistas(id)
+		.then(function (data) {
+			for(var i = 0; i < data.leveledTags.length; i++) {
+				$scope.temas.push(data.leveledTags[i].tag)
+			}
+		})
+		.catch(function (err) {
+			$log.error("Error al cargar los temas de la evaluación inicial: " + err);
+		});
+	
 	function nivelesValidos () {
-		for (var i = 0; i < $rootScope.temas.length; i++) {
+		for (var i = 0; i < $scope.temas.length; i++) {
 			if ($scope.nivelUsuario[i] === undefined) {
 				return false;
 			}
@@ -111,15 +103,14 @@ app.controller('controladorEntrevista', function (servicioRest, $scope, $rootSco
 	$scope.evaluacion = function() {
 		if (nivelesValidos()) {
 			var evaluacion = [];
-			for (var i = 0; i < $rootScope.temas.length; i++) {
+			for (var i = 0; i < $scope.temas.length; i++) {
 				evaluacion.push({
-					tag: $rootScope.temas[i].tag,
+					tag: $scope.temas[i],
 					nota: $scope.nivelUsuario[i]
 				});
 			}
 			servicioRest.postEvaluacion(id, evaluacion)
 				.then(function (data) {
-					console.log(data);
 					sessionStorage.setItem("mostrar", 'entrevista');
 					$scope.mostrar = sessionStorage.getItem("mostrar");
 				})

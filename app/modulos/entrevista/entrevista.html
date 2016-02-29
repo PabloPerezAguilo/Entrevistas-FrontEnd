@@ -7,13 +7,16 @@
 	</md-button>	
 </div>
 <div ng-show="mostrar === 'evaluacion'">
-	<div class="alert alert-info mensaje">
+	<div class="alert alert-info mensajeEvaluacion">
 		<p>Evalue su nivel de conocimiento en cada uno de los siguientes ámbitos</p>
 	</div>
-	<div ng-repeat="tema in temas">
-		<p>Tema: {{tema.tag}}</p>
-		 <md-slider md-discrete="" ng-model="nivelUsuario[$index]" aria-label="nivel usuario" 
-					step="1" min="1" max="10"></md-slider>
+	<div class="contenedorEvaluacion">
+		<div ng-repeat="tema in temas" class="evaluacion">
+			<p>{{tema}}</p>
+			 <md-slider ng-init="nivelUsuario[$index] = 5" 
+						md-discrete="" ng-model="nivelUsuario[$index]" aria-label="nivel usuario" 
+						step="1" min="0" max="10"></md-slider>
+		</div>
 	</div>
 	<md-button class="md-raised btnEntrevistado" ng-click="evaluacion()">
 		Continuar
@@ -66,7 +69,7 @@
 <div ng-show="mostrar === 'mensajeFinal'">
 	<div class="alert alert-info mensaje">
 		<p>Ha completado el cuestionario correctamente.</p> 
-		<p>En breve llegara el entrevistador tecnico.</p>
+		<p>En breve llegará el entrevistador tecnico.</p>
 		<p>Por favor, espere y no pulse continuar hasta su llegada.</p>
 	</div>
 	<md-button class="md-raised btnEntrevistado" ng-click="aceptarBtn()">

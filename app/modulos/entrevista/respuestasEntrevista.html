@@ -1,23 +1,23 @@
 <div class="entrevistado" ng-show="verRespuestasEntrevista">
 	<md-content>
 		<md-list>
-			<div layout="row">
-				<div class="alert alert-info infoNota" flex="75">
+			<div>
+				<div class="alert alert-info infoNota">
 					La nota obtenida es: <span class="letraNegrita">{{ nota }} / 10</span>
 					<p class="letraPequenia">Las preguntas de libre respuesta no están incluidas en la nota</p>
 				</div>
-				<div flex="25" class="valoracion">
-					<p class="tituloValoracion">Valoración del usuario:</p>		
+				<div>
+					<p class="tituloValoracion">Valoración del usuario:</p>
 					<div ng-repeat="valoracion in evaluacion">
-						<span flex>
-							<md-chips class="chipValoracion">
-							  <md-chip>
+						<span>
+							<md-chips>
+							  <md-chip class="chipValoracion">
 								  <strong>{{valoracion.tag}}</strong> ({{valoracion.nota}})
 								</md-chip>
 							</md-chips>
 						</span>
-							<span flex>
-								<md-slider class="valoracionSlider" md-discrete ng-model="valoracion.nota" 
+							<span>
+								<md-slider class="valoracionSlider" ng-model="valoracion.nota" 
 										   aria-label="nivel usuario" step="1" min="1" max="10" 
 										   ng-disabled="true">
 								</md-slider>

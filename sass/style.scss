@@ -836,7 +836,7 @@ md-input-container.horas {
 }
 
 .mensaje {
-	margin-top: 14%;
+	margin-top: 18%;
     width: 35%;
     margin-left: 34%;
     padding-bottom: 3%;
@@ -925,7 +925,7 @@ md-autocomplete.autocompleteAdmin {
 .btnEntrevistado.md-button.md-raised {
     width: 25%;
     min-width: 200px;
-    margin-left: 41%;
+    margin-left: 39%;
 }
 
 .checkMostrarEntrevistas {
@@ -975,6 +975,10 @@ md-slider[disabled] .md-track-fill {
     margin-right: 24%;
 }
 
+.contenedorEvaluacion {
+	margin-top: 3%;
+}
+
 .mensajeEvaluacion {
 	margin-top: 11%;
     width: 35%;
@@ -989,11 +993,8 @@ md-slider[disabled] .md-track-fill {
 	margin-left: 6%;
 }
 
-.chipValoracion { 
-	margin-top: 8px;
-    margin-right: 8px;
-    margin-bottom: 0px;
-    margin-left: 27%; //45%
+.chipValoracion.md-chip { 
+	margin: 8px 8px 0 27%;
 }
 
 md-slider[disabled] {
