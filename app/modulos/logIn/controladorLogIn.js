@@ -74,8 +74,11 @@ app.controller('controladorLogIn', function (servicioRest, config, $scope, $loca
 			$rootScope.cargando = true;
 			var user = {};
 			user.username = $scope.user.toLowerCase();
-			//user.password = window.btoa($scope.pass);
-			user.password = $scope.pass;
+			if(config.ldap) {
+				user.password = window.btoa($scope.pass);
+			} else {
+				user.password = $scope.pass;
+			}
 			$rootScope.usuario = $scope.user;
 			servicioRest.postAuthenticate(user)
 				.then(function (data) {
@@ -104,6 +107,8 @@ app.controller('controladorLogIn', function (servicioRest, config, $scope, $loca
 					if (err === "Servicio no disponible") {
 						toast("Error de conexión");
 						$log.error("Error al conectar con el servidor: " + err);
+					} else if (err === "LDAP time out") {
+						toast("Error de conexión con LDAP")
 					} else {
 						toast("El usuario o la contraseña es incorrecta");
 					}
@@ -119,7 +124,11 @@ app.controller('controladorLogIn', function (servicioRest, config, $scope, $loca
 		$rootScope.cargando = true;
 		var user = {};
 		user.username = "abarrero";
-		user.password = window.btoa("password");
+		if(config.ldap) {
+			user.password = window.btoa("password");
+		} else {
+			user.password = "password";
+		}		
 		$rootScope.usuario = "abarrero";
 		servicioRest.postAuthenticate(user)
 			.then(function (data) {
@@ -163,7 +172,11 @@ app.controller('controladorLogIn', function (servicioRest, config, $scope, $loca
 		$rootScope.cargando = true;
 		var user = {};
 		user.username = "agonzalez";
-		user.password = window.btoa("password");
+		if(config.ldap) {
+			user.password = window.btoa("password");
+		} else {
+			user.password = "password";
+		}
 		$rootScope.usuario = "agonzalez";
 		servicioRest.postAuthenticate(user)
 			.then(function (data) {

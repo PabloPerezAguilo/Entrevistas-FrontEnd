@@ -657,7 +657,7 @@ md-input-container.horas {
   padding-top: 0; }
 
 .mensaje {
-  margin-top: 14%;
+  margin-top: 18%;
   width: 35%;
   margin-left: 34%;
   padding-bottom: 3%;
@@ -758,19 +758,41 @@ md-slider.md-default-theme[disabled]:not(.md-min) .md-thumb:after, md-slider[dis
 .tituloValoracion {
   font-weight: bold;
   font-family: sans-serif;
-  color: #EF6C00; }
+  color: #EF6C00;
+  text-align: center; }
 
-.chipValoracion {
-  display: inline-block; }
-
-md-slider.valoracionSlider {
-  margin-left: 0;
-  margin-right: 0;
-  padding: 0;
-  width: 20%; }
+md-slider[disabled] .md-track-fill {
+  background-color: #EF6C00;
+  display: inherit; }
 
 .valoracion {
   margin-left: 2%; }
+
+.evaluacion {
+  margin-left: 30%;
+  margin-right: 24%; }
+
+.contenedorEvaluacion {
+  margin-top: 3%; }
+
+.mensajeEvaluacion {
+  margin-top: 11%;
+  width: 35%;
+  margin-left: 34.7%;
+  padding-bottom: 1%;
+  padding-top: 1%;
+  text-align: center; }
+
+.temaEvaluado {
+  text-align: center;
+  margin-left: 6%; }
+
+.chipValoracion.md-chip {
+  margin: 8px 8px 0 27%; }
+
+md-slider[disabled] {
+  width: 46%;
+  margin-left: 28%; }
 
 /*---------------------AYUDA-------------------------*/
 md-dialog-content.ayuda {
