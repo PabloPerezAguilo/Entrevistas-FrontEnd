@@ -10,18 +10,18 @@
 					<p class="tituloValoracion">Valoración del usuario:</p>
 					<div ng-repeat="valoracion in evaluacion">
 						<span>
-							<md-chips>
-							  <md-chip class="chipValoracion">
-								  <strong>{{valoracion.tag}}</strong> ({{valoracion.nota}})
+							<md-chips class="chipValoracion">
+								<md-chip class="chipValoracion">
+									<strong>{{valoracion.tag}}</strong> ({{valoracion.nota}})
 								</md-chip>
 							</md-chips>
 						</span>
-							<span>
-								<md-slider class="valoracionSlider" ng-model="valoracion.nota" 
-										   aria-label="nivel usuario" step="1" min="1" max="10" 
-										   ng-disabled="true">
-								</md-slider>
-							</span>
+						<span>
+							<md-slider class="valoracionSlider" ng-model="valoracion.nota" 
+									   aria-label="nivel usuario" step="1" min="1" max="10" 
+									   ng-disabled="true">
+							</md-slider>
+						</span>
 					</div>
 				</div>
 			</div>

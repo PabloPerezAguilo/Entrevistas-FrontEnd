@@ -66,6 +66,15 @@
 									</div>
 								</div>
 							</md-input-container>
+							<md-input-container class="md-inline horas" flex="30">
+								<input required type="number" step="any" ng-model="numPreguntas" min="0" 
+									   placeholder="Número de preguntas *">
+								<div ng-messages="horas.$error">
+									<div ng-message-exp="['required', 'min']">
+										Debe ser un número positivo.
+									</div>
+								</div>
+							</md-input-container>
 						</span>
 						
 						<div ng-repeat="respuestas in temasChip" flex>
@@ -137,12 +146,20 @@
 				<div class="alert alert-info alertAyuda">
 					<p>En los siguientes campos deberá introducir la hora.</p>
 					<md-input-container class="horasAyuda">
-						<input type="number" step="any" ng-model="horas" min="08" max="20" 
+						<input type="number" step="any" min="08" max="20" 
 							   placeholder="Hora *">
 					</md-input-container>
 					<md-input-container class="md-inline">
-						<input type="number" step="any" ng-model="minutos" min="00" max="59" 
+						<input type="number" step="any" min="00" max="59" 
 							   placeholder="Minutos *">
+					</md-input-container>
+				</div>
+				<div class="alert alert-info alertAyuda">
+					<p>En este campo pondrá el número de preguntas que desee para la entrevista.</p>
+					<md-input-container class="md-inline horas">
+						<input required type="number" step="any" min="0" 
+							   placeholder="Número de preguntas *">
+						
 					</md-input-container>
 				</div>
 				<div class="alert alert-info alertAyuda">
