@@ -37,6 +37,9 @@
             <div id="doneLoading" class="doneLoadingLogIn" ng-hide="cargando"></div>
             <md-progress-linear id="progressBar" md-mode="indeterminate" ng-show="cargando"></md-progress-linear>
 		</header>
+		
+		<md-progress-circular class="cargarSesion" md-mode="indeterminate" 
+							  ng-show="cargandoSesion" md-diameter="300"></md-progress-circular>
         
 		<div ng-view ng-intro-options="introOptions" ng-intro-method="lanzarAyuda">
 		</div>

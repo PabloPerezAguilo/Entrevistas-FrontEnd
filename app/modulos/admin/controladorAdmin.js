@@ -2,6 +2,7 @@ app.controller('controladorAdmin', function (servicioRest, config, $scope, $loca
 	
 	$scope.verAdmin = false;
 	$rootScope.verCabecera = false;
+	$rootScope.cargandoSesion = false;
 
 	if (sessionStorage.getItem("rol") !== null) {
 		$rootScope.rol = sessionStorage.getItem("rol");

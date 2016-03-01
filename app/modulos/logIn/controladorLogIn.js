@@ -1,7 +1,7 @@
 app.controller('controladorLogIn', function (servicioRest, config, $scope, $location, $rootScope, $mdToast, $log, $http) {
 	'use strict';
 	$scope.verLogin = false;
-	$rootScope.verCabecera = false;
+	$rootScope.verCabecera = true;
 	$rootScope.logueado = false;
 	$rootScope.conFooter = true;
 	$rootScope.rolUsuario = "";
@@ -15,7 +15,40 @@ app.controller('controladorLogIn', function (servicioRest, config, $scope, $loca
 		rol = localStorage.getItem("rol");
 	}
 	
-	if (rol === "ROLE_TECH") {
+	function toast(texto) {
+		$mdToast.show(
+			$mdToast.simple().content(texto).position('top right').hideDelay(1500)
+		);
+	}
+	
+	if (localStorage.getItem("usuario") !== null) { //RECORDAR SESION
+		$rootScope.cargandoSesion = true;
+		var user = {
+			username: localStorage.getItem("usuario"),
+			password: localStorage.getItem("password")
+		};
+		servicioRest.postAuthenticate(user)
+			.then(function (data) {
+				$http.defaults.headers.common['x-access-token'] = data.token;
+				$rootScope.rol = data.role;
+				sessionStorage.setItem("token", data.token);
+				if (data.role === "ROLE_ADMIN") {
+					$location.path("/admin");
+					return null;
+				} else {
+					$location.path("/tec");
+					return null;
+				}
+			})
+			.catch(function (err) {
+				$log.error("Error al recordar sesión: " + err);
+				$rootScope.cargandoSesion = false;
+				$scope.verLogin = true;
+				$rootScope.cerrarSesion();
+				toast("Error al recordar sesión");
+				return null;
+			});
+	} else if (rol === "ROLE_TECH") {
 		$location.path("/tec");
 		return null;
 	} else if (sessionStorage.getItem("permiso")) {
@@ -27,26 +60,6 @@ app.controller('controladorLogIn', function (servicioRest, config, $scope, $loca
 	} else if (rol === "ROLE_ADMIN") {
 		$location.path("/admin");
 		return null;
-	} else if (localStorage.getItem("usuario") !== null) { //RECORDAR SESION
-		var user = {
-			username: localStorage.getItem("usuario"),
-			password: localStorage.getItem("password")
-		};
-		servicioRest.postAuthenticate(user)
-			.then(function (data) {
-				$http.defaults.headers.common['x-access-token'] = data.token;
-				$rootScope.rol = data.role;
-				if (data.role === "ROLE_ADMIN") {
-					$location.path("/admin");
-					return null;
-				} else {
-					$location.path("/tec");
-					return null;
-				}
-			})
-			.catch(function (err) {
-				$log.error("Error al recordar sesión: " + err);
-			});
 	} else {
 		//muestra la pagina cuando se comprueba que no ha entrado aqui incorrectamente
 		$scope.verLogin = true;
@@ -56,12 +69,6 @@ app.controller('controladorLogIn', function (servicioRest, config, $scope, $loca
 	$scope.cambioCheck = function () {
 		checkeado = $scope.checkRecordar;
 	};
-
-	function toast(texto) {
-		$mdToast.show(
-			$mdToast.simple().content(texto).position('top right').hideDelay(1500)
-		);
-	}
 
 	$scope.login = function () {
 		if ($scope.user === undefined && $scope.pass === undefined) {
@@ -107,8 +114,9 @@ app.controller('controladorLogIn', function (servicioRest, config, $scope, $loca
 					if (err === "Servicio no disponible") {
 						toast("Error de conexión");
 						$log.error("Error al conectar con el servidor: " + err);
-					} else if (err === "LDAP time out") {
-						toast("Error de conexión con LDAP")
+					} else if (err.data.message === "LDAP time out") {
+						toast("Error de conexión con LDAP");
+						$log.error("Error al conectar con LDAP: " + err.data.message);
 					} else {
 						toast("El usuario o la contraseña es incorrecta");
 					}
