@@ -227,6 +227,10 @@ md-tabs:not(.md-no-tab-content):not(.md-dynamic-height) {
 .md-padding {
   padding: 0px; }
 
+.cargarSesion {
+  margin-left: 39%;
+  margin-top: 20%; }
+
 /*------------------------------TECNICO*------------------------------*/
 .cabecera {
   position: fixed;

@@ -2,6 +2,7 @@ app.controller('controladorTec', function (servicioRest, $scope, $rootScope, $md
 	
 	$scope.verTecnico = false;
 	$rootScope.verCabecera = false;
+	$rootScope.cargandoSesion = false;
 	
 	if (sessionStorage.getItem("rol") !== null) {
 		$rootScope.rol = sessionStorage.getItem("rol");
