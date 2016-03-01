@@ -92,10 +92,8 @@ app.controller('controladorUsuarios', function (servicioRest, config, $scope, $r
 	
 	
 	$scope.eliminar = function (indice, rol) {
-		var nick;
         if (rol === "tecnico") {
-			nick = $scope.tecnicos[indice].username;
-			servicioRest.deleteUsuario(nick)
+			servicioRest.deleteUsuario($scope.tecnicos[indice].username)
 				.then(function (data) {
 					$scope.tecnicos.splice(indice, 1);
 				})
@@ -103,8 +101,7 @@ app.controller('controladorUsuarios', function (servicioRest, config, $scope, $r
 					$log.error("Error al eliminar la entrevista: " + err);
 				});
 		} else if("admin") {
-			nick = $scope.administradores[indice].username;
-			servicioRest.deleteUsuario(nick)
+			servicioRest.deleteUsuario($scope.administradores[indice].username)
 				.then(function (data) {
 					$scope.administradores.splice(indice, 1);
 				})
