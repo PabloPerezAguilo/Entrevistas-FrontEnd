@@ -41,7 +41,7 @@
 					<h3>{{ $index  + 1}}. <span ng-repeat="linea in pregunta.title">{{ linea }}<p></p></span> </h3>
 					<md-radio-group ng-model="respuestas[$index]">
 						<p class="respuestas displayInline" ng-repeat="answer in pregunta.answers"> 
-							<md-radio-button class="radioButtonEntrevista" value="{{$index}}" aria-label="respuestas test">
+							<md-radio-button value="{{$index}}" aria-label="respuestas test">
 								{{ answer.title }}
 							</md-radio-button>
 						</p>

@@ -123,13 +123,13 @@ app.controller('controladorLogIn', function (servicioRest, config, $scope, $loca
 	$scope.admin = function () {
 		$rootScope.cargando = true;
 		var user = {};
-		user.username = "abarrero";
+		user.username = "fgmontoro";
 		if(config.ldap) {
 			user.password = window.btoa("password");
 		} else {
 			user.password = "password";
 		}		
-		$rootScope.usuario = "abarrero";
+		$rootScope.usuario = "fgmontoro";
 		servicioRest.postAuthenticate(user)
 			.then(function (data) {
 				$http.defaults.headers.common['x-access-token'] = data.token;
@@ -171,13 +171,13 @@ app.controller('controladorLogIn', function (servicioRest, config, $scope, $loca
 	$scope.tec = function () {
 		$rootScope.cargando = true;
 		var user = {};
-		user.username = "agonzalez";
+		user.username = "abarrero";
 		if(config.ldap) {
 			user.password = window.btoa("password");
 		} else {
 			user.password = "password";
 		}
-		$rootScope.usuario = "agonzalez";
+		$rootScope.usuario = "abarrero";
 		servicioRest.postAuthenticate(user)
 			.then(function (data) {
 				$http.defaults.headers.common['x-access-token'] = data.token;
