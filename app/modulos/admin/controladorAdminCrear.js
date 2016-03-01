@@ -189,6 +189,12 @@ app.controller('controladorAdminCrear', function (servicioRest, $scope, $mdDialo
 		return false;
 	}
 	
+	$scope.enter = function(keypress) {
+		if (keypress.charCode === 13) {
+			$scope.crearEntrevista();
+		}
+	}
+	
 	/* ----------------------- CHIPS TEMAS ----------------------- */
 	
 	function cargarTemas(temas) {

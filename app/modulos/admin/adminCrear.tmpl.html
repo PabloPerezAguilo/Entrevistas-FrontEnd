@@ -84,10 +84,12 @@
 											  rz-slider-options="minSliderValue[$index].options"></rzslider>
 								<md-chips ng-model="temasEntrevista[$index]" md-autocomplete-snap="" 
 									  md-transform-chip="transformChip($chip, $index)" md-require-match="false">
-									<md-autocomplete id="aptitudes" md-selected-item="selectedItem" md-search-text="searchText"
-												 md-items="item in queryBuscarTema(searchText)"
-												 md-item-text="item.valor"
-												 placeholder="Aptitudes">
+									<md-autocomplete id="aptitudes" md-selected-item="selectedItem" 
+													 md-search-text="searchText"
+													 md-items="item in queryBuscarTema(searchText)"
+													 md-item-text="item.valor"
+													 placeholder="Aptitudes"
+													 ng-keypress="enter($event)">
 										<span md-highlight-text="searchText">
 											{{item.tag}}
 										</span>
