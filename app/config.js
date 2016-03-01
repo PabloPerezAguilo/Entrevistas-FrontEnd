@@ -6,5 +6,6 @@ app.constant('config', {
 	//url: "http://194.140.6.59:9600/api", //FRAN
 	//url: "http://194.140.6.57:9600/api"//, //AFRI
 	url: "http://194.140.7.155:9600/api",
-	ldap: true
+	ldap: true,
+	nPreguntasEntrevista: 10
 });

@@ -73,7 +73,11 @@ app.controller('controladorUsuarios', function (servicioRest, config, $scope, $r
 				.catch(function (err) {
 					$log.error(err);
 					$scope.verCarga = null;
-					toast('No existe el usuario "' + $scope.nick + '" en la base de datos');
+					if (err === 400) {
+						toast($scope.nick + ' ya tiene un rol asociado');
+					} else {
+						toast('No existe el usuario "' + $scope.nick + '" en la base de datos');
+					}
 				});
 		} else {
 			toast("Debe rellenar los campos");

@@ -1,4 +1,5 @@
-app.controller('controladorAdminCrear', function (servicioRest, $scope, $mdDialog, $mdToast, $rootScope, $log) {
+app.controller('controladorAdminCrear', function (servicioRest, $scope, $mdDialog, $mdToast, $rootScope, $log, config) {
+	
 	$scope.ayuda = function() {
 		$scope.crear = !$scope.crear;
 		if(!$scope.crear) {
@@ -12,6 +13,8 @@ app.controller('controladorAdminCrear', function (servicioRest, $scope, $mdDialo
     $scope.temasEntrevista = [];
 	$scope.errorTema = [];
 	$scope.haciendoEntrevista = true;
+	$scope.minutos = 0;
+	$scope.numPreguntas = config.nPreguntasEntrevista;
 	
     var Options = {
         tag: String,
@@ -63,7 +66,8 @@ app.controller('controladorAdminCrear', function (servicioRest, $scope, $mdDialo
 	//comprueba que estén rellenos todos los campos obligatorios
     function entrevistaVacia(){
 		if($scope.nombreEntrevista === undefined || $scope.nombreEntrevista === "" || sinTemas() 
-		   || $scope.fecha === undefined || $scope.horas === undefined || $scope.minutos === undefined) {
+		   || $scope.fecha === undefined || $scope.horas === undefined || $scope.minutos === undefined 
+		   || $scope.numPreguntas === undefined) {
 			return true;
 		}
 		return false;
@@ -100,6 +104,7 @@ app.controller('controladorAdminCrear', function (servicioRest, $scope, $mdDialo
             entrevista.name = $scope.nombreEntrevista;
             entrevista.DNI = $scope.dniEntrevista;
             entrevista.date = $scope.fecha.getFullYear() + "-" + mes + "-" + dia + "T" + hora + ":" + minutos;
+			entrevista.nPreguntas = $scope.numPreguntas;
 			
             for (i = 0; i < $scope.contTemasChip; i++) {
                 for (j = 0; j < $scope.temasEntrevista[i].length; j++) {
@@ -108,6 +113,7 @@ app.controller('controladorAdminCrear', function (servicioRest, $scope, $mdDialo
 											 min: $scope.minSliderValue[i].minSliderG});
 				}
             }
+			
 			servicioRest.postInterview(entrevista)
 				.then(function(data) {
 					$scope.mensaje = [];

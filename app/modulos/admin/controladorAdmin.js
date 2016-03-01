@@ -280,7 +280,6 @@ app.controller('controladorAdmin', function (servicioRest, config, $scope, $loca
             clickOutsideToClose: false
         })
 			.then(function (data) {
-			console.log("entra")
 				getEntrevistas(nombreSeleccionado, paginaActual);
 				obtenerNombres();
 			})
