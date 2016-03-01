@@ -649,6 +649,9 @@ md-input-container.horas {
   display: none; }
 
 /* ------------------- ENTREVISTA ---------------------------*/
+.radioButtonAyuda {
+  margin-left: 25px; }
+
 .radioButtonEntrevista {
   margin-right: 10px; }
 

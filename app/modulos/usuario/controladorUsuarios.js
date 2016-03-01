@@ -39,6 +39,15 @@ app.controller('controladorUsuarios', function (servicioRest, config, $scope, $r
 		);
 	}
 	
+	$scope.ayuda = function() {
+		$scope.verAyuda = !$scope.verAyuda;
+		if(!$scope.verAyuda) {
+			$scope.cabeceraCrear = '- Ayuda';
+		} else {
+			$scope.cabeceraCrear = '';
+		}
+	}
+	
 	$scope.altaUsuario = function () {
 		if (datosValidos()) {
 			$scope.verCarga = 'indeterminate';
