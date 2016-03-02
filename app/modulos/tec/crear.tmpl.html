@@ -120,6 +120,18 @@
 								</md-button>
 								<p>Para mas info pulsa ayuda.</p>
 							</div>
+							
+							<div class="alert alert-warning" ng-show="confirmacionTest">
+  								¿Está seguro de que quiere crear esta aptitud?								
+									<md-button aria-label="eliminar" ng-click="crearTema()" 
+											   class="md-button icon explosionIcono okCrearTema">
+										<md-icon md-svg-src="img/ok.svg"></md-icon>
+									</md-button>
+									<md-button aria-label="eliminar" ng-click="cerrarConfirm()" 
+											   class="md-button icon explosionIcono cancelCrearTema">
+										<md-icon md-svg-src="img/cerrar.svg"></md-icon>
+									</md-button>
+							</div>
 
                             <md-input-container class="md-block">
                                 <label>Enunciado de la pregunta *</label>
