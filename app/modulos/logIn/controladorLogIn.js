@@ -114,11 +114,11 @@ app.controller('controladorLogIn', function (servicioRest, config, $scope, $loca
 					if (err === "Servicio no disponible") {
 						toast("Error de conexión");
 						$log.error("Error al conectar con el servidor: " + err);
+					} else if(err === "Authentication failed. User not found.") {
+						toast("El usuario o la contraseña es incorrecta");
 					} else if (err.data.message === "LDAP time out") {
 						toast("Error de conexión con LDAP");
 						$log.error("Error al conectar con LDAP: " + err.data.message);
-					} else {
-						toast("El usuario o la contraseña es incorrecta");
 					}
 				});
 		}
