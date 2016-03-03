@@ -1,5 +1,5 @@
 <md-dialog class="redimensionar" ng-init="error=false;req=false;mini=false;maxi=false;crear=true">
-        <form>
+        <form name="formulario">
             <md-toolbar>
                 <div class="md-toolbar-tools">
                     <h2>
@@ -24,13 +24,15 @@
             <md-dialog-content ng-model="conte" ng-show="crear">
                 <md-content>
                     <div class="contenidoTablaCrear tablaAdmin" ng-show="haciendoEntrevista" layout="column">
-                        <md-input-container class="md-block inputCrearEntrevista" flex>
-                            <label>Nombre y apellidos *</label>
-                            <textarea required ng-model="nombreEntrevista"></textarea>
-							<div ng-messages="nombreEntrevista.$error">
-								<div ng-message="required">Este campo es obligatorio</div>								
-							</div>
-                        </md-input-container>
+						<md-input-container class="md-block inputCrearEntrevista" flex>
+								<label>Nombre y apellidos *</label>
+								<input required="" name="nombreEntrevista" ng-model="nombreEntrevista">
+								<div ng-messages="formulario.nombreEntrevista.$error">
+									<span ng-show="formulario.nombreEntrevista.$touched && formulario.nombreEntrevista.$invalid" class="letraPequenia">
+										Este campo es obligatorio</span>
+								</div>
+							</md-input-container>
+						
                         <md-input-container class="md-block inputCrearEntrevista" flex>
                             <label>DNI</label>
                             <textarea ng-model="dniEntrevista"></textarea>
