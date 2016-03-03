@@ -56,12 +56,13 @@
 							</md-subheader>
 							<md-divider class="dividerUsuarios"></md-divider>
 							<md-autocomplete class="autocompleteUsuarios"
-											 md-no-cache="noCache"
+											 md-no-cache="false"
 											 md-selected-item="selectedItemTec" 
 											 md-search-text-change="searchTextChange(searchTextTec, 'tecnico')" 
 											 md-search-text="searchTextTec" 
 											 md-selected-item-change="selectedItemChangeTec(item)"
-											 md-items="item in queryBuscarNombreTec(searchText)" md-item-text="item.username" 
+											 md-items="item in queryBuscarNombreTec(searchTextTec)" 
+											 md-item-text="item.username" 
 											 md-min-length="0" placeholder="Buscar por nombre del técnico">
 								<md-item-template>
 									<span md-highlight-text="searchText" md-highlight-flags="^i">{{item.username}}</span>
@@ -105,7 +106,7 @@
 											 md-search-text-change="searchTextChange(searchTextAdmin, 'admin')" 
 											 md-search-text="searchTextAdmin" 
 											 md-selected-item-change="selectedItemChangeAdmin(item)"
-											 md-items="item in queryBuscarNombreAdmin(searchText)" md-item-text="item.username" 
+											 md-items="item in queryBuscarNombreAdmin(searchTextAdmin)" md-item-text="item.username" 
 											 md-min-length="0" placeholder="Buscar por nombre del técnico">
 								<md-item-template>
 									<span md-highlight-text="searchText" md-highlight-flags="^i">{{item.username}}</span>
