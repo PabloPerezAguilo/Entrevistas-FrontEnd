@@ -87,7 +87,7 @@ footer {
   bottom: 0;
   background: #1E1E1E;
   width: 100%;
-  height: 70px; }
+  height: 50px; }
 
 #logo {
   padding-top: 0.5%;
@@ -129,6 +129,13 @@ md-progress-linear .md-container {
   background-color: rgba(239, 108, 0, 0.17); }
 
 /* ------------------------- LOG IN --------------------------------------- */
+.alert.mensajeIE {
+  position: fixed;
+  bottom: 70px;
+  left: 50px;
+  padding-top: 10px;
+  padding-bottom: 10px; }
+
 .logIn {
   font-family: fontPrincipal;
   background-color: #F5F5F5;
@@ -308,7 +315,7 @@ md-dialog.md-transition-in.redimensionar {
   margin: auto;
   min-width: 720px;
   min-height: 300px;
-  max-height: 700px; }
+  max-height: 650px; }
 
 md-tabs .md-tab.md-active {
   color: #1E1E1E; }
@@ -994,7 +1001,7 @@ md-progress-circular .md-inner .md-right .md-half-circle {
   border-color: #EF6C00; }
 
 /*--------------------- media queries ------------------------*/
-@media screen and (max-height: 600px) {
+@media screen and (max-height: 650px) {
   md-dialog.md-transition-in.redimensionar {
     float: inherit;
     min-height: 100%;

@@ -203,6 +203,7 @@ app.controller('controladorTec', function (servicioRest, $scope, $rootScope, $md
                     pregunta.directive = null;
                     pregunta.answers = datosPregunta.answers;
                 }
+			console.log(pregunta);
                 servicioRest.postPregunta(pregunta)
                     .then(function (data) {
 						pregunta._id = data.data._id;
