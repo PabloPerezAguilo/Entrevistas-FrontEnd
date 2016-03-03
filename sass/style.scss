@@ -142,7 +142,7 @@ footer {
     display: inline;
     float: right;
     color: $letra;
-    margin-top: 2%;
+    margin-top: 1.5%;
     margin-right: 2%;
 }
 
@@ -1256,7 +1256,7 @@ md-progress-circular .md-inner .md-right .md-half-circle {
 	border-color: $colorPrincipal;
 }
 /*--------------------- media queries ------------------------*/
-@media screen and (max-height: 650px) {
+@media screen and (max-height: 600px) {
    md-dialog.md-transition-in.redimensionar {
        float: inherit;
        min-height: 100%;
