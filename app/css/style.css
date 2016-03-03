@@ -796,18 +796,37 @@ md-slider[disabled] .md-track-fill {
   margin-left: 2%; }
 
 .evaluacion {
-  margin-left: 30%;
-  margin-right: 24%; }
+  margin-left: 68%;
+  margin-right: 24%;
+  width: 100%; }
 
 .contenedorEvaluacion {
   margin-top: 3%; }
 
 .mensajeEvaluacion {
-  margin-top: 11%;
-  width: 35%;
-  margin-left: 34.7%;
-  padding-bottom: 1%;
-  padding-top: 1%;
+  margin-top: 25%;
+  width: 61%;
+  margin-left: 87%;
+  padding-bottom: 3%;
+  padding-top: 3%;
+  text-align: center; }
+
+.btnEvaluacion.md-button.md-raised {
+  width: 25%;
+  min-width: 200px;
+  margin-left: 97%; }
+
+.btnMensajeFinal.md-button.md-raised {
+  width: 25%;
+  min-width: 200px;
+  margin-left: 120%; }
+
+.mensajeFinal {
+  margin-top: 65%;
+  width: 88%;
+  margin-left: 101%;
+  padding-bottom: 3%;
+  padding-top: 3%;
   text-align: center; }
 
 .temaEvaluado {

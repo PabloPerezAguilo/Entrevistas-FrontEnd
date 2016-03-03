@@ -1,12 +1,12 @@
 <div ng-show="mostrar === 'bienvenida'" class="mensajeBienvenida">
 	<div class="alert alert-info mensaje">
-		<p>Bienvenido {{nombreEntrevistado}}, a continuacion realizará un test sobre diversos temas relacionados con el puesto al que opta. Conteste con tranquilidad y puede dejar en blanco aquellas que no conozca, tenga en cuenta que el test no restará.</p>
+		<p>Bienvenido {{nombreEntrevistado}}, a continuacion realizará un test sobre diversos temas relacionados con el puesto al que opta. Conteste con tranquilidad y puede dejar en blanco aquellas que no conozca.</p>
 	</div>
 	<md-button class="md-raised btnEntrevistado" ng-click="bienvenida()">
 		Continuar
 	</md-button>	
 </div>
-<div ng-show="mostrar === 'evaluacion'">
+<div ng-show="mostrar === 'evaluacion'" class="mensajeBienvenida">
 	<div class="alert alert-info mensajeEvaluacion">
 		<p>Evalue su nivel de conocimiento en cada uno de los siguientes ámbitos</p>
 	</div>
@@ -18,7 +18,7 @@
 						step="1" min="0" max="10"></md-slider>
 		</div>
 	</div>
-	<md-button class="md-raised btnEntrevistado" ng-click="evaluacion()">
+	<md-button class="md-raised btnEvaluacion" ng-click="evaluacion()">
 		Continuar
 	</md-button>	
 </div>
@@ -66,13 +66,13 @@
 	</md-button>
 </div>
 
-<div ng-show="mostrar === 'mensajeFinal'">
-	<div class="alert alert-info mensaje">
+<div ng-show="mostrar === 'mensajeFinal'" class="mensajeBienvenida">
+	<div class="alert alert-info mensajeFinal">
 		<p>Ha completado el cuestionario correctamente.</p> 
 		<p>En breve llegará el entrevistador tecnico.</p>
 		<p>Por favor, espere y no pulse continuar hasta su llegada.</p>
 	</div>
-	<md-button class="md-raised btnEntrevistado" ng-click="aceptarBtn()">
-		Continuar
+	<md-button class="md-raised btnMensajeFinal" ng-click="aceptarBtn()">
+		Aceptar
 	</md-button>	
 </div>
