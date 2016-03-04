@@ -1,29 +1,33 @@
 <div class="logIn"  ng-show="verLogin">
-	<div class="enBloque">
-		<md-input-container class="md-block">
-			<label>Usuario</label>
-			<input required name="user" ng-model="user" ng-keypress="enter($event)">
-			<div ng-messages="user.$error">
-				<div ng-message="required">Debe introducir un usuario</div>
-			</div>
-		</md-input-container>
-	</div>
-	
-	<div class="enBloque">
-		<md-input-container class="md-block">
-			<label>Contraseña</label>
-			<input required type="password" name="pass" ng-model="pass" ng-keypress="enter($event)">
-			<div ng-messages="pass.$error">
-				<div ng-message="required">Debe introducir una contraseña</div>
-			</div>
-		</md-input-container>
-	</div>
-	
-	<div class="derecha">
-		<md-checkbox ng-model="checkRecordar" ng-change="cambioCheck()">
-			No cerrar sesión
-		</md-checkbox>
-	</div>
+	<form name="formulario">
+		<div class="enBloque">
+			<md-input-container class="md-block" flex>
+				<label>Usuario</label>
+				<input required="" name="user" ng-model="user" ng-keypress="enter($event)">
+				<div ng-messages="formulario.user.$error">
+					<span ng-show="formulario.user.$touched && formulario.user.$invalid" class="letraPequenia">
+						Este campo es obligatorio</span>
+				</div>
+			</md-input-container>
+		</div>
+
+		<div class="enBloque">
+			<md-input-container class="md-block" flex>
+				<label>Contraseña</label>
+				<input required="" type="password" name="pass" ng-model="pass" ng-keypress="enter($event)">
+				<div ng-messages="formulario.pass.$error">
+					<span ng-show="formulario.pass.$touched && formulario.pass.$invalid" class="letraPequenia">
+						Este campo es obligatorio</span>
+				</div>
+			</md-input-container>
+		</div>
+
+		<div class="derecha">
+			<md-checkbox ng-model="checkRecordar" ng-change="cambioCheck()">
+				No cerrar sesión
+			</md-checkbox>
+		</div>
+	</form>
 	
 	<div>
 		<md-button class="md-raised" ng-click="login()">Iniciar sesión</md-button>
