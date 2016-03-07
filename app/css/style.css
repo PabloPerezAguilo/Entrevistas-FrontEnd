@@ -108,7 +108,8 @@ footer {
   float: right;
   color: #EFEFEF;
   margin-top: 1.5%;
-  margin-right: 2%; }
+  margin-right: 2%;
+  font-size: 85%; }
 
 #doneLoading {
   height: 6px;

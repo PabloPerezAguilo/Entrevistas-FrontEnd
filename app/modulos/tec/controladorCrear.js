@@ -8,6 +8,23 @@ app.controller('controladorCrear', function (servicioRest, $scope, $mdDialog, $m
 			$scope.cabeceraCrear = "";
 		}
 	}
+
+	$scope.comprobarRespuestasTest=function(){
+		for(var i = 0 ; i<contTest; i++){
+			if($scope.respuestasTest[i] === undefined || $scope.respuestasTest[i] === "") {
+				return true;
+			}
+		}
+		return false;
+	}
+	$scope.comprobarRespuestasTestAbierto=function(){
+		for(var i = 0 ; i<contTestAbierto; i++){
+			if($scope.respuestasTestAbierto[i] === undefined || $scope.respuestasTestAbierto[i] === "") {
+				return true;
+			}
+		}
+		return false;
+	}
     
 	$scope.entendido = true;
 	$scope.entendidoAbierta = true;

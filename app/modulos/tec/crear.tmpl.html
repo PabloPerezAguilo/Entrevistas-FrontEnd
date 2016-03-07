@@ -152,7 +152,7 @@
 
 											<md-input-container class="md-block respuesta">
 												<label>Respuesta {{respuestas}} *</label>
-												<textarea required ng-model="respuestasTest[$index]"></textarea>
+												<textarea ng-required="required" ng-model="respuestasTest[$index]"></textarea>
 												<div ng-messages="respuestasTest[$index].$error">
 													<div ng-message="required">Debe introucir una respuesta</div>					
 												</div>
@@ -166,12 +166,14 @@
 								</md-button>
 
 								<md-button class="md-raised" ng-click="crearPTest()"
-										   ng-disabled="deshabilitadoTest">Guardar</md-button>
+										   ng-disabled="formularioTest.$invalid || temasTest.length === 0 || comprobarRespuestasTest()">
+									Guardar
+								</md-button>
 
 							</div>
 						</form>
 					</md-content>
-                </md-tab>                    
+				</md-tab>
 
                 <md-tab label="pregunta de selección múltiple">
                     <md-content>
@@ -235,7 +237,7 @@
 
 									<md-input-container class="md-block respuesta">
 												<label>Respuesta {{respuestasAbierto}} *</label>
-												<textarea required ng-model="respuestasTestAbierto[$index]"></textarea>
+												<textarea ng-required="required" ng-model="respuestasTestAbierto[$index]"></textarea>
 												<div ng-messages="respuestasTestAbierto[$index].$error">
 													<div ng-message="required">Debe introucir una respuesta</div>					
 												</div>
@@ -248,7 +250,9 @@
 								</md-button>
 
 								<md-button class="md-raised" ng-click="crearPTestAbierta()" 
-										   ng-disabled="deshabilitadoTestAbierto">Guardar</md-button>
+										   ng-disabled="formularioTestAbierto.$invalid || temasTestAbierto.length === 0 || comprobarRespuestasTestAbierto()">
+									Guardar 
+								</md-button>
 
 							</div>
 						</form>
